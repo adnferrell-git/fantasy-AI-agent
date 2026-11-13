@@ -570,6 +570,13 @@
    ],
    "bench": [
     {
+     "id": "11620",
+     "name": "Rome Odunze",
+     "pos": "WR",
+     "team": "CHI",
+     "inj": null
+    },
+    {
      "id": "12457",
      "name": "Jaydon Blue",
      "pos": "RB",
@@ -617,13 +624,6 @@
      "pos": "WR",
      "team": "WAS",
      "inj": null
-    },
-    {
-     "id": "7526",
-     "name": "Jaylen Waddle",
-     "pos": "WR",
-     "team": "DEN",
-     "inj": "Out"
     },
     {
      "id": "7567",
@@ -1881,13 +1881,6 @@
      "inj": null
     },
     {
-     "id": "11620",
-     "name": "Rome Odunze",
-     "pos": "WR",
-     "team": "CHI",
-     "inj": null
-    },
-    {
      "id": "13150",
      "name": "Darius Cooper",
      "pos": "WR",
@@ -1928,6 +1921,13 @@
      "pos": "WR",
      "team": "SF",
      "inj": "DNR"
+    },
+    {
+     "id": "7526",
+     "name": "Jaylen Waddle",
+     "pos": "WR",
+     "team": "DEN",
+     "inj": "Out"
     },
     {
      "id": "9508",
