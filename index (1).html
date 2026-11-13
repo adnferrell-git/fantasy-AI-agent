@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>THE DYNASTY · Front Office</title>
+<style>
+:root{--bg:#0b0f17;--card:#131a26;--line:#223049;--tx:#e6ecf5;--mu:#8a9ab3;--ac:#3dd6a3;--wa:#ffb84d;--rd:#ff6b6b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 system-ui,sans-serif}
+header{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line)}
+h1{font-size:16px;letter-spacing:.12em;margin:0}h1 span{color:var(--ac)}.mu{color:var(--mu);font-size:12px}
+.tick{overflow:hidden;white-space:nowrap;background:#0f1522;border-bottom:1px solid var(--line);padding:8px 0}
+.tick div{display:inline-block;padding-left:100%;animation:t 70s linear infinite}@keyframes t{to{transform:translateX(-100%)}}
+main{display:grid;grid-template-columns:1fr 330px;gap:16px;padding:16px 20px}@media(max-width:1000px){main{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:16px}
+h2{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);margin:0 0 10px}
+button{background:var(--ac);color:#04251b;border:0;border-radius:6px;padding:7px 14px;font-weight:600;cursor:pointer}
+#alert .al{background:#3a1717;border-bottom:2px solid var(--rd);color:#ffd9d9;padding:10px 20px}#alert b{color:var(--rd)}button.ghost{background:#1d2a40;color:var(--tx)}.more{margin-top:6px;padding:3px 10px;font-size:12px}.long{margin-top:6px;white-space:pre-wrap}
+nav{display:flex;gap:8px;margin-bottom:16px}nav button{background:#1d2a40;color:var(--mu)}nav button.on{background:var(--ac);color:#04251b}
+.pane{display:none}.pane.on{display:block}
+.arena{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.game{background:#0f1522;border:1px solid var(--line);border-radius:10px;padding:12px}.game.mine{border-color:var(--ac);box-shadow:0 0 14px #3dd6a333}
+.tm{display:flex;justify-content:space-between}.bar{height:8px;background:#2a3550;border-radius:9px;margin:8px 0;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--ac),#2b9e7a);transition:width 1s}
+.live{font-size:11px;color:var(--rd)}.live:before{content:"●";margin-right:4px;animation:p 1.2s infinite}@keyframes p{50%{opacity:.2}}
+.row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)}.row:last-child{border:0}.me{color:var(--ac);font-weight:600}
+.chip{font-size:11px;padding:1px 7px;border-radius:99px;background:#2a1d1d;color:var(--rd);margin-left:6px}
+.call{font-weight:700}.START{color:var(--ac)}.SIT{color:var(--wa)}.item{padding:10px 0;border-bottom:1px solid var(--line)}.item:last-child{border:0}
+.room{margin-bottom:14px}.rt{font-weight:600;margin-bottom:6px}
+.scene{height:64px;background:#0f1522;border-radius:8px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:14px;font-size:30px}
+.bob{animation:bob 1.4s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-6px)}}
+.field{background:repeating-linear-gradient(90deg,#14301f 0 30px,#17382a 30px 60px)}
+.dot{position:absolute;width:10px;height:10px;border-radius:50%;background:#fff;animation:run 3s linear infinite}
+.d1{top:12px}.d2{top:28px;animation-delay:-1s}.d3{top:46px;animation-delay:-2s}@keyframes run{from{left:-10px}to{left:100%}}
+.screen{width:46px;height:34px;border:2px solid var(--mu);border-radius:4px;background:#1d3b66;animation:fl 1.6s steps(2) infinite}@keyframes fl{50%{background:#2f6fb8}}
+.shake{display:inline-block;animation:sh .6s infinite}@keyframes sh{25%{transform:rotate(-14deg)}75%{transform:rotate(14deg)}}
+#greet{position:fixed;inset:0;background:#0b0f17f2;z-index:9;display:grid;place-items:center;padding:20px}
+.box{max-width:560px;width:100%;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+.box .big{font-size:54px}.box p{min-height:70px}
+.ask{display:flex;gap:8px;margin:10px 0}.ask input{flex:1;background:#0f1522;border:1px solid var(--line);color:var(--tx);border-radius:6px;padding:8px}
+.arena{display:flex;flex-direction:column;gap:8px}.game{display:flex;align-items:center;gap:10px;padding:10px 12px}.game .n{color:var(--mu);width:18px}.game .tn{flex:0 0 130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.game .tn.r{text-align:right}.game .sc{width:46px;text-align:center}.game .bar{flex:1;margin:0}#stand{columns:2;font-size:11px}#stand .row{padding:1px 0}.flag{font-size:11px;padding:1px 7px;border-radius:99px;margin-left:6px}.flag.red{background:#3a1717;color:var(--rd)}.flag.yel{background:#3a2d12;color:var(--wa)}.todo{margin-top:6px}.todo label{display:block;font-size:12px;margin-top:4px;cursor:pointer}.todo label.done{text-decoration:line-through;color:var(--mu)}textarea{width:100%;margin-top:8px;background:#0f1522;border:1px solid var(--line);color:var(--tx);border-radius:6px;padding:8px;font:inherit}</style></head><body>
+<div id="greet"><div class="box"><div class="big bob">🧑‍🏫</div><h2>Assistant Coach</h2>
+<p id="say">Coach is getting the report ready…</p>
+<div class="ask"><input id="q" placeholder="Ask me anything about the team…"><button id="go">Ask</button></div>
+<p id="ans" class="mu"></p><button id="menu" class="ghost">Go to main menu →</button></div></div>
+<header><h1>THE <span>DYNASTY</span> · FRONT OFFICE</h1><div class="mu" id="meta">Connecting…</div></header>
+<div class="tick"><div id="tick">Loading the wire…</div></div>
+<div id="alert"></div>
+<main>
+<section>
+<nav><button class="on" data-p="arena">League</button><button data-p="lineup">Lineup</button><button data-p="trades">Trades</button><button data-p="tlog">Trade log</button></nav>
+<div class="pane on" id="arena"><div class="card"><h2>Week matchups</h2><div class="arena" id="games">Loading…</div></div><div class="card"><h2>My lineup</h2><div id="lu2" class="mu">Loading…</div></div><div class="card"><h2>Standings</h2><div id="stand"></div></div></div>
+<div class="pane" id="lineup"><div class="card"><h2>Start / sit calls</h2><div id="ss" class="mu">Waiting on the Head Coach…</div></div><div class="card"><h2>Waiver moves and drops</h2><div id="wv" class="mu">Waiting on the Scout…</div></div><div class="card"><h2>My lineup</h2><div id="lu"></div></div><div class="card"><h2>Injury report</h2><div id="inj"></div></div></div>
+<div class="pane" id="trades"><div class="card"><h2>Trade offers to send</h2><div id="tr" class="mu">Waiting on the Analyst…</div></div><div class="card"><h2>Counter-offer help</h2><div class="mu">Paste or type what the owner sent back, and the Manager tells you what to do.</div><textarea id="cin" rows="3" placeholder="Example: Bob countered, he wants Player A and Player B for Player C"></textarea><button id="cgo" style="margin-top:8px">Ask the Manager</button><div id="cout" class="mu" style="white-space:pre-wrap;margin-top:8px"></div></div></div>
+<div class="pane" id="tlog"><div class="card"><h2>League trade log</h2><div id="tstats" class="mu"></div><div id="tl"></div></div></div>
+</section>
+<aside class="card"><h2>My HQ</h2>
+<div class="room"><div class="rt">🏈 Practice Field</div><div class="scene field"><i class="dot d1"></i><i class="dot d2"></i><i class="dot d3"></i><span class="bob">🧑‍🏫</span></div><div class="mu" id="r-hc">Head Coach is calling plays…</div><div class="todo" id="t-hc"></div></div>
+<div class="room"><div class="rt">🎬 Film Room</div><div class="scene"><span class="screen"></span><span>🕵️</span></div><div class="mu" id="r-sc">Scout is breaking down film…</div><div class="todo" id="t-sc"></div></div>
+<div class="room"><div class="rt">📚 Analyst’s Desk</div><div class="scene"><span class="bob">🤓</span><span>📖</span><span class="mu">+3.2</span></div><div class="mu" id="r-an">Analyst is cooking up trades…</div><div class="todo" id="t-an"></div></div>
+<div class="room"><div class="rt">📞 Manager’s Office</div><div class="scene"><span>🧑‍💼</span><span class="shake">📱</span></div><div class="mu" id="r-mg">Manager is working the phones…</div><div class="todo" id="t-mg"></div></div>
+</aside></main>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pn=p=>`${esc(p.name)} <span class="mu">${esc(p.pos||'')} ${esc(p.team||'')}</span>${p.inj?`<span class="chip">${esc(p.inj)}</span>`:''}`;
+let LS=null,LB=null,done={};try{done=JSON.parse(localStorage.getItem('done')||'{}')}catch{}
+const pn0=p=>`${esc(p.name)} <span class="mu">${esc(p.pos||'')} ${esc(p.team||'')}${p.opp?' vs '+esc(p.opp):''}</span>`;
+const flag=p=>{if(p.bye)return '<span class="flag red">🚩 BYE · take him out</span>';if(p.inj&&['Out','IR','PUP','Sus','Doubtful'].includes(p.inj))return `<span class="flag red">🚩 ${esc(p.inj)} · take him out</span>`;if(p.inj)return `<span class="flag yel">⚠️ ${esc(p.inj)}</span>`;return ''};
+function renderAlert(){const s=LS;if(!s)return;$('#alert').innerHTML=(s.alerts||[]).map(a=>`<div class="al"><b>INJURY ALERT:</b> ${esc(a.name)} (${esc(a.pos)}, ${esc(a.team)}) is ${esc(a.status)}. ${(()=>{const r=((LB&&LB.replacements)||[]).find(x=>x.out===a.name);return r?(r.fix==='TRADE'&&r.trade_ref?'Best fix: send the trade to <b>'+esc(r.trade_ref)+'</b> (stopgap: '+esc(r.in)+')':'Replace with <b>'+esc(r.in)+'</b> ('+esc(r.why)+')'):a.replacements.length?'Healthy bench option: '+esc(a.replacements.join(', ')):'No healthy bench player at that position, check waivers.'})()}</div>`).join('');}
+function todos(){const s=LS,b=LB||{};if(!s)return;const it={hc:[],sc:[],an:[],mg:[]};
+ if(s.lock&&new Date(s.lock.at)>Date.now())it.hc.push(`Lock lineup before ${s.lock.player} kicks off (${new Date(s.lock.at).toLocaleString([],{weekday:'short',hour:'numeric',minute:'2-digit'})})`);
+ (s.alerts||[]).forEach(a=>{const rp=(b.replacements||[]).find(x=>x.out===a.name),nm=rp?rp.in:a.replacements[0];if(a.status==='Questionable'){it.hc.push(`Check ${a.name} (Questionable) before kickoff, backup: ${nm||'none on bench'}`);return}it.hc.push(rp&&rp.fix==='TRADE'&&rp.trade_ref?`Fix ${a.name} (${a.status}) with the trade to ${rp.trade_ref}, stopgap: ${nm}`:`Replace ${a.name} (${a.status}) with ${nm||'a waiver pickup'}`);if(!a.replacements.length){const tr=(s.scout||[]).find(p=>p.pos===a.pos);it.sc.push(`Find a healthy ${a.pos} on waivers${tr?' (trending: '+tr.name+')':''}`)}});
+ if(LB&&!LB.error){(b.waivers||[]).slice(0,3).forEach(w=>it.sc.push(`Add ${w.add}, drop ${w.drop}`));(b.drops||[]).slice(0,3).forEach(d=>it.sc.push(`Drop ${d.player}: no value left`))}else{(s.scout||[]).slice(0,3).forEach(p=>it.sc.push(`Check waivers: ${p.name} (${p.pos}, ${p.team})`))}
+ (b.trades||[]).slice(0,3).forEach(x=>{it.an.push(`Send offer to ${x.to}: get ${(x.get||[]).join(', ')}`);it.sc.push(`Scout trade target: ${(x.get||[]).join(', ')} (${x.to})`);it.mg.push(`Text ${x.to} to make sure they saw it`)});
+ Object.keys(it).forEach(k=>{const el=$('#t-'+k);if(!el)return;el.innerHTML=it[k].length?it[k].map(t=>`<label class="${done[t]?'done':''}"><input type="checkbox" data-t="${esc(t)}" ${done[t]?'checked':''}> ${esc(t)}</label>`).join(''):'<div class="mu">Nothing to do right now.</div>'})}
+document.addEventListener('change',e=>{const c=e.target.closest('[data-t]');if(!c)return;done[c.dataset.t]=c.checked;try{localStorage.setItem('done',JSON.stringify(done))}catch{}c.parentElement.classList.toggle('done',c.checked)});
+let tt;function type(el,t){clearInterval(tt);el.textContent='';let i=0;tt=setInterval(()=>{el.textContent=t.slice(0,++i);if(i>=t.length)clearInterval(tt)},18)}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button,.pane').forEach(x=>x.classList.remove('on'));b.classList.add('on');$('#'+b.dataset.p).classList.add('on')});
+$('#menu').onclick=()=>$('#greet').style.display='none';
+async function askCoach(){const q=$('#q').value.trim();if(!q)return;$('#ans').textContent='Coach is thinking…';
+  try{const r=await(await fetch('/api/ask',{method:'POST',body:JSON.stringify({q})})).json();$('#ans').textContent=r.answer}catch{$('#ans').textContent='Lost the connection.'}}
+$('#go').onclick=askCoach;$('#q').onkeydown=e=>{if(e.key==='Enter')askCoach()};
+async function state(){try{
+  const s=await(await fetch('/api/state')).json();if(s.error)return;LS=s;
+  let lk='';if(s.lock){const ms=new Date(s.lock.at)-Date.now();if(ms>0){const m=Math.floor(ms/6e4);lk=` · Lineup locks in ${m>=60?Math.floor(m/60)+'h ':''}${m%60}m (${s.lock.player})`}else lk=' · Lineup locked'}
+  $('#meta').textContent=`Week ${s.league.week} · ${s.me}${lk} · updated ${new Date(s.updated).toLocaleTimeString()}`;
+  renderAlert();
+  document.title=(s.alerts&&s.alerts.length?'(!) ':'')+'THE DYNASTY · Front Office';
+  const wire=[...(s.statLines||[]),...s.moves,...s.injuries.map(i=>`INJURY: ${i.name} (${i.team}) ${i.inj}${i.mine?' - YOUR TEAM':''}`)];
+  $('#tick').textContent=wire.length?wire.join('   •   '):'Quiet on the wire. Nothing moving yet.';
+  $('#games').innerHTML=s.games.map((g,i)=>{const t=g.ap+g.bp,pct=t?Math.round(g.ap/t*100):50,mine=g.a===s.me||g.b===s.me;
+    return `<div class="game ${mine?'mine':''}"><span class="n">${i+1}</span><span class="tn ${g.a===s.me?'me':''}">${esc(g.a)}</span><b class="sc">${g.ap}</b><div class="bar"><i style="width:${pct}%"></i></div><b class="sc">${g.bp}</b><span class="tn r ${g.b===s.me?'me':''}">${esc(g.b)}</span><span class="${t?'live':'mu'}">${t?'LIVE':'SOON'}</span></div>`}).join('')||'No games yet.';
+  const w=r=>+r.split('-')[0];
+  $('#stand').innerHTML=[...s.teams].sort((a,b)=>w(b.record)-w(a.record)).map((t,i)=>`<div class="row"><span class="${t.mine?'me':''}">${i+1}. ${esc(t.owner)}</span><span class="mu">${esc(t.record)}</span></div>`).join('');
+  const m=s.teams.find(x=>x.mine);
+  $('#lu').innerHTML=m?'<b>Starters</b>'+m.starters.map(p=>`<div class="row"><span>${pn(p)}</span></div>`).join('')+'<b>Bench</b>'+m.bench.map(p=>`<div class="row"><span>${pn(p)}</span></div>`).join(''):'';
+  $('#inj').innerHTML=s.injuries.map(i=>`<div class="row"><span class="${i.mine?'me':''}">${esc(i.name)} <span class="mu">${esc(i.owner)}</span></span><span class="chip">${esc(i.inj)}</span></div>`).join('')||'Clean bill of health.';
+  $('#lu2').innerHTML=m?m.starters.map(p=>`<div class="row"><span>${pn0(p)}</span><span>${flag(p)}</span></div>`).join(''):'';
+  todos();
+  $('#tl').innerHTML=(s.tradeLog||[]).map(t=>`<div class="item"><div class="mu">Week ${esc(t.week)}</div>${t.sides.map(x=>`<div><b>${esc(x.owner)}</b> gets ${esc(x.gets.join(', '))}</div>`).join('')}</div>`).join('')||'No trades yet in this league.';
+  const tc=Object.entries(s.tradeCounts||{}).sort((a,b)=>b[1]-a[1]);$('#tstats').textContent=tc.length?'Trades per owner: '+tc.map(([o,n])=>`${o} ${n}`).join(' · '):'';
+  if(s.scout&&s.scout.length)$('#r-sc').textContent='Trending free agents: '+s.scout.slice(0,3).map(p=>`${p.name} (${p.pos})`).join(', ');else
+  if(m&&m.bench.length)$('#r-sc').textContent='Scouting: '+m.bench.slice(0,3).map(p=>p.name).join(', ');
+}catch(e){}}
+let greeted=false;
+async function brief(){try{
+  const b=await(await fetch('/api/brief')).json();LB=b;renderAlert();todos();
+  if(b.error){if(!greeted){$('#say').textContent=b.error;greeted=true}return}
+  if(!greeted){type($('#say'),b.report||'');greeted=true}
+  $('#ss').innerHTML=(b.start_sit||[]).map(x=>`<div class="item"><span class="call ${esc(x.call)}">${esc(x.call)}</span> ${esc(x.player)} <span class="mu">${esc(x.confidence||'')} confidence${x.boom_chance&&!/^n\/?a/i.test(x.boom_chance)?' · boom chance '+esc(x.boom_chance):''}</span><div class="mu">${esc(x.why)}</div><button class="ghost more" data-q="${esc('Explain in detail why I should '+x.call+' '+x.player+' this week.')}">Tell me more</button><div class="long mu"></div></div>`).join('')||'No calls yet.';
+  $('#tr').innerHTML=(b.trades||[]).map(x=>`<div class="item"><b>To ${esc(x.to)}</b><div>Get: <b>${esc((x.get||[]).join(', '))}</b> <span class="mu">${esc(x.confidence||'')} confidence</span></div><div>Give: ${esc((x.give||[]).join(', '))}</div>${x.opener?`<div class="mu">1. Opener: ${esc(x.opener)}</div>`:''}${x.fallback?`<div class="mu">2. If he pushes back: ${esc(x.fallback)}</div>`:''}${x.drop_after?`<div class="mu">If roster is full, drop: ${esc(x.drop_after)}</div>`:''}${x.text?`<div class="mu">Text: "${esc(x.text)}" <button class="ghost more cp" data-c="${esc(x.text)}">Copy</button></div>`:''}<div class="mu">${esc(x.why)}</div><button class="ghost more" data-q="${esc('Break down this trade in detail. I give '+(x.give||[]).join(', ')+' and get '+(x.get||[]).join(', ')+' with '+x.to+'. Why does it help me, and why would they accept?')}">Break it down</button><div class="long mu"></div></div>`).join('')||'No offers right now.';
+  $('#wv').innerHTML=((b.waivers||[]).map(w=>`<div class="item"><b>Add ${esc(w.add)}</b> · drop ${esc(w.drop)} <span class="mu">${esc(w.confidence||'')} confidence</span><div class="mu">${esc(w.why)}</div></div>`).join('')+(b.drops||[]).map(d=>`<div class="item"><b>Drop ${esc(d.player)}</b><div class="mu">${esc(d.why)}</div></div>`).join(''))||'No pickups or drops worth making right now.';
+  const c=(b.start_sit||[])[0],t=(b.trades||[])[0];
+  if(c)$('#r-hc').textContent=`${c.call}: ${c.player}`;
+  if(t){$('#r-an').textContent=`${b.trades.length} trade ideas on the board`;$('#r-mg').textContent=`On the phone with ${t.to}`}
+}catch(e){}}
+document.addEventListener('click',e=>{const c=e.target.closest('.cp');if(!c)return;try{navigator.clipboard.writeText(c.dataset.c);c.textContent='Copied'}catch{c.textContent='Copy failed'}});
+document.addEventListener('click',async e=>{const b=e.target.closest('.more:not(.cp)');if(!b)return;const o=b.nextElementSibling;o.textContent='Coach is breaking it down…';try{const r=await(await fetch('/api/ask',{method:'POST',body:JSON.stringify({q:b.dataset.q})})).json();o.textContent=r.answer}catch{o.textContent='Lost the connection.'}});
+$('#cgo').onclick=async()=>{const q=$('#cin').value.trim();if(!q)return;$('#cout').textContent='Manager is reviewing the counter…';try{const r=await(await fetch('/api/counter',{method:'POST',body:JSON.stringify({q})})).json();$('#cout').textContent=r.answer}catch{$('#cout').textContent='Lost the connection.'}};
+state();brief();setInterval(state,3e4);setInterval(brief,3e5);
+</script></body></html>
