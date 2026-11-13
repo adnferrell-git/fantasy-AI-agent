@@ -859,11 +859,11 @@
      "inj": null
     },
     {
-     "id": "13279",
-     "name": "Carnell Tate",
+     "id": "12499",
+     "name": "Elic Ayomanor",
      "pos": "WR",
      "team": "TEN",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "12506",
@@ -910,18 +910,18 @@
      "inj": "IR"
     },
     {
-     "id": "12499",
-     "name": "Elic Ayomanor",
-     "pos": "WR",
-     "team": "TEN",
-     "inj": null
-    },
-    {
      "id": "12507",
      "name": "Omarion Hampton",
      "pos": "RB",
      "team": "LAC",
      "inj": null
+    },
+    {
+     "id": "13279",
+     "name": "Carnell Tate",
+     "pos": "WR",
+     "team": "TEN",
+     "inj": "Questionable"
     },
     {
      "id": "13305",
