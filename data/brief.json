@@ -1,42 +1,42 @@
 {
- "made": "2026-11-13T04:19:15.773Z",
+ "made": "2026-11-13T15:43:29.644Z",
  "week": 10,
- "report": "Tough 2-7 start, but the lineup is solid this week. Stafford has a soft Arizona pass defense (ranked 2nd-easiest vs QB), and Javonte Williams is carrying 23 carries a game. Tee Higgins is hot, averaging 28.2 over his last 3. Rachaad White plays Thursday night, so he is locked in. Stevenson and Marks are both Questionable, so check them before kickoff. I'd start Stevenson at flex, with Flournoy as the fallback if he's out. I have one small trade idea for Rashee Rice.",
+ "report": "We're 2-7 and a long way back, but nobody on the roster is hurt and the lineup is clean. Stafford faces Arizona, which allows the 2nd most QB points. Jameson Williams gets New England, which allows the 2nd most WR points. White plays Thursday night, so he's the first one to lock in. Tee Higgins is hot with 28.17 PPR per game over his last three.",
  "start_sit": [
   {
    "player": "Matthew Stafford",
    "call": "START",
    "boom_chance": "N/A",
    "confidence": "HIGH",
-   "why": "Arizona ranks 2nd-easiest vs QB; he averages 15.9 with a 9.1 floor."
-  },
-  {
-   "player": "Rhamondre Stevenson",
-   "call": "START",
-   "boom_chance": "MEDIUM",
-   "confidence": "MEDIUM",
-   "why": "Detroit is 30th vs RB; he's at 16.4 over his last 3, if active."
-  },
-  {
-   "player": "Ryan Flournoy",
-   "call": "SIT",
-   "boom_chance": "LOW",
-   "confidence": "MEDIUM",
-   "why": "SF ranks 28th vs WR and he averages only 9.3; Stevenson has the better matchup."
+   "why": "Arizona allows the 2nd most QB points; his floor is 9.12."
   },
   {
    "player": "Jameson Williams",
    "call": "START",
    "boom_chance": "MEDIUM",
+   "confidence": "HIGH",
+   "why": "New England allows the 2nd most WR points; he's at 16.03 over his last three."
+  },
+  {
+   "player": "Ryan Flournoy",
+   "call": "START",
+   "boom_chance": "N/A",
    "confidence": "MEDIUM",
-   "why": "New England is 2nd-easiest vs WR; he's at 16.0 over his last 3."
+   "why": "97% snaps and a 6.06 floor beat Dell's two-game sample."
   },
   {
    "player": "Rachaad White",
    "call": "START",
    "boom_chance": "N/A",
    "confidence": "MEDIUM",
-   "why": "Giants are 26th vs RB; he's trending up at 12.9 over his last 3."
+   "why": "Healthy at 9.74 PPR per game; Stevenson is questionable against Detroit's tough run defense."
+  },
+  {
+   "player": "Rhamondre Stevenson",
+   "call": "SIT",
+   "boom_chance": "LOW",
+   "confidence": "MEDIUM",
+   "why": "Questionable, and Detroit ranks 30th in points allowed to RBs."
   }
  ],
  "replacements": [],
@@ -44,29 +44,45 @@
  "drops": [
   {
    "player": "Seth McGowan",
-   "why": "31% snaps and 3.6 PPG; no path to starting."
+   "why": "3.63 PPR per game on 31% snaps; he can't start over anyone."
   },
   {
    "player": "Kaelon Black",
-   "why": "25% snap share, 4.7 PPG; stuck behind SF's starters."
+   "why": "25% snap share and 4.71 PPR per game; nothing to start him over."
   }
  ],
  "trades": [
   {
-   "to": "TWILL4",
+   "to": "garfy135",
    "give": [
-    "Woody Marks",
-    "Tank Dell"
+    "Sam LaPorta",
+    "Woody Marks"
    ],
    "get": [
-    "Rashee Rice"
+    "Travis Kelce"
    ],
    "drop_after": "Seth McGowan",
+   "confidence": "MEDIUM",
+   "why": "Kelce's 8.76 floor beats LaPorta's 6.78 (MORE RELIABLE); they get a younger TE and a RB.",
+   "opener": "LaPorta for Kelce straight up, to see if he wants youth.",
+   "fallback": "Add Michael Mayer; if he still says no, walk away.",
+   "text": "Sent you a TE offer, take a look when you can."
+  },
+  {
+   "to": "Gooner6967",
+   "give": [
+    "Jameson Williams",
+    "Rhamondre Stevenson"
+   ],
+   "get": [
+    "Matthew Golden"
+   ],
+   "drop_after": "Kaelon Black",
    "confidence": "LOW",
-   "why": "Rashee Rice brings MORE POINTS: 13.2 PPG, 9.9 floor and 8 targets a game, versus Flournoy's 9.3. TWILL4 gets a steady RB and a WR for depth.",
-   "opener": "Marks for Rice straight up, to see his price.",
-   "fallback": "Add Kaelon Black to the offer; walk away if he wants Stevenson or Higgins.",
-   "text": "Hey, sent you an offer for Rice, take a look when you can."
+   "why": "Golden's 18.21 PPR and 11.67 targets per game give me MORE POINTS; they get two starters.",
+   "opener": "Jameson Williams for Golden straight up.",
+   "fallback": "Add Stevenson as the sweetener; walk if he asks for more.",
+   "text": "Sent you a WR offer, let me know what you think."
   }
  ]
 }
