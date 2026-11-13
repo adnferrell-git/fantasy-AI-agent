@@ -2,7 +2,8 @@
 // Optional: set ANTHROPIC_API_KEY to wake up the AI staff.
 const http = require('http'), fs = require('fs');
 const USERNAME = 'AFERR', LEAGUE_NAME = 'THE DYNASTY';
-const KEY = process.env.ANTHROPIC_API_KEY, MODEL = process.env.MODEL || 'claude-sonnet-5-5';
+// Pull just the key out, in case extra spaces or lines got pasted into the secret.
+const RAWKEY = process.env.ANTHROPIC_API_KEY || '', KEY = (RAWKEY.match(/sk-ant-[A-Za-z0-9_-]+/) || [])[0] || RAWKEY.trim(), MODEL = process.env.MODEL || 'claude-sonnet-5-5';
 const B = 'https://api.sleeper.app/v1';
 const get = async p => { const r = await fetch(B + p); if (!r.ok) throw new Error(p + ' ' + r.status); return r.json(); };
 let players = {}, S = null, brief = null, briefAt = 0;
