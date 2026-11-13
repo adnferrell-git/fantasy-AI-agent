@@ -342,11 +342,11 @@
      "inj": "Questionable"
     },
     {
-     "id": "5892",
-     "name": "David Montgomery",
+     "id": "8408",
+     "name": "Jordan Mason",
      "pos": "RB",
-     "team": "HOU",
-     "inj": "Questionable"
+     "team": "MIN",
+     "inj": null
     },
     {
      "id": "8146",
@@ -449,6 +449,13 @@
      "inj": null
     },
     {
+     "id": "5892",
+     "name": "David Montgomery",
+     "pos": "RB",
+     "team": "HOU",
+     "inj": "Questionable"
+    },
+    {
      "id": "5995",
      "name": "Justice Hill",
      "pos": "RB",
@@ -475,13 +482,6 @@
      "pos": "TE",
      "team": "WAS",
      "inj": "Questionable"
-    },
-    {
-     "id": "8408",
-     "name": "Jordan Mason",
-     "pos": "RB",
-     "team": "MIN",
-     "inj": null
     },
     {
      "id": "9479",
