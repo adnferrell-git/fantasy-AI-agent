@@ -44,18 +44,18 @@
      "inj": null
     },
     {
-     "id": "5844",
-     "name": "T.J. Hockenson",
+     "id": "7600",
+     "name": "Pat Freiermuth",
      "pos": "TE",
-     "team": "MIN",
-     "inj": "Questionable"
-    },
-    {
-     "id": "13274",
-     "name": "Germie Bernard",
-     "pos": "WR",
      "team": "PIT",
      "inj": null
+    },
+    {
+     "id": "5872",
+     "name": "Deebo Samuel Sr.",
+     "pos": "WR",
+     "team": "SF",
+     "inj": "Questionable"
     },
     {
      "id": "9753",
@@ -130,10 +130,17 @@
      "inj": "Questionable"
     },
     {
-     "id": "5872",
-     "name": "Deebo Samuel Sr.",
+     "id": "4039",
+     "name": "Cooper Kupp",
      "pos": "WR",
-     "team": "SF",
+     "team": "SEA",
+     "inj": null
+    },
+    {
+     "id": "5844",
+     "name": "T.J. Hockenson",
+     "pos": "TE",
+     "team": "MIN",
      "inj": "Questionable"
     },
     {
@@ -141,13 +148,6 @@
      "name": "Tyler Bass",
      "pos": "K",
      "team": "BUF",
-     "inj": null
-    },
-    {
-     "id": "8135",
-     "name": "Treylon Burks",
-     "pos": "WR",
-     "team": "WAS",
      "inj": null
     },
     {
@@ -859,10 +859,10 @@
      "inj": null
     },
     {
-     "id": "12499",
-     "name": "Elic Ayomanor",
+     "id": "13274",
+     "name": "Germie Bernard",
      "pos": "WR",
-     "team": "TEN",
+     "team": "PIT",
      "inj": null
     },
     {
@@ -910,6 +910,13 @@
      "inj": "IR"
     },
     {
+     "id": "12499",
+     "name": "Elic Ayomanor",
+     "pos": "WR",
+     "team": "TEN",
+     "inj": null
+    },
+    {
      "id": "12507",
      "name": "Omarion Hampton",
      "pos": "RB",
@@ -949,13 +956,6 @@
      "name": "Chase McLaughlin",
      "pos": "K",
      "team": "TB",
-     "inj": null
-    },
-    {
-     "id": "7600",
-     "name": "Pat Freiermuth",
-     "pos": "TE",
-     "team": "PIT",
      "inj": null
     },
     {
