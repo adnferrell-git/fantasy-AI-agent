@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <title>THE DYNASTY · Front Office</title>
 <style>
 :root{--bg:#0b0f17;--card:#131a26;--line:#223049;--tx:#e6ecf5;--mu:#8a9ab3;--ac:#3dd6a3;--wa:#ffb84d;--rd:#ff6b6b}
@@ -35,7 +36,31 @@ nav{display:flex;gap:8px;margin-bottom:16px}nav button{background:#1d2a40;color:
 .box{max-width:560px;width:100%;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
 .box .big{font-size:54px}.box p{min-height:70px}
 .ask{display:flex;gap:8px;margin:10px 0}.ask input{flex:1;background:#0f1522;border:1px solid var(--line);color:var(--tx);border-radius:6px;padding:8px}
-.arena{display:flex;flex-direction:column;gap:8px}.game{display:flex;align-items:center;gap:10px;padding:10px 12px}.game .n{color:var(--mu);width:18px}.game .tn{flex:0 0 130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.game .tn.r{text-align:right}.game .sc{width:46px;text-align:center}.game .bar{flex:1;margin:0}#stand{columns:2;font-size:11px}#stand .row{padding:1px 0}.flag{font-size:11px;padding:1px 7px;border-radius:99px;margin-left:6px}.flag.red{background:#3a1717;color:var(--rd)}.flag.yel{background:#3a2d12;color:var(--wa)}.todo{margin-top:6px}.todo label{display:block;font-size:12px;margin-top:4px;cursor:pointer}.todo label.done{text-decoration:line-through;color:var(--mu)}textarea{width:100%;margin-top:8px;background:#0f1522;border:1px solid var(--line);color:var(--tx);border-radius:6px;padding:8px;font:inherit}</style></head><body>
+.arena{display:flex;flex-direction:column;gap:8px}.game{display:flex;align-items:center;gap:10px;padding:10px 12px}.game .n{color:var(--mu);width:18px}.game .tn{flex:0 0 130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.game .tn.r{text-align:right}.game .sc{width:46px;text-align:center}.game .bar{flex:1;margin:0}#stand{columns:2;font-size:11px}#stand .row{padding:1px 0}.flag{font-size:11px;padding:1px 7px;border-radius:99px;margin-left:6px}.flag.red{background:#3a1717;color:var(--rd)}.flag.yel{background:#3a2d12;color:var(--wa)}.todo{margin-top:6px}.todo label{display:block;font-size:12px;margin-top:4px;cursor:pointer}.todo label.done{text-decoration:line-through;color:var(--mu)}textarea{width:100%;margin-top:8px;background:#0f1522;border:1px solid var(--line);color:var(--tx);border-radius:6px;padding:8px;font:inherit}
+/* ===== retro 3D HQ ===== */
+:root{--bg:#0d1226;--card:#151c36;--line:#2c3a66;--ac:#5ef38c;--wa:#ffb84d;--or:#ff7a2f}
+h1,h2,.rt,nav button,.px,.lbl b,#hq3d button{font-family:'Press Start 2P',ui-monospace,monospace;letter-spacing:.04em}
+h1{font-size:13px}h2{font-size:9px;line-height:1.6}.rt{font-size:9px;line-height:1.6}nav button,#hq3d button{font-size:9px;padding:9px 12px}
+.card{border:2px solid var(--line);border-radius:4px;box-shadow:4px 4px 0 #04060f}
+button{border-radius:3px;box-shadow:3px 3px 0 #04060f;transition:transform .08s}button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #04060f}
+nav button.on{background:var(--ac)}
+#hq3d{position:relative;height:460px;margin:16px 20px 0;border:2px solid var(--line);border-radius:4px;box-shadow:4px 4px 0 #04060f;overflow:hidden;
+ background:radial-gradient(1px 1px at 12% 18%,#fff8,transparent),radial-gradient(1px 1px at 38% 9%,#fff8,transparent),radial-gradient(1px 1px at 71% 22%,#fff6,transparent),radial-gradient(1px 1px at 88% 12%,#fff8,transparent),radial-gradient(1px 1px at 55% 30%,#fff5,transparent),linear-gradient(#070b1c,#1b2650 75%)}
+#hqc{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:none}#hqc:active{cursor:grabbing}
+#hqlbl{position:absolute;inset:0;pointer-events:none}
+.lbl{position:absolute;left:0;top:0;pointer-events:auto;cursor:pointer;background:#0d1226e6;border:2px solid var(--ac);border-radius:3px;padding:5px 7px;max-width:180px;box-shadow:3px 3px 0 #000;transition:opacity .2s}
+.lbl b{display:block;font-size:7px;color:var(--ac);margin-bottom:3px;white-space:nowrap}.lbl span{font-size:10px;color:var(--mu);display:block;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lbl:hover span{white-space:normal;color:var(--tx)}
+.lbl:hover{border-color:var(--or)}.lbl.board{border-color:var(--or);text-align:center}.lbl.board b{color:var(--or)}
+.lbl.alarm{border-color:var(--rd);animation:p 1s infinite}.lbl.alarm b{color:var(--rd);margin:0}
+.hqbar{position:absolute;top:10px;left:12px;right:12px;display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+.hqbar .px{font-size:10px;color:var(--or);text-shadow:2px 2px 0 #000}.hqbar button{pointer-events:auto}
+.hqhint{position:absolute;bottom:8px;right:12px;font-size:11px}
+#toasts{position:absolute;left:12px;bottom:12px;display:flex;flex-direction:column;gap:6px;max-width:min(380px,70%)}
+.toast{background:#0d1226f0;border:2px solid var(--ac);padding:7px 10px;font-size:12px;box-shadow:3px 3px 0 #000;animation:slide .35s ease-out;transition:opacity .5s,transform .5s}
+.toast.bad{border-color:var(--rd)}.toast.out{opacity:0;transform:translateX(-30px)}@keyframes slide{from{transform:translateX(-40px);opacity:0}}
+#hq3d.nogl::after{content:'3D needs WebGL. Try Chrome or Edge.';position:absolute;inset:0;display:grid;place-items:center;color:var(--mu)}
+.room{padding:8px;border:2px solid transparent;border-radius:4px;transition:border-color .3s,background .3s}.room.hot{border-color:var(--ac);background:#5ef38c12}
+</style></head><body>
 <div id="greet"><div class="box"><div class="big bob">🧑‍🏫</div><h2>Assistant Coach</h2>
 <p id="say">Coach is getting the report ready…</p>
 <div class="ask"><input id="q" placeholder="Ask me anything about the team…"><button id="go">Ask</button></div>
@@ -43,6 +68,9 @@ nav{display:flex;gap:8px;margin-bottom:16px}nav button{background:#1d2a40;color:
 <header><h1>THE <span>DYNASTY</span> · FRONT OFFICE</h1><div class="mu" id="meta">Connecting…</div></header>
 <div class="tick"><div id="tick">Loading the wire…</div></div>
 <div id="alert"></div>
+<section id="hq3d"><canvas id="hqc"></canvas><div id="hqlbl"></div>
+<div class="hqbar"><span class="px">MY HQ · LIVE</span><button id="hqreset" class="ghost">FULL VIEW</button></div>
+<div id="toasts"></div><div class="hqhint mu">drag to spin · scroll to zoom · click a room</div></section>
 <main>
 <section>
 <nav><button class="on" data-p="arena">League</button><button data-p="lineup">Lineup</button><button data-p="trades">Trades</button><button data-p="tlog">Trade log</button></nav>
@@ -51,12 +79,209 @@ nav{display:flex;gap:8px;margin-bottom:16px}nav button{background:#1d2a40;color:
 <div class="pane" id="trades"><div class="card"><h2>Trade offers to send</h2><div id="tr" class="mu">Waiting on the Analyst…</div></div><div class="card"><h2>Counter-offer help</h2><div class="mu">Paste or type what the owner sent back, and the Manager tells you what to do.</div><textarea id="cin" rows="3" placeholder="Example: Bob countered, he wants Player A and Player B for Player C"></textarea><button id="cgo" style="margin-top:8px">Ask the Manager</button><div id="cout" class="mu" style="white-space:pre-wrap;margin-top:8px"></div></div></div>
 <div class="pane" id="tlog"><div class="card"><h2>League trade log</h2><div id="tstats" class="mu"></div><div id="tl"></div></div></div>
 </section>
-<aside class="card"><h2>My HQ</h2>
-<div class="room"><div class="rt">🏈 Practice Field</div><div class="scene field"><i class="dot d1"></i><i class="dot d2"></i><i class="dot d3"></i><span class="bob">🧑‍🏫</span></div><div class="mu" id="r-hc">Head Coach is calling plays…</div><div class="todo" id="t-hc"></div></div>
-<div class="room"><div class="rt">🎬 Film Room</div><div class="scene"><span class="screen"></span><span>🕵️</span></div><div class="mu" id="r-sc">Scout is breaking down film…</div><div class="todo" id="t-sc"></div></div>
-<div class="room"><div class="rt">📚 Analyst’s Desk</div><div class="scene"><span class="bob">🤓</span><span>📖</span><span class="mu">+3.2</span></div><div class="mu" id="r-an">Analyst is cooking up trades…</div><div class="todo" id="t-an"></div></div>
-<div class="room"><div class="rt">📞 Manager’s Office</div><div class="scene"><span>🧑‍💼</span><span class="shake">📱</span></div><div class="mu" id="r-mg">Manager is working the phones…</div><div class="todo" id="t-mg"></div></div>
+<aside class="card"><h2>Staff to-do</h2>
+<div class="room" id="room-hc"><div class="rt">🏈 Head Coach</div><div class="mu" id="r-hc">Head Coach is calling plays…</div><div class="todo" id="t-hc"></div></div>
+<div class="room" id="room-sc"><div class="rt">🎬 Scout</div><div class="mu" id="r-sc">Scout is breaking down film…</div><div class="todo" id="t-sc"></div></div>
+<div class="room" id="room-an"><div class="rt">📚 Analyst</div><div class="mu" id="r-an">Analyst is cooking up trades…</div><div class="todo" id="t-an"></div></div>
+<div class="room" id="room-mg"><div class="rt">📞 Manager</div><div class="mu" id="r-mg">Manager is working the phones…</div><div class="todo" id="t-mg"></div></div>
 </aside></main>
+<script>
+// ===== 3D VOXEL HQ (plain WebGL, no libraries) =====
+(function(){
+const wrap=document.getElementById('hq3d'),cv=document.getElementById('hqc'),lblBox=document.getElementById('hqlbl'),toastBox=document.getElementById('toasts');
+const gl=cv.getContext('webgl',{antialias:true,alpha:true});
+const noop={update(){}};
+if(!gl){wrap.classList.add('nogl');window.HQ=noop;return}
+
+// ---- math (column-major 4x4) ----
+const mul=(a,b)=>{const o=new Array(16);for(let c=0;c<4;c++)for(let r=0;r<4;r++){let s=0;for(let k=0;k<4;k++)s+=a[k*4+r]*b[c*4+k];o[c*4+r]=s}return o};
+const T=(x,y,z)=>[1,0,0,0,0,1,0,0,0,0,1,0,x,y,z,1];
+const Sc=(x,y,z)=>[x,0,0,0,0,y,0,0,0,0,z,0,0,0,0,1];
+const Ry=a=>{const c=Math.cos(a),s=Math.sin(a);return[c,0,-s,0,0,1,0,0,s,0,c,0,0,0,0,1]};
+const Rx=a=>{const c=Math.cos(a),s=Math.sin(a);return[1,0,0,0,0,c,s,0,0,-s,c,0,0,0,0,1]};
+const persp=(f,asp,n,fa)=>{const t=1/Math.tan(f/2);return[t/asp,0,0,0,0,t,0,0,0,0,(fa+n)/(n-fa),-1,0,0,2*fa*n/(n-fa),0]};
+const sub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]],dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const norm=a=>{const l=Math.hypot(...a)||1;return[a[0]/l,a[1]/l,a[2]/l]};
+const look=(e,c,u)=>{const z=norm(sub(e,c)),x=norm(cross(u,z)),y=cross(z,x);return[x[0],y[0],z[0],0,x[1],y[1],z[1],0,x[2],y[2],z[2],0,-dot(x,e),-dot(y,e),-dot(z,e),1]};
+const rgb=h=>[parseInt(h.slice(1,3),16)/255,parseInt(h.slice(3,5),16)/255,parseInt(h.slice(5,7),16)/255];
+const C={};const col=h=>C[h]||(C[h]=rgb(h));
+
+// ---- shaders ----
+const sh=(type,src)=>{const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s};
+const prog=gl.createProgram();
+gl.attachShader(prog,sh(gl.VERTEX_SHADER,`attribute vec3 p;attribute vec3 n;uniform mat4 uVP,uM;varying vec3 vN;varying float vD;
+void main(){vec4 w=uM*vec4(p,1.);vN=normalize((uM*vec4(n,0.)).xyz);gl_Position=uVP*w;vD=gl_Position.w;}`));
+gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,`precision mediump float;uniform vec3 uC,uFog;uniform float uE;varying vec3 vN;varying float vD;
+void main(){float d=max(dot(vN,normalize(vec3(.5,1.,.35))),0.);float f=max(dot(vN,normalize(vec3(-.6,.3,-.5))),0.);
+vec3 c=uC*(.40+.52*d+.16*f);c=mix(c,uC*1.3,uE);float fg=clamp((vD-45.)/70.,0.,.7);gl_FragColor=vec4(mix(c,uFog,fg),1.);}`));
+gl.linkProgram(prog);gl.useProgram(prog);
+const U={};['uVP','uM','uC','uFog','uE'].forEach(k=>U[k]=gl.getUniformLocation(prog,k));
+
+// ---- unit cube ----
+const P=[],N=[],X=[];
+[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]].forEach(n=>{const[a,b]=n[0]?[[0,1,0],[0,0,1]]:n[1]?[[0,0,1],[1,0,0]]:[[1,0,0],[0,1,0]];const i=P.length/3;
+[[-1,-1],[1,-1],[1,1],[-1,1]].forEach(([u,v])=>{for(let k=0;k<3;k++)P.push(.5*n[k]+.5*u*a[k]+.5*v*b[k]);N.push(...n)});X.push(i,i+1,i+2,i,i+2,i+3)});
+const buf=(d,loc)=>{const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(d),gl.STATIC_DRAW);const l=gl.getAttribLocation(prog,loc);gl.enableVertexAttribArray(l);gl.vertexAttribPointer(l,3,gl.FLOAT,false,0,0)};
+buf(P,'p');buf(N,'n');
+const ib=gl.createBuffer();gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ib);gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(X),gl.STATIC_DRAW);
+gl.enable(gl.DEPTH_TEST);
+const draw=(m,c,e=0)=>{gl.uniformMatrix4fv(U.uM,false,m);gl.uniform3fv(U.uC,typeof c==='string'?col(c):c);gl.uniform1f(U.uE,e);gl.drawElements(gl.TRIANGLES,36,gl.UNSIGNED_SHORT,0)};
+const boxM=(x,y,z,w,h,d)=>mul(T(x,y+h/2,z),Sc(w,h,d));
+
+// ---- static world ----
+const W=[];const v=(x,y,z,w,h,d,c,e=0)=>W.push({m:boxM(x,y,z,w,h,d),c,e});
+v(0,-1.4,0,40,1.4,30,'#3b2f2a');v(0,-.25,0,38.6,.25,28.6,'#55b04a');           // island + grass
+for(let i=0;i<10;i++)v(-16+i*2,0,6,2,.08,12,i===0?'#ff7a2f':i%2?'#2f9a46':'#3bb453'); // field stripes, end zone
+for(let x=-13;x<=1;x+=4)v(x,.08,6,.14,.02,12,'#f4f4f4');                      // yard lines
+v(-7,.08,.15,20,.02,.14,'#f4f4f4');v(-7,.08,11.85,20,.02,.14,'#f4f4f4');
+v(-16.6,0,6,.25,2.2,.25,'#ffd23f');v(-16.6,2.2,6,.25,.25,3.2,'#ffd23f');v(-16.6,2.2,4.5,.25,2.2,.25,'#ffd23f');v(-16.6,2.2,7.5,.25,2.2,.25,'#ffd23f');
+v(-1,0,-.6,6,.5,.8,'#c0392b');v(-1,.5,-.95,6,.6,.15,'#c0392b');               // team bench
+// film room
+v(11,0,6.5,12,.12,11,'#3d2a63');v(11,0,1.2,12,3.4,.4,'#54407e');v(16.8,0,6.5,.4,3.4,11,'#54407e');
+v(11,.7,1.5,6.4,2.6,.15,'#101010');
+[8.4,11,13.6].forEach(x=>{v(x,.12,7.4,1.3,.55,1.2,'#8e2b3d');v(x,.67,8,1.3,1,.22,'#8e2b3d')});
+v(14.8,.12,9.8,1.2,1.2,1.2,'#d9d9d9');v(14.8,1.32,9.8,.9,.4,.9,'#f7e27a');   // popcorn tub
+// analyst office
+v(-9,0,-7.5,14,.12,9,'#9a6738');v(-9,0,-11.8,14,3.4,.4,'#d8cfb8');v(-15.8,0,-7.5,.4,3.4,9,'#d8cfb8');
+v(-9,.12,-9.4,4.4,.9,1.6,'#5b3a1e');
+v(-13.2,.12,-11.2,3,2.8,.8,'#5b3a1e');
+['#e74c3c','#3498db','#f1c40f','#2ecc71','#9b59b6','#e67e22'].forEach((c,i)=>{v(-14.3+i*.42,.5,-10.9,.32,.75,.5,c);v(-14.3+i*.42,1.6,-10.9,.32,.65,.5,['#16a085','#c0392b','#2980b9','#f39c12','#8e44ad','#27ae60'][i])});
+v(-5,.9,-11.55,4,2,.1,'#ffffff');
+[.5,.9,.7,1.3,1.1,1.6].forEach((h,i)=>v(-6.5+i*.55,1.05,-11.48,.35,h,.06,'#2ecc71',.6));
+// manager office
+v(9,0,-7.5,14,.12,9,'#1f3b6b');v(9,0,-11.8,14,3.4,.4,'#a9bdd3');v(15.8,0,-7.5,.4,3.4,9,'#a9bdd3');
+[5,7.4,9.8].forEach(x=>v(x,1.2,-11.55,1.8,1.4,.08,'#8fd3ff',.7));
+v(12,.12,-9.8,4.6,.9,1.6,'#2b2b2b');v(12.6,1.02,-9.8,1.2,.08,.9,'#bbbbbb');v(12.6,1.1,-10.2,1.2,.75,.06,'#3a7bd5',.8);
+v(14.6,.12,-11,1.4,1.3,.8,'#5b3a1e');v(14.6,1.42,-11,.5,.2,.4,'#e6b422');v(14.6,1.62,-11,.2,.5,.2,'#e6b422');v(14.6,2.12,-11,.6,.5,.45,'#ffcf3f',.3);
+// scoreboard
+v(-2.6,0,-13,.4,4,.4,'#5a5a5a');v(2.6,0,-13,.4,4,.4,'#5a5a5a');v(0,4,-13,7.4,2.8,.5,'#141922');v(0,4.1,-12.74,7,2.6,.05,'#0b1a12');
+// light towers
+[[-19,13.5],[19,13.5],[-19,-13.5],[19,-13.5]].forEach(([x,z])=>{v(x,0,z,.45,9,.45,'#6b6b6b');v(x,9,z,2,1,1,'#fff6c4',1)});
+// bushes
+[[-18,-2],[17.8,1],[-18.2,11],[4,12.8],[0,-6],[-1.5,-9],[18,-3]].forEach(([x,z],i)=>{v(x,0,z,1.4,1,1.4,'#2d7a3a');v(x+.2,1,z,.8,.6,.8,i%2?'#3a9447':'#2d7a3a')});
+
+// ---- characters ----
+const SKIN=['#f1c27d','#c68642','#8d5524','#e0ac69'];
+function person(c,t){
+  const ph=c.ph||0,walk=c.walk,sit=c.sit;
+  const sw=walk?Math.sin(t*9+ph)*.7:0,bob=walk?Math.abs(Math.sin(t*9+ph))*.1:Math.sin(t*2+ph)*.02;
+  const base=mul(T(c.x,0,c.z),Ry(c.yaw)),hip=(sit?.68:.8)+bob;
+  const part=(px,py,rot,oy,w,h,d,cl,oz=0)=>draw(mul(base,mul(T(px,py,0),mul(Rx(rot),boxM(0,oy,oz,w,h,d)))),cl);
+  draw(boxM(c.x,.13,c.z,1.1,.02,.9),'#1e3a1e');
+  part(-.2,hip,sit?-1.5:sw,-.8,.34,.8,.36,c.pants);part(.2,hip,sit?-1.5:-sw,-.8,.34,.8,.36,c.pants);
+  part(0,hip,0,0,.82,.8,.46,c.shirt);
+  if(c.num)part(0,hip,0,.25,.3,.3,.02,'#ffffff',.24);
+  let aL=-sw*.8,aR=sw*.8;
+  if(c.anim==='wave'){aR=-2.7+Math.sin(t*6)*.35;aL=-.9}
+  if(c.anim==='type'){aL=-1.25+Math.sin(t*22)*.06;aR=-1.25+Math.cos(t*22)*.06}
+  if(c.anim==='phone'){aR=-2.75}
+  if(c.anim==='watch'){aL=-.3;aR=-1+Math.max(0,Math.sin(t*1.7))*.5}
+  const sh=hip+.76;
+  part(-.55,sh,aL,-.72,.26,.72,.3,c.shirt);part(.55,sh,aR,-.72,.26,.72,.3,c.shirt);
+  part(-.55,sh,aL,-.86,.22,.16,.26,c.skin);part(.55,sh,aR,-.86,.22,.16,.26,c.skin);
+  if(c.anim==='wave')part(-.55,sh,aL,-.8,.6,.75,.08,'#8b5a2b',.22);          // clipboard
+  if(c.anim==='phone')part(.55,sh,aR,-.92,.14,.3,.1,'#222');
+  const hy=hip+.8;
+  part(0,hy,0,0,.62,.62,.62,c.skin);
+  part(-.14,hy,0,.3,.1,.12,.02,'#111',.315);part(.14,hy,0,.3,.1,.12,.02,'#111',.315);
+  part(0,hy,0,.6,.66,.14,.66,c.cap||c.hair);
+  if(c.cap)part(0,hy,0,.6,.66,.06,.34,c.cap,.46);
+  if(c.helmet){part(0,hy,0,-.04,.7,.72,.7,c.helmet);part(0,hy,0,.2,.5,.08,.1,'#dddddd',.38)}
+}
+// path walker
+function path(pts){const seg=[];let L=0;for(let i=0;i<pts.length;i++){const a=pts[i],b=pts[(i+1)%pts.length],l=Math.hypot(b[0]-a[0],b[1]-a[1]);seg.push({a,b,l,s:L});L+=l}return{seg,L}}
+function at(pa,d){d=((d%pa.L)+pa.L)%pa.L;const s=pa.seg.find(s=>d>=s.s&&d<s.s+s.l)||pa.seg[0];const k=(d-s.s)/s.l;return{x:s.a[0]+(s.b[0]-s.a[0])*k,z:s.a[1]+(s.b[1]-s.a[1])*k,yaw:Math.atan2(s.b[0]-s.a[0],s.b[1]-s.a[1])}}
+const routes=[path([[-12,3],[-4,3],[-2,6],[-4,9],[-12,9],[-14,6]]),path([[-10,2],[-3,2],[-3,10],[-10,10]]),path([[-14,4],[-6,7],[-14,10],[-8,5.5]])];
+const team=['#ff7a2f','#1d4ed8','#ff7a2f'];
+const runners=routes.map((r,i)=>({walk:1,ph:i*2,shirt:team[i],pants:'#f4f4f4',skin:SKIN[i],hair:'#222',helmet:i===1?'#1d4ed8':'#ff7a2f',num:1,r,sp:3.2+i*.5,off:i*7}));
+const qb={x:-9,z:6,yaw:Math.PI/2,shirt:'#ff7a2f',pants:'#f4f4f4',skin:SKIN[3],hair:'#222',helmet:'#ff7a2f',num:1,anim:'throw'};
+const coach={x:-4,z:-.9,yaw:.25,shirt:'#1d3557',pants:'#2b2d42',skin:SKIN[1],hair:'#222',cap:'#ff7a2f',anim:'wave',ph:1};
+const scout={x:11,z:7.6,yaw:Math.PI,sit:1,shirt:'#6c3483',pants:'#2c3e50',skin:SKIN[0],hair:'#6e2c00',anim:'watch'};
+const analyst={x:-9,z:-8,yaw:Math.PI,sit:1,shirt:'#27ae60',pants:'#34495e',skin:SKIN[2],hair:'#111',anim:'type',ph:2};
+const mgr={walk:1,shirt:'#ecf0f1',pants:'#1c2833',skin:SKIN[0],hair:'#3e2723',anim:'phone',ph:3,r:path([[5,-6.5],[11,-6.5]]),sp:1.6};
+const chairs=[[-9,-8.2],[11,-8.6]];
+// particles
+const parts=Array.from({length:46},()=>({x:(Math.random()-.5)*36,y:Math.random()*10,z:(Math.random()-.5)*26,v:.3+Math.random()*.6}));
+
+// ---- camera + input ----
+const cam={yaw:.2,el:.6,r:38,t:[0,0,0]},goal={yaw:.2,el:.6,r:38,t:[0,0,0]};
+let drag=null,lastUse=0,focused=null,hover=false;
+cv.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY};cv.setPointerCapture(e.pointerId)});
+cv.addEventListener('pointermove',e=>{if(!drag)return;goal.yaw-=(e.clientX-drag.x)*.006;goal.el=Math.min(1.3,Math.max(.22,goal.el+(e.clientY-drag.y)*.004));drag={x:e.clientX,y:e.clientY};lastUse=performance.now()});
+cv.addEventListener('pointerup',()=>drag=null);
+cv.addEventListener('wheel',e=>{e.preventDefault();goal.r=Math.min(70,Math.max(12,goal.r*(e.deltaY>0?1.1:.9)));lastUse=performance.now()},{passive:false});
+
+// ---- labels ----
+const ZONES=[{k:'hc',name:'PRACTICE FIELD',who:'Head Coach',p:[-7,3.2,6],f:[-7,0,5]},{k:'sc',name:'FILM ROOM',who:'Scout',p:[11,4,6],f:[11,0,6]},
+ {k:'an',name:"ANALYST'S DESK",who:'Analyst',p:[-9,4,-8],f:[-9,0,-8]},{k:'mg',name:"MANAGER'S OFFICE",who:'Manager',p:[9,4,-8],f:[9,0,-8]}];
+ZONES.forEach(z=>{z.el=document.createElement('div');z.el.className='lbl';z.el.innerHTML=`<b>${z.name}</b><span></span>`;z.el.onclick=()=>focus(z);z.el.onmouseenter=()=>hover=true;z.el.onmouseleave=()=>hover=false;lblBox.appendChild(z.el)});
+const board=document.createElement('div');board.className='lbl board';board.innerHTML='<b>THE DYNASTY</b><span>WK -- · --</span>';lblBox.appendChild(board);
+const beacon=document.createElement('div');beacon.className='lbl alarm';beacon.innerHTML='<b>🚨 INJURY ALERT</b>';beacon.style.display='none';lblBox.appendChild(beacon);
+function focus(z){focused=z;goal.t=z.f.slice();goal.r=19;goal.el=.7;document.querySelectorAll('.room').forEach(r=>r.classList.toggle('hot',r.id==='room-'+z.k));
+  const room=document.getElementById('room-'+z.k);if(room)room.scrollIntoView({behavior:'smooth',block:'nearest'})}
+document.getElementById('hqreset').onclick=()=>{focused=null;Object.assign(goal,{el:.6,r:38,t:[0,0,0]});document.querySelectorAll('.room').forEach(r=>r.classList.remove('hot'))};
+
+// ---- live data hooks ----
+let alertOn=false,seenMoves=null,statusAt=0;
+function toast(msg,kind){const d=document.createElement('div');d.className='toast '+(kind||'');d.textContent=msg;toastBox.prepend(d);while(toastBox.children.length>4)toastBox.lastChild.remove();setTimeout(()=>d.classList.add('out'),7000);setTimeout(()=>d.remove(),7600)}
+window.HQ={update(s){
+  if(!s)return;const me=(s.teams||[]).find(t=>t.mine);
+  board.querySelector('span').textContent=`WK ${s.league?s.league.week:'--'} · ${me?me.record:'--'}`;
+  const was=alertOn;alertOn=!!(s.alerts&&s.alerts.length);
+  if(alertOn&&!was)s.alerts.forEach(a=>toast(`🚨 ${a.name} is ${a.status}`,'bad'));
+  const mv=s.moves||[];
+  if(seenMoves){mv.filter(m=>!seenMoves.has(m)).slice(0,3).forEach(m=>toast('📰 '+m))}else if(mv.length)toast('📡 Front office online · '+mv.length+' moves on the wire');
+  seenMoves=new Set(mv);
+}};
+
+// ---- render loop ----
+const SKY=rgb('#1b2650');let last=performance.now();
+function project(VP,p,w,h){const x=VP[0]*p[0]+VP[4]*p[1]+VP[8]*p[2]+VP[12],y=VP[1]*p[0]+VP[5]*p[1]+VP[9]*p[2]+VP[13],q=VP[3]*p[0]+VP[7]*p[1]+VP[11]*p[2]+VP[15];
+  if(q<=0)return null;return[(x/q*.5+.5)*w,(1-(y/q*.5+.5))*h,q]}
+function place(el,VP,p,w,h){const s=project(VP,p,w,h);if(!s||s[0]<-80||s[0]>w+80){el.style.opacity=0;return}el.style.opacity=1;el.style.transform=`translate(${s[0]}px,${s[1]}px) translate(-50%,-100%)`}
+function frame(now){
+  const t=now/1000,dt=Math.min(.05,(now-last)/1000);last=now;
+  const dpr=Math.min(devicePixelRatio||1,1.5),w=cv.clientWidth,h=cv.clientHeight;
+  if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr)}
+  if(!drag&&!focused&&!hover&&now-lastUse>4000)goal.yaw=.2+Math.sin(t*.12)*.55;
+  const k=1-Math.pow(.02,dt);['yaw','el','r'].forEach(q=>cam[q]+=(goal[q]-cam[q])*k);for(let i=0;i<3;i++)cam.t[i]+=(goal.t[i]-cam.t[i])*k;
+  const eye=[cam.t[0]+cam.r*Math.cos(cam.el)*Math.sin(cam.yaw),cam.t[1]+cam.r*Math.sin(cam.el),cam.t[2]+cam.r*Math.cos(cam.el)*Math.cos(cam.yaw)];
+  const VP=mul(persp(.75,w/Math.max(h,1),.5,200),look(eye,[cam.t[0],cam.t[1]+1,cam.t[2]],[0,1,0]));
+  gl.viewport(0,0,cv.width,cv.height);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
+  gl.uniformMatrix4fv(U.uVP,false,VP);gl.uniform3fv(U.uFog,SKY);
+  for(const o of W)draw(o.m,o.c,o.e);
+  // animated screens
+  const fl=.5+.5*Math.sin(t*3);
+  draw(boxM(11,.85,1.62,6,2.3,.04),[.15+.25*fl,.35,.75-.2*fl],1);
+  for(let i=0;i<4;i++)draw(boxM(8.6+i*1.6,1.1+.45*Math.abs(Math.sin(t*1.3+i)),1.66,.25,.25,.02),'#ffffff',1);
+  [-10.2,-7.8].forEach((x,i)=>{draw(boxM(x,1.02,-9.9,.15,.45,.15),'#333');draw(boxM(x,1.4,-9.9,1.7,1,.1),'#111');
+    draw(boxM(x,1.48,-9.84,1.5,.84,.02),i?[.1,.6+.3*fl,.3]:[.2,.4,.8+.15*fl],1)});
+  chairs.forEach(([x,z])=>{draw(boxM(x,.12,z,1.1,.55,1.1),'#2c2c2c');draw(boxM(x,.67,z+.5,1.1,.9,.18),'#2c2c2c')});
+  // people
+  runners.forEach(r=>{const p=at(r.r,t*r.sp+r.off);Object.assign(r,p);person(r,t)});
+  const tgt=runners[Math.floor(t/2.4)%3],u=(t%2.4)/2.4;
+  qb.yaw=Math.atan2(tgt.x-qb.x,tgt.z-qb.z);person(qb,t);
+  if(u<.85){const k2=u/.85,bx=qb.x+(tgt.x-qb.x)*k2,bz=qb.z+(tgt.z-qb.z)*k2,by=1.9+Math.sin(k2*Math.PI)*2.4;
+    draw(mul(T(bx,by,bz),mul(Ry(t*9),Sc(.3,.22,.5))),'#8b4513')}
+  person(coach,t);person(scout,t);person(analyst,t);
+  const mp=at(mgr.r,t*mgr.sp);Object.assign(mgr,mp);person(mgr,t);
+  // alert beacon over the head coach
+  if(alertOn){const pu=.5+.5*Math.sin(t*8);draw(mul(T(coach.x,3.6+Math.sin(t*3)*.15,coach.z),mul(Ry(t*2),Sc(.55,.55,.55))),[1,.15+.2*pu,.15],pu)}
+  // particles
+  parts.forEach(p=>{p.y+=dt*p.v;if(p.y>11){p.y=0}draw(mul(T(p.x+Math.sin(t+p.z)*.3,p.y,p.z),Sc(.1,.1,.1)),'#fff3b0',1)});
+  // stadium light flicker on scoreboard
+  draw(boxM(0,5.1,-12.7,6.6,.04,.02),alertOn?[1,.2,.2]:[.3,1,.5],1);
+  // labels
+  if(now-statusAt>800){statusAt=now;ZONES.forEach(z=>{const s=document.getElementById('r-'+z.k);z.el.querySelector('span').textContent=s?s.textContent:''})}
+  ZONES.forEach(z=>place(z.el,VP,z.p,w,h));place(board,VP,[0,7.3,-13],w,h);
+  beacon.style.display=alertOn?'':'none';if(alertOn)place(beacon,VP,[coach.x,4.6,coach.z],w,h);
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+})();
+
+</script>
 <script>
 const $=s=>document.querySelector(s),esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const pn=p=>`${esc(p.name)} <span class="mu">${esc(p.pos||'')} ${esc(p.team||'')}</span>${p.inj?`<span class="chip">${esc(p.inj)}</span>`:''}`;
@@ -78,7 +303,7 @@ async function askCoach(){const q=$('#q').value.trim();if(!q)return;$('#ans').te
   try{const r=await(await fetch('/api/ask',{method:'POST',body:JSON.stringify({q})})).json();$('#ans').textContent=r.answer}catch{$('#ans').textContent='Lost the connection.'}}
 $('#go').onclick=askCoach;$('#q').onkeydown=e=>{if(e.key==='Enter')askCoach()};
 async function state(){try{
-  const s=await(await fetch('/api/state')).json();if(s.error)return;LS=s;
+  const s=await(await fetch('/api/state')).json();if(s.error)return;LS=s;try{window.HQ&&HQ.update(s)}catch(e){console.error(e)}
   let lk='';if(s.lock){const ms=new Date(s.lock.at)-Date.now();if(ms>0){const m=Math.floor(ms/6e4);lk=` · Lineup locks in ${m>=60?Math.floor(m/60)+'h ':''}${m%60}m (${s.lock.player})`}else lk=' · Lineup locked'}
   $('#meta').textContent=`Week ${s.league.week} · ${s.me}${lk} · updated ${new Date(s.updated).toLocaleTimeString()}`;
   renderAlert();
