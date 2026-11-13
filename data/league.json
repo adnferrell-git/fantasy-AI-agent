@@ -221,10 +221,10 @@
      "inj": null
     },
     {
-     "id": "8134",
-     "name": "Khalil Shakir",
+     "id": "12718",
+     "name": "Konata Mumpfield",
      "pos": "WR",
-     "team": "BUF",
+     "team": "LAR",
      "inj": null
     },
     {
@@ -272,13 +272,6 @@
      "inj": null
     },
     {
-     "id": "12718",
-     "name": "Konata Mumpfield",
-     "pos": "WR",
-     "team": "LAR",
-     "inj": null
-    },
-    {
      "id": "13294",
      "name": "Makai Lemon",
      "pos": "WR",
@@ -312,6 +305,13 @@
      "pos": "QB",
      "team": "BAL",
      "inj": "IR"
+    },
+    {
+     "id": "8134",
+     "name": "Khalil Shakir",
+     "pos": "WR",
+     "team": "BUF",
+     "inj": null
     },
     {
      "id": "9757",
