@@ -173,8 +173,20 @@ function nflFor(list) {
   return { through_week: K.through_week, notes: K.notes, players, defense_rank_vs_pos: def };
 }
 
+// With no key on this PC, show the latest report the staff wrote on GitHub (they run there 24/7).
+const REPORT_URL = 'https://raw.githubusercontent.com/adnferrell-git/fantasy-AI-agent/main/data/brief.json';
+async function githubBrief() {
+  try {
+    const r = await fetch(REPORT_URL + '?t=' + Date.now());
+    if (!r.ok) throw new Error(r.status);
+    const b = await r.json();
+    const when = new Date(b.made).toLocaleString('en-US', { weekday: 'short', hour: 'numeric', minute: '2-digit' });
+    return { ...b, report: `(Staff report from ${when}) ${b.report || ''}` };
+  } catch (e) { return { error: 'Could not load the staff report from GitHub yet (' + e.message + ').' }; }
+}
+
 async function makeBrief() {
-  if (!KEY) return { error: 'Add your ANTHROPIC_API_KEY and restart to wake up the staff.' };
+  if (!KEY) return githubBrief();
   if (!S) return { error: 'Still loading the league. Try again in a minute.' };
   const me = S.teams.find(t => t.mine);
   const ctx = { league: S.league, my_team: me, games: S.games, recent_moves: S.moves, completed_trades: S.tradeLog.slice(0, 15), trade_counts: S.tradeCounts, free_agents_trending: S.scout, my_last_week_stats: S.statLines, my_alerts: S.alerts,
