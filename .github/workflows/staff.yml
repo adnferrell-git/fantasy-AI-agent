@@ -1,0 +1,47 @@
+name: AI staff report
+
+on:
+  schedule:
+    - cron: "0 15 * * *"     # every day 9:00 AM Central
+    - cron: "30 22 * * 4"    # Thursday 4:30 PM Central, before Thursday night kickoff
+    - cron: "30 16 * * 0"    # Sunday 10:30 AM Central, before the early games
+  workflow_dispatch:          # "Run workflow" button for a report on demand
+
+permissions:
+  contents: write
+
+concurrency:
+  group: watcher            # shares the lane with the watcher so their saves never collide
+  cancel-in-progress: false
+
+jobs:
+  staff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/cache/restore@v4
+        with:
+          path: |
+            players.json
+            players-meta.json
+          key: players-none
+          restore-keys: players-
+
+      - name: Wake up the staff
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: node staff.js
+
+      - name: Save the report
+        run: |
+          git config user.name "dynasty-staff"
+          git config user.email "dynasty-staff@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet || (git commit -m "staff: front office report" && git pull --rebase -q && git push)

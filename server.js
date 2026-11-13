@@ -28,8 +28,9 @@ async function byeSet(season, wk) {
   } catch {}
   return new Set();
 }
+const SERVER = require.main === module; // false when staff.js loads this file on GitHub
 const alerted = new Set(), WEBHOOK = process.env.DISCORD_WEBHOOK || '';
-async function ping(msg) { if (!WEBHOOK) return; try { await fetch(WEBHOOK, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ content: msg }) }); } catch {} }
+async function ping(msg) { if (!WEBHOOK || !SERVER) return; try { await fetch(WEBHOOK, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ content: msg }) }); } catch {} }
 
 const TL_FILE = 'trade-log.json';
 let TL = { done: [], trades: {} };
@@ -196,6 +197,7 @@ async function counter(text) {
   return r.ok ? j.content.map(c => c.text || '').join('') : ((j.error && j.error.message) || 'API error');
 }
 
+if (SERVER) {
 http.createServer(async (req, res) => {
   const send = (o, c = 'application/json') => { res.writeHead(200, { 'content-type': c }); res.end(typeof o === 'string' ? o : JSON.stringify(o)); };
   try {
@@ -215,3 +217,7 @@ http.createServer(async (req, res) => {
   const go = () => refresh().catch(e => console.error('refresh failed:', e.message));
   await go(); setInterval(go, 6e4);
 })();
+}
+
+// Used by staff.js (the scheduled AI staff on GitHub Actions).
+module.exports = { async load() { players = await loadPlayers(); await refresh(); return S; }, makeBrief };

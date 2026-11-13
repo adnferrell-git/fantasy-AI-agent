@@ -45,4 +45,4 @@ jobs:
           git config user.name "dynasty-watcher"
           git config user.email "dynasty-watcher@users.noreply.github.com"
           git add data/
-          git diff --cached --quiet || (git commit -m "watcher: league update" && git push)
+          git diff --cached --quiet || (git commit -m "watcher: league update" && git pull --rebase -q && git push)
