@@ -3,3 +3,4 @@ players.json
 players-meta.json
 trade-log.json
 .env
+__pycache__/

@@ -1,0 +1,37 @@
+name: NFL film study
+
+on:
+  schedule:
+    - cron: "0 8 * * *"    # every night 2:00 AM Central (nflverse updates its data overnight)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: watcher
+  cancel-in-progress: false
+
+jobs:
+  study:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install data tools
+        run: pip install nflreadpy pandas pyarrow
+
+      - name: Study this season
+        run: python nfl_knowledge.py
+
+      - name: Save what the staff learned
+        run: |
+          git config user.name "dynasty-film-room"
+          git config user.email "dynasty-film-room@users.noreply.github.com"
+          git add data/nfl/
+          git diff --cached --quiet || (git commit -m "film study: nightly NFL data" && git pull --rebase -q && git push)
