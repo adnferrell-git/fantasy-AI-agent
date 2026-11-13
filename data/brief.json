@@ -1,7 +1,72 @@
 {
- "made": "2026-11-13T04:15:22.169Z",
+ "made": "2026-11-13T04:19:15.773Z",
  "week": 10,
- "report": "",
- "start_sit": [],
- "trades": []
+ "report": "Tough 2-7 start, but the lineup is solid this week. Stafford has a soft Arizona pass defense (ranked 2nd-easiest vs QB), and Javonte Williams is carrying 23 carries a game. Tee Higgins is hot, averaging 28.2 over his last 3. Rachaad White plays Thursday night, so he is locked in. Stevenson and Marks are both Questionable, so check them before kickoff. I'd start Stevenson at flex, with Flournoy as the fallback if he's out. I have one small trade idea for Rashee Rice.",
+ "start_sit": [
+  {
+   "player": "Matthew Stafford",
+   "call": "START",
+   "boom_chance": "N/A",
+   "confidence": "HIGH",
+   "why": "Arizona ranks 2nd-easiest vs QB; he averages 15.9 with a 9.1 floor."
+  },
+  {
+   "player": "Rhamondre Stevenson",
+   "call": "START",
+   "boom_chance": "MEDIUM",
+   "confidence": "MEDIUM",
+   "why": "Detroit is 30th vs RB; he's at 16.4 over his last 3, if active."
+  },
+  {
+   "player": "Ryan Flournoy",
+   "call": "SIT",
+   "boom_chance": "LOW",
+   "confidence": "MEDIUM",
+   "why": "SF ranks 28th vs WR and he averages only 9.3; Stevenson has the better matchup."
+  },
+  {
+   "player": "Jameson Williams",
+   "call": "START",
+   "boom_chance": "MEDIUM",
+   "confidence": "MEDIUM",
+   "why": "New England is 2nd-easiest vs WR; he's at 16.0 over his last 3."
+  },
+  {
+   "player": "Rachaad White",
+   "call": "START",
+   "boom_chance": "N/A",
+   "confidence": "MEDIUM",
+   "why": "Giants are 26th vs RB; he's trending up at 12.9 over his last 3."
+  }
+ ],
+ "replacements": [],
+ "waivers": [],
+ "drops": [
+  {
+   "player": "Seth McGowan",
+   "why": "31% snaps and 3.6 PPG; no path to starting."
+  },
+  {
+   "player": "Kaelon Black",
+   "why": "25% snap share, 4.7 PPG; stuck behind SF's starters."
+  }
+ ],
+ "trades": [
+  {
+   "to": "TWILL4",
+   "give": [
+    "Woody Marks",
+    "Tank Dell"
+   ],
+   "get": [
+    "Rashee Rice"
+   ],
+   "drop_after": "Seth McGowan",
+   "confidence": "LOW",
+   "why": "Rashee Rice brings MORE POINTS: 13.2 PPG, 9.9 floor and 8 targets a game, versus Flournoy's 9.3. TWILL4 gets a steady RB and a WR for depth.",
+   "opener": "Marks for Rice straight up, to see his price.",
+   "fallback": "Add Kaelon Black to the offer; walk away if he wants Stevenson or Higgins.",
+   "text": "Hey, sent you an offer for Rice, take a look when you can."
+  }
+ ]
 }
