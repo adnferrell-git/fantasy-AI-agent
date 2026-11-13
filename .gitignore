@@ -1,0 +1,5 @@
+node_modules/
+players.json
+players-meta.json
+trade-log.json
+.env

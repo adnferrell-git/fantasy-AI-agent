@@ -1,0 +1,48 @@
+name: Dynasty watcher
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # every 15 min (GitHub can run a few minutes late)
+  workflow_dispatch:          # lets you hit "Run workflow" by hand
+
+permissions:
+  contents: write
+
+concurrency:
+  group: watcher
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Keep the big Sleeper player list between runs so it's only downloaded once a day.
+      - id: day
+        run: echo "day=$(date -u +%F)" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            players.json
+            players-meta.json
+          key: players-${{ steps.day.outputs.day }}
+          restore-keys: players-
+
+      - name: Check the league
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: node watch.js
+
+      - name: Save what changed
+        run: |
+          git config user.name "dynasty-watcher"
+          git config user.email "dynasty-watcher@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet || (git commit -m "watcher: league update" && git push)
