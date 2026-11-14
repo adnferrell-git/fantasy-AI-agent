@@ -203,6 +203,21 @@ async function githubBrief() {
   } catch (e) { return { error: 'Could not load the staff report from GitHub yet (' + e.message + ').' }; }
 }
 
+// The report the HQ wall screens show. With a key, the live brief this PC made; otherwise data/brief.json,
+// whichever is newer: the copy in this folder (after a git pull) or the one on GitHub (the overnight staff run).
+let ghReport = null, ghAt = 0;
+async function staffReport() {
+  if (KEY && brief && !brief.error) return { ...brief, made: new Date(briefAt).toISOString(), source: 'live' };
+  let local = null;
+  try { local = { ...JSON.parse(fs.readFileSync('data/brief.json', 'utf8')), source: 'file' }; } catch {}
+  if (!ghReport || Date.now() - ghAt > 3e5) {
+    ghAt = Date.now();
+    try { const r = await fetch(REPORT_URL + '?t=' + Date.now()); if (r.ok) ghReport = { ...(await r.json()), source: 'github' }; } catch {}
+  }
+  const best = [local, ghReport].filter(b => b && !b.error).sort((a, b) => new Date(b.made || 0) - new Date(a.made || 0))[0];
+  return best || { error: 'No staff report yet. The staff on GitHub writes one on its next run.' };
+}
+
 async function makeBrief() {
   if (!KEY) return githubBrief();
   if (!S) return { error: 'Still loading the league. Try again in a minute.' };
@@ -258,6 +273,7 @@ http.createServer(async (req, res) => {
     if (req.url === '/api/state') return send(S || { error: 'loading' });
     if (req.method === 'POST' && req.url === '/api/counter') { let b = ''; for await (const c of req) b += c; return send({ answer: await counter(JSON.parse(b).q) }); }
     if (req.method === 'POST' && req.url === '/api/ask') { let b = ''; for await (const c of req) b += c; return send({ answer: await ask(JSON.parse(b).q) }); }
+    if (req.url.startsWith('/api/report')) return send(await staffReport());
     if (req.url.startsWith('/api/brief')) {
       if (req.url.includes('refresh') || !brief || brief.error || Date.now() - briefAt > 18e5) { brief = await makeBrief(); briefAt = Date.now(); }
       return send(brief);

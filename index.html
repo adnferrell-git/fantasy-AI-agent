@@ -82,7 +82,7 @@ nav button.on{background:var(--ac)}
 <div id="alert"></div>
 <section id="hq3d"><canvas id="hqc"></canvas><div id="hqlbl"></div>
 <div class="hqbar"><span class="px">MY HQ · LIVE</span><button id="hqreset" class="ghost">FULL VIEW</button></div>
-<div id="toasts"></div><div class="hqhint mu">drag to spin · scroll to zoom · click a room, the field or the stadium</div></section>
+<div id="toasts"></div><div class="hqhint mu">drag to spin · scroll to zoom · click a room to read its screen</div></section>
 <main>
 <section>
 <nav><button class="on" data-p="arena">League</button><button data-p="lineup">Lineup</button><button data-p="trades">Trades</button><button data-p="tlog">Trade log</button></nav>
@@ -104,7 +104,7 @@ nav button.on{background:var(--ac)}
 (function(){
 const wrap=document.getElementById('hq3d'),cv=document.getElementById('hqc'),lblBox=document.getElementById('hqlbl'),toastBox=document.getElementById('toasts');
 const gl=cv.getContext('webgl',{antialias:true,alpha:true});
-const noop={update(){}};
+const noop={update(){},report(){}};
 if(!gl){wrap.classList.add('nogl');window.HQ=noop;return}
 
 // ---- math (column-major 4x4) ----
@@ -190,18 +190,16 @@ const GL={D:['110','101','101','101','110'],Y:['101','101','010','010','010'],N:
 [...'DYNASTY'].forEach((ch,L)=>GL[ch].forEach((row,r)=>[...row].forEach((b,c)=>{if(b==='1')v(-4.05+(L*4+c)*.3+.15,F+4.1+(4-r)*.3,-8.42,.3,.3,.1,'#ffb84d',.9)})));
 // Head Coach room: whiteboard of plays, desk
 const hc=ROOMS[0].cx;
-v(hc-.5,F+1.2,-7.93,4.4,1.8,.08,'#f4f4f4');
-[[-2.2,1.5],[-1.4,1.5],[-.6,1.5],[.2,1.5],[1,1.5]].forEach(([x,y])=>v(hc-.5+x,F+y,-7.87,.18,.18,.03,'#1d4ed8'));
-[[-1.8,2.5],[-.2,2.5],[.8,2.2]].forEach(([x,y])=>{v(hc-.5+x,F+y,-7.87,.24,.07,.03,'#e74c3c');v(hc-.5+x,F+y-.08,-7.87,.07,.24,.03,'#e74c3c')});
+v(hc-.5,F+1.12,-7.93,4.6,2.32,.08,'#9aa1ad');v(hc-.5,F+1.06,-7.84,4.4,.06,.14,'#9aa1ad');   // whiteboard frame + marker tray (the board is a report screen)
 v(hc+2,F,-3.4,2.2,.8,1.1,'#7a4a24');v(hc+2,F+.8,-3.4,.7,.12,.5,'#ff7a2f');v(hc+2.6,F+.8,-3.2,.3,.22,.45,'#8b4513');
 // Scout film room: big screen, recliners, popcorn
 const sc=ROOMS[1].cx;
-v(sc,F+.9,-7.92,5.2,2.4,.1,'#101010');
+v(sc,F+.85,-7.92,5.1,2.6,.1,'#101010');
 [[sc-.9,-4.8],[sc+1.3,-4.8]].forEach(([x,z])=>{v(x,F,z,1.1,.55,1.1,'#6a1f2e');v(x,F+.55,z+.5,1.1,.9,.18,'#6a1f2e');v(x-.6,F,z,.15,.75,1.1,'#5a1a26');v(x+.6,F,z,.15,.75,1.1,'#5a1a26')});
 v(sc+2.7,F,-4.6,.8,.8,.8,'#d9d9d9');v(sc+2.7,F+.8,-4.6,.6,.3,.6,'#f7e27a');
 // Analyst: desk with monitors, wall chart, bookshelf
 const an=ROOMS[2].cx;
-v(an,F,-6.9,4.4,.9,1.4,'#5b3a1e');v(an,F+2.35,-7.93,4.4,1.1,.06,'#ffffff');
+v(an,F,-6.9,4.4,.9,1.4,'#5b3a1e');v(an,F+2.3,-7.93,4.6,1.2,.06,'#1a1f2e');
 [-1.1,1.1].forEach(o=>{v(an+o,F+.9,-7.1,.15,.38,.15,'#333');v(an+o,F+1.28,-7.1,1.7,1,.1,'#111')});
 v(an,F,-5.9,1.1,.55,1.1,'#2c2c2c');v(an,F+.55,-5.4,1.1,.9,.18,'#2c2c2c');
 v(an+2.9,F,-3.6,.8,2.6,2.8,'#5b3a1e');
@@ -210,7 +208,7 @@ for(let r=0;r<3;r++)for(let i=0;i<6;i++)v(an+2.45,F+.3+r*.8,-4.6+i*.4,.12,.6-(i%
 // Manager: desk + laptop, wall TV, trophy cabinet, plant
 const mg=ROOMS[3].cx;
 v(mg+1.5,F,-6.6,3.6,.9,1.4,'#2b2b2b');v(mg+1.8,F+.9,-6.6,1.2,.08,.9,'#bbbbbb');v(mg+1.8,F+.98,-7.0,1.2,.75,.06,'#3a7bd5',.8);
-v(mg-1.5,F+1.5,-7.93,2.6,1.5,.08,'#111');
+v(mg-1.5,F+1.45,-7.93,3.2,1.75,.08,'#111');
 v(mg+2.9,F,-3.6,.8,1.3,1.6,'#5b3a1e');v(mg+2.9,F+1.3,-3.6,.4,.2,.4,'#e6b422');v(mg+2.9,F+1.5,-3.6,.18,.45,.18,'#e6b422');v(mg+2.9,F+1.95,-3.6,.55,.45,.4,'#ffcf3f',.3);
 v(mg-3,F,-7.4,.6,.5,.6,'#8b5a2b');v(mg-3,F+.5,-7.4,.8,1,.8,'#2d7a3a');
 
@@ -237,6 +235,80 @@ for(let i=0;i<3;i++){const h=.6*(i+1),sc2=i%2?'#1d4ed8':'#ff7a2f';
  .forEach(([x,z],i)=>{v(x,0,z,.5,1.4,.5,'#6b4423');v(x,1.4,z,2.2,1.6,2.2,i%2?'#2d7a3a':'#327f3c');v(x,3,z,1.4,1,1.4,i%3?'#3a9447':'#2f8a40')});
 v(-16.5,0,4,.18,7,.18,'#cccccc');v(-16.5,7,4,.3,.3,.3,'#ffd23f',.6);
 const sBuf={p:mkbuf(SP),n:mkbuf(SN),c:mkbuf(SC),count:SP.length/3};
+
+// ---- wall screens: each room shows its staffer's latest call from the report (canvas -> texture) ----
+const sp=gl.createProgram();
+gl.attachShader(sp,sh(gl.VERTEX_SHADER,`attribute vec2 q;uniform mat4 uVP,uM;varying vec2 vU;void main(){vU=q+.5;gl_Position=uVP*uM*vec4(q,0.,1.);}`));
+gl.attachShader(sp,sh(gl.FRAGMENT_SHADER,`precision mediump float;uniform sampler2D uT;uniform float uB,uS;varying vec2 vU;
+void main(){vec3 c=texture2D(uT,vU).rgb;c*=uB*(1.-uS+uS*(.75+.25*sin(vU.y*500.)));gl_FragColor=vec4(c,1.);}`));
+gl.bindAttribLocation(sp,0,'q');gl.linkProgram(sp);
+const SU={};['uVP','uM','uT','uB','uS'].forEach(k=>SU[k]=gl.getUniformLocation(sp,k));
+const quad=mkbuf([-.5,-.5,.5,-.5,-.5,.5,.5,.5]);
+const aniso=gl.getExtension('EXT_texture_filter_anisotropic');
+const PXF=px=>`${px}px "Press Start 2P",ui-monospace,monospace`;
+const SCREENS={
+ hc:{x:hc-.5,y:F+2.28,z:-7.85,w:4.4,h:2.2,cw:512,ch:256,scan:0},
+ sc:{x:sc,y:F+2.15,z:-7.85,w:4.8,h:2.4,cw:512,ch:256,scan:.12},
+ an:{x:an,y:F+2.9,z:-7.88,w:4.4,h:1.1,cw:512,ch:128,scan:.1},
+ mg:{x:mg-1.5,y:F+2.32,z:-7.86,w:3,h:1.5,cw:512,ch:256,scan:.12}};
+Object.values(SCREENS).forEach(s=>{s.cv=document.createElement('canvas');s.cv.width=s.cw;s.cv.height=s.ch;s.g=s.cv.getContext('2d');s.tex=gl.createTexture();s.m=mul(T(s.x,s.y,s.z),Sc(s.w,s.h,1))});
+// text helpers: shrink a line until it fits, wrap the rest
+function fitPx(g,t,maxW,big,small){let px=big;for(;px>small;px-=2){g.font=PXF(px);if(g.measureText(t).width<=maxW)break}g.font=PXF(px);return px}
+function wrapT(g,t,maxW,maxL){const out=[];let cur='';String(t||'').split(/\s+/).filter(Boolean).forEach(wd=>{const n=cur?cur+' '+wd:wd;if(g.measureText(n).width>maxW&&cur){out.push(cur);cur=wd}else cur=n});if(cur)out.push(cur);
+  if(out.length>maxL){out.length=maxL;let l=out[maxL-1];while(l.length>1&&g.measureText(l+'…').width>maxW)l=l.slice(0,-1);out[maxL-1]=l+'…'}return out}
+function lines(g,t,x,y,maxW,px,lh,maxL,color,align){g.font=PXF(px);g.fillStyle=color;g.textAlign=align||'left';const L=wrapT(g,t,maxW,maxL);L.forEach((l,i)=>g.fillText(l,x,y+i*lh));return y+L.length*lh}
+const up=s=>String(s||'').toUpperCase();
+let REP=null,REPstate=null;
+function stamp(b){if(!b||!b.made)return '';const d=new Date(b.made);if(isNaN(d))return '';return (b.source==='live'?'LIVE · ':'')+d.toLocaleString('en-US',{weekday:'short',hour:'numeric',minute:'2-digit'}).toUpperCase()}
+function tvFrame(g,W,H,bg,acc,title,b){g.fillStyle=bg;g.fillRect(0,0,W,H);g.fillStyle=acc;g.fillRect(0,0,W,H>140?40:30);g.fillStyle='#0b0f17';g.textBaseline='middle';g.font=PXF(H>140?16:13);g.textAlign='left';g.fillText(title,14,H>140?21:16);
+  const st=stamp(b);if(st){g.font=PXF(12);g.textAlign='right';g.fillText(st,W-12,H>140?21:16)}g.textBaseline='alphabetic'}
+const PAINT={
+ hc(g,W,H,b){ // whiteboard: X's and O's on the left, the call on the right in marker
+  g.fillStyle='#f6f7f2';g.fillRect(0,0,W,H);g.strokeStyle='#d6d9de';g.lineWidth=2;g.beginPath();g.moveTo(156,18);g.lineTo(156,H-18);g.stroke();
+  g.lineWidth=5;g.lineCap='round';g.strokeStyle='#1d4ed8';[[30,190],[62,190],[94,190],[126,190],[78,222]].forEach(([x,y])=>{g.beginPath();g.arc(x,y,9,0,7);g.stroke()});
+  g.strokeStyle='#e74c3c';[[40,70],[100,60],[124,120]].forEach(([x,y])=>{g.beginPath();g.moveTo(x-9,y-9);g.lineTo(x+9,y+9);g.moveTo(x+9,y-9);g.lineTo(x-9,y+9);g.stroke()});
+  g.strokeStyle='#1d4ed8';g.lineWidth=3;g.setLineDash([6,6]);g.beginPath();g.moveTo(30,178);g.quadraticCurveTo(20,110,58,92);g.stroke();g.beginPath();g.moveTo(126,178);g.lineTo(126,150);g.lineTo(142,132);g.stroke();g.setLineDash([]);
+  const X=172,MW=W-X-16;g.fillStyle='#1d4ed8';g.font=PXF(17);g.textAlign='left';g.fillText('GAME PLAN',X,40);const st=stamp(b);if(st){g.font=PXF(11);g.fillStyle='#8a9ab3';g.textAlign='right';g.fillText(st,W-14,36)}
+  const c=b&&(b.start_sit||[])[0],r=b&&(b.replacements||[])[0];
+  if(!b){lines(g,'Waiting on the report…',X,110,MW,18,26,3,'#555');return}
+  if(c){const t=up(c.call)+' '+up(c.player);const px=fitPx(g,t,MW,34,16);let y=lines(g,t,X,92,MW,px,px+10,2,c.call==='SIT'?'#e67e22':'#1f9d55');
+    if(c.over)y=lines(g,(c.call==='SIT'?'put in ':'over ')+c.over,X,y+10,MW,fitPx(g,'over '+c.over,MW,18,12),24,2,'#333');lines(g,up(c.confidence||'')+' CONFIDENCE',X,Math.min(y+24,H-16),MW,14,18,1,'#1d4ed8');return}
+  if(r){const a='IN: '+up(r.in),o='OUT: '+up(r.out);let y=lines(g,a,X,90,MW,fitPx(g,a,MW,30,14),38,1,'#1f9d55');y=lines(g,o,X,y+4,MW,fitPx(g,o,MW,20,11),28,1,'#e74c3c');lines(g,r.why,X,y+16,MW,14,22,3,'#555');return}
+  let y=lines(g,'LINEUP SET',X,104,MW,fitPx(g,'LINEUP SET',MW,34,16),40,1,'#1f9d55');lines(g,'No changes this week. Start your guys.',X,y+16,MW,15,22,3,'#555')},
+ sc(g,W,H,b){tvFrame(g,W,H,'#120b1c','#b06ce0','SCOUT · WAIVERS',b);const X=18,MW=W-36;
+  if(!b){lines(g,'Waiting on the report…',X,110,MW,18,26,3,'#cbb6e6');return}
+  const w=(b.waivers||[])[0],d=(b.drops||[])[0];
+  if(w){const a='ADD '+up(w.add),o='DROP '+up(w.drop);let y=lines(g,a,X,90,MW,fitPx(g,a,MW,32,14),40,1,'#5ef38c');y=lines(g,o,X,y+2,MW,fitPx(g,o,MW,22,12),30,1,'#ff6b6b');lines(g,w.why,X,y+14,MW,15,23,3,'#d9cbee');
+    if((b.waivers||[]).length>1){g.font=PXF(12);g.fillStyle='#b06ce0';g.textAlign='right';g.fillText('+'+(b.waivers.length-1)+' MORE',W-14,H-12)}return}
+  if(d){const o='DROP '+up(d.player);let y=lines(g,o,X,94,MW,fitPx(g,o,MW,32,14),40,2,'#ff6b6b');lines(g,d.why,X,y+12,MW,15,23,3,'#d9cbee');return}
+  let y=lines(g,'NO PICKUPS',X,100,MW,32,40,1,'#5ef38c');y=lines(g,'Your bench beats the wire.',X,y+12,MW,15,21,2,'#d9cbee');
+  const tr=REPstate&&(REPstate.scout||[])[0];if(tr){const t='WATCHING: '+up(tr.name);lines(g,t,X,y+18,MW,fitPx(g,t,MW,15,10),20,1,'#ffb84d')}},
+ an(g,W,H,b){tvFrame(g,W,H,'#0c1a14','#2ecc71','ANALYST · TOP TRADE',b);const X=14,MW=W-28;
+  if(!b){lines(g,'Waiting on the report…',X,74,MW,15,20,2,'#bfe9cf');return}
+  const t=(b.trades||[])[0];
+  if(!t){lines(g,'ROSTER MAXED',X,74,MW,24,28,1,'#5ef38c');lines(g,'No trade makes you better.',X,106,MW,13,18,1,'#bfe9cf');return}
+  const get='GET '+up((t.get||[]).join(' + '));lines(g,get,X,68,MW,fitPx(g,get,MW,26,12),28,1,'#5ef38c');
+  const info=['from '+t.to,t.gain?t.gain+'/wk':'',t.upgrades||''].filter(Boolean).join(' · ');lines(g,info,X,94,MW,fitPx(g,info,MW,15,9),18,1,'#e6ecf5');
+  const give='for '+(t.give||[]).join(', ');lines(g,give,X,117,MW,fitPx(g,give,MW,13,8),14,1,'#8fbfa3')},
+ mg(g,W,H,b){tvFrame(g,W,H,'#0d1830','#3a9bff','MANAGER · NEXT TEXT',b);const X=18,MW=W-36;
+  if(!b){lines(g,'Waiting on the report…',X,110,MW,18,26,3,'#b9d6ff');return}
+  const t=(b.trades||[]).find(x=>x.text);
+  if(!t){lines(g,'PHONE IS QUIET',X,104,MW,fitPx(g,'PHONE IS QUIET',MW,30,14),36,1,'#b9d6ff');lines(g,'No offers to follow up on.',X,146,MW,15,21,2,'#8a9ab3');return}
+  const to='TO: '+up(t.to);g.font=PXF(fitPx(g,to,MW,18,10));g.fillStyle='#8fb8ff';g.textAlign='left';g.fillText(to,X,74);
+  g.font=PXF(20);let L=wrapT(g,t.text,MW-36,4);if(L.length>3){g.font=PXF(16);L=wrapT(g,t.text,MW-36,4)}const lh=L.length>3?24:30,bh=L.length*lh+20;
+  g.fillStyle='#3a9bff';g.beginPath();if(g.roundRect)g.roundRect(X,90,MW,bh,14);else g.rect(X,90,MW,bh);g.fill();g.beginPath();g.moveTo(X+MW-40,90+bh);g.lineTo(X+MW-14,90+bh+16);g.lineTo(X+MW-60,90+bh);g.fill();
+  g.fillStyle='#ffffff';L.forEach((l,i)=>g.fillText(l,X+18,90+lh+2+i*lh))}};
+function paintScreens(){Object.entries(SCREENS).forEach(([k,s])=>{const g=s.g;g.save();g.textBaseline='alphabetic';try{PAINT[k](g,s.cw,s.ch,REP)}catch(e){console.error(e)}g.restore();
+  gl.bindTexture(gl.TEXTURE_2D,s.tex);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,s.cv);gl.generateMipmap(gl.TEXTURE_2D);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+  if(aniso)gl.texParameterf(gl.TEXTURE_2D,aniso.TEXTURE_MAX_ANISOTROPY_EXT,Math.min(8,gl.getParameter(aniso.MAX_TEXTURE_MAX_ANISOTROPY_EXT)))})}
+paintScreens();
+if(document.fonts){document.fonts.load(PXF(16)).then(paintScreens,()=>{});document.fonts.ready.then(paintScreens,()=>{})}
+function drawScreens(VP,t){gl.useProgram(sp);gl.uniformMatrix4fv(SU.uVP,false,VP);gl.uniform1i(SU.uT,0);gl.activeTexture(gl.TEXTURE0);
+  gl.bindBuffer(gl.ARRAY_BUFFER,quad);gl.enableVertexAttribArray(0);gl.vertexAttribPointer(0,2,gl.FLOAT,false,0,0);
+  Object.entries(SCREENS).forEach(([k,s],i)=>{gl.bindTexture(gl.TEXTURE_2D,s.tex);gl.uniformMatrix4fv(SU.uM,false,s.m);gl.uniform1f(SU.uS,s.scan);gl.uniform1f(SU.uB,s.scan?.96+.04*Math.sin(t*7+i*2):1);gl.drawArrays(gl.TRIANGLE_STRIP,0,4)});
+  gl.useProgram(prog);attr(cubeP,aP,3)}
 
 // ---- characters ----
 const SKIN=['#f1c27d','#c68642','#8d5524','#e0ac69'];
@@ -305,7 +377,7 @@ cv.addEventListener('pointerleave',()=>{hot=null;cv.style.cursor=''});
 cv.addEventListener('wheel',e=>{e.preventDefault();goal.r=Math.min(85,Math.max(9,goal.r*(e.deltaY>0?1.1:.9)));lastUse=performance.now()},{passive:false});
 
 // ---- rooms, spots and labels ----
-ROOMS.forEach(r=>{r.p=[r.cx,F+4.3,-1];r.f={t:[r.cx,.4,-4.8],r:13.5,el:.82,yaw:0};r.hit=(x,z)=>Math.abs(x-r.cx)<3.5&&z>-8.2&&z<-.8});
+ROOMS.forEach(r=>{r.p=[r.cx,F+4.3,-1];r.f={t:[SCREENS[r.k].x,1.5,-7.2],r:9,el:.45,yaw:0};r.hit=(x,z)=>Math.abs(x-r.cx)<3.5&&z>-8.2&&z<-.8});
 const SPOTS=[{name:'field',f:{t:[-30,0,0],r:24,el:.55,yaw:.35},hit:(x,z)=>x>-41&&x<-19&&Math.abs(z)<7},
  {name:'stadium',f:{t:[33,0,-3],r:27,el:.6,yaw:-.25},hit:(x,z)=>x>23&&x<43&&z>-18&&z<9}];
 const ZONES=[...ROOMS,...SPOTS];
@@ -326,8 +398,12 @@ document.getElementById('hqreset').onclick=()=>{focused=null;Object.assign(goal,
 // ---- live data hooks ----
 let alertOn=false,seenMoves=null,statusAt=0;
 function toast(msg,kind){const d=document.createElement('div');d.className='toast '+(kind||'');d.textContent=msg;toastBox.prepend(d);while(toastBox.children.length>4)toastBox.lastChild.remove();setTimeout(()=>d.classList.add('out'),7000);setTimeout(()=>d.remove(),7600)}
-window.HQ={update(s){
+let repKey='';
+window.HQ={report(b){if(!b||b.error)return;const k=JSON.stringify([b.made,b.start_sit,b.replacements,b.waivers,b.drops,b.trades&&b.trades[0]]);if(k===repKey)return;
+  const first=!repKey;repKey=k;REP=b;paintScreens();if(!first)toast('📺 New staff report is up on the wall screens')},
+ update(s){
   if(!s)return;const me=(s.teams||[]).find(t=>t.mine);
+  const tr0=REPstate&&(REPstate.scout||[])[0],tr1=(s.scout||[])[0];REPstate=s;if(REP&&(tr0&&tr0.name)!==(tr1&&tr1.name))paintScreens();
   board.querySelector('span').textContent=`WK ${s.league?s.league.week:'--'} · ${me?me.record:'--'}`;
   const was=alertOn;alertOn=!!(s.alerts&&s.alerts.length);
   if(alertOn&&!was)s.alerts.forEach(a=>toast(`🚨 ${a.name} is ${a.status}`,'bad'));
@@ -359,15 +435,10 @@ function frame(now){
   attr(cubeP,aP,3);attr(cubeN,aN,3);gl.disableVertexAttribArray(aC);gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER,ib);
   const fl=.5+.5*Math.sin(t*3);
   // coach's whiteboard: a play being drawn
-  {const u=(t*.5)%1,px=hc-2.7+u*3.8,py=F+1.5+Math.sin(u*Math.PI)*1.2;box(px,py,-7.86,.16,.16,.03,'#e74c3c',1)}
-  // film room screen
-  box(sc,F+1.05,-7.86,4.9,2.1,.04,[.15+.25*fl,.35,.75-.2*fl],1);
-  for(let i=0;i<4;i++)box(sc-2+i*1.3,F+1.3+.9*Math.abs(Math.sin(t*1.3+i)),-7.82,.25,.25,.02,'#ffffff',1);
-  // analyst monitors + growing chart
-  [-1.1,1.1].forEach((o,i)=>box(an+o,F+1.36,-7.04,1.5,.84,.02,i?[.1,.6+.3*fl,.3]:[.2,.4,.8+.15*fl],1));
-  for(let i=0;i<6;i++){const bh=.2+.65*(.5+.5*Math.sin(t*.8+i*.9));box(an-1.75+i*.7,F+2.45,-7.88,.4,bh,.04,i===5?'#ff7a2f':'#2ecc71',.6)}
-  // manager's TV
-  box(mg-1.5,F+1.6,-7.87,2.4,1.3,.03,[.15,.3+.2*fl,.6+.2*fl],1);
+  {const u=(t*.5)%1,px=hc-2.55+u*1.05,py=F+1.65+Math.sin(u*Math.PI)*1.1;box(px,py,-7.82,.12,.12,.02,'#e74c3c',1)}
+  // analyst monitors: a growing chart on the left one, live numbers on the right
+  [-1.1,1.1].forEach((o,i)=>box(an+o,F+1.36,-7.04,1.5,.84,.02,i?[.1,.6+.3*fl,.3]:[.08,.12,.22],1));
+  for(let i=0;i<5;i++){const bh=.1+.55*(.5+.5*Math.sin(t*.8+i*.9));box(an-1.68+i*.29,F+1.42,-7.02,.18,bh,.02,i===4?'#ff7a2f':'#2ecc71',.8)}
   // people
   runners.forEach(r=>{const p=at(r.r,t*r.sp+r.off);Object.assign(r,p);person(r,t)});
   const tgt=runners[Math.floor(t/2.4)%3],u=(t%2.4)/2.4;
@@ -388,7 +459,7 @@ function frame(now){
   // flag
   for(let i=0;i<6;i++){const wv=Math.sin(t*4-i*.8)*.1*i;box(-16.15+i*.5,6+wv*.3,4+wv,.5,.9,.06,i%2?'#ff7a2f':'#ffb84d')}
   // alert beacon over the head coach
-  if(alertOn){const pu=.5+.5*Math.sin(t*8);draw(mul(T(coach.x,F+3.4+Math.sin(t*3)*.15,coach.z),mul(Ry(t*2),Sc(.55,.55,.55))),[1,.15+.2*pu,.15],pu)}
+  if(alertOn){const pu=.5+.5*Math.sin(t*8);draw(mul(T(coach.x,F+4.6+Math.sin(t*3)*.15,coach.z),mul(Ry(t*2),Sc(.55,.55,.55))),[1,.15+.2*pu,.15],pu)}
   // particles
   parts.forEach(p=>{p.y+=dt*p.v;if(p.y>11){p.y=0}box(p.x+Math.sin(t+p.z)*.3,p.y,p.z,.1,.1,.1,'#fff3b0',1)});
   // scoreboard light strip
@@ -396,6 +467,8 @@ function frame(now){
   for(let i=0;i<8;i++)box(29.8+i*.9,5.5,-17,.5,.5*(.4+.6*Math.abs(Math.sin(t*2+i))),.03,'#ffb84d',.8);
   // room highlight strip above the glass (hover/focus), red pulse on the head coach when there's an alert
   ROOMS.forEach((r,i)=>{const on=r===hot||r===focused;if(i===0&&alertOn){const pu=.5+.5*Math.sin(t*6);box(r.cx,F+3.12,-.84,6.9,.16,.04,[1,.2*pu,.2*pu],1)}else if(on)box(r.cx,F+3.12,-.84,6.9,.16,.04,r.acc,1)});
+  // the staff report on each room's wall screen
+  drawScreens(VP,t);
   // glass (see-through pass)
   gl.enable(gl.BLEND);gl.blendFuncSeparate(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA,gl.ZERO,gl.ONE);gl.depthMask(false);gl.uniform1f(U.uA,.2);
   ROOMS.forEach(r=>{[-2.35,0,2.35].forEach(o=>box(r.cx+o,F+.25,-1,2.2,3.1,.05,r===hot||r===focused?r.acc:'#9fd8ff',.25))});
@@ -465,7 +538,7 @@ async function state(){try{
 }catch(e){}}
 let greeted=false;
 async function brief(){try{
-  const b=await(await fetch('/api/brief')).json();LB=b;renderAlert();todos();
+  const b=await(await fetch('/api/brief')).json();LB=b;renderAlert();todos();if(!b.error)report();
   if(b.error){if(!greeted){$('#say').textContent=b.error;greeted=true}return}
   if(!greeted){type($('#say'),b.report||'');greeted=true}
   $('#ss').innerHTML=(b.start_sit||[]).map(x=>`<div class="item"><span class="call ${esc(x.call)}">${esc(x.call)}</span> <b>${esc(x.player)}</b>${x.over?` <span class="mu">${x.call==='SIT'?'→ put in':'over'}</span> <b>${esc(x.over)}</b>`:''} <span class="mu">${esc(x.confidence||'')} confidence${x.boom_chance&&!/^n\/?a/i.test(x.boom_chance)?' · boom chance '+esc(x.boom_chance):''}</span><div class="mu">${esc(x.why)}</div><button class="ghost more" data-q="${esc('Explain in detail why I should '+x.call+' '+x.player+' this week.')}">Tell me more</button><div class="long mu"></div></div>`).join('')||(b.report?'<div class="okset">✅ Your lineup is already the best it can be. No changes this week.</div>':'No calls yet.');
@@ -477,8 +550,12 @@ async function brief(){try{
   if(c)$('#r-hc').textContent=`${c.call}: ${c.player}`;
   if(t){$('#r-an').textContent=`${b.trades.length} trade ideas on the board`;$('#r-mg').textContent=`On the phone with ${t.to}`}
 }catch(e){}}
+// the overnight staff report for the HQ wall screens (data/brief.json, or the live brief when this PC has a key)
+async function report(){try{const b=await(await fetch('/api/report')).json();if(b.error)return;if(window.HQ)HQ.report(b);
+  const c=(b.start_sit||[])[0],r=(b.replacements||[])[0];$('#r-hc').textContent=c?`${c.call}: ${c.player}`:r?`Swap in ${r.in} for ${r.out}`:'Lineup is set';
+  const t=(b.trades||[])[0];if(t){$('#r-an').textContent=`Target: ${(t.get||[]).join(', ')}`;$('#r-mg').textContent=`Texting ${t.to}`}}catch(e){}}
 document.addEventListener('click',e=>{const c=e.target.closest('.cp');if(!c)return;try{navigator.clipboard.writeText(c.dataset.c);c.textContent='Copied'}catch{c.textContent='Copy failed'}});
 document.addEventListener('click',async e=>{const b=e.target.closest('.more:not(.cp)');if(!b)return;const o=b.nextElementSibling;o.textContent='Coach is breaking it down…';try{const r=await(await fetch('/api/ask',{method:'POST',body:JSON.stringify({q:b.dataset.q})})).json();o.textContent=r.answer}catch{o.textContent='Lost the connection.'}});
 $('#cgo').onclick=async()=>{const q=$('#cin').value.trim();if(!q)return;$('#cout').textContent='Manager is reviewing the counter…';try{const r=await(await fetch('/api/counter',{method:'POST',body:JSON.stringify({q})})).json();$('#cout').textContent=r.answer}catch{$('#cout').textContent='Lost the connection.'}};
-state();brief();setInterval(state,3e4);setInterval(brief,3e5);
+state();brief();report();setInterval(state,3e4);setInterval(brief,3e5);setInterval(report,3e5);
 </script></body></html>
