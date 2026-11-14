@@ -48,7 +48,7 @@
      "name": "Pat Freiermuth",
      "pos": "TE",
      "team": "PIT",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "5872",
@@ -1313,11 +1313,11 @@
      "inj": null
     },
     {
-     "id": "8151",
-     "name": "Kenneth Walker III",
+     "id": "11579",
+     "name": "Audric Estime",
      "pos": "RB",
-     "team": "KC",
-     "inj": "Out"
+     "team": "NO",
+     "inj": null
     },
     {
      "id": "7594",
@@ -1348,17 +1348,17 @@
      "inj": null
     },
     {
-     "id": "11579",
-     "name": "Audric Estime",
-     "pos": "RB",
+     "id": "11834",
+     "name": "Devaughn Vele",
+     "pos": "WR",
      "team": "NO",
      "inj": null
     },
     {
-     "id": "13296",
-     "name": "Caleb Douglas",
+     "id": "12540",
+     "name": "Chimere Dike",
      "pos": "WR",
-     "team": "MIA",
+     "team": "TEN",
      "inj": null
     },
     {
@@ -1385,13 +1385,6 @@
      "inj": null
     },
     {
-     "id": "11834",
-     "name": "Devaughn Vele",
-     "pos": "WR",
-     "team": "NO",
-     "inj": null
-    },
-    {
      "id": "12487",
      "name": "Terrance Ferguson",
      "pos": "TE",
@@ -1413,10 +1406,10 @@
      "inj": "Out"
     },
     {
-     "id": "12540",
-     "name": "Chimere Dike",
+     "id": "13296",
+     "name": "Caleb Douglas",
      "pos": "WR",
-     "team": "TEN",
+     "team": "MIA",
      "inj": null
     },
     {
@@ -1446,6 +1439,13 @@
      "pos": "WR",
      "team": "IND",
      "inj": "IR"
+    },
+    {
+     "id": "8151",
+     "name": "Kenneth Walker III",
+     "pos": "RB",
+     "team": "KC",
+     "inj": "Out"
     },
     {
      "id": "8172",
