@@ -717,11 +717,11 @@
      "inj": null
     },
     {
-     "id": "11783",
-     "name": "Ryan Flournoy",
-     "pos": "WR",
-     "team": "DAL",
-     "inj": null
+     "id": "7611",
+     "name": "Rhamondre Stevenson",
+     "pos": "RB",
+     "team": "NE",
+     "inj": "Questionable"
     },
     {
      "id": "2747",
@@ -747,6 +747,13 @@
      "inj": "Questionable"
     },
     {
+     "id": "11783",
+     "name": "Ryan Flournoy",
+     "pos": "WR",
+     "team": "DAL",
+     "inj": null
+    },
+    {
      "id": "12474",
      "name": "Woody Marks",
      "pos": "RB",
@@ -766,13 +773,6 @@
      "pos": "RB",
      "team": "IND",
      "inj": null
-    },
-    {
-     "id": "7611",
-     "name": "Rhamondre Stevenson",
-     "pos": "RB",
-     "team": "NE",
-     "inj": "Questionable"
     },
     {
      "id": "8116",
