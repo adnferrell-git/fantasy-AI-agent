@@ -1,7 +1,213 @@
 {
- "made": "2026-11-14T00:10:43.083Z",
+ "made": "2026-11-14T00:13:35.716Z",
  "week": 10,
- "report": "{\"report\":\"No injury alerts this week, so nothing forces a replacement. You are 2-7 and trail gavinzteam, so ceiling matters. One change: start Rhamondre Stevenson (16.43 last 3, DET gives up the 30th-most to RBs) over Ryan Flournoy, who tops out at 12.44. Higgins at 28.17 over his last 3 and Javonte Williams at 17.73 carry the roster. Weak spots are the TE (LaPorta 5.5 last 3), the flex spots, and a QB averaging 15.87. The most important offer is Mike Evans from cash50, a floor of 12.4 in place of a 9.31 flex. Send the Cousins, Kelce/Cooper and Allen offers after that.\",\"team_breakdown\":[{\"group\":\"QB\",\"grade\":\"C+\",\"note\":\"Stafford averages 15.87 with a 12.33 last 3 and a 9.12 floor, a below-average QB1 for a team that needs points.\"},{\"group\":\"RB\",\"grade\":\"B-\",\"note\":\"Javonte Williams is excellent (17.73 avg, 23 carries, 11 floor), but White is only 9.74 with a 5.3 floor.\"},{\"group\":\"WR\",\"grade\":\"B\",\"note\":\"Higgins (19.98, 28.17 last 3) and McMillan (15.56) are strong, but McMillan's last 3 slipped to 11.8.\"},{\"group\":\"TE\",\"grade\":\"C\",\"note\":\"LaPorta averages 11.64 but only 5.5 over his last 3, with a 6.78 floor.\"},{\"group\":\"FLEX depth\",\"grade\":\"C\",\"note\":\"Jameson Williams (13.21) is fine, but Flournoy (9.31, 12.44 ceiling) is the weakest starter.\"},{\"group\":\"Bench\",\"grade\":\"C-\",\"note\":\"Stevenson (12.63) is the only real piece; McGowan (3.63) and Black (4.71) play 31% and 25% of snaps.\"}],\"plan\":[\"Start Stevenson at flex now, then land Mike Evans from cash50 to replace Flournoy with a 12.4 floor.\",\"Upgrade QB with Kirk Cousins (19.14 avg, 13.77 floor) from gavinzteam for White, a back who is not starting.\",\"Replace LaPorta with Travis Kelce (12.47 last 3, 8.76 floor) and add Omar Cooper Jr. from garfy135 as a ceiling flex.\"],\"start_sit\":[{\"player\":\"Rhamondre Stevenson\",\"call\":\"START\",\"over\":\"Ryan Flournoy\",\"boom_chance\":\"MEDIUM\",\"confidence\":\"MEDIUM\",\"why\":\"Stevenson averages 12.63 (16.43 last 3) against Flournoy's 9",
- "start_sit": [],
- "trades": []
+ "report": "Your team is 2-7 and healthy, with no injury alerts and no bye-week holes. The one lineup change: start Rhamondre Stevenson at FLEX over Ryan Flournoy. Stevenson averages 12.63 (16.43 over his last 3) against Detroit, which allows the 30th-most RB points. He is Questionable, so check his status before kickoff. The most important trade to send is Matthew Golden from Gooner6967, a WR averaging 18.21 on 11.67 targets a game, because it is your biggest weekly gain. Trades 1-8 all draw on the same small pool of bench depth, so pick the best two or three that get accepted rather than sending every one.",
+ "team_breakdown": [
+  {
+   "group": "QB",
+   "grade": "C",
+   "note": "Stafford averages 15.87 but is down to 12.33 over his last 3 with a 9.12 floor. He faces Arizona, which allows the 2nd-most QB points, so he starts this week."
+  },
+  {
+   "group": "RB",
+   "grade": "C+",
+   "note": "Javonte Williams is excellent at 17.73 with 23 carries a game. Rachaad White is only 9.74, though his Thursday matchup is soft (NYG allows the 29th-most RB points)."
+  },
+  {
+   "group": "WR",
+   "grade": "B",
+   "note": "Higgins (19.98, 28.17 over his last 3) and McMillan (15.56) are solid. Jameson Williams adds 13.21, but nobody else on the roster is reliable."
+  },
+  {
+   "group": "TE",
+   "grade": "C",
+   "note": "LaPorta averages 11.64 but has fallen to 5.5 over his last 3. Mayer is a 9.09 backup."
+  },
+  {
+   "group": "FLEX depth",
+   "grade": "C-",
+   "note": "Flournoy at 9.31 is the weakest starter. Stevenson (12.63) is the best flex option if he plays."
+  },
+  {
+   "group": "Bench",
+   "grade": "D+",
+   "note": "Most of the bench is below 9 points a game. McGowan (3.63) and Black (4.71) have almost no role, so they are useful only as trade filler."
+  }
+ ],
+ "plan": [
+  "Start Stevenson at FLEX now, then trade bench depth for a true WR1 such as Golden or Omar Cooper Jr.",
+  "Upgrade RB2 from White (9.74) to Jeanty (15.48, floor 10.3).",
+  "Replace Stafford's 9.12 floor with a steadier QB like Stroud (floor 16.48)."
+ ],
+ "start_sit": [
+  {
+   "player": "Rhamondre Stevenson",
+   "call": "START",
+   "over": "Ryan Flournoy",
+   "boom_chance": "MEDIUM",
+   "confidence": "MEDIUM",
+   "why": "Stevenson averages 12.63 (16.43 last 3) with 4 targets and 10.3 carries a game, against 9.31 for Flournoy. Detroit allows the 30th-most RB points, a big matchup edge. He is Questionable, so confirm he plays before kickoff; if he is out, keep Flournoy in."
+  }
+ ],
+ "replacements": [],
+ "waivers": [],
+ "drops": [
+  {
+   "player": "Seth McGowan",
+   "why": "3.63 avg on a 31% snap share; he can't start over anyone."
+  },
+  {
+   "player": "Zonovan Knight",
+   "why": "Questionable with no stats and no role to start over anyone."
+  }
+ ],
+ "trades": [
+  {
+   "to": "Gooner6967",
+   "give": [
+    "Rhamondre Stevenson",
+    "Pierre Strong Jr.",
+    "Rashid Shaheed"
+   ],
+   "get": [
+    "Matthew Golden"
+   ],
+   "drop_after": "Seth McGowan",
+   "confidence": "LOW",
+   "upgrades": "FLEX (replaces Flournoy)",
+   "gain": "+8.9",
+   "why": "Golden averages 18.21 (21.07 last 3) on 11.67 targets a game and a 33% target share, against Minnesota's WR defense, which allows the 30th-most points. This is MORE POINTS: he replaces Flournoy's 9.31. Gooner6967 gets a 12.63-average back plus two depth pieces for a thin RB group, with Barkley on bye and only Williams and Warren behind him.",
+   "opener": "Stevenson for Golden straight up",
+   "fallback": "Add Marks for Strong; walk away if he wants Higgins.",
+   "text": "Sent you a Golden offer, take a look when you can"
+  },
+  {
+   "to": "daddyisback8",
+   "give": [
+    "Woody Marks",
+    "Tank Dell",
+    "Ladd McConkey"
+   ],
+   "get": [
+    "Ashton Jeanty"
+   ],
+   "drop_after": "Kaelon Black",
+   "confidence": "MEDIUM",
+   "upgrades": "RB2 (replaces Rachaad White)",
+   "gain": "+5.7",
+   "why": "Jeanty averages 15.48 with a 10.3 floor, 6.33 targets a game and a 64% snap share, so he is steadier than White's 9.74. This is MORE RELIABLE: his 10.3 floor beats White's 5.3. At 1-8 daddyisback8 gets three usable depth players for one starter, and his bench is mostly IR and no-role players.",
+   "opener": "Marks and Dell for Jeanty",
+   "fallback": "Add McConkey; walk away if he asks for Higgins or Javonte.",
+   "text": "Sent a Jeanty offer, have a look"
+  },
+  {
+   "to": "garfy135",
+   "give": [
+    "Woody Marks",
+    "Ladd McConkey"
+   ],
+   "get": [
+    "Omar Cooper Jr."
+   ],
+   "drop_after": "Seth McGowan",
+   "confidence": "LOW",
+   "upgrades": "FLEX (replaces Flournoy)",
+   "gain": "+6.3",
+   "why": "Omar Cooper Jr. averages 15.65 (19.53 last 3) on 7.67 targets and an 86% snap share, with a 9.88 floor. This is MORE POINTS: he beats Flournoy's 9.31, though he is Questionable. garfy135 is 2-7 and his RB spots (Rodriguez, Hall) are thin, so Marks's 17.3 carries a game helps him.",
+   "opener": "Marks for Cooper straight up",
+   "fallback": "Add Strong Jr.; walk away if he asks for a starter.",
+   "text": "Sent an offer for Cooper, check it out"
+  },
+  {
+   "to": "zaneruth",
+   "give": [
+    "Woody Marks",
+    "Tank Dell",
+    "Michael Mayer"
+   ],
+   "get": [
+    "C.J. Stroud"
+   ],
+   "drop_after": "Seth McGowan",
+   "confidence": "LOW",
+   "upgrades": "QB (replaces Stafford)",
+   "gain": "+4.6",
+   "why": "Stroud averages 20.51 (24.95 last 3) with a 16.48 floor, against Stafford's 9.12 floor. This is MORE RELIABLE: his worst weeks are far better. Zaneruth already has Daniels at QB, so Stroud is a spare, and he gets three useful bench players for a backup.",
+   "opener": "Marks and Mayer for Stroud",
+   "fallback": "Add Dell; walk away if he wants Stafford included as the only piece.",
+   "text": "Sent a Stroud offer, take a peek"
+  },
+  {
+   "to": "Cavery11",
+   "give": [
+    "Rhamondre Stevenson",
+    "Kaelon Black"
+   ],
+   "get": [
+    "D'Andre Swift"
+   ],
+   "drop_after": "Seth McGowan",
+   "confidence": "LOW",
+   "upgrades": "RB2 (replaces Rachaad White)",
+   "gain": "+7.4",
+   "why": "Swift averages 17.09 (16.67 last 3) with a 9.44 floor and 20.3 carries a game. This is MORE POINTS: he replaces White's 9.74, though he is on bye this week. Cavery11 lost Josh Jacobs for this week and has only Kaleb Johnson (3.31) behind McCaffrey, so Stevenson is a real help.",
+   "opener": "Stevenson for Swift straight up",
+   "fallback": "Add Black; walk away if he wants Javonte.",
+   "text": "Sent you a Swift offer, see what you think"
+  },
+  {
+   "to": "whecar",
+   "give": [
+    "Kaelon Black",
+    "Ladd McConkey"
+   ],
+   "get": [
+    "Caleb Douglas"
+   ],
+   "drop_after": "Seth McGowan",
+   "confidence": "MEDIUM",
+   "upgrades": "FLEX (replaces Flournoy)",
+   "gain": "+2.8",
+   "why": "Caleb Douglas averages 12.12 (14.10 last 3) with a 7.42 floor and a 24% target share. This is MORE POINTS over Flournoy, with a safer floor. Whecar's RB depth is thin behind Walker and Hubbard (Wright is at 0.68), so Black's 10.3 carries a game helps.",
+   "opener": "Black for Douglas",
+   "fallback": "Add McConkey; walk away if he wants a starter.",
+   "text": "Sent a Douglas offer, take a look"
+  },
+  {
+   "to": "Ashtonmoore12",
+   "give": [
+    "Michael Mayer",
+    "Kaelon Black"
+   ],
+   "get": [
+    "Tyler Warren"
+   ],
+   "drop_after": "Seth McGowan",
+   "confidence": "MEDIUM",
+   "upgrades": "TE (replaces LaPorta)",
+   "gain": "+0.4",
+   "why": "Warren averages 12.01 with an 8.54 floor and 8.67 targets a game, while LaPorta has fallen to 5.5 over his last 3 on a 6.78 floor. This is MORE RELIABLE: the floor is 1.8 points higher. Ashtonmoore12 is 2-7 and gets a 9.09 TE plus a RB with 10.3 carries a game.",
+   "opener": "Mayer for Warren",
+   "fallback": "Add Black; walk away if he wants LaPorta.",
+   "text": "Sent a Warren offer, have a look"
+  },
+  {
+   "to": "cash50",
+   "give": [
+    "Michael Mayer",
+    "Ladd McConkey"
+   ],
+   "get": [
+    "Mike Evans"
+   ],
+   "drop_after": "Seth McGowan",
+   "confidence": "LOW",
+   "upgrades": "FLEX (replaces Flournoy)",
+   "gain": "+5.5",
+   "why": "Evans averages 14.83 (17.10 last 3) with a 12.4 floor and 7.67 targets a game, against Flournoy's 9.31. This is MORE RELIABLE: his 12.4 floor beats Flournoy's 6.06. He is Questionable, and cash50 is the trade-happiest owner with 11 trades.",
+   "opener": "McConkey for Evans",
+   "fallback": "Add Mayer; walk away if he asks for Stevenson.",
+   "text": "Sent an Evans offer, see if it works"
+  }
+ ]
 }
