@@ -186,10 +186,10 @@
      "inj": null
     },
     {
-     "id": "9224",
-     "name": "Chase Brown",
+     "id": "13337",
+     "name": "Emmett Johnson",
      "pos": "RB",
-     "team": "CIN",
+     "team": "KC",
      "inj": null
     },
     {
@@ -221,10 +221,10 @@
      "inj": null
     },
     {
-     "id": "12718",
-     "name": "Konata Mumpfield",
-     "pos": "WR",
-     "team": "LAR",
+     "id": "9224",
+     "name": "Chase Brown",
+     "pos": "RB",
+     "team": "CIN",
      "inj": null
     },
     {
@@ -272,17 +272,17 @@
      "inj": null
     },
     {
+     "id": "12718",
+     "name": "Konata Mumpfield",
+     "pos": "WR",
+     "team": "LAR",
+     "inj": null
+    },
+    {
      "id": "13294",
      "name": "Makai Lemon",
      "pos": "WR",
      "team": "PHI",
-     "inj": null
-    },
-    {
-     "id": "13337",
-     "name": "Emmett Johnson",
-     "pos": "RB",
-     "team": "KC",
      "inj": null
     },
     {
@@ -970,7 +970,7 @@
      "name": "Keaton Mitchell",
      "pos": "RB",
      "team": "LAC",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "9758",
@@ -1403,7 +1403,7 @@
      "name": "TreVeyon Henderson",
      "pos": "RB",
      "team": "NE",
-     "inj": "Out"
+     "inj": "IR"
     },
     {
      "id": "13296",
@@ -1615,7 +1615,7 @@
      "name": "Travis Etienne Jr.",
      "pos": "RB",
      "team": "NO",
-     "inj": "IR"
+     "inj": "Questionable"
     },
     {
      "id": "9494",
