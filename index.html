@@ -60,6 +60,18 @@ nav button.on{background:var(--ac)}
 .toast.bad{border-color:var(--rd)}.toast.out{opacity:0;transform:translateX(-30px)}@keyframes slide{from{transform:translateX(-40px);opacity:0}}
 #hq3d.nogl::after{content:'3D needs WebGL. Try Chrome or Edge.';position:absolute;inset:0;display:grid;place-items:center;color:var(--mu)}
 .room{padding:8px;border:2px solid transparent;border-radius:4px;transition:border-color .3s,background .3s}.room.hot{border-color:var(--ac);background:#5ef38c12}
+
+/* ===== Sleeper-style lineup ===== */
+.prow{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}.prow:last-child{border:0}
+.prow .slot{flex:0 0 46px;font-family:'Press Start 2P',monospace;font-size:8px;color:var(--or);text-align:center}
+.prow img{flex:0 0 46px;width:46px;height:46px;border-radius:50%;object-fit:cover;background:#0b1020;border:2px solid var(--line)}
+.prow.bad img{border-color:var(--rd)}.pinfo{flex:1;min-width:0}.pname{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pstats{display:flex;gap:14px;text-align:center}.pstats b{display:block;font-size:13px}.pstats span{font-size:10px;color:var(--mu);white-space:nowrap}
+@media(max-width:760px){.pstats div:nth-child(n+3){display:none}}
+.up{color:var(--ac)}.dn{color:var(--rd)}.dr{font-size:11px;padding:0 6px;border-radius:3px;background:#222a44;margin-left:4px}.dr.easy{color:var(--ac)}.dr.hard{color:var(--rd)}
+.sec{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--mu);margin:12px 0 2px}
+.gain{color:var(--ac);font-weight:700}.grade{display:inline-block;width:34px;font-family:'Press Start 2P',monospace;font-size:11px}.gA{color:var(--ac)}.gB{color:#9be36d}.gC{color:var(--wa)}.gD,.gF{color:var(--rd)}
+.okset{color:var(--ac);font-weight:600}
 </style></head><body>
 <div id="greet"><div class="box"><div class="big bob">🧑‍🏫</div><h2>Assistant Coach</h2>
 <p id="say">Coach is getting the report ready…</p>
@@ -75,8 +87,8 @@ nav button.on{background:var(--ac)}
 <section>
 <nav><button class="on" data-p="arena">League</button><button data-p="lineup">Lineup</button><button data-p="trades">Trades</button><button data-p="tlog">Trade log</button></nav>
 <div class="pane on" id="arena"><div class="card"><h2>Week matchups</h2><div class="arena" id="games">Loading…</div></div><div class="card"><h2>My lineup</h2><div id="lu2" class="mu">Loading…</div></div><div class="card"><h2>Standings</h2><div id="stand"></div></div></div>
-<div class="pane" id="lineup"><div class="card"><h2>Start / sit calls</h2><div id="ss" class="mu">Waiting on the Head Coach…</div></div><div class="card"><h2>Waiver moves and drops</h2><div id="wv" class="mu">Waiting on the Scout…</div></div><div class="card"><h2>My lineup</h2><div id="lu"></div></div><div class="card"><h2>Injury report</h2><div id="inj"></div></div></div>
-<div class="pane" id="trades"><div class="card"><h2>Trade offers to send</h2><div id="tr" class="mu">Waiting on the Analyst…</div></div><div class="card"><h2>Counter-offer help</h2><div class="mu">Paste or type what the owner sent back, and the Manager tells you what to do.</div><textarea id="cin" rows="3" placeholder="Example: Bob countered, he wants Player A and Player B for Player C"></textarea><button id="cgo" style="margin-top:8px">Ask the Manager</button><div id="cout" class="mu" style="white-space:pre-wrap;margin-top:8px"></div></div></div>
+<div class="pane" id="lineup"><div class="card"><h2>Head Coach breakdown</h2><div id="bd" class="mu">Waiting on the Head Coach…</div></div><div class="card"><h2>Lineup changes</h2><div id="ss" class="mu">Waiting on the Head Coach…</div></div><div class="card"><h2>Waiver pickups · who to drop</h2><div id="wv" class="mu">Waiting on the Scout…</div></div><div class="card"><h2>My lineup</h2><div id="lu"></div></div><div class="card"><h2>Injury report</h2><div id="inj"></div></div></div>
+<div class="pane" id="trades"><div class="card"><h2>Trade board · offers to send <span id="trn"></span></h2><div id="tr" class="mu">Waiting on the Analyst…</div></div><div class="card"><h2>Counter-offer help</h2><div class="mu">Paste or type what the owner sent back, and the Manager tells you what to do.</div><textarea id="cin" rows="3" placeholder="Example: Bob countered, he wants Player A and Player B for Player C"></textarea><button id="cgo" style="margin-top:8px">Ask the Manager</button><div id="cout" class="mu" style="white-space:pre-wrap;margin-top:8px"></div></div></div>
 <div class="pane" id="tlog"><div class="card"><h2>League trade log</h2><div id="tstats" class="mu"></div><div id="tl"></div></div></div>
 </section>
 <aside class="card"><h2>Staff to-do</h2>
@@ -401,6 +413,15 @@ requestAnimationFrame(frame);
 </script>
 <script>
 const $=s=>document.querySelector(s),esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const HS=p=>p.pos==='DEF'?`https://sleepercdn.com/images/team_logos/nfl/${String(p.id).toLowerCase()}.png`:`https://sleepercdn.com/content/nfl/players/thumb/${p.id}.jpg`;
+function prow(p,slot){const st=p.st||{},f=v=>v==null?'–':v;
+  const tr=st.trend==null?'':st.trend>=1?` <span class="up">▲${st.trend}</span>`:st.trend<=-1?` <span class="dn">▼${Math.abs(st.trend)}</span>`:'';
+  const def=st.def?`<span class="dr ${st.def<=8?'easy':st.def>=25?'hard':''}" title="Opponent defense rank vs ${esc(p.pos||'')} (1 = gives up the most)">#${st.def} vs ${esc(p.pos||'')}</span>`:'';
+  const kick=p.kick?new Date(p.kick).toLocaleString([],{weekday:'short',hour:'numeric',minute:'2-digit'}):'';
+  const use=p.pos==='RB'?[st.car!=null?st.car:null,'carries/g']:p.pos==='QB'?[null,'']:[st.tgt!=null?Math.round(st.tgt*100)+'%':null,'tgt share'];
+  const bad=p.bye||(p.inj&&['Out','IR','PUP','Sus','Doubtful'].includes(p.inj));
+  return `<div class="prow ${bad?'bad':''}"><span class="slot">${esc(slot)}</span><img src="${HS(p)}" loading="lazy" alt="" onerror="this.style.visibility='hidden'"><div class="pinfo"><div class="pname">${esc(p.name)}${p.inj?`<span class="chip">${esc(p.inj)}</span>`:''}${p.bye?'<span class="chip">BYE</span>':''}</div><div class="mu">${esc(p.pos||'')} · ${esc(p.team||'')}${p.opp?` · vs ${esc(p.opp)}`:''}${kick?' · '+kick:''}${def}</div></div><div class="pstats"><div><b>${f(st.avg)}</b><span>avg pts</span></div><div><b>${f(st.last3)}${tr}</b><span>last 3</span></div><div><b>${st.floor!=null?st.floor+'–'+st.ceil:'–'}</b><span>floor–ceil</span></div><div><b>${st.snap!=null?st.snap+'%':'–'}</b><span>snaps</span></div>${use[1]?`<div><b>${f(use[0])}</b><span>${use[1]}</span></div>`:''}</div></div>`}
 const pn=p=>`${esc(p.name)} <span class="mu">${esc(p.pos||'')} ${esc(p.team||'')}</span>${p.inj?`<span class="chip">${esc(p.inj)}</span>`:''}`;
 let LS=null,LB=null,done={};try{done=JSON.parse(localStorage.getItem('done')||'{}')}catch{}
 const pn0=p=>`${esc(p.name)} <span class="mu">${esc(p.pos||'')} ${esc(p.team||'')}${p.opp?' vs '+esc(p.opp):''}</span>`;
@@ -432,7 +453,8 @@ async function state(){try{
   const w=r=>+r.split('-')[0];
   $('#stand').innerHTML=[...s.teams].sort((a,b)=>w(b.record)-w(a.record)).map((t,i)=>`<div class="row"><span class="${t.mine?'me':''}">${i+1}. ${esc(t.owner)}</span><span class="mu">${esc(t.record)}</span></div>`).join('');
   const m=s.teams.find(x=>x.mine);
-  $('#lu').innerHTML=m?'<b>Starters</b>'+m.starters.map(p=>`<div class="row"><span>${pn(p)}</span></div>`).join('')+'<b>Bench</b>'+m.bench.map(p=>`<div class="row"><span>${pn(p)}</span></div>`).join(''):'';
+  const SL=(s.league&&s.league.slots)||[];const SLN={SUPER_FLEX:'SFLX',REC_FLEX:'WRTE',WRRB_FLEX:'W/R',FLEX:'FLEX'};
+  $('#lu').innerHTML=m?'<div class="sec">STARTERS</div>'+m.starters.map((p,i)=>prow(p,SLN[SL[i]]||SL[i]||'')).join('')+'<div class="sec">BENCH</div>'+m.bench.map(p=>prow(p,'BN')).join(''):'';
   $('#inj').innerHTML=s.injuries.map(i=>`<div class="row"><span class="${i.mine?'me':''}">${esc(i.name)} <span class="mu">${esc(i.owner)}</span></span><span class="chip">${esc(i.inj)}</span></div>`).join('')||'Clean bill of health.';
   $('#lu2').innerHTML=m?m.starters.map(p=>`<div class="row"><span>${pn0(p)}</span><span>${flag(p)}</span></div>`).join(''):'';
   todos();
@@ -446,8 +468,10 @@ async function brief(){try{
   const b=await(await fetch('/api/brief')).json();LB=b;renderAlert();todos();
   if(b.error){if(!greeted){$('#say').textContent=b.error;greeted=true}return}
   if(!greeted){type($('#say'),b.report||'');greeted=true}
-  $('#ss').innerHTML=(b.start_sit||[]).map(x=>`<div class="item"><span class="call ${esc(x.call)}">${esc(x.call)}</span> ${esc(x.player)} <span class="mu">${esc(x.confidence||'')} confidence${x.boom_chance&&!/^n\/?a/i.test(x.boom_chance)?' · boom chance '+esc(x.boom_chance):''}</span><div class="mu">${esc(x.why)}</div><button class="ghost more" data-q="${esc('Explain in detail why I should '+x.call+' '+x.player+' this week.')}">Tell me more</button><div class="long mu"></div></div>`).join('')||'No calls yet.';
-  $('#tr').innerHTML=(b.trades||[]).map(x=>`<div class="item"><b>To ${esc(x.to)}</b><div>Get: <b>${esc((x.get||[]).join(', '))}</b> <span class="mu">${esc(x.confidence||'')} confidence</span></div><div>Give: ${esc((x.give||[]).join(', '))}</div>${x.opener?`<div class="mu">1. Opener: ${esc(x.opener)}</div>`:''}${x.fallback?`<div class="mu">2. If he pushes back: ${esc(x.fallback)}</div>`:''}${x.drop_after?`<div class="mu">If roster is full, drop: ${esc(x.drop_after)}</div>`:''}${x.text?`<div class="mu">Text: "${esc(x.text)}" <button class="ghost more cp" data-c="${esc(x.text)}">Copy</button></div>`:''}<div class="mu">${esc(x.why)}</div><button class="ghost more" data-q="${esc('Break down this trade in detail. I give '+(x.give||[]).join(', ')+' and get '+(x.get||[]).join(', ')+' with '+x.to+'. Why does it help me, and why would they accept?')}">Break it down</button><div class="long mu"></div></div>`).join('')||'No offers right now.';
+  $('#ss').innerHTML=(b.start_sit||[]).map(x=>`<div class="item"><span class="call ${esc(x.call)}">${esc(x.call)}</span> <b>${esc(x.player)}</b>${x.over?` <span class="mu">${x.call==='SIT'?'→ put in':'over'}</span> <b>${esc(x.over)}</b>`:''} <span class="mu">${esc(x.confidence||'')} confidence${x.boom_chance&&!/^n\/?a/i.test(x.boom_chance)?' · boom chance '+esc(x.boom_chance):''}</span><div class="mu">${esc(x.why)}</div><button class="ghost more" data-q="${esc('Explain in detail why I should '+x.call+' '+x.player+' this week.')}">Tell me more</button><div class="long mu"></div></div>`).join('')||(b.report?'<div class="okset">✅ Your lineup is already the best it can be. No changes this week.</div>':'No calls yet.');
+  $('#bd').innerHTML=((b.team_breakdown||[]).map(g=>`<div class="row"><span><span class="grade g${esc(String(g.grade||'').charAt(0))}">${esc(g.grade||'')}</span><b>${esc(g.group)}</b></span><span class="mu" style="flex:1;margin-left:12px">${esc(g.note||'')}</span></div>`).join('')+((b.plan||[]).length?'<div class="sec">PLAN TO GO ELITE</div>'+b.plan.map((p,i)=>`<div class="mu">${i+1}. ${esc(p)}</div>`).join(''):''))||'The next staff report will include a full breakdown.';
+  $('#trn').textContent=(b.trades||[]).length?'('+b.trades.length+')':'';
+  $('#tr').innerHTML=(b.trades||[]).map((x,i)=>`<div class="item"><b>#${i+1} · To ${esc(x.to)}</b>${x.gain?` <span class="gain">${esc(x.gain)} pts/wk</span>`:''}${x.upgrades?` <span class="mu">· upgrades ${esc(x.upgrades)}</span>`:''}<div>Get: <b>${esc((x.get||[]).join(', '))}</b> <span class="mu">${esc(x.confidence||'')} confidence</span></div><div>Give: ${esc((x.give||[]).join(', '))}</div>${x.opener?`<div class="mu">1. Opener: ${esc(x.opener)}</div>`:''}${x.fallback?`<div class="mu">2. If he pushes back: ${esc(x.fallback)}</div>`:''}${x.drop_after?`<div class="mu">If roster is full, drop: ${esc(x.drop_after)}</div>`:''}${x.text?`<div class="mu">Text: "${esc(x.text)}" <button class="ghost more cp" data-c="${esc(x.text)}">Copy</button></div>`:''}<div class="mu">${esc(x.why)}</div><button class="ghost more" data-q="${esc('Break down this trade in detail. I give '+(x.give||[]).join(', ')+' and get '+(x.get||[]).join(', ')+' with '+x.to+'. Why does it help me, and why would they accept?')}">Break it down</button><div class="long mu"></div></div>`).join('')||(b.report?'✅ No trade left that makes your team better. The roster is maxed out.':'No offers right now.');
   $('#wv').innerHTML=((b.waivers||[]).map(w=>`<div class="item"><b>Add ${esc(w.add)}</b> · drop ${esc(w.drop)} <span class="mu">${esc(w.confidence||'')} confidence</span><div class="mu">${esc(w.why)}</div></div>`).join('')+(b.drops||[]).map(d=>`<div class="item"><b>Drop ${esc(d.player)}</b><div class="mu">${esc(d.why)}</div></div>`).join(''))||'No pickups or drops worth making right now.';
   const c=(b.start_sit||[])[0],t=(b.trades||[])[0];
   if(c)$('#r-hc').textContent=`${c.call}: ${c.player}`;

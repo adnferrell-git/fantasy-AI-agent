@@ -2,7 +2,7 @@ name: AI staff report
 
 on:
   schedule:
-    - cron: "0 15 * * *"     # every day 9:00 AM Central
+    - cron: "0 */6 * * *"    # every 6 hours, around the clock: fresh trades and waiver calls
     - cron: "30 22 * * 4"    # Thursday 4:30 PM Central, before Thursday night kickoff
     - cron: "30 16 * * 0"    # Sunday 10:30 AM Central, before the early games
   workflow_dispatch:          # "Run workflow" button for a report on demand
