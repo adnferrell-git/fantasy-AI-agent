@@ -1,43 +1,43 @@
 {
- "made": "2026-11-15T06:49:26.564Z",
+ "made": "2026-11-15T12:33:34.560Z",
  "week": 10,
- "report": "We're 2-7 and need a run now. The lineup is already the best we can field, so there are no start/sit changes. Rhamondre Stevenson is Questionable at DET, the 30th-ranked defense against RBs, so keep him in unless he's ruled out and then slot Woody Marks. Tee Higgins is hot at 28.2 over his last 3 against PIT (24th vs WR), and Javonte Williams is steady at 17.7 a game. The weak spots are RB2 (White at 9.7), TE (LaPorta at 5.5 over his last 3) and QB (Stafford at 15.9). The best trade to send is the Cousins deal to gavinzteam, which upgrades QB from surplus, with the Coleman deal to cash50 right behind it. I could only find 4 trades that improve us and that the other owner would plausibly accept.",
+ "report": "We're 2-7 and need to win now. The lineup is mostly set. Rhamondre Stevenson is Questionable and plays at 1:30 PM Sunday against DET, whose run defense ranks 30th (1 = allows the most). Woody Marks is the backup if he is ruled out, but I'd keep Stevenson in unless he is declared out. Our weak spots are TE (LaPorta, 5.5 over his last 3) and a RB2 who averages only 9.74 (White). The key trade is for a RB from TWILL4, who has RB depth, and we give him a WR he can start. Send that one first, then work down the board.",
  "team_breakdown": [
   {
    "group": "QB",
-   "grade": "C",
-   "note": "Stafford averages 15.87 with a 12.33 last 3. His floor is 9.12, though ARI is a soft matchup (2nd vs QB)."
+   "grade": "C+",
+   "note": "Stafford averages 15.87 and is down to 12.33 over his last 3, but he faces ARI, which gives up the 2nd-most to QBs."
   },
   {
    "group": "RB",
-   "grade": "C+",
-   "note": "Javonte Williams is solid at 17.73 on 23 carries a game. White is 9.74 and Stevenson is 12.63 but Questionable."
+   "grade": "C",
+   "note": "Javonte Williams is strong at 17.73 with 23 carries a game, but White averages 9.74 and Stevenson is Questionable."
   },
   {
    "group": "WR",
    "grade": "B",
-   "note": "Higgins averages 19.98 and McMillan 15.56. J. Williams adds 13.21, so the group is good, with a weak bench behind it."
+   "note": "Higgins averages 19.98 and 28.17 over his last 3, and McMillan and J. Williams are solid, but the WR depth is thin."
   },
   {
    "group": "TE",
-   "grade": "C",
-   "note": "LaPorta averages 11.64 but has fallen to 5.5 over his last 3, with a 6.78 floor."
+   "grade": "C-",
+   "note": "LaPorta averages 11.64 but only 5.5 over his last 3, so the position is a slump with no strong replacement."
   },
   {
    "group": "FLEX depth",
    "grade": "C",
-   "note": "J. Williams (13.21) and Stevenson (12.63) are fine now. If either misses, the next options are Flournoy (9.31) and Marks (8.86)."
+   "note": "Stevenson and J. Williams fill the flex spots, with Flournoy (9.31) as the next man up."
   },
   {
    "group": "Bench",
    "grade": "D+",
-   "note": "Nobody on the bench averages above 9.3 except Dell, who has only 2 games. Black and McGowan are under 5 a game and have little value."
+   "note": "Nobody on the bench averages above 9.31 and most backup RBs are under 6, so the bench has no real scoring depth."
   }
  ],
  "plan": [
-  "Turn surplus bench RBs and the TE spot into a better RB2 (Coleman or Allen) to replace White's 9.74.",
-  "Get a QB at 19+ per game (Cousins at 19.14) to replace Stafford's 15.87.",
-  "Find a TE with a steadier floor than LaPorta, whose last 3 average is 5.5."
+  "Upgrade RB2 from White (9.74) to a 12+ PPG back using bench WR depth.",
+  "Find a steadier TE than LaPorta's 5.5 last-3 average.",
+  "Package bench pieces for a starter-level RB so a Stevenson injury doesn't sink the lineup."
  ],
  "start_sit": [],
  "replacements": [
@@ -46,90 +46,10 @@
    "in": "Woody Marks",
    "fix": "BACKUP",
    "trade_ref": "",
-   "why": "Marks has 17.3 carries and an 8.28 floor, the steadiest bench RB."
+   "why": "Marks has 17.3 carries per game and a steady 8.28 floor."
   }
  ],
  "waivers": [],
  "drops": [],
- "trades": [
-  {
-   "to": "gavinzteam",
-   "give": [
-    "Woody Marks",
-    "Pierre Strong Jr."
-   ],
-   "get": [
-    "Kirk Cousins"
-   ],
-   "drop_after": "",
-   "confidence": "LOW",
-   "upgrades": "QB (Cousins in, Stafford to bench)",
-   "gain": "+3.3",
-   "why": "Cousins is the target: 19.14 a game, 20.41 over his last 3, with a 13.77 floor, against Stafford's 15.87 and 9.12 floor. That is a MORE POINTS upgrade at QB. gavinzteam has Burrow (24.89) and also Shough (18.2), so Cousins sits on his bench, while his RB Jadarian Price scores only 6.3 and Marks (8.86 on 17.3 carries) would start for him.",
-   "their_need": "RB2 Price scores just 6.3",
-   "value_check": "14.4 vs 19.1",
-   "opener": "Marks and Strong for Cousins, your third QB.",
-   "fallback": "Add Kaelon Black; walk away if he wants Higgins or Williams.",
-   "text": "Sent you an offer, take a look when you can."
-  },
-  {
-   "to": "cash50",
-   "give": [
-    "Michael Mayer",
-    "Kaelon Black"
-   ],
-   "get": [
-    "Jonah Coleman"
-   ],
-   "drop_after": "",
-   "confidence": "MEDIUM",
-   "upgrades": "RB2 (replaces White at 9.74)",
-   "gain": "+2.8",
-   "why": "Coleman is the target: 12.58 a game, 16.03 over his last 3, 77% snaps, with a 7.12 floor, against White's 9.74. That is a MORE POINTS upgrade at RB2. cash50's TE slot is weak, with Freiermuth Questionable at 9.88 and Hockenson out, so Mayer (9.09 on a 76% snap share) would start for him. Coleman is on bye this week but is a bench player for cash50.",
-   "their_need": "TE with Freiermuth hurt, Hockenson out",
-   "value_check": "13.8 vs 12.6",
-   "opener": "Mayer and Black for Coleman, who is on bye.",
-   "fallback": "Add Strong; walk away if he asks for Stevenson.",
-   "text": "Offer sent, you need a TE with those injuries."
-  },
-  {
-   "to": "TWILL4",
-   "give": [
-    "Rachaad White"
-   ],
-   "get": [
-    "Braelon Allen"
-   ],
-   "drop_after": "",
-   "confidence": "MEDIUM",
-   "upgrades": "RB2 (replaces White)",
-   "gain": "+1.9",
-   "why": "Allen is the target: 11.67 a game, 16.03 over his last 3, 15.3 carries a game, against White's 9.74. That is a MORE POINTS upgrade. TWILL4 starts Emmett Johnson at RB2 (7.6 on a 30% snap share), so White (9.74 against NYG, 29th vs RB) is a +2.1 upgrade for him, and he still has Chase Brown and Pollard.",
-   "their_need": "RB2 Emmett Johnson scores only 7.6",
-   "value_check": "9.7 vs 11.7",
-   "opener": "White for Allen, an upgrade at your RB2.",
-   "fallback": "Add Strong; walk away if he wants a starter back.",
-   "text": "Sent a swap, it upgrades your RB2."
-  },
-  {
-   "to": "daddyisback8",
-   "give": [
-    "Ryan Flournoy",
-    "Ladd McConkey"
-   ],
-   "get": [
-    "Emeka Egbuka"
-   ],
-   "drop_after": "",
-   "confidence": "LOW",
-   "upgrades": "FLEX/bench WR (stronger depth)",
-   "gain": "+1.8",
-   "why": "Egbuka is the target: 11.14 a game, 13.97 over his last 3, 10 targets a game and a 7.58 floor, against Flournoy's 9.31 and 6.06 floor. That is a STRONGER BENCH move and a flex upgrade, though he is on bye this week. daddyisback8's WRs are thin (Virgil 2.8, Fields 7.0), so Flournoy (97% snaps) and McConkey would both start for him and add about 6.5 points over Virgil.",
-   "their_need": "WR2 and flex hold Virgil at 2.8",
-   "value_check": "17.9 vs 11.1",
-   "opener": "Flournoy and McConkey for Egbuka, both start for you.",
-   "fallback": "Offer Flournoy alone for Egbuka; walk away if he asks for more.",
-   "text": "Offer in, it helps your WR depth."
-  }
- ]
+ "trades": []
 }
