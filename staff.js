@@ -36,7 +36,7 @@ const list = (title, rows) => rows && rows.length ? `\n**${title}**\n` + rows.jo
     + list('🚑 Fixes', (b.replacements || []).map(x => `• ${x.out} out → **${x.in}**${x.fix === 'TRADE' && x.trade_ref ? ` (or the trade to ${x.trade_ref})` : ''}: ${x.why}`))
     + list('🕵️ Scout: waivers', [...(b.waivers || []).map(w => `• Add **${w.add}**, drop ${w.drop} (${w.confidence || '?'}): ${w.why}`),
                                  ...(b.drops || []).map(d => `• Drop **${d.player}** → ${d.add ? `add **${d.add}**` : d.for_trade ? `room for the trade to ${d.for_trade}` : 'make room'}: ${d.why}`)])
-    + list('🤓 Analyst: trades to send', (b.trades || []).slice(0, 3).map(x => `• To **${x.to}**: get ${(x.get || []).join(', ')} for ${(x.give || []).join(', ')} (${x.confidence || '?'})\n   ${x.why}${x.opener ? `\n   Opener: ${x.opener}` : ''}${x.text ? `\n   📱 Text: "${x.text}"` : ''}`));
+    + list('🤓 Analyst: trades to send', (b.trades || []).slice(0, 3).map(x => `• To **${x.to}**: get ${(x.get || []).join(', ')} for ${(x.give || []).join(', ')} (${x.confidence || '?'})${x.their_need ? `\n   Fills their need: ${x.their_need}` : ''}${x.value_check ? ` · value ${x.value_check}` : ''}\n   ${x.why}${x.opener ? `\n   Opener: ${x.opener}` : ''}${x.text ? `\n   📱 Text: "${x.text}"` : ''}`));
   await post(msg);
   console.log('staff report done');
 })().catch(e => { console.error('staff failed:', e.message); process.exit(1); });
