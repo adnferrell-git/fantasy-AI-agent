@@ -4,3 +4,5 @@ players-meta.json
 trade-log.json
 .env
 __pycache__/
+.app-version
+.new-*

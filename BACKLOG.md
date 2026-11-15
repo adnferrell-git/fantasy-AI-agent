@@ -5,7 +5,7 @@ Aiden (or Claude in chat) can reorder, add or remove items at any time.
 
 ## Rules for every build
 - Plain Node 18+ and plain browser JS. No npm installs, no build step, no CDNs except the Google Fonts link already in index.html. The 3D scene is hand-written WebGL in index.html.
-- `node server.js` must keep working on Aiden's Windows PC (serves index.html and the /api/* routes).
+- `node server.js` must keep working on Aiden's Windows PC (serves index.html and the /api/* routes). Aiden runs it through `start.js` (via `start.bat`), which auto-downloads index.html, server.js, staff.js, watch.js, nfl_knowledge.py, README.md and BACKLOG.md from main every 5 minutes and restarts the server when server.js/staff.js change. Don't break or rename `start.js`/`start.bat`; a new file the PC needs must be added to FILES in start.js.
 - Never break `watch.js`, `staff.js`, `nfl_knowledge.py` or the workflows in `.github/workflows/`.
 - Test before pushing: `node --check`, run against mocked Sleeper/Anthropic data, and screenshot the page in headless Chrome (`/usr/bin/google-chrome` + Python Playwright, SwiftShader WebGL). Sleeper, ESPN and Anthropic are not reachable from the build workspace.
 - Never commit secrets. The repo is public.
