@@ -98,6 +98,35 @@ main{display:block;padding:20px 20px 40px;max-width:1320px;margin:0 auto}#hq3d{m
 #allTodo .room{margin:0;background:#0f1530;border:2px solid var(--line)}#allTodo .room.hot{border-color:var(--ac)}
 nav{margin-bottom:18px}
 
+/* ===== game mode (first person) ===== */
+#hqplay{background:var(--or);color:#1a0b02;font-size:10px;padding:10px 16px}
+#fpui{display:none}#hq3d.fp #fpui{display:block}
+#hq3d.fp{position:fixed;inset:0;margin:0!important;height:100vh;width:100vw;z-index:50;border:0;border-radius:0;box-shadow:none;background:linear-gradient(#24346e,#3b5aa0 55%,#6d8fc9)}
+#hq3d.fp .hqbar,#hq3d.fp .hqhint{display:none}body.fpmode{overflow:hidden}
+#hq3d.fp #toasts{top:54px;bottom:auto;left:14px}
+.xh{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#fff;font:20px monospace;text-shadow:0 0 3px #000;pointer-events:none}
+.fphint{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-size:12px;color:#e6ecf5;background:#0d1226b0;padding:6px 12px;border-radius:3px;white-space:nowrap;pointer-events:none}
+.fpprompt{position:absolute;left:50%;top:58%;transform:translateX(-50%);font-family:'Press Start 2P',monospace;font-size:12px;color:#fff;background:#0d1226d9;border:2px solid var(--ac);padding:10px 14px;box-shadow:3px 3px 0 #000;pointer-events:none}
+.fpprompt b{background:var(--ac);color:#04251b;padding:2px 7px;margin-right:6px}
+.hotbar{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:0;background:#1b1b1bd0;border:3px solid #111;padding:3px}
+.slot{width:58px;height:58px;border:3px solid #8b8b8b;border-top-color:#5a5a5a;border-left-color:#5a5a5a;background:#3c3c3cd0;position:relative;display:grid;place-items:center;cursor:pointer;margin:0 1px}
+.slot.on{border:3px solid #fff;box-shadow:0 0 0 2px #000,inset 0 0 0 2px #000;transform:scale(1.08);z-index:2}
+.slot .si{font-size:28px;filter:drop-shadow(2px 2px 0 #000)}.slot.done .si{opacity:.35}.slot.done:after{content:'✔';position:absolute;right:4px;top:0;color:var(--ac);font-weight:900;text-shadow:1px 1px 0 #000}
+.slot .sn{position:absolute;left:4px;bottom:1px;font:10px 'Press Start 2P',monospace;color:#fff;text-shadow:1px 1px 0 #000}
+.slot .sb{position:absolute;right:3px;top:2px;width:15px;height:15px;background:var(--rd);color:#fff;font:9px 'Press Start 2P',monospace;display:grid;place-items:center}
+.hotname{position:absolute;bottom:92px;left:50%;transform:translateX(-50%);color:#fff;font-size:15px;font-weight:600;text-shadow:2px 2px 0 #000;white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+.hotname span{color:#c9d3e6;font-weight:400;font-size:13px}.hotname.fade{animation:hn 4s forwards}@keyframes hn{0%,70%{opacity:1}100%{opacity:.55}}
+.dlg{position:absolute;left:50%;bottom:110px;transform:translateX(-50%);width:min(760px,94vw);background:#0d1226f2;border:3px solid #fff;box-shadow:6px 6px 0 #000;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.dlg[hidden]{display:none}.dhead{display:flex;align-items:center;gap:12px}.dpic{width:56px;height:56px;display:grid;place-items:center;font-size:32px;border:3px solid #000;box-shadow:3px 3px 0 #000}
+.dhead b{display:block;font-family:'Press Start 2P',monospace;font-size:13px}.drec{font-size:12px;color:var(--mu)}.dhead>div{flex:1}.dx{background:#2a1220;color:#fff;padding:6px 10px}
+.dlog{max-height:38vh;overflow:auto;font-size:16px;line-height:1.5;display:flex;flex-direction:column;gap:8px}.dl b{font-family:'Press Start 2P',monospace;font-size:10px;color:var(--wa)}.dl.me{color:#c9d3e6}.dl.me b{color:var(--ac)}
+.dchips{display:flex;gap:8px;flex-wrap:wrap}.dchips button{background:#1d2a40;color:var(--tx);font-size:12px;padding:6px 10px}
+.dask{display:flex;gap:8px}.dask input{flex:1;background:#060914;border:2px solid var(--line);color:var(--tx);padding:9px 10px;font:inherit;font-size:15px}.dask button{font-family:'Press Start 2P',monospace;font-size:10px}
+#fpui.talking .hotname,#fpui.talking .fpprompt,#fpui.talking .xh{display:none!important}
+.pause{position:absolute;inset:0;background:#05070dc0;display:grid;place-items:center}.pause[hidden]{display:none}
+.pbox{background:#0d1226;border:3px solid #fff;box-shadow:6px 6px 0 #000;padding:24px;display:flex;flex-direction:column;gap:12px;align-items:stretch;min-width:280px;text-align:center}
+.pbox b{font-family:'Press Start 2P',monospace;font-size:18px;margin-bottom:6px}.pbox button{font-family:'Press Start 2P',monospace;font-size:11px;padding:12px}
+
 /* ===== Scoreboard tab ===== */
 .sbhead{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}.sbhead h2{margin:0}.sbhead .mu{flex:1}
 .wkpick{display:flex;gap:6px;align-items:center}.wkpick button{padding:7px 10px;font-size:11px}.wkpick button:disabled{opacity:.35;cursor:default}
@@ -130,7 +159,7 @@ nav{margin-bottom:18px}
 <div class="tick"><div id="tick">Loading the wire…</div></div>
 <div id="alert"></div>
 <section id="hq3d"><canvas id="hqc"></canvas><div id="hqlbl"></div>
-<div class="hqbar"><span class="px">MY HQ · LIVE</span><button id="hqreset" class="ghost">FULL VIEW</button></div>
+<div class="hqbar"><span class="px">MY HQ · LIVE</span><span><button id="hqplay">▶ PLAY</button> <button id="hqreset" class="ghost">FULL VIEW</button></span></div>
 <div id="toasts"></div><div class="hqhint mu">drag to spin · scroll to zoom · click a room to read its screen</div></section>
 <main>
 <section class="card" id="today"><div class="thead"><h2>TODAY</h2><span class="mu" id="tsum">Getting the staff's list…</span><button id="tall" class="ghost" aria-expanded="false">SEE ALL ▾</button></div>
@@ -281,9 +310,9 @@ for(let i=0;i<3;i++){const h=.6*(i+1),sc2=i%2?'#1d4ed8':'#ff7a2f';
   v(27.3-i*1.2,0,-2,1.2,h,20,'#7d8496');v(27.3-i*1.2,h,-2,1.1,.08,20,sc2);
   v(38.7+i*1.2,0,-2,1.2,h,20,'#7d8496');v(38.7+i*1.2,h,-2,1.1,.08,20,sc2);
   v(33,0,-12.7-i*1.2,17.4,h,1.2,'#7d8496');v(33,h,-12.7-i*1.2,17.4,.08,1.1,sc2)}
-[29.5,36.5].forEach(x=>v(x,0,-17.3,.4,5,.4,'#5a5a5a'));v(33,5,-17.3,8,3,.5,'#141922');v(33,5.15,-17.03,7.6,2.7,.05,'#0b1a12');
+[25,41].forEach(x=>v(x,0,-17.4,.8,4.3,.8,'#5a5a5a'));v(33,4.2,-17.4,19.2,10.2,.5,'#141922');v(33,14.4,-17.4,19.4,.35,.6,'#ff7a2f',.4); // jumbotron (the live scoreboard is drawn on it)
 // light towers
-[[-42,-8],[-42,8],[24,-14],[42,-14],[23,9],[43,9]].forEach(([x,z])=>{v(x,0,z,.45,9,.45,'#6b6b6b');v(x,9,z,2,1,1,'#fff6c4',1)});
+[[-42,-8],[-42,8],[20.5,-12],[45.5,-12],[23,9],[43,9]].forEach(([x,z])=>{v(x,0,z,.45,9,.45,'#6b6b6b');v(x,9,z,2,1,1,'#fff6c4',1)});
 // trees and flag pole
 [[-18,-12],[-12,-15],[-6,-13],[0,-15.5],[6,-13],[12,-15],[18,-12],[-46,-10],[-47,-3],[-46,5],[-45,11],[-24,-12],[-34,-12],[49,-8],[49,2],[48,10],[-17,7],[17.5,6.5],[-55,27],[55,27],[-60,-20],[30,-24],[-10,-24],[10,-26],[60,-6],[-62,2]]
  .forEach(([x,z],i)=>{v(x,0,z,.5,1.4,.5,'#6b4423');v(x,1.4,z,2.2,1.6,2.2,i%2?'#2d7a3a':'#327f3c');v(x,3,z,1.4,1,1.4,i%3?'#3a9447':'#2f8a40')});
@@ -304,7 +333,8 @@ const SCREENS={
  hc:{x:hc-.5,y:F+2.28,z:-7.85,w:4.4,h:2.2,cw:512,ch:256,scan:0},
  sc:{x:sc,y:F+2.15,z:-7.85,w:4.8,h:2.4,cw:512,ch:256,scan:.12},
  an:{x:an,y:F+2.9,z:-7.88,w:4.4,h:1.1,cw:512,ch:128,scan:.1},
- mg:{x:mg-1.5,y:F+2.32,z:-7.86,w:3,h:1.5,cw:512,ch:256,scan:.12}};
+ mg:{x:mg-1.5,y:F+2.32,z:-7.86,w:3,h:1.5,cw:512,ch:256,scan:.12},
+ sb:{x:33,y:9.3,z:-17.13,w:18.4,h:9.6,cw:1024,ch:512,scan:.05}};
 Object.values(SCREENS).forEach(s=>{s.cv=document.createElement('canvas');s.cv.width=s.cw;s.cv.height=s.ch;s.g=s.cv.getContext('2d');s.tex=gl.createTexture();s.m=mul(T(s.x,s.y,s.z),Sc(s.w,s.h,1))});
 // text helpers: shrink a line until it fits, wrap the rest
 function fitPx(g,t,maxW,big,small){let px=big;for(;px>small;px-=2){g.font=PXF(px);if(g.measureText(t).width<=maxW)break}g.font=PXF(px);return px}
@@ -352,6 +382,41 @@ const PAINT={
   g.font=PXF(20);let L=wrapT(g,t.text,MW-36,4);if(L.length>3){g.font=PXF(16);L=wrapT(g,t.text,MW-36,4)}const lh=L.length>3?24:30,bh=L.length*lh+20;
   g.fillStyle='#3a9bff';g.beginPath();if(g.roundRect)g.roundRect(X,90,MW,bh,14);else g.rect(X,90,MW,bh);g.fill();g.beginPath();g.moveTo(X+MW-40,90+bh);g.lineTo(X+MW-14,90+bh+16);g.lineTo(X+MW-60,90+bh);g.fill();
   g.fillStyle='#ffffff';L.forEach((l,i)=>g.fillText(l,X+18,90+lh+2+i*lh))}};
+// ---- the jumbotron: this week's live scoreboard (from /api/scoreboard) ----
+let SBD=null,GAME_ON=false;
+// team pictures: loaded with CORS so the canvas stays usable; if the host says no, the initials badge stays
+const AVI={},AVC2=['#ff7a2f','#5ef38c','#3a9bff','#c77dff','#ffd23f','#ff6b9a','#4de8e0','#ffb84d','#9be36d','#ff6b6b'];
+function avatar(g,t,x,y,sz){const c=AVC2[[...String(t.owner)].reduce((a,ch)=>a+ch.charCodeAt(0),0)%AVC2.length];
+  g.save();g.beginPath();g.arc(x+sz/2,y+sz/2,sz/2,0,7);g.clip();g.fillStyle=c;g.fillRect(x,y,sz,sz);
+  const im=t.avatar&&AVI[t.avatar];
+  if(im&&im.ok)g.drawImage(im,x,y,sz,sz);else{g.fillStyle='#0b0f17';g.font=PXF(Math.round(sz*.32));g.textAlign='center';g.textBaseline='middle';g.fillText(String(t.owner||'?').replace(/[^A-Za-z0-9]/g,'').slice(0,2).toUpperCase(),x+sz/2,y+sz/2+2)}
+  g.restore();g.strokeStyle=t.mine?'#5ef38c':'#2c3a66';g.lineWidth=4;g.beginPath();g.arc(x+sz/2,y+sz/2,sz/2,0,7);g.stroke();
+  if(t.avatar&&!AVI[t.avatar]){const im2=new Image();im2.crossOrigin='anonymous';AVI[t.avatar]=im2;im2.onload=()=>{im2.ok=1;paintOne('sb')};im2.src=t.avatar}}
+PAINT.sb=function(g,W,H){const d=SBD;g.fillStyle='#04060c';g.fillRect(0,0,W,H);
+  g.fillStyle='#ff7a2f';g.fillRect(0,0,W,58);g.fillStyle='#0b0f17';g.textBaseline='middle';g.font=PXF(26);g.textAlign='left';g.fillText('THE DYNASTY'+(d&&!d.error?' · WEEK '+d.week:''),20,31);
+  if(!d||d.error||!d.games){lines(g,'SCOREBOARD WARMING UP…',40,250,W-80,30,40,2,'#8a9ab3');g.textBaseline='alphabetic';return}
+  const st=d.status==='live'?'● LIVE':d.status==='final'?'FINAL':'KICKOFF SOON';g.textAlign='right';g.font=PXF(22);g.fillText(st,W-20,31);
+  const m=d.games.find(x=>x.mine)||d.games[0],fin=d.status==='final';
+  if(m){const nm=(t,x,al,c)=>{const ax=al==='left'?x:x-58;avatar(g,t,ax,78,58);const tx=al==='left'?x+72:x-72;
+      g.textAlign=al;g.font=PXF(fitPx(g,up(t.owner),300,28,12));g.fillStyle=c;g.fillText(up(t.owner),tx,98);
+      if(t.team){g.font=PXF(fitPx(g,t.team,300,14,9));g.fillStyle='#8a9ab3';g.fillText(t.team,tx,126)}};
+    nm(m.a,30,'left',m.a.mine?'#5ef38c':'#e6ecf5');nm(m.b,W-30,'right',m.b.mine?'#5ef38c':'#e6ecf5');
+    g.font=PXF(76);g.textAlign='left';g.fillStyle=fin&&m.a.pts<m.b.pts?'#6b7590':'#ffd23f';g.fillText((+m.a.pts).toFixed(1),30,196);
+    g.textAlign='right';g.fillStyle=fin&&m.b.pts<m.a.pts?'#6b7590':'#ffd23f';g.fillText((+m.b.pts).toFixed(1),W-30,196);
+    g.font=PXF(18);g.fillStyle='#8a9ab3';g.textAlign='left';g.fillText(fin?'FINAL':'PROJ '+(+m.a.proj).toFixed(1),30,250);g.textAlign='right';g.fillText(fin?'FINAL':'PROJ '+(+m.b.proj).toFixed(1),W-30,250);
+    g.textAlign='center';g.font=PXF(22);g.fillStyle='#ff7a2f';g.fillText('VS',W/2,180);
+    const bw=W-60,share=fin?((m.a.pts+m.b.pts)?m.a.pts/(m.a.pts+m.b.pts):.5):m.win/100;g.fillStyle='#3a9bff';g.fillRect(30,276,bw,22);g.fillStyle='#5ef38c';g.fillRect(30,276,bw*share,22);
+    if(!fin){g.font=PXF(16);g.fillStyle='#e6ecf5';g.textAlign='left';g.fillText(m.win+'% WIN',30,322);g.textAlign='right';g.fillText((100-m.win)+'% WIN',W-30,322)}}
+  g.fillStyle='#223049';g.fillRect(20,342,W-40,3);
+  const rest=d.games.filter(x=>x!==m).slice(0,6);g.font=PXF(17);
+  rest.forEach((x,i)=>{const cx=i%2?W/2+16:30,y=382+Math.floor(i/2)*46,cw=W/2-46;g.fillStyle='#0f1530';g.fillRect(cx-10,y-24,cw+20,38);
+    g.textAlign='left';g.fillStyle='#c9d3e6';g.font=PXF(fitPx(g,up(x.a.owner),cw*.33,17,10));g.fillText(up(x.a.owner),cx,y);
+    g.textAlign='right';g.font=PXF(fitPx(g,up(x.b.owner),cw*.33,17,10));g.fillText(up(x.b.owner),cx+cw,y);
+    g.textAlign='center';g.font=PXF(17);g.fillStyle='#ffd23f';g.fillText(`${(+x.a.pts).toFixed(1)} - ${(+x.b.pts).toFixed(1)}`,cx+cw/2,y)});
+  g.textBaseline='alphabetic'};
+function paintOne(k){const s=SCREENS[k];const g=s.g;g.save();try{PAINT[k](g,s.cw,s.ch,REP)}catch(e){console.error(e)}g.restore();
+  gl.bindTexture(gl.TEXTURE_2D,s.tex);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,s.cv);gl.generateMipmap(gl.TEXTURE_2D);
+  gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR)}
 function paintScreens(){Object.entries(SCREENS).forEach(([k,s])=>{const g=s.g;g.save();g.textBaseline='alphabetic';try{PAINT[k](g,s.cw,s.ch,REP)}catch(e){console.error(e)}g.restore();
   gl.bindTexture(gl.TEXTURE_2D,s.tex);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,s.cv);gl.generateMipmap(gl.TEXTURE_2D);
   gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
@@ -424,11 +489,12 @@ let drag=null,down=null,lastUse=0,focused=null,hover=false,hot=null,VIEW=null;
 const FOV=.75;
 cv.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY};down={x:e.clientX,y:e.clientY};cv.setPointerCapture(e.pointerId)});
 cv.addEventListener('pointermove',e=>{
+  if(FP.on){drag=null;return}
   if(!drag){hot=pick(e);cv.style.cursor=hot?'pointer':'';return}
   goal.yaw-=(e.clientX-drag.x)*.006;goal.el=Math.min(1.3,Math.max(.2,goal.el+(e.clientY-drag.y)*.004));drag={x:e.clientX,y:e.clientY};lastUse=performance.now()});
-cv.addEventListener('pointerup',e=>{drag=null;if(down&&Math.hypot(e.clientX-down.x,e.clientY-down.y)<5){const z=pick(e);if(z)focus(z)}down=null});
+cv.addEventListener('pointerup',e=>{drag=null;if(FP.on){down=null;return}if(down&&Math.hypot(e.clientX-down.x,e.clientY-down.y)<5){const z=pick(e);if(z)focus(z)}down=null});
 cv.addEventListener('pointerleave',()=>{hot=null;cv.style.cursor=''});
-cv.addEventListener('wheel',e=>{e.preventDefault();goal.r=Math.min(85,Math.max(9,goal.r*(e.deltaY>0?1.1:.9)));lastUse=performance.now()},{passive:false});
+cv.addEventListener('wheel',e=>{if(FP.on)return;e.preventDefault();goal.r=Math.min(85,Math.max(9,goal.r*(e.deltaY>0?1.1:.9)));lastUse=performance.now()},{passive:false});
 
 // ---- rooms, spots and labels ----
 ROOMS.forEach(r=>{r.p=[r.cx,F+4.3,-1];r.f={t:[SCREENS[r.k].x,1.5,-7.2],r:9,el:.45,yaw:0};r.hit=(x,z)=>Math.abs(x-r.cx)<3.5&&z>-8.2&&z<-.8});
@@ -453,12 +519,22 @@ document.getElementById('hqreset').onclick=()=>{focused=null;Object.assign(goal,
 let alertOn=false,seenMoves=null,statusAt=0;
 function toast(msg,kind){const d=document.createElement('div');d.className='toast '+(kind||'');d.textContent=msg;toastBox.prepend(d);while(toastBox.children.length>4)toastBox.lastChild.remove();setTimeout(()=>d.classList.add('out'),7000);setTimeout(()=>d.remove(),7600)}
 let repKey='';
-window.HQ={report(b){if(!b||b.error)return;const k=JSON.stringify([b.made,b.start_sit,b.replacements,b.waivers,b.drops,b.trades&&b.trades[0]]);if(k===repKey)return;
+window.HQ={
+ scoreboard(d){if(!d||d.error)return;const m=(d.games||[]).find(x=>x.mine);
+  if(m&&SBD&&!SBD.error){const o=(SBD.games||[]).find(x=>x.mine);if(o&&m.a.pts>o.a.pts+.05){cheerUntil=performance.now()+4000;toast(`🏈 ${m.a.owner} +${(m.a.pts-o.a.pts).toFixed(1)} · ${m.a.pts.toFixed(1)}-${m.b.pts.toFixed(1)}`)}}
+  const was=GAME_ON;SBD=d;GAME_ON=!!(m&&d.status==='live'&&d.week===d.current)||!!window.FORCE_LIVE_GAME;if(GAME_ON&&!was)toast('🏟️ Your game is live in the stadium!');
+  if(m)board.querySelector('span').textContent=d.status==='live'?`LIVE ${m.a.pts.toFixed(1)}-${m.b.pts.toFixed(1)}`:d.status==='final'?`FINAL ${m.a.pts.toFixed(1)}-${m.b.pts.toFixed(1)}`:`WK ${d.week} · ${m.win}% WIN`;
+  paintOne('sb')},
+ tasks(items){TASKS=(items||[]).slice(0,9);if(FP.on)renderHot()},
+ lessons(L){LESS=L},
+ enter:()=>enterFP(),exit:()=>exitFP(),
+ _debug(o){Object.assign(FP,o);if(o.talk)openTalk(NPC.find(n=>n.k===o.talk))},
+ report(b){if(!b||b.error)return;const k=JSON.stringify([b.made,b.start_sit,b.replacements,b.waivers,b.drops,b.trades&&b.trades[0]]);if(k===repKey)return;
   const first=!repKey;repKey=k;REP=b;paintScreens();if(!first)toast('📺 New staff report is up on the wall screens')},
  update(s){
   if(!s)return;const me=(s.teams||[]).find(t=>t.mine);
   const tr0=REPstate&&(REPstate.scout||[])[0],tr1=(s.scout||[])[0];REPstate=s;if(REP&&(tr0&&tr0.name)!==(tr1&&tr1.name))paintScreens();
-  board.querySelector('span').textContent=`WK ${s.league?s.league.week:'--'} · ${me?me.record:'--'}`;
+  if(!SBD)board.querySelector('span').textContent=`WK ${s.league?s.league.week:'--'} · ${me?me.record:'--'}`;
   const was=alertOn;alertOn=!!(s.alerts&&s.alerts.length);
   if(alertOn&&!was)s.alerts.forEach(a=>toast(`🚨 ${a.name} is ${a.status}`,'bad'));
   const mv=s.moves||[];
@@ -466,6 +542,145 @@ window.HQ={report(b){if(!b||b.error)return;const k=JSON.stringify([b.made,b.star
   else if(mv.length){toast('📡 Front office online · '+mv.length+' moves on the wire');cheerUntil=performance.now()+3000}
   seenMoves=new Set(mv);
 }};
+
+// ===== GAME MODE: walk the facility in first person, talk to the staff, hotbar to-dos, live game in the stadium =====
+// Solid boxes the player can't walk through, as [x0,x1,z0,z1] on the ground.
+const COL=[[-14.4,14.4,-8.5,-7.9],[-14.45,-13.95,-8.2,2.6],[13.95,14.45,-8.2,2.6],
+ ...[-7,0,7].map(x=>[x-.2,x+.2,-8.2,-.85]),
+ ...ROOMS.flatMap(r=>[[r.cx-3.5,r.cx-1.05,-1.15,-.85],[r.cx+1.05,r.cx+3.5,-1.15,-.85]]),
+ [-14,-1.4,2.2,2.6],[1.4,14,2.2,2.6],
+ [hc+.9,hc+3.1,-3.95,-2.85],[sc-1.5,sc-.3,-5.4,-4.2],[sc+.7,sc+1.9,-5.4,-4.2],[sc+2.3,sc+3.1,-5,-4.2],[an-2.2,an+2.2,-7.6,-6.2],[an-.55,an+.55,-6.45,-5.35],[an+2.5,an+3.3,-5,-2.2],
+ [mg-.3,mg+3.3,-7.3,-5.9],[mg+2.5,mg+3.3,-4.4,-2.8],[mg-3.4,mg-2.6,-7.8,-7],[-13.85,-12.95,1.35,2.25],[12.95,13.85,1.35,2.25],[13.1,13.7,-.6,0],
+ [23.7,27.9,-12.4,8.2],[38.1,42.3,-12.4,8.2],[24.2,41.8,-16.2,-12],[24.5,25.5,-17.9,-16.9],[40.5,41.5,-17.9,-16.9],[23.3,42.7,-17.75,-17.05],
+ [-30-3.1,-30+3.1,-7.7,-6.7],[-16.7,-16.3,3.8,4.2]];
+[[-18,-12],[-12,-15],[-6,-13],[0,-15.5],[6,-13],[12,-15],[18,-12],[-46,-10],[-47,-3],[-46,5],[-45,11],[-24,-12],[-34,-12],[49,-8],[49,2],[48,10],[-17,7],[17.5,6.5]].forEach(([x,z])=>COL.push([x-.4,x+.4,z-.4,z+.4]));
+const FP={on:false,x:0,z:9,y:0,vy:0,yaw:0,pitch:-.05,keys:new Set(),sel:0,talk:null,near:null,locked:false};
+const NPC=[{k:'hc',who:'Head Coach',icon:'🏈',acc:'#ff7a2f',p:coach},{k:'sc',who:'Scout',icon:'🎬',acc:'#c77dff',p:scout},{k:'an',who:'Analyst',icon:'📚',acc:'#5ef38c',p:analyst},
+ {k:'mg',who:'Manager',icon:'📞',acc:'#3a9bff',p:mgr},{k:'ac',who:'Assistant Coach',icon:'🧑‍🏫',acc:'#ffd23f',p:intern}];
+let TASKS=[],LESS=null;
+const R=.35,hits=(x,z)=>COL.some(b=>x>b[0]-R&&x<b[1]+R&&z>b[2]-R&&z<b[3]+R)||Math.abs(x)>75||Math.abs(z)>40;
+function fpMove(dt){
+  if(FP.talk)return;
+  const k=FP.keys,f=(k.has('KeyW')||k.has('ArrowUp')?1:0)-(k.has('KeyS')||k.has('ArrowDown')?1:0),st=(k.has('KeyD')?1:0)-(k.has('KeyA')?1:0);
+  if(!FP.locked)FP.yaw+=((k.has('ArrowRight')?1:0)-(k.has('ArrowLeft')?1:0))*2.2*dt;else FP.yaw+=0;
+  const sp=(k.has('ShiftLeft')||k.has('ShiftRight')?9:5.2)*dt,fx=Math.sin(FP.yaw),fz=-Math.cos(FP.yaw);
+  let dx=(fx*f-fz*st),dz=(fz*f+fx*st);const l=Math.hypot(dx,dz);if(l>0){dx=dx/l*sp;dz=dz/l*sp}
+  if(!hits(FP.x+dx,FP.z))FP.x+=dx;if(!hits(FP.x,FP.z+dz))FP.z+=dz;
+  FP.walk=l>0;FP.vy-=16*dt;FP.y=Math.max(0,FP.y+FP.vy*dt);if(FP.y===0)FP.vy=0;
+  // who is close enough to talk to (in front of you)
+  let best=null,bd=2.9;NPC.forEach(n=>{const ddx=n.p.x-FP.x,ddz=n.p.z-FP.z,d=Math.hypot(ddx,ddz);if(d<bd&&(ddx*fx+ddz*fz)/(d||1)>.2){bd=d;best=n}});
+  FP.near=best;
+}
+// ---- live game on the stadium field while your matchup is live ----
+const G={los:3,play:-1,gain:5,tgt:0,lastPts:null};
+const mkP=(o,i)=>({x:33,z:0,y:0,yaw:o?Math.PI:0,walk:1,ph:i,shirt:o?'#ff7a2f':'#e8edf5',pants:o?'#1d4ed8':'#e8edf5',skin:SKIN[i%4],hair:'#222',helmet:o?'#ff7a2f':'#c0392b',num:1});
+const OFF=[...Array(7)].map((_,i)=>mkP(1,i)),DEF=[...Array(6)].map((_,i)=>mkP(0,i+3));
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),lerp=(a,b,k)=>a+(b-a)*k;
+function form(los,tg){// formation spots [x,z] for offense (QB,C,G,G,RB,WR,WR) and defense (DL,DL,LB,CB,CB,S)
+  return{o:[[33,los+1.3],[33,los+.45],[32.1,los+.45],[33.9,los+.45],[33.9,los+2.4],[29.7,los+.45],[36.3,los+.45]],d:[[32.5,los-.55],[33.5,los-.55],[33,los-2.6],[29.9,los-1.1],[36.1,los-1.1],[33,los-6]]}}
+function gamePos(u,los,gain,tg){const F0=form(los,tg),o=F0.o.map(p=>p.slice()),d=F0.d.map(p=>p.slice());
+  const k=clamp((u-.12)/.5,0,1),depth=Math.max(2,gain-1.2);
+  [5,6].forEach((wi,j)=>{const dir=j?-1:1;o[wi][1]-=k*depth;o[wi][0]+=dir*Math.max(0,k-.55)*3.2});
+  o[0][1]+=Math.min(1,u/.4)*1.1;o[4][0]+=k*2.2;o[4][1]-=k*.8;o[1][1]-=k*.3;o[2][1]-=k*.25;o[3][1]-=k*.25;
+  d[0][1]+=k*.5;d[1][1]+=k*.6;
+  const wr=o[5+tg];d[3+tg]=[wr[0]+(tg?-.4:.4),wr[1]-.9];d[4-tg][1]-=k*2;d[2][1]-=k*.6;
+  let carrier=null;
+  if(u>.62){const c=clamp((u-.62)/.23,0,1);wr[1]-=c*1.4;carrier=wr;
+    [[2,.6],[5,.8],[3+tg,.95]].forEach(([i,a])=>{d[i][0]=lerp(d[i][0],wr[0],c*a);d[i][1]=lerp(d[i][1],wr[1]-.5,c*a)})}
+  return{o,d,carrier,wr}}
+function liveGame(t,now){
+  if(!GAME_ON)return;
+  const P=6.5,n=Math.floor(t/P),u=(t%P)/P;
+  if(n!==G.play){if(G.play>=0){G.los-=G.gain;if(G.los<-8.3){G.los=3;cheerUntil=now+3500;toast('🏈 TOUCHDOWN on the field!')}}G.play=n;G.gain=2.5+(n*7919%5);G.tgt=n%2}
+  let A=gamePos(Math.min(u,.88),G.los,G.gain,G.tgt);
+  if(u>.88){const nl=G.los-G.gain<-8.3?3:G.los-G.gain,B=gamePos(0,nl,0,0),k=(u-.88)/.12;
+    A={o:A.o.map((p,i)=>[lerp(p[0],B.o[i][0],k),lerp(p[1],B.o[i][1],k)]),d:A.d.map((p,i)=>[lerp(p[0],B.d[i][0],k),lerp(p[1],B.d[i][1],k)]),carrier:null}}
+  const put=(pl,p,face)=>{const dx=p[0]-pl.x,dz=p[1]-pl.z,m=Math.hypot(dx,dz);pl.walk=m>.01;if(m>.02)pl.yaw=Math.atan2(dx,dz);else pl.yaw=face;pl.x=p[0];pl.z=p[1];person(pl,t)};
+  OFF.forEach((pl,i)=>put(pl,A.o[i],Math.PI));DEF.forEach((pl,i)=>put(pl,A.d[i],0));
+  // the ball: snap, throw, carry
+  const qb=OFF[0];let bx,by,bz;
+  if(u<.45){bx=qb.x;by=1.25;bz=qb.z-.35}
+  else if(u<.62){const k=(u-.45)/.17,c=gamePos(.62,G.los,G.gain,G.tgt).wr;bx=lerp(qb.x,c[0],k);bz=lerp(qb.z,c[1],k);by=1.3+Math.sin(k*Math.PI)*2.2}
+  else{const c=OFF[5+G.tgt];bx=c.x;by=1.2;bz=c.z-.35}
+  if(u<=.88)draw(mul(T(bx,by,bz),mul(Ry(t*8),Sc(.22,.2,.42))),'#8b4513');
+  // line of scrimmage + first-down marker
+  box(33,.09,G.los,8.6,.02,.08,'#3a9bff',.6);box(28.3,0,G.los-G.gain,.12,1.2,.12,'#ffd23f',.6);
+}
+// ---- markers over the staff: "!" when they have something for you, a green arrow over whoever owns the selected hotbar item ----
+function npcMarks(t){const sel=TASKS[FP.sel];NPC.forEach(n=>{const open=TASKS.some(x=>x.k===n.k&&!x.done),hy=(n.p.sit?2.1:2.45)+(n.p.y||0)+Math.sin(t*3)*.08;
+  if(sel&&!sel.done&&sel.k===n.k&&FP.on){box(n.p.x,hy+.45,n.p.z,.18,.4,.18,'#5ef38c',1);box(n.p.x,hy+.25,n.p.z,.42,.14,.42,'#5ef38c',1);box(n.p.x,hy+.12,n.p.z,.22,.12,.22,'#5ef38c',1)}
+  else if(open){box(n.p.x,hy+.35,n.p.z,.16,.42,.16,'#ffd23f',1);box(n.p.x,hy+.1,n.p.z,.16,.14,.16,'#ffd23f',1)}})}
+// ---- game UI (built once) ----
+const ui=document.createElement('div');ui.id='fpui';ui.innerHTML=`<div class="xh">+</div><div class="fphint">WASD move · mouse look · SHIFT run · SPACE jump · E talk · 1-9 / wheel pick a to-do · F mark done · ESC pause</div>
+<div class="fpprompt"></div><div class="hotname"></div><div class="hotbar"></div>
+<div class="dlg" hidden><div class="dhead"><span class="dpic"></span><div><b class="dname"></b><span class="drec"></span></div><button class="dx" title="Close (Esc)">✕</button></div>
+<div class="dlog"></div><div class="dchips"><button data-q="What should I do right now?">What should I do?</button><button data-q="Why? Walk me through it.">Why?</button><button data-q="What else are you watching?">Anything else?</button></div>
+<form class="dask"><input placeholder="Say something…" autocomplete="off"><button>SAY</button></form></div>
+<div class="pause" hidden><div class="pbox"><b>PAUSED</b><button class="pres">▶ KEEP PLAYING</button><button class="pex ghost">EXIT TO DASHBOARD</button></div></div>`;
+wrap.appendChild(ui);
+const $u=q=>ui.querySelector(q),dlg=$u('.dlg'),dlog=$u('.dlog'),pause=$u('.pause');
+const strip=h=>{const d=document.createElement('div');d.innerHTML=h;return d.textContent.replace(/\s+/g,' ').trim()};
+function renderHot(){const hb=$u('.hotbar');hb.innerHTML=Array.from({length:9},(_,i)=>{const x=TASKS[i],n=x&&NPC.find(q=>q.k===x.k);
+  return `<div class="slot ${i===FP.sel?'on':''} ${x&&x.done?'done':''}" data-i="${i}">${x?`<span class="si">${n?n.icon:'•'}</span>${x.tag&&!x.done?'<span class="sb">!</span>':''}`:''}<span class="sn">${i+1}</span></div>`}).join('');
+  const x=TASKS[FP.sel],nm=$u('.hotname');nm.innerHTML=x?`${x.done?'✅ ':''}${esc(strip(x.html))} <span>· ${x.done?'done':'go see the '+(NPC.find(q=>q.k===x.k)||{}).who+' · F to mark done'}</span>`:'<span>Nothing in this slot</span>';nm.classList.remove('fade');void nm.offsetWidth;nm.classList.add('fade')}
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ui.addEventListener('click',e=>{const sl=e.target.closest('.slot');if(sl){FP.sel=+sl.dataset.i;renderHot()}});
+// ---- talking ----
+const HIST={};
+const clip=(s,n)=>{s=String(s||'');return s.length>n?s.slice(0,n).replace(/\s+\S*$/,'')+'…':s};
+function greet(k){const b=REP||{},st=REPstate||{},mine=TASKS.filter(x=>x.k===k&&!x.done).map(x=>strip(x.html));
+  const todo=mine.length?` On your list from me: ${mine.join('; ')}.`:'';
+  if(k==='hc'){const c=(b.start_sit||[])[0],r=(b.replacements||[])[0];let s=c?`Boss. ${c.call} ${c.player}${c.over?(c.call==='SIT'?', put in ':' over ')+c.over:''}. ${clip(c.why,200)}`:r?`${r.out} can't go. Put ${r.in} in. ${clip(r.why,160)}`:'Lineup is set, boss. Nothing to change this week.';
+    if(st.lock&&new Date(st.lock.at)>Date.now())s+=` Lineup locks ${new Date(st.lock.at).toLocaleString([],{weekday:'short',hour:'numeric',minute:'2-digit'})}.`;return s+todo}
+  if(k==='sc'){const w=(b.waivers||[])[0],d=(b.drops||[])[0],tr=(st.scout||[])[0];return (w?`Got one for you. Add ${w.add}, drop ${w.drop}. ${clip(w.why,200)}`:d?`Make room: drop ${d.player}${d.add?' and grab '+d.add:''}. ${clip(d.why,160)}`:`Wire's quiet. Your bench beats it.${tr?' I\'m watching '+tr.name+' though.':''}`)+todo}
+  if(k==='an'){const t=(b.trades||[])[0];return (t?`Top idea: send ${t.to} ${(t.give||[]).join(' + ')} for ${(t.get||[]).join(' + ')}${t.gain?', about '+t.gain+' pts a week':''}. ${clip(t.why,200)}`:'Roster is maxed. No trade makes you better right now.')+todo}
+  if(k==='mg'){const t=(b.trades||[]).find(x=>x.text);return (t?`Here's what I'd text ${t.to}: "${t.text}"`:'Phone is quiet. Nobody to follow up with.')+todo}
+  const sum=clip(String(b.report||'The staff report is on its way.').replace(/^\(Staff report[^)]*\)\s*/,''),260);
+  const rec=LESS&&LESS.record&&Object.entries(LESS.record).map(([w,r])=>`${w} ${r.right}/${r.calls}`).join(', ');
+  return `Welcome to the building. ${sum}${rec?` Film room grades so far: ${rec} right.`:''} Go see the staff, the ones with a yellow ! have something for you.`}
+function say(who,text,cls){const d=document.createElement('div');d.className='dl '+(cls||'');d.innerHTML=who?`<b>${esc(who)}:</b> <span></span>`:'<span></span>';dlog.appendChild(d);
+  const sp=d.querySelector('span');if(cls==='me')sp.textContent=text;else typeIn(sp,text);dlog.scrollTop=dlog.scrollHeight;return sp}
+function typeIn(sp,text){const t0=performance.now();clearInterval(sp._iv);sp._iv=setInterval(()=>{const n=Math.ceil((performance.now()-t0)/7);sp.textContent=text.slice(0,n);dlog.scrollTop=dlog.scrollHeight;if(n>=text.length)clearInterval(sp._iv)},16)}
+function openTalk(n){FP.talk=n;FP.keys.clear();if(document.pointerLockElement)document.exitPointerLock();
+  $u('.dpic').textContent=n.icon;$u('.dpic').style.background=n.acc;$u('.dname').textContent=n.who.toUpperCase();$u('.dname').style.color=n.acc;
+  const r=LESS&&LESS.record&&LESS.record[n.who];$u('.drec').textContent=r?`film room: ${r.right}/${r.calls} calls right lately`:'';
+  dlog.innerHTML='';(HIST[n.k]||[]).slice(-6).forEach(m=>{const d=document.createElement('div');d.className='dl '+(m.role==='user'?'me':'');d.innerHTML=m.role==='user'?`<b>YOU:</b> ${esc(m.text)}`:`<b>${esc(n.who)}:</b> ${esc(m.text)}`;dlog.appendChild(d)});
+  say(n.who,greet(n.k));dlg.hidden=false;ui.classList.add('talking');pause.hidden=true;setTimeout(()=>$u('.dask input').focus(),50)}
+function closeTalk(){dlg.hidden=true;ui.classList.remove('talking');FP.talk=null;if(FP.on)lockIt()}
+async function ask(q){const n=FP.talk;if(!n||!q)return;const h=HIST[n.k]=HIST[n.k]||[];say('YOU',q,'me');const sp=say(n.who,'…');
+  try{const r=await(await fetch('/api/ask',{method:'POST',body:JSON.stringify({q,who:n.k,history:h})})).json();let a=String(r.answer||'');
+    if(/ANTHROPIC_API_KEY/.test(a))a=`I can only read you my report right now, this PC has no ANTHROPIC_API_KEY. Put your key in the .env file next to start.bat and I'll answer anything.`;
+    h.push({role:'user',text:q},{role:'assistant',text:a});typeIn(sp,a)}
+  catch{sp.textContent='(lost the connection)'}}
+$u('.dask').onsubmit=e=>{e.preventDefault();const i=$u('.dask input');const q=i.value.trim();i.value='';ask(q)};
+$u('.dchips').onclick=e=>{const b=e.target.closest('[data-q]');if(b)ask(b.dataset.q)};
+$u('.dx').onclick=closeTalk;
+$u('.dask input').addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();closeTalk()}e.stopPropagation()});
+// ---- enter / exit / pause ----
+function lockIt(){try{const p=cv.requestPointerLock&&cv.requestPointerLock();if(p&&p.catch)p.catch(()=>{if(FP.on&&!FP.talk)pause.hidden=false})}catch{}}
+document.addEventListener('pointerlockerror',()=>{if(FP.on&&!FP.talk)pause.hidden=false});
+function enterFP(){if(FP.on)return;FP.on=true;wrap.classList.add('fp');document.body.classList.add('fpmode');Object.assign(FP,{x:0,z:9.5,yaw:0,pitch:-.04,y:0,vy:0});renderHot();lockIt();toast('🎮 Walk in through the front doors. Staff with a yellow ! have something for you.')}
+function exitFP(){FP.on=false;FP.talk=null;dlg.hidden=true;pause.hidden=true;wrap.classList.remove('fp');document.body.classList.remove('fpmode');if(document.pointerLockElement)document.exitPointerLock();FP.keys.clear()}
+$u('.pres').onclick=()=>{pause.hidden=true;lockIt()};$u('.pex').onclick=exitFP;
+document.addEventListener('pointerlockchange',()=>{FP.locked=document.pointerLockElement===cv;if(FP.on&&!FP.locked&&!FP.talk)pause.hidden=false;if(FP.locked)pause.hidden=true});
+document.addEventListener('mousemove',e=>{if(!FP.on||!FP.locked||FP.talk)return;FP.yaw+=e.movementX*.0024;FP.pitch=clamp(FP.pitch-e.movementY*.0024,-1.35,1.35)});
+cv.addEventListener('click',()=>{if(FP.on&&!FP.locked&&!FP.talk)lockIt()});
+document.addEventListener('keydown',e=>{if(!FP.on||FP.talk)return;if(e.target.closest&&e.target.closest('input,textarea'))return;
+  const c=e.code;FP.keys.add(c);
+  if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(c))e.preventDefault();
+  if(c==='Space'&&FP.y===0)FP.vy=6;
+  if(c==='KeyE'&&FP.near)openTalk(FP.near);
+  if(/^Digit[1-9]$/.test(c)){FP.sel=+c.slice(5)-1;renderHot()}
+  if(c==='KeyF'){const x=TASKS[FP.sel];if(x&&window.toggleTask){window.toggleTask(x.id);toast(x.done?'↩️ Back on the list':'✅ Done: '+clip(strip(x.html),60))}}
+  if(c==='Escape'&&!FP.locked)exitFP()});
+document.addEventListener('keyup',e=>FP.keys.delete(e.code));
+window.addEventListener('blur',()=>FP.keys.clear());
+cv.addEventListener('wheel',e=>{if(!FP.on)return;e.preventDefault();e.stopImmediatePropagation();FP.sel=(FP.sel+(e.deltaY>0?1:8))%9;renderHot()},{capture:true,passive:false});
+// drag to look when the mouse isn't captured (and on touch screens)
+let fpDrag=null;cv.addEventListener('pointerdown',e=>{if(FP.on&&!FP.locked)fpDrag={x:e.clientX,y:e.clientY}},true);
+document.addEventListener('pointermove',e=>{if(!fpDrag)return;FP.yaw+=(e.clientX-fpDrag.x)*.005;FP.pitch=clamp(FP.pitch-(e.clientY-fpDrag.y)*.004,-1.35,1.35);fpDrag={x:e.clientX,y:e.clientY}});
+document.addEventListener('pointerup',()=>fpDrag=null);
+document.getElementById('hqplay').onclick=enterFP;
 
 // ---- render loop ----
 const SKY=rgb('#1b2650');let last=performance.now();
@@ -478,9 +693,12 @@ function frame(now){
   if(cv.width!==Math.round(w*dpr)||cv.height!==Math.round(h*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr)}
   if(!drag&&!focused&&!hover&&now-lastUse>4000)goal.yaw=HOME.yaw+Math.sin(t*.12)*.2;
   const k=1-Math.pow(.02,dt);['yaw','el','r'].forEach(q=>cam[q]+=(goal[q]-cam[q])*k);for(let i=0;i<3;i++)cam.t[i]+=(goal.t[i]-cam.t[i])*k;
-  const eye=[cam.t[0]+cam.r*Math.cos(cam.el)*Math.sin(cam.yaw),cam.t[1]+cam.r*Math.sin(cam.el),cam.t[2]+cam.r*Math.cos(cam.el)*Math.cos(cam.yaw)];
-  const ctr=[cam.t[0],cam.t[1]+1,cam.t[2]],asp=w/Math.max(h,1);VIEW={eye,ctr,asp};
-  const VP=mul(persp(FOV,asp,1,420),look(eye,ctr,[0,1,0]));
+  let eye=[cam.t[0]+cam.r*Math.cos(cam.el)*Math.sin(cam.yaw),cam.t[1]+cam.r*Math.sin(cam.el),cam.t[2]+cam.r*Math.cos(cam.el)*Math.cos(cam.yaw)];
+  let ctr=[cam.t[0],cam.t[1]+1,cam.t[2]];const asp=w/Math.max(h,1);
+  if(FP.on){fpMove(dt);const inside=FP.x>-14.2&&FP.x<14.2&&FP.z>-8.2&&FP.z<2.4,bob=FP.walk&&FP.y===0?Math.abs(Math.sin(t*10))*.06:0;
+    eye=[FP.x,1.62+(inside?F:0)+FP.y+bob,FP.z];const cp=Math.cos(FP.pitch);ctr=[eye[0]+Math.sin(FP.yaw)*cp,eye[1]+Math.sin(FP.pitch),eye[2]-Math.cos(FP.yaw)*cp]}
+  VIEW={eye,ctr,asp};
+  const VP=FP.on?mul(persp(1.15,asp,.06,420),look(eye,ctr,[0,1,0])):mul(persp(FOV,asp,1,420),look(eye,ctr,[0,1,0]));
   gl.viewport(0,0,cv.width,cv.height);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
   gl.uniformMatrix4fv(U.uVP,false,VP);gl.uniform3fv(U.uFog,SKY);gl.uniform1f(U.uA,1);
   // baked world
@@ -499,9 +717,13 @@ function frame(now){
   qb.yaw=Math.atan2(tgt.x-qb.x,tgt.z-qb.z);person(qb,t);
   if(u<.85){const k2=u/.85,bx=qb.x+(tgt.x-qb.x)*k2,bz=qb.z+(tgt.z-qb.z)*k2,by=1.9+Math.sin(k2*Math.PI)*2.4;
     draw(mul(T(bx,by,bz),mul(Ry(t*9),Sc(.3,.22,.5))),'#8b4513')}
-  person(coach,t);person(scout,t);person(analyst,t);
-  Object.assign(mgr,at(mgr.r,t*mgr.sp));person(mgr,t);
-  Object.assign(intern,at(intern.r,t*intern.sp));person(intern,t);
+  const tk=FP.talk&&FP.talk.p;
+  if(tk!==mgr){Object.assign(mgr,at(mgr.r,t*mgr.sp));mgr.walk=1}else mgr.walk=0;
+  if(tk!==intern){Object.assign(intern,at(intern.r,t*intern.sp));intern.walk=1}else intern.walk=0;
+  [coach,scout,analyst,mgr,intern].forEach(c=>{if(c===tk&&!c.sit){const y0=c.yaw;c.yaw=Math.atan2(FP.x-c.x,FP.z-c.z);person(c,t);if(c===coach)c.yaw=y0}else person(c,t)});
+  // the live game in the stadium, the markers over the staff, and a roof once you're walking around inside
+  liveGame(t,now);npcMarks(t);
+  if(FP.on){box(0,F+3.62,-2.9,28.4,.14,10.8,'#cfc8b6');for(let i=-12;i<=12;i+=4)box(i,F+3.58,-2.9,1.6,.05,9,'#fff6c4',1)}
   // crowd
   const cheer=now<cheerUntil;
   fans.forEach(f=>{const j=cheer?Math.abs(Math.sin(t*9+f.ph))*.4:Math.abs(Math.sin(t*1.5+f.ph))*.04;box(f.x,f.y+j,f.z,.45,.55,.35,f.c);box(f.x,f.y+j+.55,f.z,.34,.34,.34,f.s);
@@ -517,20 +739,22 @@ function frame(now){
   // particles
   parts.forEach(p=>{p.y+=dt*p.v;if(p.y>11){p.y=0}box(p.x+Math.sin(t+p.z)*.3,p.y,p.z,.1,.1,.1,'#fff3b0',1)});
   // scoreboard light strip
-  box(33,7.6,-17.02,7.2,.06,.03,alertOn?[1,.2,.2]:[.3,1,.5],1);
-  for(let i=0;i<8;i++)box(29.8+i*.9,5.5,-17,.5,.5*(.4+.6*Math.abs(Math.sin(t*2+i))),.03,'#ffb84d',.8);
+  box(33,4.25,-17.1,18.4,.08,.05,alertOn?[1,.2,.2]:GAME_ON?[1,.3*fl,.2]:[.3,1,.5],1);
   // room highlight strip above the glass (hover/focus), red pulse on the head coach when there's an alert
   ROOMS.forEach((r,i)=>{const on=r===hot||r===focused;if(i===0&&alertOn){const pu=.5+.5*Math.sin(t*6);box(r.cx,F+3.12,-.84,6.9,.16,.04,[1,.2*pu,.2*pu],1)}else if(on)box(r.cx,F+3.12,-.84,6.9,.16,.04,r.acc,1)});
   // the staff report on each room's wall screen
   drawScreens(VP,t);
   // glass (see-through pass)
   gl.enable(gl.BLEND);gl.blendFuncSeparate(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA,gl.ZERO,gl.ONE);gl.depthMask(false);gl.uniform1f(U.uA,.2);
-  ROOMS.forEach(r=>{[-2.35,0,2.35].forEach(o=>box(r.cx+o,F+.25,-1,2.2,3.1,.05,r===hot||r===focused?r.acc:'#9fd8ff',.25))});
+  ROOMS.forEach(r=>{(FP.on?[-2.35,2.35]:[-2.35,0,2.35]).forEach(o=>box(r.cx+o,F+.25,-1,2.2,3.1,.05,r===hot||r===focused?r.acc:'#9fd8ff',.25))});
   gl.uniform1f(U.uA,1);gl.depthMask(true);gl.disable(gl.BLEND);
+  // game HUD: who you can talk to
+  if(FP.on){const pr=$u('.fpprompt'),txt=FP.near&&!FP.talk?`<b>E</b> TALK TO ${FP.near.who.toUpperCase()}`:'';if(pr.innerHTML!==txt)pr.innerHTML=txt;pr.style.display=txt?'':'none'}
   // labels
+  lblBox.style.display=FP.on?'none':'';
   if(now-statusAt>800){statusAt=now;ROOMS.forEach(z=>{const s=document.getElementById('r-'+z.k);z.el.querySelector('span').textContent=s?s.textContent:''})}
   ROOMS.forEach(z=>place(z.el,VP,focused&&focused.k?[z.cx,F+4.1,-8.2]:z.p,w,h));
-  {const a=project(VP,ROOMS[0].p,w,h),b=project(VP,ROOMS[1].p,w,h),c=project(VP,ROOMS[3].p,w,h);lblBox.classList.toggle('tight',!!(a&&b&&c)&&Math.min(Math.abs(b[0]-a[0]),Math.abs(c[0]-a[0])/3)<142)}place(board,VP,[33,8.3,-17.3],w,h);
+  {const a=project(VP,ROOMS[0].p,w,h),b=project(VP,ROOMS[1].p,w,h),c=project(VP,ROOMS[3].p,w,h);lblBox.classList.toggle('tight',!!(a&&b&&c)&&Math.min(Math.abs(b[0]-a[0]),Math.abs(c[0]-a[0])/3)<142)}place(board,VP,[33,15.4,-17.3],w,h);
   beacon.style.display=alertOn?'':'none';if(alertOn)place(beacon,VP,[coach.x,F+6.4,coach.z],w,h);
   requestAnimationFrame(frame);
 }
@@ -589,7 +813,8 @@ function todayItems(){const s=LS,b=(LB&&!LB.error?LB:LR)||{},out=[],add=(k,id,ht
   if(w)add('sc','wv:'+w.add,`Add <b>${esc(w.add)}</b> <span class="mu">· drop ${esc(w.drop)}</span>`,6);
   else if(d)add('sc','dr:'+d.player,d.add?`Add <b>${esc(d.add)}</b> <span class="mu">· drop ${esc(d.player)}</span>`:`Drop <b>${esc(d.player)}</b> <span class="mu">· ${esc(d.for_trade?'room for the '+d.for_trade+' trade':'frees a roster spot')}</span>`,6);
   return out.sort((x,y)=>(!!done[x.id]-!!done[y.id])||x.pri-y.pri)}
-function renderToday(){const el=$('#tlist');if(!el||(!LS&&!LB&&!LR))return;const all=todayItems(),open=all.filter(x=>!done[x.id]).length,it=all.slice(0,5);
+window.toggleTask=id=>{done[id]=!done[id];try{localStorage.setItem('done',JSON.stringify(done))}catch{}renderToday();todos()};
+function renderToday(){const el=$('#tlist');if(!el||(!LS&&!LB&&!LR))return;const all=todayItems();try{window.HQ&&HQ.tasks&&HQ.tasks(all.map(x=>({...x,done:!!done[x.id]})))}catch(e){console.error(e)}const open=all.filter(x=>!done[x.id]).length,it=all.slice(0,5);
   $('#tsum').textContent=open?`${open} thing${open>1?'s':''} to do${LS?' · Week '+LS.league.week:''}`:`All caught up${LS?' · Week '+LS.league.week:''}`;
   el.innerHTML=it.length?it.map(x=>`<li class="ti ${done[x.id]?'done':''}" data-k="${x.k}"><span class="ic" title="${SI[x.k][1]}">${SI[x.k][0]}</span><span class="tx">${x.html}</span>${x.tag?`<span class="tag ${x.tag==='SOON'?'soon':''}">${x.tag}</span>`:''}<input type="checkbox" data-t="${esc(x.id)}" ${done[x.id]?'checked':''} title="Mark done"></li>`).join('')+(open?'':'<li class="tclear"><b>✅ All clear.</b> <span class="mu">The staff has nothing else for you right now.</span></li>')
     :'<li class="tclear"><b>✅ All clear.</b> <span class="mu">Nothing urgent today. Enjoy the games.</span></li>'}
@@ -667,10 +892,14 @@ function renderSB(){const d=SBD,el=$('#sb');if(!d)return;if(d.error){el.textCont
   const sel=$('#wksel');if(sel.options.length!==d.current){sel.innerHTML=Array.from({length:d.current},(_,i)=>`<option value="${i+1}">Week ${i+1}${i+1===d.current?' (now)':''}</option>`).join('')}
   sel.value=d.week;$('#wkp').disabled=d.week<=1;$('#wkn').disabled=d.week>=d.current}
 async function loadSB(){clearTimeout(sbT);try{const d=await(await fetch('/api/scoreboard'+(SBW?'?week='+SBW:''))).json();if(d.error&&SBD&&!SBD.error){}else SBD=d;renderSB()}catch(e){if(!SBD)$('#sb').textContent='Could not reach the scoreboard.'}
+  if(SBD&&!SBD.error&&SBD.week===SBD.current)try{window.HQ&&HQ.scoreboard&&HQ.scoreboard(SBD)}catch(e){console.error(e)}
   // live: every 30s; this week but not live: every 5 min; past weeks are final and never change
   const cur=!SBD||SBD.error||SBD.week===SBD.current;if(cur)sbT=setTimeout(loadSB,SBD&&SBD.status==='live'?3e4:3e5)}
 const goWk=w=>{if(!SBD||SBD.error)return;w=Math.min(Math.max(w,1),SBD.current);SBW=w===SBD.current?null:w;$('#sb').style.opacity=.5;loadSB().then(()=>$('#sb').style.opacity='')};
 $('#wksel').onchange=e=>goWk(+e.target.value);$('#wkp').onclick=()=>SBD&&goWk(SBD.week-1);$('#wkn').onclick=()=>SBD&&goWk(SBD.week+1);
 loadSB();
+// the jumbotron always shows this week, even while the tab is looking at an older week
+setInterval(async()=>{if(!SBW)return;try{const d=await(await fetch('/api/scoreboard')).json();if(!d.error&&window.HQ&&HQ.scoreboard)HQ.scoreboard(d)}catch{}},3e4);
+async function lessons(){try{const L=await(await fetch('/api/lessons')).json();if(window.HQ&&HQ.lessons)HQ.lessons(L)}catch{}}lessons();setInterval(lessons,36e5);
 state();brief();report();setInterval(state,3e4);setInterval(brief,3e5);setInterval(report,3e5);
 </script></body></html>
