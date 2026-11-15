@@ -100,7 +100,7 @@ nav{margin-bottom:18px}
 
 /* ===== game mode (first person) ===== */
 #hqplay{background:var(--or);color:#1a0b02;font-size:10px;padding:10px 16px}
-#fpui{display:none}#hq3d.fp #fpui{display:block}
+#fpui{display:none}#hq3d.fp #fpui{display:block;position:absolute;inset:0;pointer-events:none;z-index:3}#fpui .todotab,#fpui .todop,#fpui .dlg,#fpui .pause{pointer-events:auto}#fpui .pause{z-index:4}#fpui .todotab,#fpui .todop{z-index:5}
 #hq3d.fp{position:fixed;inset:0;margin:0!important;height:100vh;width:100vw;z-index:50;border:0;border-radius:0;box-shadow:none;background:linear-gradient(#24346e,#3b5aa0 55%,#6d8fc9)}
 #hq3d.fp .hqbar,#hq3d.fp .hqhint{display:none}body.fpmode{overflow:hidden}
 #hq3d.fp #toasts{top:54px;bottom:auto;left:14px}
@@ -108,21 +108,22 @@ nav{margin-bottom:18px}
 .fphint{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-size:12px;color:#e6ecf5;background:#0d1226b0;padding:6px 12px;border-radius:3px;white-space:nowrap;pointer-events:none}
 .fpprompt{position:absolute;left:50%;top:58%;transform:translateX(-50%);font-family:'Press Start 2P',monospace;font-size:12px;color:#fff;background:#0d1226d9;border:2px solid var(--ac);padding:10px 14px;box-shadow:3px 3px 0 #000;pointer-events:none}
 .fpprompt b{background:var(--ac);color:#04251b;padding:2px 7px;margin-right:6px}
-.hotbar{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:0;background:#1b1b1bd0;border:3px solid #111;padding:3px}
-.slot{width:58px;height:58px;border:3px solid #8b8b8b;border-top-color:#5a5a5a;border-left-color:#5a5a5a;background:#3c3c3cd0;position:relative;display:grid;place-items:center;cursor:pointer;margin:0 1px}
-.slot.on{border:3px solid #fff;box-shadow:0 0 0 2px #000,inset 0 0 0 2px #000;transform:scale(1.08);z-index:2}
-.slot .si{font-size:28px;filter:drop-shadow(2px 2px 0 #000)}.slot.done .si{opacity:.35}.slot.done:after{content:'✔';position:absolute;right:4px;top:0;color:var(--ac);font-weight:900;text-shadow:1px 1px 0 #000}
-.slot .sn{position:absolute;left:4px;bottom:1px;font:10px 'Press Start 2P',monospace;color:#fff;text-shadow:1px 1px 0 #000}
-.slot .sb{position:absolute;right:3px;top:2px;width:15px;height:15px;background:var(--rd);color:#fff;font:9px 'Press Start 2P',monospace;display:grid;place-items:center}
-.hotname{position:absolute;bottom:92px;left:50%;transform:translateX(-50%);color:#fff;font-size:15px;font-weight:600;text-shadow:2px 2px 0 #000;white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
-.hotname span{color:#c9d3e6;font-weight:400;font-size:13px}.hotname.fade{animation:hn 4s forwards}@keyframes hn{0%,70%{opacity:1}100%{opacity:.55}}
+.todotab{position:absolute;top:70px;right:0;font-family:'Press Start 2P',monospace;font-size:11px;background:#0d1226ee;color:#fff;border:3px solid var(--wa);border-right:0;border-radius:6px 0 0 6px;padding:12px 14px;box-shadow:-3px 3px 0 #000;cursor:pointer}
+.todotab span{background:var(--rd);color:#fff;padding:2px 6px;margin-left:6px;border-radius:2px}.todotab span:empty{display:none}.todotab:hover{background:#1d2a40}
+.todop{position:absolute;top:60px;right:16px;width:min(440px,92vw);max-height:calc(100vh - 120px);overflow:auto;background:#0d1226f5;border:3px solid var(--wa);box-shadow:6px 6px 0 #000;padding:14px 16px}
+.todop[hidden]{display:none}.tph{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.tph b{font-family:'Press Start 2P',monospace;font-size:13px;color:var(--wa)}.tpx{background:#2a1220;color:#fff;padding:6px 10px}
+.todop ul{list-style:none;margin:0;padding:0}.todop li{display:flex;align-items:center;gap:12px;padding:10px 4px;border-bottom:1px solid var(--line);cursor:pointer}.todop li:last-child{border:0}
+.todop li:hover{background:#ffffff0d}.todop li.tgt{background:#5ef38c18;outline:2px solid #5ef38c55}
+.todop .ic{flex:0 0 34px;height:34px;display:grid;place-items:center;font-size:18px;border:2px solid var(--line);border-radius:4px;background:#060914}
+.todop .tx{flex:1;font-size:15px;line-height:1.4}.todop .tx small{display:block;color:var(--mu);font-size:12px}.todop li.done .tx{text-decoration:line-through;color:var(--mu)}
+.todop input{width:20px;height:20px;accent-color:var(--ac);cursor:pointer}.tpf{font-size:12px;margin-top:8px}.tpe{padding:14px 4px;color:var(--ac)}
 .dlg{position:absolute;left:50%;bottom:110px;transform:translateX(-50%);width:min(760px,94vw);background:#0d1226f2;border:3px solid #fff;box-shadow:6px 6px 0 #000;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
 .dlg[hidden]{display:none}.dhead{display:flex;align-items:center;gap:12px}.dpic{width:56px;height:56px;display:grid;place-items:center;font-size:32px;border:3px solid #000;box-shadow:3px 3px 0 #000}
 .dhead b{display:block;font-family:'Press Start 2P',monospace;font-size:13px}.drec{font-size:12px;color:var(--mu)}.dhead>div{flex:1}.dx{background:#2a1220;color:#fff;padding:6px 10px}
 .dlog{max-height:38vh;overflow:auto;font-size:16px;line-height:1.5;display:flex;flex-direction:column;gap:8px}.dl b{font-family:'Press Start 2P',monospace;font-size:10px;color:var(--wa)}.dl.me{color:#c9d3e6}.dl.me b{color:var(--ac)}
 .dchips{display:flex;gap:8px;flex-wrap:wrap}.dchips button{background:#1d2a40;color:var(--tx);font-size:12px;padding:6px 10px}
 .dask{display:flex;gap:8px}.dask input{flex:1;background:#060914;border:2px solid var(--line);color:var(--tx);padding:9px 10px;font:inherit;font-size:15px}.dask button{font-family:'Press Start 2P',monospace;font-size:10px}
-#fpui.talking .hotname,#fpui.talking .fpprompt,#fpui.talking .xh{display:none!important}
+#fpui.talking .fpprompt,#fpui.talking .xh,#fpui.talking .todotab,#fpui.talking .todop{display:none!important}
 .pause{position:absolute;inset:0;background:#05070dc0;display:grid;place-items:center}.pause[hidden]{display:none}
 .pbox{background:#0d1226;border:3px solid #fff;box-shadow:6px 6px 0 #000;padding:24px;display:flex;flex-direction:column;gap:12px;align-items:stretch;min-width:280px;text-align:center}
 .pbox b{font-family:'Press Start 2P',monospace;font-size:18px;margin-bottom:6px}.pbox button{font-family:'Press Start 2P',monospace;font-size:11px;padding:12px}
@@ -525,7 +526,7 @@ window.HQ={
   const was=GAME_ON;SBD=d;GAME_ON=!!(m&&d.status==='live'&&d.week===d.current)||!!window.FORCE_LIVE_GAME;if(GAME_ON&&!was)toast('🏟️ Your game is live in the stadium!');
   if(m)board.querySelector('span').textContent=d.status==='live'?`LIVE ${m.a.pts.toFixed(1)}-${m.b.pts.toFixed(1)}`:d.status==='final'?`FINAL ${m.a.pts.toFixed(1)}-${m.b.pts.toFixed(1)}`:`WK ${d.week} · ${m.win}% WIN`;
   paintOne('sb')},
- tasks(items){TASKS=(items||[]).slice(0,9);if(FP.on)renderHot()},
+ tasks(items){TASKS=items||[];if(FP.target&&!TASKS.some(x=>x.id===FP.target&&!x.done))FP.target=null;renderTodo()},
  lessons(L){LESS=L},
  enter:()=>enterFP(),exit:()=>exitFP(),
  _debug(o){Object.assign(FP,o);if(o.talk)openTalk(NPC.find(n=>n.k===o.talk))},
@@ -543,7 +544,7 @@ window.HQ={
   seenMoves=new Set(mv);
 }};
 
-// ===== GAME MODE: walk the facility in first person, talk to the staff, hotbar to-dos, live game in the stadium =====
+// ===== GAME MODE: walk the facility in first person, talk to the staff, a to-do tab, live game in the stadium =====
 // Solid boxes the player can't walk through, as [x0,x1,z0,z1] on the ground.
 const COL=[[-14.4,14.4,-8.5,-7.9],[-14.45,-13.95,-8.2,2.6],[13.95,14.45,-8.2,2.6],
  ...[-7,0,7].map(x=>[x-.2,x+.2,-8.2,-.85]),
@@ -554,13 +555,13 @@ const COL=[[-14.4,14.4,-8.5,-7.9],[-14.45,-13.95,-8.2,2.6],[13.95,14.45,-8.2,2.6
  [23.7,27.9,-12.4,8.2],[38.1,42.3,-12.4,8.2],[24.2,41.8,-16.2,-12],[24.5,25.5,-17.9,-16.9],[40.5,41.5,-17.9,-16.9],[23.3,42.7,-17.75,-17.05],
  [-30-3.1,-30+3.1,-7.7,-6.7],[-16.7,-16.3,3.8,4.2]];
 [[-18,-12],[-12,-15],[-6,-13],[0,-15.5],[6,-13],[12,-15],[18,-12],[-46,-10],[-47,-3],[-46,5],[-45,11],[-24,-12],[-34,-12],[49,-8],[49,2],[48,10],[-17,7],[17.5,6.5]].forEach(([x,z])=>COL.push([x-.4,x+.4,z-.4,z+.4]));
-const FP={on:false,x:0,z:9,y:0,vy:0,yaw:0,pitch:-.05,keys:new Set(),sel:0,talk:null,near:null,locked:false};
+const FP={list:false,target:null,on:false,x:0,z:9,y:0,vy:0,yaw:0,pitch:-.05,keys:new Set(),sel:0,talk:null,near:null,locked:false};
 const NPC=[{k:'hc',who:'Head Coach',icon:'🏈',acc:'#ff7a2f',p:coach},{k:'sc',who:'Scout',icon:'🎬',acc:'#c77dff',p:scout},{k:'an',who:'Analyst',icon:'📚',acc:'#5ef38c',p:analyst},
  {k:'mg',who:'Manager',icon:'📞',acc:'#3a9bff',p:mgr},{k:'ac',who:'Assistant Coach',icon:'🧑‍🏫',acc:'#ffd23f',p:intern}];
 let TASKS=[],LESS=null;
 const R=.35,hits=(x,z)=>COL.some(b=>x>b[0]-R&&x<b[1]+R&&z>b[2]-R&&z<b[3]+R)||Math.abs(x)>75||Math.abs(z)>40;
 function fpMove(dt){
-  if(FP.talk)return;
+  if(FP.talk||FP.list){FP.walk=false;return}
   const k=FP.keys,f=(k.has('KeyW')||k.has('ArrowUp')?1:0)-(k.has('KeyS')||k.has('ArrowDown')?1:0),st=(k.has('KeyD')?1:0)-(k.has('KeyA')?1:0);
   if(!FP.locked)FP.yaw+=((k.has('ArrowRight')?1:0)-(k.has('ArrowLeft')?1:0))*2.2*dt;else FP.yaw+=0;
   const sp=(k.has('ShiftLeft')||k.has('ShiftRight')?9:5.2)*dt,fx=Math.sin(FP.yaw),fz=-Math.cos(FP.yaw);
@@ -606,13 +607,14 @@ function liveGame(t,now){
   // line of scrimmage + first-down marker
   box(33,.09,G.los,8.6,.02,.08,'#3a9bff',.6);box(28.3,0,G.los-G.gain,.12,1.2,.12,'#ffd23f',.6);
 }
-// ---- markers over the staff: "!" when they have something for you, a green arrow over whoever owns the selected hotbar item ----
-function npcMarks(t){const sel=TASKS[FP.sel];NPC.forEach(n=>{const open=TASKS.some(x=>x.k===n.k&&!x.done),hy=(n.p.sit?2.1:2.45)+(n.p.y||0)+Math.sin(t*3)*.08;
+// ---- markers over the staff: "!" when they have something for you, a green arrow over whoever owns the task you clicked in the to-do list ----
+function npcMarks(t){const sel=TASKS.find(x=>x.id===FP.target);NPC.forEach(n=>{const open=TASKS.some(x=>x.k===n.k&&!x.done),hy=(n.p.sit?2.1:2.45)+(n.p.y||0)+Math.sin(t*3)*.08;
   if(sel&&!sel.done&&sel.k===n.k&&FP.on){box(n.p.x,hy+.45,n.p.z,.18,.4,.18,'#5ef38c',1);box(n.p.x,hy+.25,n.p.z,.42,.14,.42,'#5ef38c',1);box(n.p.x,hy+.12,n.p.z,.22,.12,.22,'#5ef38c',1)}
   else if(open){box(n.p.x,hy+.35,n.p.z,.16,.42,.16,'#ffd23f',1);box(n.p.x,hy+.1,n.p.z,.16,.14,.16,'#ffd23f',1)}})}
 // ---- game UI (built once) ----
-const ui=document.createElement('div');ui.id='fpui';ui.innerHTML=`<div class="xh">+</div><div class="fphint">WASD move · mouse look · SHIFT run · SPACE jump · E talk · 1-9 / wheel pick a to-do · F mark done · ESC pause</div>
-<div class="fpprompt"></div><div class="hotname"></div><div class="hotbar"></div>
+const ui=document.createElement('div');ui.id='fpui';ui.innerHTML=`<div class="xh">+</div><div class="fphint">WASD move · mouse look · SHIFT run · SPACE jump · E talk · T to-do list · ESC pause</div>
+<div class="fpprompt"></div><button class="todotab" title="Your to-do list (T)">📋 TO-DO<span></span></button>
+<div class="todop" hidden><div class="tph"><b>📋 TO-DO</b><button class="tpx" title="Close (T)">✕</button></div><ul></ul><div class="tpf mu">Tick the box when it's done · click a task and a green arrow points to that staffer</div></div>
 <div class="dlg" hidden><div class="dhead"><span class="dpic"></span><div><b class="dname"></b><span class="drec"></span></div><button class="dx" title="Close (Esc)">✕</button></div>
 <div class="dlog"></div><div class="dchips"><button data-q="What should I do right now?">What should I do?</button><button data-q="Why? Walk me through it.">Why?</button><button data-q="What else are you watching?">Anything else?</button></div>
 <form class="dask"><input placeholder="Say something…" autocomplete="off"><button>SAY</button></form></div>
@@ -620,11 +622,15 @@ const ui=document.createElement('div');ui.id='fpui';ui.innerHTML=`<div class="xh
 wrap.appendChild(ui);
 const $u=q=>ui.querySelector(q),dlg=$u('.dlg'),dlog=$u('.dlog'),pause=$u('.pause');
 const strip=h=>{const d=document.createElement('div');d.innerHTML=h;return d.textContent.replace(/\s+/g,' ').trim()};
-function renderHot(){const hb=$u('.hotbar');hb.innerHTML=Array.from({length:9},(_,i)=>{const x=TASKS[i],n=x&&NPC.find(q=>q.k===x.k);
-  return `<div class="slot ${i===FP.sel?'on':''} ${x&&x.done?'done':''}" data-i="${i}">${x?`<span class="si">${n?n.icon:'•'}</span>${x.tag&&!x.done?'<span class="sb">!</span>':''}`:''}<span class="sn">${i+1}</span></div>`}).join('');
-  const x=TASKS[FP.sel],nm=$u('.hotname');nm.innerHTML=x?`${x.done?'✅ ':''}${esc(strip(x.html))} <span>· ${x.done?'done':'go see the '+(NPC.find(q=>q.k===x.k)||{}).who+' · F to mark done'}</span>`:'<span>Nothing in this slot</span>';nm.classList.remove('fade');void nm.offsetWidth;nm.classList.add('fade')}
+function renderTodo(){const open=TASKS.filter(x=>!x.done).length;$u('.todotab span').textContent=open||'';
+  $u('.todop ul').innerHTML=TASKS.length?TASKS.map(x=>{const n=NPC.find(q=>q.k===x.k)||{};return `<li class="${x.done?'done':''} ${FP.target===x.id?'tgt':''}" data-id="${esc(x.id)}"><span class="ic" style="border-color:${n.acc||'#2c3a66'}">${n.icon||'•'}</span><span class="tx">${esc(strip(x.html))}<small>${x.done?'done':'go see the '+(n.who||'staff')}${x.tag&&!x.done?' · '+x.tag:''}</small></span><input type="checkbox" ${x.done?'checked':''} title="Mark done"></li>`}).join(''):'<li class="tpe">✅ All clear. Nothing to do right now.</li>'}
+function toggleList(v){FP.list=v==null?!FP.list:v;$u('.todop').hidden=!FP.list;if(FP.list){FP.keys.clear();pause.hidden=true;if(document.pointerLockElement)document.exitPointerLock();renderTodo()}else if(FP.on&&!FP.talk)lockIt()}
+$u('.todotab').onclick=()=>toggleList();$u('.tpx').onclick=()=>toggleList(false);
+$u('.todop').addEventListener('click',e=>{const li=e.target.closest('li[data-id]');if(!li)return;const x=TASKS.find(q=>q.id===li.dataset.id);if(!x)return;
+  if(e.target.matches('input')){if(window.toggleTask){window.toggleTask(x.id);toast(x.done?'↩️ Back on the list':'✅ Done: '+clip(strip(x.html),60))}return}
+  FP.target=FP.target===x.id?null:x.id;renderTodo()});
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-ui.addEventListener('click',e=>{const sl=e.target.closest('.slot');if(sl){FP.sel=+sl.dataset.i;renderHot()}});
+
 // ---- talking ----
 const HIST={};
 const clip=(s,n)=>{s=String(s||'');return s.length>n?s.slice(0,n).replace(/\s+\S*$/,'')+'…':s};
@@ -641,7 +647,7 @@ function greet(k){const b=REP||{},st=REPstate||{},mine=TASKS.filter(x=>x.k===k&&
 function say(who,text,cls){const d=document.createElement('div');d.className='dl '+(cls||'');d.innerHTML=who?`<b>${esc(who)}:</b> <span></span>`:'<span></span>';dlog.appendChild(d);
   const sp=d.querySelector('span');if(cls==='me')sp.textContent=text;else typeIn(sp,text);dlog.scrollTop=dlog.scrollHeight;return sp}
 function typeIn(sp,text){const t0=performance.now();clearInterval(sp._iv);sp._iv=setInterval(()=>{const n=Math.ceil((performance.now()-t0)/7);sp.textContent=text.slice(0,n);dlog.scrollTop=dlog.scrollHeight;if(n>=text.length)clearInterval(sp._iv)},16)}
-function openTalk(n){FP.talk=n;FP.keys.clear();if(document.pointerLockElement)document.exitPointerLock();
+function openTalk(n){if(FP.list){FP.list=false;$u('.todop').hidden=true}FP.talk=n;FP.keys.clear();if(document.pointerLockElement)document.exitPointerLock();
   $u('.dpic').textContent=n.icon;$u('.dpic').style.background=n.acc;$u('.dname').textContent=n.who.toUpperCase();$u('.dname').style.color=n.acc;
   const r=LESS&&LESS.record&&LESS.record[n.who];$u('.drec').textContent=r?`film room: ${r.right}/${r.calls} calls right lately`:'';
   dlog.innerHTML='';(HIST[n.k]||[]).slice(-6).forEach(m=>{const d=document.createElement('div');d.className='dl '+(m.role==='user'?'me':'');d.innerHTML=m.role==='user'?`<b>YOU:</b> ${esc(m.text)}`:`<b>${esc(n.who)}:</b> ${esc(m.text)}`;dlog.appendChild(d)});
@@ -659,23 +665,23 @@ $u('.dask input').addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventD
 // ---- enter / exit / pause ----
 function lockIt(){try{const p=cv.requestPointerLock&&cv.requestPointerLock();if(p&&p.catch)p.catch(()=>{if(FP.on&&!FP.talk)pause.hidden=false})}catch{}}
 document.addEventListener('pointerlockerror',()=>{if(FP.on&&!FP.talk)pause.hidden=false});
-function enterFP(){if(FP.on)return;FP.on=true;wrap.classList.add('fp');document.body.classList.add('fpmode');Object.assign(FP,{x:0,z:9.5,yaw:0,pitch:-.04,y:0,vy:0});renderHot();lockIt();toast('🎮 Walk in through the front doors. Staff with a yellow ! have something for you.')}
-function exitFP(){FP.on=false;FP.talk=null;dlg.hidden=true;pause.hidden=true;wrap.classList.remove('fp');document.body.classList.remove('fpmode');if(document.pointerLockElement)document.exitPointerLock();FP.keys.clear()}
+function enterFP(){if(FP.on)return;FP.on=true;wrap.classList.add('fp');document.body.classList.add('fpmode');Object.assign(FP,{x:0,z:9.5,yaw:0,pitch:-.04,y:0,vy:0,list:false});$u('.todop').hidden=true;renderTodo();lockIt();toast('🎮 Walk in through the front doors. Staff with a yellow ! have something for you.')}
+function exitFP(){FP.on=false;FP.talk=null;FP.list=false;$u('.todop').hidden=true;dlg.hidden=true;pause.hidden=true;wrap.classList.remove('fp');document.body.classList.remove('fpmode');if(document.pointerLockElement)document.exitPointerLock();FP.keys.clear()}
 $u('.pres').onclick=()=>{pause.hidden=true;lockIt()};$u('.pex').onclick=exitFP;
-document.addEventListener('pointerlockchange',()=>{FP.locked=document.pointerLockElement===cv;if(FP.on&&!FP.locked&&!FP.talk)pause.hidden=false;if(FP.locked)pause.hidden=true});
+document.addEventListener('pointerlockchange',()=>{FP.locked=document.pointerLockElement===cv;if(FP.on&&!FP.locked&&!FP.talk&&!FP.list)pause.hidden=false;if(FP.locked)pause.hidden=true});
 document.addEventListener('mousemove',e=>{if(!FP.on||!FP.locked||FP.talk)return;FP.yaw+=e.movementX*.0024;FP.pitch=clamp(FP.pitch-e.movementY*.0024,-1.35,1.35)});
-cv.addEventListener('click',()=>{if(FP.on&&!FP.locked&&!FP.talk)lockIt()});
-document.addEventListener('keydown',e=>{if(!FP.on||FP.talk)return;if(e.target.closest&&e.target.closest('input,textarea'))return;
+cv.addEventListener('click',()=>{if(FP.on&&!FP.locked&&!FP.talk){if(FP.list)toggleList(false);else lockIt()}});
+document.addEventListener('keydown',e=>{if(!FP.on||FP.talk)return;if(e.target.closest&&e.target.closest('input[type=text],input:not([type]),textarea'))return;
+  if(FP.list){if(e.code==='KeyT'||e.code==='Escape'){e.preventDefault();toggleList(false)}return}
   const c=e.code;FP.keys.add(c);
   if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(c))e.preventDefault();
   if(c==='Space'&&FP.y===0)FP.vy=6;
   if(c==='KeyE'&&FP.near)openTalk(FP.near);
-  if(/^Digit[1-9]$/.test(c)){FP.sel=+c.slice(5)-1;renderHot()}
-  if(c==='KeyF'){const x=TASKS[FP.sel];if(x&&window.toggleTask){window.toggleTask(x.id);toast(x.done?'↩️ Back on the list':'✅ Done: '+clip(strip(x.html),60))}}
+  if(c==='KeyT')toggleList();
   if(c==='Escape'&&!FP.locked)exitFP()});
 document.addEventListener('keyup',e=>FP.keys.delete(e.code));
 window.addEventListener('blur',()=>FP.keys.clear());
-cv.addEventListener('wheel',e=>{if(!FP.on)return;e.preventDefault();e.stopImmediatePropagation();FP.sel=(FP.sel+(e.deltaY>0?1:8))%9;renderHot()},{capture:true,passive:false});
+
 // drag to look when the mouse isn't captured (and on touch screens)
 let fpDrag=null;cv.addEventListener('pointerdown',e=>{if(FP.on&&!FP.locked)fpDrag={x:e.clientX,y:e.clientY}},true);
 document.addEventListener('pointermove',e=>{if(!fpDrag)return;FP.yaw+=(e.clientX-fpDrag.x)*.005;FP.pitch=clamp(FP.pitch-(e.clientY-fpDrag.y)*.004,-1.35,1.35);fpDrag={x:e.clientX,y:e.clientY}});
