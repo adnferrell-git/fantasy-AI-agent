@@ -584,6 +584,13 @@
      "inj": null
     },
     {
+     "id": "12474",
+     "name": "Woody Marks",
+     "pos": "RB",
+     "team": "HOU",
+     "inj": null
+    },
+    {
      "id": "12489",
      "name": "RJ Harvey",
      "pos": "RB",
@@ -596,13 +603,6 @@
      "pos": "TE",
      "team": "CHI",
      "inj": null
-    },
-    {
-     "id": "13276",
-     "name": "Omar Cooper Jr.",
-     "pos": "WR",
-     "team": "NYJ",
-     "inj": "Questionable"
     },
     {
      "id": "13281",
@@ -754,11 +754,11 @@
      "inj": null
     },
     {
-     "id": "12474",
-     "name": "Woody Marks",
-     "pos": "RB",
-     "team": "HOU",
-     "inj": null
+     "id": "13276",
+     "name": "Omar Cooper Jr.",
+     "pos": "WR",
+     "team": "NYJ",
+     "inj": "Questionable"
     },
     {
      "id": "13414",
