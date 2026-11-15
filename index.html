@@ -240,7 +240,12 @@ function bake(m,c,e){const k=typeof c==='string'?col(c):c;for(const i of X){cons
   SP.push(m[0]*x+m[4]*y+m[8]*z+m[12],m[1]*x+m[5]*y+m[9]*z+m[13],m[2]*x+m[6]*y+m[10]*z+m[14]);
   const nx=m[0]*a+m[4]*b+m[8]*d,ny=m[1]*a+m[5]*b+m[9]*d,nz=m[2]*a+m[6]*b+m[10]*d,l=Math.hypot(nx,ny,nz)||1;SN.push(nx/l,ny/l,nz/l);SC.push(k[0],k[1],k[2],e)}}
 const v=(x,y,z,w,h,d,c,e=0)=>bake(boxM(x,y,z,w,h,d),c,e);
+const vr=(x,y,z,w,h,d,a,c,e=0)=>bake(mul(T(x,y,z),mul(Ry(a),boxM(0,0,0,w,h,d))),c,e);   // same, turned by angle a around y
 const F=.15; // building floor height
+// DYNASTY brand: deep navy, silver, one bright orange accent; the crest is a chunky "D"
+const SX=100,SZ=-55,NAVY='#142850',SILV='#c0c8d4',ORNG='#ff7a2f',CONC='#8d94a3',SUY=9,STEEL='#b9c2cf';
+const DG=['1110','1001','1001','1001','1110'];
+const crest=(cx,cz,s,c,bg,y=.075)=>{v(cx,y,cz,6*s,.02,7*s,bg);DG.forEach((row,r)=>[...row].forEach((b,cc)=>{if(b==='1')v(cx+(cc-1.5)*s*1.2,y+.015,cz+(r-2)*s*1.2,s*1.2,.02,s*1.2,c)}))};
 const ROOMS=[{k:'hc',name:'HEAD COACH',who:'Head Coach',cx:-10.5,acc:'#ff7a2f',dk:'#8a3a12',rug:'#5a2a14'},
  {k:'sc',name:'SCOUT',who:'Scout',cx:-3.5,acc:'#b06ce0',dk:'#4a2470',rug:'#2a1d3d'},
  {k:'an',name:'ANALYST',who:'Analyst',cx:3.5,acc:'#2ecc71',dk:'#1c6b40',rug:'#1d3d2a'},
@@ -254,10 +259,10 @@ for(let x=-100;x<=100;x+=5)v(x,0,19,2,.06,.18,'#ffd23f');
 
 // front office building
 v(0,0,-3,29.2,F,11.2,'#9aa1ad');                                                // foundation
-v(0,F,-8.2,28.8,3.6,.4,'#e6dcc6');                                              // back wall
-[-14.2,14.2].forEach(x=>{v(x,F,-2.9,.4,3.6,10.6,'#a4513f');v(x,F+3.6,-2.9,.6,.25,11,'#3a3f52')});
-v(0,F+3.6,-8.2,29.2,.25,.6,'#3a3f52');
-[-7,0,7].forEach(x=>{v(x,F,-4.5,.3,3.6,7,'#d8cfb8');v(x,F+3.6,-4.5,.5,.2,7,'#3a3f52')});
+v(0,F,-8.2,28.8,3.6,.4,'#e9edf2');                                              // back wall
+[-14.2,14.2].forEach(x=>{v(x,F,-2.9,.4,3.6,10.6,STEEL);v(x,F+3.6,-2.9,.6,.25,11,NAVY);v(x+Math.sign(x)*.21,F+3.1,-2.9,.02,.18,10.6,ORNG,.4)});
+v(0,F+3.6,-8.2,29.2,.25,.6,NAVY);
+[-7,0,7].forEach(x=>{v(x,F,-4.5,.3,3.6,7,'#dfe4ea');v(x,F+3.6,-4.5,.5,.2,7,NAVY)});
 // glass fronts: frames (the glass itself is drawn in the see-through pass)
 v(0,F+3.35,-1,28,.25,.25,'#2a3245');
 ROOMS.forEach(r=>{v(r.cx,F,-1,7,.25,.25,'#2a3245');[-3.5,-1.2,1.2,3.5].forEach(o=>v(r.cx+o,F,-1,.14,3.6,.25,'#2a3245'));
@@ -265,15 +270,44 @@ ROOMS.forEach(r=>{v(r.cx,F,-1,7,.25,.25,'#2a3245');[-3.5,-1.2,1.2,3.5].forEach(o
   v(r.cx,F,-4.5,6,.02,5,r.rug);v(r.cx,F,-7.95,6.7,1,.1,r.dk);v(r.cx,F+1,-7.95,6.7,.12,.12,r.acc,.4)});
 // hallway: tiles, front wall, pillars, entrance
 for(let i=0;i<28;i++)[-.35,.75,1.85].forEach((z,j)=>v(-13.5+i,F,z,1,.02,1.1,(i+j)%2?'#c9ced8':'#aab2c0'));
-v(-7.85,F,2.4,12.3,.9,.3,'#a4513f');v(7.85,F,2.4,12.3,.9,.3,'#a4513f');
-[-7,7].forEach(x=>v(x,F,2.4,.5,3.6,.5,'#a4513f'));[-1.6,1.6].forEach(x=>v(x,F,2.4,.4,3.6,.4,'#a4513f'));
-v(0,F+3.6,2.4,29.2,.35,.5,'#3a3f52');v(0,F+3.6,3.4,4.2,.25,2.2,'#ff7a2f');v(0,0,3.1,4,.1,1,'#9aa1ad');v(0,F,2.1,2.6,.03,.7,'#ff7a2f');
+v(-7.85,F,2.4,12.3,.9,.3,NAVY);v(7.85,F,2.4,12.3,.9,.3,NAVY);v(-7.85,F+.9,2.4,12.3,.06,.36,SILV);v(7.85,F+.9,2.4,12.3,.06,.36,SILV);
+[-7,7].forEach(x=>v(x,F,2.4,.5,3.6,.5,SILV));[-1.6,1.6].forEach(x=>v(x,F,2.4,.4,3.6,.4,SILV));
+[-12.6,-10.2,-8.6,-5.4,-3.2,3.2,5.4,8.6,10.2,12.6].forEach(x=>v(x,F+.9,2.4,.1,2.7,.12,'#2a3245'));   // mullions of the hallway's glass front
+v(0,F+3.6,2.4,29.2,.35,.5,NAVY);v(0,F+3.72,2.66,29.2,.12,.02,ORNG,.4);v(0,0,3.1,4,.1,1,'#9aa1ad');v(0,F,2.1,2.6,.03,.7,ORNG);
 [[-13.4,1.8],[13.4,1.8]].forEach(([x,z])=>{v(x,F,z,.7,.6,.7,'#8b5a2b');v(x,F+.6,z,.9,.9,.9,'#2d7a3a');v(x,F+1.5,z,.5,.4,.5,'#3a9447')});
 v(13.4,F,-.3,.6,1.1,.6,'#e0e0e0');v(13.4,F+1.1,-.3,.45,.6,.45,'#8fd3ff',.3);         // water cooler
 // sign on the roofline
-v(0,F+3.6,-8.6,10.4,2.6,.3,'#151a2b');v(0,F+3.6,-8.6,10.6,.15,.4,'#ff7a2f',.5);
+v(0,F+3.6,-8.6,10.4,2.6,.3,NAVY);v(0,F+3.6,-8.6,10.6,.15,.4,ORNG,.5);v(0,F+6.2,-8.6,10.6,.12,.4,SILV);
 const GL={D:['110','101','101','101','110'],Y:['101','101','010','010','010'],N:['101','111','111','111','101'],A:['010','101','111','101','101'],S:['111','100','111','001','111'],T:['111','010','010','010','010']};
-[...'DYNASTY'].forEach((ch,L)=>GL[ch].forEach((row,r)=>[...row].forEach((b,c)=>{if(b==='1')v(-4.05+(L*4+c)*.3+.15,F+4.1+(4-r)*.3,-8.42,.3,.3,.1,'#ffb84d',.9)})));
+[...'DYNASTY'].forEach((ch,L)=>GL[ch].forEach((row,r)=>[...row].forEach((b,c)=>{if(b==='1')v(-4.05+(L*4+c)*.3+.15,F+4.1+(4-r)*.3,-8.42,.3,.3,.1,'#f2f5f9',.9)})));
+
+// ===== main office tower behind the rooms: three floors of glass and steel, the DYNASTY crest on the roof =====
+const TWZ=-13.45,TWD=9.1,TWW=32;
+for(let f=0;f<3;f++){const y=f*3.4;
+  v(0,y,TWZ,TWW,.8,TWD,STEEL);v(0,y+.8,TWZ,TWW-.3,2.6,TWD-.3,'#4f86c6',.25);                        // steel band, glass band
+  for(let x=-15;x<=15;x+=2)v(x,y+.8,TWZ+TWD/2-.1,.14,2.6,.14,'#2a3245');
+  for(let z=TWZ-TWD/2+1.2;z<TWZ+TWD/2;z+=2)[-TWW/2+.1,TWW/2-.1].forEach(x=>v(x,y+.8,z,.14,2.6,.14,'#2a3245'))}
+v(0,10.2,TWZ,TWW+.4,.5,TWD+.4,NAVY);v(0,10.45,TWZ+TWD/2+.21,TWW+.4,.12,.02,ORNG,.5);v(0,10.7,TWZ,TWW-1,.05,TWD-1,'#8d94a3');
+crest(0,TWZ,.95,ORNG,SILV,10.75);
+[[-12.5,-16],[12.5,-16],[-12.5,-11],[12.5,-11]].forEach(([x,z])=>{v(x,10.7,z,2.2,.9,1.6,'#9aa1ad');v(x,11.6,z,1.4,.1,1,'#6b6b6b')});   // rooftop units
+// ===== curved glass atrium: the tall main lobby in front of the hallway doors =====
+const AR=3.4,AZ=2.4,AH=6.2,AN=10,ATR=[];
+for(let i=0;i<AN;i++){const a0=i/AN*Math.PI,a1=(i+1)/AN*Math.PI,p0=[AR*Math.cos(a0),AZ+AR*Math.sin(a0)],p1=[AR*Math.cos(a1),AZ+AR*Math.sin(a1)];
+  const s={mx:(p0[0]+p1[0])/2,mz:(p0[1]+p1[1])/2,len:Math.hypot(p1[0]-p0[0],p1[1]-p0[1]),ang:Math.atan2(-(p1[1]-p0[1]),p1[0]-p0[0]),door:i===4||i===5,p0,p1};ATR.push(s);
+  vr(s.mx,AH,s.mz,s.len+.12,.55,.35,s.ang,NAVY);vr(s.mx,AH+.2,s.mz,s.len+.12,.12,.37,s.ang,ORNG,.4);           // roof ring + accent
+  if(s.door)vr(s.mx,2.7,s.mz,s.len,.25,.3,s.ang,ORNG,.3)}                                                   // lintel over the doors
+for(let i=0;i<=AN;i++){const a=i/AN*Math.PI,y0=i===AN/2?2.95:0;v(AR*Math.cos(a),y0,AZ+AR*Math.sin(a),.18,AH-y0,.18,SILV)}       // steel fins
+for(let i=1;i<AN;i+=2){const a=i/AN*Math.PI;vr(AR/2*Math.cos(a),AH+.35,AZ+AR/2*Math.sin(a),AR,.1,.12,-a,SILV)}                 // roof ribs
+for(let z=0;z<AR;z+=.5){const hw=Math.sqrt(AR*AR-(z+.25)*(z+.25));v(0,0,AZ+z+.25,2*hw,.06,.5,(z*2)%2?'#d9dee6':'#e6e9ef')}    // lobby floor
+crest(0,AZ+2.2,.28,ORNG,NAVY,.06);
+v(2,0,3.9,.8,1,1.4,NAVY);v(2,1,3.9,.95,.08,1.55,SILV);v(2.35,.35,3.9,.12,.2,1.2,ORNG,.4);                        // front desk
+v(-2.1,0,3.9,.8,.5,.8,'#5b6170');v(-2.1,.5,3.9,.9,1,.9,'#2d7a3a');v(-2.1,1.5,3.9,.5,.5,.5,'#3a9447');                // planter
+// ===== crest plaza out front: round paved plaza with the crest inlaid, planters, hedges and flower beds =====
+const PZ=10.3,PR=5.2,disc=(r,y,h,c1,c2)=>{for(let z=-r;z<r;z+=.5){const m=Math.abs(z+.25),hw=Math.sqrt(Math.max(0,r*r-m*m));if(hw>.2)v(0,y,PZ+z+.25,2*hw,h,.5,c2&&Math.floor(z*2)%2?c2:c1)}};
+disc(PR,0,.05,'#c9ced8','#d2d6de');disc(PR-.9,0,.06,NAVY);disc(PR-1.3,0,.065,'#dfe3ea','#e8ebf0');crest(0,PZ,.55,ORNG,NAVY,.065);
+[[-4.1,PZ-3.2],[4.1,PZ-3.2],[-4.1,PZ+3.2],[4.1,PZ+3.2]].forEach(([x,z])=>{v(x,0,z,1.1,.55,1.1,'#5b6170');v(x,.55,z,1.2,.7,1.2,'#2f8a40');v(x,1.25,z,.6,.3,.6,ORNG,.15)});
+[[-13,-4.5],[4.5,13]].forEach(([a,b])=>{v((a+b)/2,0,3.4,b-a,.65,.7,'#2d7a3a');for(let x=a+.4;x<b;x+=.8)v(x,0,4.15,.5,.3,.5,['#ff7a2f','#ffd23f','#f2f5f9','#e74c3c'][Math.round((x-a)/.8)%4])});
+for(let x=-50;x<=50;x+=4)v(x,0,10.6,2,.025,9.8,'#55a84d');                                                        // mowing stripes
 // Head Coach room: whiteboard of plays, desk
 const hc=ROOMS[0].cx;
 v(hc-.5,F+1.12,-7.93,4.6,2.32,.08,'#9aa1ad');v(hc-.5,F+1.06,-7.84,4.4,.06,.14,'#9aa1ad');   // whiteboard frame + marker tray (the board is a report screen)
@@ -299,16 +333,29 @@ v(mg+2.9,F,-3.6,.8,1.3,1.6,'#5b3a1e');v(mg+2.9,F+1.3,-3.6,.4,.2,.4,'#e6b422');v(
 v(mg-3,F,-7.4,.6,.5,.6,'#8b5a2b');v(mg-3,F+.5,-7.4,.8,1,.8,'#2d7a3a');
 
 // practice field (left of the building)
-for(let i=0;i<10;i++)v(-39+i*2,0,0,2,.08,12,i===0?'#ff7a2f':i===9?'#1d4ed8':i%2?'#2f9a46':'#3bb453');
+for(let i=0;i<10;i++)v(-39+i*2,0,0,2,.08,12,i===0?'#ff7a2f':i===9?NAVY:i%2?'#2f9a46':'#3bb453');
 [-36,-32,-28,-24].forEach(x=>v(x,.08,0,.14,.02,12,'#f4f4f4'));[-5.85,5.85].forEach(z=>v(-30,.08,z,20,.02,.14,'#f4f4f4'));
 [-40.6,-19.4].forEach(x=>{v(x,0,0,.25,2.2,.25,'#ffd23f');v(x,2.2,0,.25,.25,3.2,'#ffd23f');v(x,2.2,-1.5,.25,2.2,.25,'#ffd23f');v(x,2.2,1.5,.25,2.2,.25,'#ffd23f')});
-v(-30,0,-7.2,6,.5,.8,'#c0392b');v(-30,.5,-7.55,6,.6,.15,'#c0392b');
+v(-30,0,-7.2,6,.5,.8,NAVY);v(-30,.5,-7.55,6,.6,.15,NAVY);v(-30,.85,-7.47,6,.12,.02,ORNG,.4);
 v(-22.5,0,4.5,2.6,.3,.8,'#555555');[-23.2,-21.8].forEach(x=>v(x,.3,4.5,.7,1.2,.6,'#ff7a2f'));
 [[-34,-6.6],[-26,-6.6],[-38,6.6],[-22,6.6]].forEach(([x,z])=>v(x,0,z,.35,.45,.35,'#ff7a2f'));
+crest(-30,0,.45,ORNG,NAVY,.08);
+// second outdoor practice field (further west) + navy windscreens with the orange stripe behind both fields
+for(let i=0;i<10;i++)v(-69+i*2,0,0,2,.08,12,i===0?ORNG:i===9?NAVY:i%2?'#2f9a46':'#3bb453');
+[-66,-62,-58,-54].forEach(x=>v(x,.08,0,.14,.02,12,'#f4f4f4'));[-5.85,5.85].forEach(z=>v(-60,.08,z,20,.02,.14,'#f4f4f4'));crest(-60,0,.45,ORNG,NAVY,.08);
+[-70.6,-49.4].forEach(x=>{v(x,0,0,.25,2.2,.25,'#ffd23f');v(x,2.2,0,.25,.25,3.2,'#ffd23f');v(x,2.2,-1.5,.25,2.2,.25,'#ffd23f');v(x,2.2,1.5,.25,2.2,.25,'#ffd23f')});
+[-60,-30].forEach(x=>{v(x,0,-8.4,20,1.6,.12,NAVY);v(x,1.05,-8.33,20,.16,.02,ORNG,.4);[-6,0,6].forEach(o=>v(x+o,.35,-8.33,.6,.6,.02,SILV))});
+// ===== indoor practice dome: a stepped barrel vault in silver with navy ribs, behind the practice fields =====
+const DX=-30,DZ=-24,DL=26,DW=9,DH=8.5,DN=12,dhw=j=>DW*Math.sqrt(1-Math.pow((j+.5)/DN,2));
+for(let j=0;j<DN;j++){const y=j*DH/DN,hw=dhw(j);v(DX,y,DZ,DL,DH/DN+.01,2*hw,j%4===3?'#dfe4ea':'#eef1f5');
+  for(let x=DX-DL/2+1;x<DX+DL/2;x+=4)v(x,y,DZ,.3,DH/DN+.01,2*hw+.14,NAVY);
+  if(j===2)[-1,1].forEach(sd=>{for(let x=DX-DL/2+3;x<DX+DL/2-1;x+=4)v(x,y+.1,DZ+sd*(hw+.03),2.6,.45,.04,'#8fd3ff',.45)})}  // window strip
+v(DX,0,DZ,DL+.3,.5,2*DW+.3,NAVY);v(DX,.5,DZ,DL+.3,.1,2*DW+.3,ORNG,.4);
+crest(DX,DZ,.6,ORNG,NAVY,DH-.05);
+v(DX+DL/2+.1,0,DZ,.2,2.6,4,'#2a3245');v(DX+DL/2+.15,2.6,DZ,.2,.4,4.4,ORNG,.4);v(DX+DL/2+2,0,DZ,4,.04,4,'#c2b8a3');
 // ===== THE DYNASTY STADIUM: a full NFL-style bowl east of the HQ =====
 // Lower bowl, a suite level on the west side (GM suite + staff suites, elevator to the field), upper deck,
 // open south end with the tunnel, jumbotrons at both ends. DYNASTY colors: deep navy, silver, orange.
-const SX=100,SZ=-55,NAVY='#142850',SILV='#c0c8d4',ORNG='#ff7a2f',CONC='#8d94a3',SUY=9;
 // field: 50 between the goal lines + 5-deep end zones, stripes every 5
 v(SX,-.02,SZ,46,.04,82,'#2f8a40');
 for(let i=0;i<10;i++)v(SX,0,SZ-25+i*5+2.5,26,.06,5,i%2?'#2f9a46':'#37a84f');
@@ -317,8 +364,6 @@ for(let i=0;i<=10;i++)v(SX,.07,SZ-25+i*5,26,.02,.16,'#f4f4f4');
 [-13,13].forEach(x=>v(SX+x,.07,SZ,.16,.02,60,'#f4f4f4'));
 for(let i=0;i<50;i++)[-4,4].forEach(x=>v(SX+x,.07,SZ-25+i+.5,.5,.02,.08,'#f4f4f4'));
 // DYNASTY crest at midfield and in the end zones (a "D")
-const DG=['1110','1001','1001','1001','1110'];
-const crest=(cx,cz,s,c,bg)=>{v(cx,.075,cz,6*s,.02,7*s,bg);DG.forEach((row,r)=>[...row].forEach((b,cc)=>{if(b==='1')v(cx+(cc-1.5)*s*1.2,.09,cz+(r-2)*s*1.2,s*1.2,.02,s*1.2,c)}))};
 crest(SX,SZ,1,ORNG,NAVY);
 ['DYNASTY'].forEach(()=>{for(let i=0;i<7;i++){v(SX-9+i*3,.08,SZ-27.5,1.6,.02,2.4,SILV);v(SX-9+i*3,.08,SZ+27.5,1.6,.02,2.4,NAVY)}});
 // goal posts
@@ -393,8 +438,16 @@ for(let r=0;r<12;r++){const y=SUY+4+.78*(r+1)+.12,d=17+r+.5;
   for(let x=-37-r;x<=37+r;x+=1.6)fan(SX+x,y,SZ-37-d,false)}
 // light towers
 [[-42,-8],[-42,8]].forEach(([x,z])=>{v(x,0,z,.45,9,.45,'#6b6b6b');v(x,9,z,2,1,1,'#fff6c4',1)});
-// trees and flag pole
-[[-18,-12],[-12,-15],[-6,-13],[0,-15.5],[6,-13],[12,-15],[18,-12],[-46,-10],[-47,-3],[-46,5],[-45,11],[-24,-12],[-34,-12],[44,-14],[46,4],[-17,7],[17.5,6.5],[-55,27],[55,27],[-60,-20],[30,-24],[-10,-24],[10,-26],[-62,2]]
+// ===== parking lot east of the HQ: striped stalls, parked cars, light poles =====
+const CARC=['#e74c3c','#f2f5f9','#3a9bff','#1b1e24',SILV,'#ffd23f',NAVY,'#2ecc71'],PCARS=[],PLIGHT=[[27,-8],[34,-8],[41,-8]];
+v(34,0,-8,26,.04,18,'#2d2f36');v(34,0,8.5,4,.035,15,'#34363e');
+[-14.2,-1.8].forEach((rz,ri)=>{for(let i=0;i<9;i++){const x=23.6+i*2.6;v(x-1.3,.04,rz,.08,.02,3.4,'#f4f4f4');if(i===8)v(x+1.3,.04,rz,.08,.02,3.4,'#f4f4f4');
+  if((i*7+ri*3)%5!==1){const c=CARC[(i*3+ri*5)%CARC.length];PCARS.push([x,rz]);v(x,.25,rz,1.5,.6,3,c);v(x,.85,rz+(ri?-.2:.2),1.3,.5,1.6,'#1d2a40');
+    [-1,1].forEach(a=>[-1,1].forEach(b=>v(x+a*.7,0,rz+b*1,.2,.5,.55,'#111')))}}});
+PLIGHT.forEach(([x,z])=>{v(x,0,z,.25,6,.25,'#6b6b6b');v(x,6,z,1.6,.3,.7,'#fff6c4',1);v(x,0,z,.6,.3,.6,'#9aa1ad')});
+// trees and flag pole (TREES are solid in game mode too)
+const TREES=[[-18,-12],[18,-12],[-46,-10],[-47,-3],[-46,5],[-45,11],[-24,-12],[-34,-12],[46,4],[-17,7],[17.5,6.5],[24,11.5],[44,11.5],[52,11.5],[60,11.5],[68,11.5],[-12,-22],[12,-22]];
+[...TREES,[-55,27],[55,27],[-60,-20],[30,-24],[-10,-24],[10,-26],[-75,-14],[-22,-38],[-38,-38]]
  .forEach(([x,z],i)=>{v(x,0,z,.5,1.4,.5,'#6b4423');v(x,1.4,z,2.2,1.6,2.2,i%2?'#2d7a3a':'#327f3c');v(x,3,z,1.4,1,1.4,i%3?'#3a9447':'#2f8a40')});
 v(-16.5,0,4,.18,7,.18,'#cccccc');v(-16.5,7,4,.3,.3,.3,'#ffd23f',.6);
 const sBuf={p:mkbuf(SP),n:mkbuf(SN),c:mkbuf(SC),count:SP.length/3};
@@ -550,8 +603,8 @@ function person(c,t){
 function path(pts){const seg=[];let L=0;for(let i=0;i<pts.length;i++){const a=pts[i],b=pts[(i+1)%pts.length],l=Math.hypot(b[0]-a[0],b[1]-a[1]);seg.push({a,b,l,s:L});L+=l}return{seg,L}}
 function at(pa,d){d=((d%pa.L)+pa.L)%pa.L;const s=pa.seg.find(s=>d>=s.s&&d<s.s+s.l)||pa.seg[0];const k=(d-s.s)/s.l;return{x:s.a[0]+(s.b[0]-s.a[0])*k,z:s.a[1]+(s.b[1]-s.a[1])*k,yaw:Math.atan2(s.b[0]-s.a[0],s.b[1]-s.a[1])}}
 const routes=[path([[-35,-3],[-27,-3],[-25,0],[-27,3],[-35,3],[-37,0]]),path([[-33,-4],[-26,-4],[-26,4],[-33,4]]),path([[-37,-2],[-29,1],[-37,4],[-31,-.5]])];
-const team=['#ff7a2f','#1d4ed8','#ff7a2f'];
-const runners=routes.map((r,i)=>({walk:1,ph:i*2,shirt:team[i],pants:'#f4f4f4',skin:SKIN[i],hair:'#222',helmet:i===1?'#1d4ed8':'#ff7a2f',num:1,r,sp:3.2+i*.5,off:i*7}));
+const team=['#ff7a2f','#22407a','#ff7a2f'];
+const runners=routes.map((r,i)=>({walk:1,ph:i*2,shirt:team[i],pants:'#f4f4f4',skin:SKIN[i],hair:'#222',helmet:i===1?'#22407a':'#ff7a2f',num:1,r,sp:3.2+i*.5,off:i*7}));
 const qb={x:-32,z:0,yaw:Math.PI/2,shirt:'#ff7a2f',pants:'#f4f4f4',skin:SKIN[3],hair:'#222',helmet:'#ff7a2f',num:1,anim:'throw'};
 const coach={x:hc-1.4,z:-4.4,y:F,yaw:.35,shirt:'#1d3557',pants:'#2b2d42',skin:SKIN[1],hair:'#222',cap:'#ff7a2f',anim:'wave',ph:1};
 const scout={x:sc-.9,z:-4.6,y:F,yaw:Math.PI,sit:1,shirt:'#6c3483',pants:'#2c3e50',skin:SKIN[0],hair:'#6e2c00',anim:'watch'};
@@ -563,7 +616,7 @@ const parts=Array.from({length:30},()=>({x:(Math.random()-.5)*90,y:Math.random()
 let cheerUntil=0;
 
 // ---- camera + input ----
-const HOME={yaw:.1,el:.72,r:28,t:[0,0,-3]};
+const HOME={yaw:.1,el:.66,r:36,t:[0,1.5,-2]};
 const cam={yaw:HOME.yaw,el:HOME.el,r:HOME.r,t:HOME.t.slice()},goal={yaw:HOME.yaw,el:HOME.el,r:HOME.r,t:HOME.t.slice()};
 let drag=null,down=null,lastUse=0,focused=null,hover=false,hot=null,VIEW=null;
 const FOV=.75;
@@ -578,7 +631,7 @@ cv.addEventListener('wheel',e=>{if(FP.on)return;e.preventDefault();goal.r=Math.m
 
 // ---- rooms, spots and labels ----
 ROOMS.forEach(r=>{r.p=[r.cx,F+4.3,-1];r.f={t:[SCREENS[r.k].x,1.5,-7.2],r:9,el:.45,yaw:0};r.hit=(x,z)=>Math.abs(x-r.cx)<3.5&&z>-8.2&&z<-.8});
-const SPOTS=[{name:'field',f:{t:[-30,0,0],r:24,el:.55,yaw:.35},hit:(x,z)=>x>-41&&x<-19&&Math.abs(z)<7},
+const SPOTS=[{name:'field',f:{t:[-36,0,-8],r:34,el:.55,yaw:.35},hit:(x,z)=>(x>-71&&x<-19&&Math.abs(z)<7)||(x>-43&&x<-17&&z>-33&&z<-15)},
  {name:'stadium',f:{t:[SX,4,SZ],r:150,el:.62,yaw:-.75},hit:(x,z)=>Math.abs(x-SX)<50&&z>SZ-68&&z<SZ+48}];
 const ZONES=[...ROOMS,...SPOTS];
 ROOMS.forEach(z=>{z.el=document.createElement('div');z.el.className='lbl';z.el.style.borderColor=z.acc;z.el.innerHTML=`<b style="color:${z.acc}">${z.name}</b><span></span>`;z.el.onclick=()=>focus(z);z.el.onmouseenter=()=>{hover=true;hot=z};z.el.onmouseleave=()=>{hover=false;hot=null};lblBox.appendChild(z.el)});
@@ -639,7 +692,11 @@ const COL=[[-14.4,14.4,-8.5,-7.9],[-14.45,-13.95,-8.2,2.6],[13.95,14.45,-8.2,2.6
  [SX-50.5,SX-19.4,SZ-69,SZ+47.6],[SX+19.4,SX+50.5,SZ-69,SZ+47.6],[SX-50.5,SX+50.5,SZ-69,SZ-36.4],[SX-19.4,SX-3.5,SZ+36.4,SZ+47.6],[SX+3.5,SX+19.4,SZ+36.4,SZ+47.6],
  [SX-12.6,SX-11.4,SZ+50.6,SZ+51.8],[SX+11.4,SX+12.6,SZ+50.6,SZ+51.8],[SX-18.2,SX-17.1,SZ-8,SZ+8],[SX+17.1,SX+18.1,SZ-8,SZ+8],
  [-30-3.1,-30+3.1,-7.7,-6.7],[-16.7,-16.3,3.8,4.2]];
-[[-18,-12],[-12,-15],[-6,-13],[0,-15.5],[6,-13],[12,-15],[18,-12],[-46,-10],[-47,-3],[-46,5],[-45,11],[-24,-12],[-34,-12],[44,-14],[46,4],[-17,7],[17.5,6.5]].forEach(([x,z])=>COL.push([x-.4,x+.4,z-.4,z+.4]));
+TREES.forEach(([x,z])=>COL.push([x-.4,x+.4,z-.4,z+.4]));
+// the pro facility: office tower, atrium glass (doors open), lobby desk + planter, plaza planters, hedges, practice dome, windscreens, parked cars, light poles
+COL.push([-16.2,16.2,-18.2,-8.7],[1.6,2.4,3.2,4.6],[-2.5,-1.7,3.5,4.3],[-13,-4.5,3.05,4.4],[4.5,13,3.05,4.4],[DX-DL/2-.2,DX+DL/2+.2,DZ-DW-.2,DZ+DW+.2],[-70,-50,-8.5,-8.3],[-40,-20,-8.5,-8.3],
+ ...[[-4.1,PZ-3.2],[4.1,PZ-3.2],[-4.1,PZ+3.2],[4.1,PZ+3.2]].map(([x,z])=>[x-.6,x+.6,z-.6,z+.6]),...PCARS.map(([x,z])=>[x-.8,x+.8,z-1.55,z+1.55]),...PLIGHT.map(([x,z])=>[x-.3,x+.3,z-.3,z+.3]));
+ATR.filter(a=>!a.door).forEach(a=>{for(let k=0;k<=1;k+=.125){const x=a.p0[0]+(a.p1[0]-a.p0[0])*k,z=a.p0[1]+(a.p1[1]-a.p0[1])*k;COL.push([x-.15,x+.15,z-.15,z+.15])}});
 const FP={lv:0,gameDay:false,list:false,target:null,on:false,x:0,z:9,y:0,vy:0,yaw:0,pitch:-.05,keys:new Set(),sel:0,talk:null,near:null,locked:false};
 const NPC=[{k:'hc',who:'Head Coach',icon:'🏈',acc:'#ff7a2f',p:coach},{k:'sc',who:'Scout',icon:'🎬',acc:'#c77dff',p:scout},{k:'an',who:'Analyst',icon:'📚',acc:'#5ef38c',p:analyst},
  {k:'mg',who:'Manager',icon:'📞',acc:'#3a9bff',p:mgr},{k:'ac',who:'Assistant Coach',icon:'🧑‍🏫',acc:'#ffd23f',p:intern}];
@@ -868,7 +925,7 @@ function frame(now){
   [coach,scout,analyst,mgr,intern].forEach(c=>{if(c===tk&&!c.sit){const y0=c.yaw;c.yaw=Math.atan2(FP.x-c.x,FP.z-c.z);person(c,t);if(c===coach)c.yaw=y0}else person(c,t)});
   // the live game in the stadium, the markers over the staff, and a roof once you're walking around inside
   liveGame(t,now,VP,w,h);npcMarks(t);
-  if(FP.on&&FP.x<20){box(0,F+3.62,-2.9,28.4,.14,10.8,'#cfc8b6');for(let i=-12;i<=12;i+=4)box(i,F+3.58,-2.9,1.6,.05,9,'#fff6c4',1)}
+  if(FP.on&&FP.x<20){box(0,F+3.62,-2.9,28.4,.14,10.8,'#d6dbe2');for(let i=-12;i<=12;i+=4)box(i,F+3.58,-2.9,1.6,.05,9,'#fff6c4',1)}
   // crowd
   const cheer=now<cheerUntil;
   fans.forEach(f=>{const j=cheer?Math.abs(Math.sin(t*9+f.ph))*.4:Math.abs(Math.sin(t*1.5+f.ph))*.04;box(f.x,f.y+j,f.z,.45,.55,.35,f.c);box(f.x,f.y+j+.55,f.z,.34,.34,.34,f.s);
@@ -893,6 +950,9 @@ function frame(now){
   // glass (see-through pass)
   gl.enable(gl.BLEND);gl.blendFuncSeparate(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA,gl.ZERO,gl.ONE);gl.depthMask(false);gl.uniform1f(U.uA,.2);
   box(SX-30,SUY+.5,SZ,.06,3,55,'#9fd8ff',.22);
+  [[-14,-7.25],[-6.75,-1.8],[1.8,6.75],[7.25,14]].forEach(([a,b])=>box((a+b)/2,F+.96,2.4,b-a,2.64,.05,'#9fd8ff',.22));   // hallway glass front
+  ATR.forEach(a=>{const y0=a.door?2.95:.06;draw(mul(T(a.mx,y0,a.mz),mul(Ry(a.ang),boxM(0,0,0,a.len,AH-y0,.05))),'#9fd8ff',.25)});   // atrium glass
+  for(let z=0;z<AR;z+=.85){const m=Math.min(AR-.01,z+.425),hw=Math.sqrt(AR*AR-m*m);box(0,AH+.3,AZ+z+.425,2*hw,.04,.85,'#bfe6ff',.3)}   // atrium glass roof
   ROOMS.forEach(r=>{(FP.on?[-2.35,2.35]:[-2.35,0,2.35]).forEach(o=>box(r.cx+o,F+.25,-1,2.2,3.1,.05,r===hot||r===focused?r.acc:'#9fd8ff',.25))});
   gl.uniform1f(U.uA,1);gl.depthMask(true);gl.disable(gl.BLEND);
   // game HUD: who you can talk to
