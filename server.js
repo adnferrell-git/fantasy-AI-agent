@@ -33,6 +33,59 @@ const SERVER = require.main === module; // false when staff.js loads this file o
 const alerted = new Set(), WEBHOOK = process.env.DISCORD_WEBHOOK || '';
 async function ping(msg) { if (!WEBHOOK || !SERVER) return; try { await fetch(WEBHOOK, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ content: msg }) }); } catch {} }
 
+// ===== Scoreboard: every matchup for a week, with projections and a win chance =====
+let LG = null;
+const sbCache = {};
+const POSAVG = { QB: 17, RB: 11, WR: 11, TE: 8, K: 8, DEF: 7 };
+// Normal CDF (Abramowitz-Stegun erf), for the win chance.
+const phi = z => { const t = 1 / (1 + 0.3275911 * Math.abs(z) / Math.SQRT2), e = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-z * z / 2); return z >= 0 ? (1 + e) / 2 : (1 - e) / 2; };
+async function scoreboard(week) {
+  if (!LG) return { error: 'Still loading the league. Try again in a minute.' };
+  const cur = LG.week, wk = Math.min(Math.max(+week || cur, 1), cur), past = wk < cur;
+  const c = sbCache[wk]; if (c && (past || Date.now() - c.at < 25e3)) return c.data;
+  const mu = await get(`/league/${LG.id}/matchups/${wk}`);
+  const user = {}; LG.users.forEach(x => user[x.user_id] = x);
+  const ros = {}; LG.rosters.forEach(r => ros[r.roster_id] = r);
+  const now = Date.now(), GAME = 3.25 * 36e5;
+  let anyLive = false, anyLeft = false;
+  const side = m => {
+    const r = ros[m.roster_id] || {}, us = user[r.owner_id] || {}, md = us.metadata || {};
+    const av = md.avatar || (us.avatar ? `https://sleepercdn.com/avatars/thumbs/${us.avatar}` : '');
+    const st = r.settings || {}, pts = Math.round((m.custom_points != null ? m.custom_points : m.points || 0) * 100) / 100;
+    let proj = 0, left = 0, vr = 0, live = false;
+    (m.starters || []).forEach((id, i) => {
+      const sp = +((m.starters_points || [])[i]) || 0;
+      if (past || !id || id === '0') { proj += sp; return; }
+      const p = pl(id), k = p.team && kickMap[p.team], ks = k ? new Date(k).getTime() : 0;
+      const s0 = statsFor({ ...p, opp: oppMap[p.team] }) || {}, avg = s0.avg != null ? +s0.avg : (POSAVG[p.pos] || 8);
+      const bye = p.team && Object.keys(kickMap).length && !k;
+      let rest = 0;
+      if (bye) rest = 0;
+      else if (!ks || now < ks) rest = avg;
+      else if (now < ks + GAME) { rest = avg * (1 - (now - ks) / GAME); live = true; }
+      rest = Math.max(rest, 0); proj += sp + rest; left += rest; vr += (0.55 * rest) ** 2;
+    });
+    if (live) anyLive = true; if (left > 0.5) anyLeft = true;
+    return { owner: LG.owner[m.roster_id], team: md.team_name || '', avatar: av, mine: r.owner_id === LG.uid,
+      record: `${st.wins || 0}-${st.losses || 0}${st.ties ? '-' + st.ties : ''}`, pts, proj: Math.round(proj * 10) / 10, left: Math.round(left * 10) / 10, vr, live };
+  };
+  const g = {}; (mu || []).forEach(m => { if (m.matchup_id != null) (g[m.matchup_id] = g[m.matchup_id] || []).push(m); });
+  const games = Object.values(g).filter(x => x.length === 2).map(([x, y]) => {
+    let a = side(x), b = side(y); if (b.mine) [a, b] = [b, a];
+    const sd = Math.sqrt(a.vr + b.vr);
+    const win = sd < 0.5 ? (a.proj > b.proj ? 1 : a.proj < b.proj ? 0 : 0.5) : phi((a.proj - b.proj) / sd);
+    delete a.vr; delete b.vr;
+    return { a, b, win: Math.round(win * 100), mine: a.mine };
+  }).sort((p, q) => q.mine - p.mine);
+  const scored = games.some(x => x.a.pts + x.b.pts > 0);
+  const status = past ? 'final' : anyLive || (scored && anyLeft) ? 'live' : scored ? 'final' : 'upcoming';
+  const standings = LG.rosters.map(r => { const st = r.settings || {}; return { owner: LG.owner[r.roster_id], mine: r.owner_id === LG.uid, w: st.wins || 0, l: st.losses || 0, t: st.ties || 0,
+    pf: Math.round(((st.fpts || 0) + (st.fpts_decimal || 0) / 100) * 10) / 10 }; }).sort((p, q) => q.w - p.w || p.l - q.l || q.pf - p.pf);
+  const data = { week: wk, current: cur, status, games, standings, updated: new Date().toISOString() };
+  sbCache[wk] = { at: Date.now(), data };
+  return data;
+}
+
 const TL_FILE = 'trade-log.json';
 let TL = { done: [], trades: {} };
 try { TL = JSON.parse(fs.readFileSync(TL_FILE, 'utf8')); } catch {}
@@ -117,6 +170,7 @@ async function refresh() {
     get(`/league/${id}/matchups/${wk}`), get(`/league/${id}/transactions/${wk}`)]);
   const name = {}; users.forEach(x => name[x.user_id] = x.display_name);
   const owner = {}; rosters.forEach(r => owner[r.roster_id] = name[r.owner_id] || 'Team ' + r.roster_id);
+  LG = { id, season: st.season, week: wk, uid: u.user_id, users, rosters, owner };
   const teams = rosters.map(r => ({
     owner: owner[r.roster_id], mine: r.owner_id === u.user_id,
     record: `${r.settings.wins}-${r.settings.losses}`,
@@ -273,6 +327,7 @@ http.createServer(async (req, res) => {
     if (req.url === '/api/state') return send(S || { error: 'loading' });
     if (req.method === 'POST' && req.url === '/api/counter') { let b = ''; for await (const c of req) b += c; return send({ answer: await counter(JSON.parse(b).q) }); }
     if (req.method === 'POST' && req.url === '/api/ask') { let b = ''; for await (const c of req) b += c; return send({ answer: await ask(JSON.parse(b).q) }); }
+    if (req.url.startsWith('/api/scoreboard')) return send(await scoreboard(new URL(req.url, 'http://x').searchParams.get('week')));
     if (req.url.startsWith('/api/report')) return send(await staffReport());
     if (req.url.startsWith('/api/brief')) {
       if (req.url.includes('refresh') || !brief || brief.error || Date.now() - briefAt > 18e5) { brief = await makeBrief(); briefAt = Date.now(); }
