@@ -99,7 +99,9 @@ main{display:block;padding:20px 20px 40px;max-width:1320px;margin:0 auto}#hq3d{m
 nav{margin-bottom:18px}
 
 /* ===== game mode (first person) ===== */
-#hqplay{background:var(--or);color:#1a0b02;font-size:10px;padding:10px 16px}
+#hqplay{background:var(--or);color:#1a0b02;font-size:10px;padding:10px 16px}#hqgame{background:#3a9bff;color:#04101f;font-size:10px;padding:10px 16px}
+#ptags{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2}.ptag{position:absolute;left:0;top:0;font:8px 'Press Start 2P',monospace;padding:4px 6px;white-space:nowrap;background:#142850e6;color:#fff;border:2px solid #c0c8d4;box-shadow:2px 2px 0 #000}
+.ptag.opp{background:#5a1018e6;border-color:#ff9a9a}.ptag.big{border-color:#ffd23f;color:#ffd23f;animation:p .6s infinite}
 #fpui{display:none}#hq3d.fp #fpui{display:block;position:absolute;inset:0;pointer-events:none;z-index:3}#fpui .todotab,#fpui .todop,#fpui .dlg,#fpui .pause{pointer-events:auto}#fpui .pause{z-index:4}#fpui .todotab,#fpui .todop{z-index:5}
 #hq3d.fp{position:fixed;inset:0;margin:0!important;height:100vh;width:100vw;z-index:50;border:0;border-radius:0;box-shadow:none;background:linear-gradient(#24346e,#3b5aa0 55%,#6d8fc9)}
 #hq3d.fp .hqbar,#hq3d.fp .hqhint{display:none}body.fpmode{overflow:hidden}
@@ -160,7 +162,7 @@ nav{margin-bottom:18px}
 <div class="tick"><div id="tick">Loading the wire…</div></div>
 <div id="alert"></div>
 <section id="hq3d"><canvas id="hqc"></canvas><div id="hqlbl"></div>
-<div class="hqbar"><span class="px">MY HQ · LIVE</span><span><button id="hqplay">▶ PLAY</button> <button id="hqreset" class="ghost">FULL VIEW</button></span></div>
+<div class="hqbar"><span class="px">MY HQ · LIVE</span><span><button id="hqplay">▶ PLAY</button> <button id="hqgame">🏟️ GAME DAY</button> <button id="hqreset" class="ghost">FULL VIEW</button></span></div>
 <div id="toasts"></div><div class="hqhint mu">drag to spin · scroll to zoom · click a room to read its screen</div></section>
 <main>
 <section class="card" id="today"><div class="thead"><h2>TODAY</h2><span class="mu" id="tsum">Getting the staff's list…</span><button id="tall" class="ghost" aria-expanded="false">SEE ALL ▾</button></div>
@@ -213,7 +215,7 @@ gl.attachShader(prog,sh(gl.VERTEX_SHADER,`attribute vec3 p;attribute vec3 n;attr
 void main(){vec4 w=uM*vec4(p,1.);vN=normalize((uM*vec4(n,0.)).xyz);vC=c;gl_Position=uVP*w;vD=gl_Position.w;}`));
 gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,`precision mediump float;uniform vec3 uFog;uniform float uA;varying vec3 vN;varying vec4 vC;varying float vD;
 void main(){vec3 n=normalize(vN);float d=max(dot(n,normalize(vec3(.5,1.,.35))),0.);float f=max(dot(n,normalize(vec3(-.6,.3,-.5))),0.);
-vec3 c=vC.rgb*(.40+.52*d+.16*f);c=mix(c,vC.rgb*1.3,vC.a);float fg=clamp((vD-60.)/150.,0.,1.);gl_FragColor=vec4(mix(c,uFog,fg),uA);}`));
+vec3 c=vC.rgb*(.40+.52*d+.16*f);c=mix(c,vC.rgb*1.3,vC.a);float fg=clamp((vD-90.)/320.,0.,.85);gl_FragColor=vec4(mix(c,uFog,fg),uA);}`));
 gl.bindAttribLocation(prog,0,'p');
 gl.linkProgram(prog);gl.useProgram(prog);
 const U={};['uVP','uM','uFog','uA'].forEach(k=>U[k]=gl.getUniformLocation(prog,k));
@@ -303,19 +305,96 @@ for(let i=0;i<10;i++)v(-39+i*2,0,0,2,.08,12,i===0?'#ff7a2f':i===9?'#1d4ed8':i%2?
 v(-30,0,-7.2,6,.5,.8,'#c0392b');v(-30,.5,-7.55,6,.6,.15,'#c0392b');
 v(-22.5,0,4.5,2.6,.3,.8,'#555555');[-23.2,-21.8].forEach(x=>v(x,.3,4.5,.7,1.2,.6,'#ff7a2f'));
 [[-34,-6.6],[-26,-6.6],[-38,6.6],[-22,6.6]].forEach(([x,z])=>v(x,0,z,.35,.45,.35,'#ff7a2f'));
-// stadium (right of the building)
-for(let i=0;i<9;i++)v(33,0,-10+i*2,9,.08,2,i===0?'#ff7a2f':i===8?'#1d4ed8':i%2?'#2f9a46':'#3bb453');
-[28.6,37.4].forEach(x=>v(x,.08,-2,.12,.02,18,'#f4f4f4'));[-7,-3,1,5].forEach(z=>v(33,.08,z,8.8,.02,.12,'#f4f4f4'));
-[-11.6].forEach(z=>{v(33,0,z,.25,2.2,.25,'#ffd23f');v(33,2.2,z,3.2,.25,.25,'#ffd23f');[-1.5,1.5].forEach(o=>v(33+o,2.2,z,.25,2.2,.25,'#ffd23f'))});
-for(let i=0;i<3;i++){const h=.6*(i+1),sc2=i%2?'#1d4ed8':'#ff7a2f';
-  v(27.3-i*1.2,0,-2,1.2,h,20,'#7d8496');v(27.3-i*1.2,h,-2,1.1,.08,20,sc2);
-  v(38.7+i*1.2,0,-2,1.2,h,20,'#7d8496');v(38.7+i*1.2,h,-2,1.1,.08,20,sc2);
-  v(33,0,-12.7-i*1.2,17.4,h,1.2,'#7d8496');v(33,h,-12.7-i*1.2,17.4,.08,1.1,sc2)}
-[25,41].forEach(x=>v(x,0,-17.4,.8,4.3,.8,'#5a5a5a'));v(33,4.2,-17.4,19.2,10.2,.5,'#141922');v(33,14.4,-17.4,19.4,.35,.6,'#ff7a2f',.4); // jumbotron (the live scoreboard is drawn on it)
+// ===== THE DYNASTY STADIUM: a full NFL-style bowl east of the HQ =====
+// Lower bowl, a suite level on the west side (GM suite + staff suites, elevator to the field), upper deck,
+// open south end with the tunnel, jumbotrons at both ends. DYNASTY colors: deep navy, silver, orange.
+const SX=100,SZ=-55,NAVY='#142850',SILV='#c0c8d4',ORNG='#ff7a2f',CONC='#8d94a3',SUY=9;
+// field: 50 between the goal lines + 5-deep end zones, stripes every 5
+v(SX,-.02,SZ,46,.04,82,'#2f8a40');
+for(let i=0;i<10;i++)v(SX,0,SZ-25+i*5+2.5,26,.06,5,i%2?'#2f9a46':'#37a84f');
+v(SX,0,SZ-27.5,26,.07,5,NAVY);v(SX,0,SZ+27.5,26,.07,5,ORNG);
+for(let i=0;i<=10;i++)v(SX,.07,SZ-25+i*5,26,.02,.16,'#f4f4f4');
+[-13,13].forEach(x=>v(SX+x,.07,SZ,.16,.02,60,'#f4f4f4'));
+for(let i=0;i<50;i++)[-4,4].forEach(x=>v(SX+x,.07,SZ-25+i+.5,.5,.02,.08,'#f4f4f4'));
+// DYNASTY crest at midfield and in the end zones (a "D")
+const DG=['1110','1001','1001','1001','1110'];
+const crest=(cx,cz,s,c,bg)=>{v(cx,.075,cz,6*s,.02,7*s,bg);DG.forEach((row,r)=>[...row].forEach((b,cc)=>{if(b==='1')v(cx+(cc-1.5)*s*1.2,.09,cz+(r-2)*s*1.2,s*1.2,.02,s*1.2,c)}))};
+crest(SX,SZ,1,ORNG,NAVY);
+['DYNASTY'].forEach(()=>{for(let i=0;i<7;i++){v(SX-9+i*3,.08,SZ-27.5,1.6,.02,2.4,SILV);v(SX-9+i*3,.08,SZ+27.5,1.6,.02,2.4,NAVY)}});
+// goal posts
+[-1,1].forEach(f=>{const z=SZ+f*30.2;v(SX,0,z,.3,3,.3,'#ffd23f');v(SX,3,z,5.6,.3,.3,'#ffd23f');[-2.7,2.7].forEach(o=>v(SX+o,3,z,.25,6,.25,'#ffd23f'))});
+// sideline walls, benches, the Head Coach's spot
+[[SX-19.6,SZ,.4,1.2,74],[SX+19.6,SZ,.4,1.2,74],[SX,SZ-36.6,39.6,1.2,.4]].forEach(([x,z,w,h,d])=>v(x,0,z,w,h,d,NAVY));
+[[SX-12.3,SZ+36.6],[SX+12.3,SZ+36.6]].forEach(([x,z])=>v(x,0,z,15,1.2,.4,NAVY));
+v(SX-17.6,0,SZ,1,.5,16,'#3a3f52');v(SX-18.3,0,SZ,.3,1.1,16,'#3a3f52');v(SX+17.6,0,SZ,1,.5,16,'#5a2a2a');
+v(SX-16.8,0,SZ+9.3,.9,.9,.9,ORNG);v(SX-16.8,.9,SZ+9.3,.7,.12,.7,'#ffffff');
+// lower bowl: 10 rows on all four sides (tunnel through the south end)
+const seat=(r,up)=>up?(r%3===0?ORNG:r%2?NAVY:SILV):(r%2?NAVY:'#2a3d6e');
+for(let r=0;r<10;r++){const h=.62*(r+1),d=r+.5,L=2*(37+r+1),W=2*(20+r+1);
+  v(SX-20-d,0,SZ,1,h,L,CONC);v(SX-20-d,h,SZ,1,.12,L,seat(r));v(SX+20+d,0,SZ,1,h,L,CONC);v(SX+20+d,h,SZ,1,.12,L,seat(r));
+  v(SX,0,SZ-37-d,W,h,1,CONC);v(SX,h,SZ-37-d,W,.12,1,seat(r));
+  const sw=20+r+1-3.5;[-1,1].forEach(s=>{v(SX+s*(3.5+sw/2),0,SZ+37+d,sw,h,1,CONC);v(SX+s*(3.5+sw/2),h,SZ+37+d,sw,.12,1,seat(r))})}
+// tunnel walls + sign over the tunnel
+[-3.7,3.7].forEach(o=>v(SX+o,0,SZ+42,.4,3.4,10,'#3a3f52'));v(SX,3.4,SZ+42,7.8,.5,10,NAVY);v(SX,3.9,SZ+47.1,7.8,1.4,.3,ORNG,.4);
+// club band (offsets 10-17): solid concourse on north and east, the suites on the west
+v(SX,0,SZ-50.5,2*54,SUY+3.8,7,'#3a4258');v(SX,SUY+1.2,SZ-46.95,2*47,1.4,.1,'#1b2440',.2);
+v(SX+33.5,0,SZ-9.5,7,SUY+3.8,113,'#3a4258');v(SX+29.95,SUY+1.2,SZ-9.5,.1,1.4,106,'#1b2440',.2);
+// west: base under the suite level, the suite floor, roof, back wall, ends
+v(SX-33.5,0,SZ-9.5,7,SUY,113,'#3a4258');
+[[SZ-47,SZ-27.6],[SZ+27.6,SZ+47]].forEach(([a,b])=>v(SX-33.5,SUY,(a+b)/2,7,3.8,b-a,'#3a4258'));
+v(SX-33.5,SUY-.2,SZ,7,.2,55.2,'#d9d4c7');v(SX-33.5,SUY+3.6,SZ,7.4,.35,55.6,'#2a3245');
+v(SX-37,SUY,SZ,.4,3.6,55.2,'#e6dcc6');
+for(let z=-27.5;z<=27.5;z+=2.5)v(SX-30,SUY,SZ+z,.16,3.6,.16,'#2a3245');
+v(SX-30.2,SUY,SZ,.3,.45,55.2,'#2a3245');v(SX-30.5,SUY+.45,SZ,.7,.08,55.2,'#5b3a1e');               // glass rail + counter
+v(SX-30,SUY+3.45,SZ,.3,.18,55.2,'#2a3245');
+// suites: GM in the middle, Scout and Analyst to the north, Manager to the south, elevator lobby at the end
+const SUITES=[{k:'an',name:'ANALYST',z0:-27.5,z1:-16.5,rug:'#1d3d2a',acc:'#2ecc71'},{k:'sc',name:'SCOUT',z0:-16.5,z1:-5.5,rug:'#2a1d3d',acc:'#b06ce0'},
+ {k:'gm',name:'GM SUITE',z0:-5.5,z1:5.5,rug:'#1f2a4a',acc:ORNG},{k:'mg',name:'MANAGER',z0:5.5,z1:16.5,rug:'#1f3b6b',acc:'#3a9bff'}];
+SUITES.forEach(s=>{const c=SZ+(s.z0+s.z1)/2,L=s.z1-s.z0;s.cz=c;
+  v(SX-32.4,SUY,c,4.2,.02,L-.4,s.rug);v(SX-34.5,SUY,c-L/4-.6,.2,3.6,L/2-1.2,'#d8cfb8');v(SX-34.5,SUY,c+L/4+.6,.2,3.6,L/2-1.2,'#d8cfb8');v(SX-34.5,SUY+2.6,c,.2,1,2.4,'#d8cfb8');
+  v(SX-32.3,SUY,SZ+s.z1,4.4,3.6,.2,'#d8cfb8');v(SX-34.41,SUY+3.1,c,.06,.3,L-.6,s.acc,.5);
+  [-2.2,2.2].forEach(o=>{v(SX-31.4,SUY,c+o,1,.5,1,'#2c2c2c');v(SX-31.9,SUY+.5,c+o,.2,.7,1,'#2c2c2c')})});            // two seats at the glass
+v(SX-32.3,SUY,SZ-27.5,4.4,3.6,.2,'#d8cfb8');
+const sui=k=>SUITES.find(s=>s.k===k);
+v(SX-32.6,SUY,sui('gm').cz,1.4,.6,1.4,'#6b1f1f');v(SX-33.3,SUY+.6,sui('gm').cz,.25,1.2,1.4,'#6b1f1f');               // the GM's chair
+v(SX-33.8,SUY,sui('gm').cz+3.6,1,.9,1.6,'#5b3a1e');v(SX-33.8,SUY+.9,sui('gm').cz+3.6,.5,.4,.5,'#c0c8d4');                // snack bar
+v(SX-33.9,SUY,sui('an').cz,1.1,.9,4.4,'#5b3a1e');[-1.1,1.1].forEach(o=>v(SX-34.1,SUY+.9,sui('an').cz+o,.1,.8,1.4,'#111'));   // analyst desk + monitors
+v(SX-32.9,SUY,sui('an').cz,.9,.5,.9,'#2c2c2c');
+v(SX-32.6,SUY,sui('sc').cz-1,1.3,.5,3,'#6a1f2e');v(SX-33.2,SUY+.5,sui('sc').cz-1,.25,.8,3,'#6a1f2e');                  // scout couch
+v(SX-33.9,SUY,sui('mg').cz-3,.8,1.2,1.2,'#5b3a1e');v(SX-33.9,SUY+1.2,sui('mg').cz-3,.3,.5,.3,'#e6b422');               // manager's trophy stand
+// elevator lobby + doors on both levels
+v(SX-36.75,SUY,SZ+22,.1,2.8,2.2,'#9aa1ad',.2);v(SX-36.7,SUY+2.8,SZ+22,.1,.3,2.4,ORNG,.6);
+v(SX-19.85,0,SZ+31,.1,2.8,2.2,'#9aa1ad',.2);v(SX-19.8,2.8,SZ+31,.1,.3,2.4,ORNG,.6);
+// upper deck (offsets 17-29), north/east/west
+for(let r=0;r<12;r++){const h=SUY+4+.78*(r+1),d=17+r+.5,L=2*(37+17+r+1);
+  v(SX-20-d,0,SZ-9.5-0,1,h,113+2*r+2-2*0,CONC);v(SX-20-d,h,SZ-9.5,1,.12,113+2*r,seat(r,1));
+  v(SX+20+d,0,SZ-9.5,1,h,113+2*r,CONC);v(SX+20+d,h,SZ-9.5,1,.12,113+2*r,seat(r,1));
+  v(SX,0,SZ-37-d,2*(20+d+.5),h,1,CONC);v(SX,h,SZ-37-d,2*(20+d+.5),.12,1,seat(r,1))}
+// facade + roof ring
+const FH=SUY+14.5;v(SX-49.7,0,SZ-9.5,.6,FH,138,SILV);v(SX+49.7,0,SZ-9.5,.6,FH,138,SILV);v(SX,0,SZ-66.7,100,FH,.6,SILV);
+v(SX-49.7,FH,SZ-9.5,1.2,.6,138,NAVY);v(SX+49.7,FH,SZ-9.5,1.2,.6,138,NAVY);v(SX,FH,SZ-66.7,100,.6,1.2,NAVY);
+[[SX-49.7,SZ+59],[SX+49.7,SZ+59]].forEach(([x,z])=>v(x,0,z-11,.6,FH,2,SILV));
+// jumbotrons (the live scoreboard is drawn on them): north end over the upper deck, south end over the plaza
+[-15,15].forEach(o=>v(SX+o,0,SZ-68.2,1.2,FH+3,1.2,'#5a5a5a'));v(SX,FH+2.5,SZ-68,36,19,.8,'#0b0f17');v(SX,FH+21.5,SZ-68,36.4,.6,1,ORNG,.4);
+[-12,12].forEach(o=>v(SX+o,0,SZ+51.2,1,7,1,'#5a5a5a'));v(SX,7,SZ+51,28,15.2,.8,'#0b0f17');v(SX,22.2,SZ+51,28.4,.5,1,ORNG,.4);
+// stadium light towers
+[[SX-52,SZ-68],[SX+52,SZ-68],[SX-52,SZ+44],[SX+52,SZ+44]].forEach(([x,z])=>{v(x,0,z,1,34,1,'#6b6b6b');v(x,34,z,6,2.4,2,'#fff6c4',1)});
+// plaza + walkway from the HQ
+v(SX,0,SZ+57,40,.04,14,'#b8b2a3');v((14+SX-20)/2,0,8,SX-20-14,.04,3,'#c2b8a3');
+// fans in the seats (baked); the rows nearest the field are animated separately so they can cheer
+const FCOL=[NAVY,SILV,ORNG,'#ffffff',NAVY,'#2a3d6e'],FSK=['#f1c27d','#c68642','#8d5524','#e0ac69'];let fr=7;const rnd=()=>(fr=(fr*16807)%2147483647)/2147483647;
+const fans=[];
+const fan=(x,y,z,live)=>{if(rnd()>.62)return;const c=FCOL[Math.floor(rnd()*6)],s=FSK[Math.floor(rnd()*4)];if(live){fans.push({x,y,z,c,s,ph:rnd()*6});return}v(x,y,z,.5,.6,.4,c);v(x,y+.6,z,.36,.36,.36,s)};
+for(let r=0;r<10;r++){const y=.62*(r+1)+.12,live=r<4;
+  for(let z=-37-r;z<=37+r;z+=1.4){fan(SX-20-r-.5,y,SZ+z,live&&Math.abs(z)<26);fan(SX+20+r+.5,y,SZ+z,live&&Math.abs(z)<26)}
+  for(let x=-20-r;x<=20+r;x+=1.4){fan(SX+x,y,SZ-37-r-.5,false);if(Math.abs(x)>4.2)fan(SX+x,y,SZ+37+r+.5,false)}}
+for(let r=0;r<12;r++){const y=SUY+4+.78*(r+1)+.12,d=17+r+.5;
+  for(let z=-46-r;z<=27+r;z+=1.6){fan(SX-20-d,y,SZ+z,false);fan(SX+20+d,y,SZ+z,false)}
+  for(let x=-37-r;x<=37+r;x+=1.6)fan(SX+x,y,SZ-37-d,false)}
 // light towers
-[[-42,-8],[-42,8],[20.5,-12],[45.5,-12],[23,9],[43,9]].forEach(([x,z])=>{v(x,0,z,.45,9,.45,'#6b6b6b');v(x,9,z,2,1,1,'#fff6c4',1)});
+[[-42,-8],[-42,8]].forEach(([x,z])=>{v(x,0,z,.45,9,.45,'#6b6b6b');v(x,9,z,2,1,1,'#fff6c4',1)});
 // trees and flag pole
-[[-18,-12],[-12,-15],[-6,-13],[0,-15.5],[6,-13],[12,-15],[18,-12],[-46,-10],[-47,-3],[-46,5],[-45,11],[-24,-12],[-34,-12],[49,-8],[49,2],[48,10],[-17,7],[17.5,6.5],[-55,27],[55,27],[-60,-20],[30,-24],[-10,-24],[10,-26],[60,-6],[-62,2]]
+[[-18,-12],[-12,-15],[-6,-13],[0,-15.5],[6,-13],[12,-15],[18,-12],[-46,-10],[-47,-3],[-46,5],[-45,11],[-24,-12],[-34,-12],[44,-14],[46,4],[-17,7],[17.5,6.5],[-55,27],[55,27],[-60,-20],[30,-24],[-10,-24],[10,-26],[-62,2]]
  .forEach(([x,z],i)=>{v(x,0,z,.5,1.4,.5,'#6b4423');v(x,1.4,z,2.2,1.6,2.2,i%2?'#2d7a3a':'#327f3c');v(x,3,z,1.4,1,1.4,i%3?'#3a9447':'#2f8a40')});
 v(-16.5,0,4,.18,7,.18,'#cccccc');v(-16.5,7,4,.3,.3,.3,'#ffd23f',.6);
 const sBuf={p:mkbuf(SP),n:mkbuf(SN),c:mkbuf(SC),count:SP.length/3};
@@ -335,8 +414,13 @@ const SCREENS={
  sc:{x:sc,y:F+2.15,z:-7.85,w:4.8,h:2.4,cw:512,ch:256,scan:.12},
  an:{x:an,y:F+2.9,z:-7.88,w:4.4,h:1.1,cw:512,ch:128,scan:.1},
  mg:{x:mg-1.5,y:F+2.32,z:-7.86,w:3,h:1.5,cw:512,ch:256,scan:.12},
- sb:{x:33,y:9.3,z:-17.13,w:18.4,h:9.6,cw:1024,ch:512,scan:.05}};
-Object.values(SCREENS).forEach(s=>{s.cv=document.createElement('canvas');s.cv.width=s.cw;s.cv.height=s.ch;s.g=s.cv.getContext('2d');s.tex=gl.createTexture();s.m=mul(T(s.x,s.y,s.z),Sc(s.w,s.h,1))});
+ sb:{x:SX,y:SUY+14.5+12,z:SZ-67.3,w:34.4,h:17.2,cw:1024,ch:512,scan:.04},
+ sb2:{x:SX,y:14.6,z:SZ+50.15,w:26.6,h:13.3,cw:1024,ch:512,scan:.04,ry:Math.PI},
+ hc2:{x:SX-34.35,y:SUY+2.1,z:SZ,w:3.6,h:1.8,cw:512,ch:256,scan:0,ry:Math.PI/2},
+ sc2:{x:SX-34.35,y:SUY+2.1,z:SZ-11,w:3.6,h:1.8,cw:512,ch:256,scan:.12,ry:Math.PI/2},
+ an2:{x:SX-34.35,y:SUY+2.4,z:SZ-22,w:3.8,h:.95,cw:512,ch:128,scan:.1,ry:Math.PI/2},
+ mg2:{x:SX-34.35,y:SUY+2.1,z:SZ+11,w:3.4,h:1.7,cw:512,ch:256,scan:.12,ry:Math.PI/2}};
+Object.values(SCREENS).forEach(s=>{s.cv=document.createElement('canvas');s.cv.width=s.cw;s.cv.height=s.ch;s.g=s.cv.getContext('2d');s.tex=gl.createTexture();s.m=mul(T(s.x,s.y,s.z),mul(Ry(s.ry||0),Sc(s.w,s.h,1)))});
 // text helpers: shrink a line until it fits, wrap the rest
 function fitPx(g,t,maxW,big,small){let px=big;for(;px>small;px-=2){g.font=PXF(px);if(g.measureText(t).width<=maxW)break}g.font=PXF(px);return px}
 function wrapT(g,t,maxW,maxL){const out=[];let cur='';String(t||'').split(/\s+/).filter(Boolean).forEach(wd=>{const n=cur?cur+' '+wd:wd;if(g.measureText(n).width>maxW&&cur){out.push(cur);cur=wd}else cur=n});if(cur)out.push(cur);
@@ -392,7 +476,7 @@ function avatar(g,t,x,y,sz){const c=AVC2[[...String(t.owner)].reduce((a,ch)=>a+c
   const im=t.avatar&&AVI[t.avatar];
   if(im&&im.ok)g.drawImage(im,x,y,sz,sz);else{g.fillStyle='#0b0f17';g.font=PXF(Math.round(sz*.32));g.textAlign='center';g.textBaseline='middle';g.fillText(String(t.owner||'?').replace(/[^A-Za-z0-9]/g,'').slice(0,2).toUpperCase(),x+sz/2,y+sz/2+2)}
   g.restore();g.strokeStyle=t.mine?'#5ef38c':'#2c3a66';g.lineWidth=4;g.beginPath();g.arc(x+sz/2,y+sz/2,sz/2,0,7);g.stroke();
-  if(t.avatar&&!AVI[t.avatar]){const im2=new Image();im2.crossOrigin='anonymous';AVI[t.avatar]=im2;im2.onload=()=>{im2.ok=1;paintOne('sb')};im2.src=t.avatar}}
+  if(t.avatar&&!AVI[t.avatar]){const im2=new Image();im2.crossOrigin='anonymous';AVI[t.avatar]=im2;im2.onload=()=>{im2.ok=1;paintOne('sb');paintOne('sb2')};im2.src=t.avatar}}
 PAINT.sb=function(g,W,H){const d=SBD;g.fillStyle='#04060c';g.fillRect(0,0,W,H);
   g.fillStyle='#ff7a2f';g.fillRect(0,0,W,58);g.fillStyle='#0b0f17';g.textBaseline='middle';g.font=PXF(26);g.textAlign='left';g.fillText('THE DYNASTY'+(d&&!d.error?' · WEEK '+d.week:''),20,31);
   if(!d||d.error||!d.games){lines(g,'SCOREBOARD WARMING UP…',40,250,W-80,30,40,2,'#8a9ab3');g.textBaseline='alphabetic';return}
@@ -418,6 +502,7 @@ PAINT.sb=function(g,W,H){const d=SBD;g.fillStyle='#04060c';g.fillRect(0,0,W,H);
 function paintOne(k){const s=SCREENS[k];const g=s.g;g.save();try{PAINT[k](g,s.cw,s.ch,REP)}catch(e){console.error(e)}g.restore();
   gl.bindTexture(gl.TEXTURE_2D,s.tex);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,s.cv);gl.generateMipmap(gl.TEXTURE_2D);
   gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR)}
+['hc','sc','an','mg','sb'].forEach(k=>PAINT[k+(k==='sb'?'2':'2')]=(...a)=>PAINT[k](...a));
 function paintScreens(){Object.entries(SCREENS).forEach(([k,s])=>{const g=s.g;g.save();g.textBaseline='alphabetic';try{PAINT[k](g,s.cw,s.ch,REP)}catch(e){console.error(e)}g.restore();
   gl.bindTexture(gl.TEXTURE_2D,s.tex);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,s.cv);gl.generateMipmap(gl.TEXTURE_2D);
   gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
@@ -473,12 +558,6 @@ const scout={x:sc-.9,z:-4.6,y:F,yaw:Math.PI,sit:1,shirt:'#6c3483',pants:'#2c3e50
 const analyst={x:an,z:-5.7,y:F,yaw:Math.PI,sit:1,shirt:'#27ae60',pants:'#34495e',skin:SKIN[2],hair:'#111',anim:'type',ph:2};
 const mgr={walk:1,y:F,shirt:'#ecf0f1',pants:'#1c2833',skin:SKIN[0],hair:'#3e2723',anim:'phone',ph:3,r:path([[mg-2.3,-3.3],[mg+1.4,-3.3]]),sp:1.6};
 const intern={walk:1,y:F,shirt:'#ffd23f',pants:'#34495e',skin:SKIN[2],hair:'#222',anim:'coffee',ph:5,r:path([[-12.6,.8],[12.6,.8]]),sp:2.2};
-// stadium crowd
-const fans=[],FC=['#ff7a2f','#1d4ed8','#ffffff','#ff7a2f','#ffd23f'];
-for(let i=0;i<3;i++){const y=.6*(i+1)+.08;
-  for(let z=-10.8;z<=7;z+=1.5){if(Math.random()<.8)fans.push({x:27.3-i*1.2,y,z:z+Math.random()*.3});if(Math.random()<.8)fans.push({x:38.7+i*1.2,y,z:z+Math.random()*.3})}
-  for(let x=25;x<=41;x+=1.5)if(Math.random()<.8)fans.push({x:x+Math.random()*.3,y,z:-12.7-i*1.2})}
-fans.forEach((f,i)=>{f.c=FC[i%FC.length];f.s=SKIN[i%4];f.ph=Math.random()*6});
 // fireflies near the lights
 const parts=Array.from({length:30},()=>({x:(Math.random()-.5)*90,y:Math.random()*10,z:-18+Math.random()*28,v:.3+Math.random()*.6}));
 let cheerUntil=0;
@@ -500,7 +579,7 @@ cv.addEventListener('wheel',e=>{if(FP.on)return;e.preventDefault();goal.r=Math.m
 // ---- rooms, spots and labels ----
 ROOMS.forEach(r=>{r.p=[r.cx,F+4.3,-1];r.f={t:[SCREENS[r.k].x,1.5,-7.2],r:9,el:.45,yaw:0};r.hit=(x,z)=>Math.abs(x-r.cx)<3.5&&z>-8.2&&z<-.8});
 const SPOTS=[{name:'field',f:{t:[-30,0,0],r:24,el:.55,yaw:.35},hit:(x,z)=>x>-41&&x<-19&&Math.abs(z)<7},
- {name:'stadium',f:{t:[33,0,-3],r:27,el:.6,yaw:-.25},hit:(x,z)=>x>23&&x<43&&z>-18&&z<9}];
+ {name:'stadium',f:{t:[SX,4,SZ],r:150,el:.62,yaw:-.75},hit:(x,z)=>Math.abs(x-SX)<50&&z>SZ-68&&z<SZ+48}];
 const ZONES=[...ROOMS,...SPOTS];
 ROOMS.forEach(z=>{z.el=document.createElement('div');z.el.className='lbl';z.el.style.borderColor=z.acc;z.el.innerHTML=`<b style="color:${z.acc}">${z.name}</b><span></span>`;z.el.onclick=()=>focus(z);z.el.onmouseenter=()=>{hover=true;hot=z};z.el.onmouseleave=()=>{hover=false;hot=null};lblBox.appendChild(z.el)});
 const board=document.createElement('div');board.className='lbl board';board.innerHTML='<b>THE DYNASTY</b><span>WK -- · --</span>';board.onclick=()=>focus(SPOTS[1]);lblBox.appendChild(board);
@@ -523,12 +602,16 @@ let repKey='';
 window.HQ={
  scoreboard(d){if(!d||d.error)return;const m=(d.games||[]).find(x=>x.mine);
   if(m&&SBD&&!SBD.error){const o=(SBD.games||[]).find(x=>x.mine);if(o&&m.a.pts>o.a.pts+.05){cheerUntil=performance.now()+4000;toast(`🏈 ${m.a.owner} +${(m.a.pts-o.a.pts).toFixed(1)} · ${m.a.pts.toFixed(1)}-${m.b.pts.toFixed(1)}`)}}
+  if(m){const prev={};[0,1].forEach(t=>(LINE[t].lineup||[]).forEach(p=>prev[t+p.name]=p.pts));
+    LINE=[{name:m.a.owner,lineup:m.a.lineup||[]},{name:m.b.owner,lineup:m.b.lineup||[]}];
+    if(SBD&&!SBD.error)[0,1].forEach(t=>LINE[t].lineup.forEach(p=>{const o=prev[t+p.name];if(o!=null&&p.pts>o+.05&&['QB','RB','WR','TE'].includes(p.pos)){G.queue.push({t,name:p.name});if(t)toast(`📣 ${p.name} +${(p.pts-o).toFixed(1)} for ${m.b.owner}`,'bad')}}))}
   const was=GAME_ON;SBD=d;GAME_ON=!!(m&&d.status==='live'&&d.week===d.current)||!!window.FORCE_LIVE_GAME;if(GAME_ON&&!was)toast('🏟️ Your game is live in the stadium!');
   if(m)board.querySelector('span').textContent=d.status==='live'?`LIVE ${m.a.pts.toFixed(1)}-${m.b.pts.toFixed(1)}`:d.status==='final'?`FINAL ${m.a.pts.toFixed(1)}-${m.b.pts.toFixed(1)}`:`WK ${d.week} · ${m.win}% WIN`;
-  paintOne('sb')},
+  paintOne('sb');paintOne('sb2')},
  tasks(items){TASKS=items||[];if(FP.target&&!TASKS.some(x=>x.id===FP.target&&!x.done))FP.target=null;renderTodo()},
  lessons(L){LESS=L},
- enter:()=>enterFP(),exit:()=>exitFP(),
+ enter:gd=>enterFP(gd),exit:()=>exitFP(),
+ _state:()=>({lv:FP.lv,x:+FP.x.toFixed(1),z:+FP.z.toFixed(1),near:FP.near&&(FP.near.who||FP.near.label)}),
  _debug(o){Object.assign(FP,o);if(o.talk)openTalk(NPC.find(n=>n.k===o.talk))},
  report(b){if(!b||b.error)return;const k=JSON.stringify([b.made,b.start_sit,b.replacements,b.waivers,b.drops,b.trades&&b.trades[0]]);if(k===repKey)return;
   const first=!repKey;repKey=k;REP=b;paintScreens();if(!first)toast('📺 New staff report is up on the wall screens')},
@@ -552,61 +635,113 @@ const COL=[[-14.4,14.4,-8.5,-7.9],[-14.45,-13.95,-8.2,2.6],[13.95,14.45,-8.2,2.6
  [-14,-1.4,2.2,2.6],[1.4,14,2.2,2.6],
  [hc+.9,hc+3.1,-3.95,-2.85],[sc-1.5,sc-.3,-5.4,-4.2],[sc+.7,sc+1.9,-5.4,-4.2],[sc+2.3,sc+3.1,-5,-4.2],[an-2.2,an+2.2,-7.6,-6.2],[an-.55,an+.55,-6.45,-5.35],[an+2.5,an+3.3,-5,-2.2],
  [mg-.3,mg+3.3,-7.3,-5.9],[mg+2.5,mg+3.3,-4.4,-2.8],[mg-3.4,mg-2.6,-7.8,-7],[-13.85,-12.95,1.35,2.25],[12.95,13.85,1.35,2.25],[13.1,13.7,-.6,0],
- [23.7,27.9,-12.4,8.2],[38.1,42.3,-12.4,8.2],[24.2,41.8,-16.2,-12],[24.5,25.5,-17.9,-16.9],[40.5,41.5,-17.9,-16.9],[23.3,42.7,-17.75,-17.05],
+ // the stadium at field level: the bowl is solid, the south tunnel is open
+ [SX-50.5,SX-19.4,SZ-69,SZ+47.6],[SX+19.4,SX+50.5,SZ-69,SZ+47.6],[SX-50.5,SX+50.5,SZ-69,SZ-36.4],[SX-19.4,SX-3.5,SZ+36.4,SZ+47.6],[SX+3.5,SX+19.4,SZ+36.4,SZ+47.6],
+ [SX-12.6,SX-11.4,SZ+50.6,SZ+51.8],[SX+11.4,SX+12.6,SZ+50.6,SZ+51.8],[SX-18.2,SX-17.1,SZ-8,SZ+8],[SX+17.1,SX+18.1,SZ-8,SZ+8],
  [-30-3.1,-30+3.1,-7.7,-6.7],[-16.7,-16.3,3.8,4.2]];
-[[-18,-12],[-12,-15],[-6,-13],[0,-15.5],[6,-13],[12,-15],[18,-12],[-46,-10],[-47,-3],[-46,5],[-45,11],[-24,-12],[-34,-12],[49,-8],[49,2],[48,10],[-17,7],[17.5,6.5]].forEach(([x,z])=>COL.push([x-.4,x+.4,z-.4,z+.4]));
-const FP={list:false,target:null,on:false,x:0,z:9,y:0,vy:0,yaw:0,pitch:-.05,keys:new Set(),sel:0,talk:null,near:null,locked:false};
+[[-18,-12],[-12,-15],[-6,-13],[0,-15.5],[6,-13],[12,-15],[18,-12],[-46,-10],[-47,-3],[-46,5],[-45,11],[-24,-12],[-34,-12],[44,-14],[46,4],[-17,7],[17.5,6.5]].forEach(([x,z])=>COL.push([x-.4,x+.4,z-.4,z+.4]));
+const FP={lv:0,gameDay:false,list:false,target:null,on:false,x:0,z:9,y:0,vy:0,yaw:0,pitch:-.05,keys:new Set(),sel:0,talk:null,near:null,locked:false};
 const NPC=[{k:'hc',who:'Head Coach',icon:'🏈',acc:'#ff7a2f',p:coach},{k:'sc',who:'Scout',icon:'🎬',acc:'#c77dff',p:scout},{k:'an',who:'Analyst',icon:'📚',acc:'#5ef38c',p:analyst},
  {k:'mg',who:'Manager',icon:'📞',acc:'#3a9bff',p:mgr},{k:'ac',who:'Assistant Coach',icon:'🧑‍🏫',acc:'#ffd23f',p:intern}];
 let TASKS=[],LESS=null;
-const R=.35,hits=(x,z)=>COL.some(b=>x>b[0]-R&&x<b[1]+R&&z>b[2]-R&&z<b[3]+R)||Math.abs(x)>75||Math.abs(z)>40;
+const R=.35;
+// two floors: 0 = ground (HQ, field, plaza), 1 = the suite level of the stadium
+const SUITE_CZ={an:SZ-22,sc:SZ-11,gm:SZ,mg:SZ+11};
+const SUITE_COL=[...[-16.5,-5.5,5.5,16.5].map(z=>[SX-34.5,SX-30.1,SZ+z-.12,SZ+z+.12]),
+ ...Object.values(SUITE_CZ).flatMap(c=>[[SX-31.95,SX-30.85,c-2.75,c-1.65],[SX-31.95,SX-30.85,c+1.65,c+2.75]]),
+ [SX-33.45,SX-31.85,SZ-.75,SZ+.75],[SX-34.35,SX-33.25,SZ+2.75,SZ+4.45],[SX-34.5,SX-33.3,SZ-24.3,SZ-19.7],[SX-33.4,SX-32.4,SZ-22.5,SZ-21.5],
+ [SX-33.35,SX-31.9,SZ-12.6,SZ-9.4],[SX-34.35,SX-33.45,SZ+7.4,SZ+8.6]];
+const hits0=(x,z)=>COL.some(b=>x>b[0]-R&&x<b[1]+R&&z>b[2]-R&&z<b[3]+R)||x<-75||x>165||z<-135||z>40;
+const hits1=(x,z)=>{if(x<SX-36.75+R||x>SX-30.35-R||z<SZ-27.3+R||z>SZ+27.3-R)return true;
+  if(x>SX-34.6-R&&x<SX-34.4+R&&z<SZ+16.5&&!Object.values(SUITE_CZ).some(c=>Math.abs(z-c)<1.15-R+.2))return true;
+  return SUITE_COL.some(b=>x>b[0]-R&&x<b[1]+R&&z>b[2]-R&&z<b[3]+R)};
+const hits=(x,z)=>FP.lv?hits1(x,z):hits0(x,z);
+const PADS=[{elev:1,lv:1,x:SX-35.6,z:SZ+22,to:{lv:0,x:SX-18.4,z:SZ+28.5,yaw:Math.PI},label:'TAKE THE ELEVATOR DOWN TO THE FIELD'},
+ {elev:1,lv:0,x:SX-18.6,z:SZ+31,to:{lv:1,x:SX-35.4,z:SZ+19.6,yaw:Math.PI},label:'TAKE THE ELEVATOR UP TO THE SUITES'}];
+const lvOf=p=>(p.y||0)>3?1:0;
 function fpMove(dt){
   if(FP.talk||FP.list){FP.walk=false;return}
   const k=FP.keys,f=(k.has('KeyW')||k.has('ArrowUp')?1:0)-(k.has('KeyS')||k.has('ArrowDown')?1:0),st=(k.has('KeyD')?1:0)-(k.has('KeyA')?1:0);
-  if(!FP.locked)FP.yaw+=((k.has('ArrowRight')?1:0)-(k.has('ArrowLeft')?1:0))*2.2*dt;else FP.yaw+=0;
-  const sp=(k.has('ShiftLeft')||k.has('ShiftRight')?9:5.2)*dt,fx=Math.sin(FP.yaw),fz=-Math.cos(FP.yaw);
+  if(!FP.locked)FP.yaw+=((k.has('ArrowRight')?1:0)-(k.has('ArrowLeft')?1:0))*2.2*dt;
+  const sp=(k.has('ShiftLeft')||k.has('ShiftRight')?(FP.lv?6:11):5.2)*dt,fx=Math.sin(FP.yaw),fz=-Math.cos(FP.yaw);
   let dx=(fx*f-fz*st),dz=(fz*f+fx*st);const l=Math.hypot(dx,dz);if(l>0){dx=dx/l*sp;dz=dz/l*sp}
   if(!hits(FP.x+dx,FP.z))FP.x+=dx;if(!hits(FP.x,FP.z+dz))FP.z+=dz;
   FP.walk=l>0;FP.vy-=16*dt;FP.y=Math.max(0,FP.y+FP.vy*dt);if(FP.y===0)FP.vy=0;
-  // who is close enough to talk to (in front of you)
-  let best=null,bd=2.9;NPC.forEach(n=>{const ddx=n.p.x-FP.x,ddz=n.p.z-FP.z,d=Math.hypot(ddx,ddz);if(d<bd&&(ddx*fx+ddz*fz)/(d||1)>.2){bd=d;best=n}});
+  // who (or what) is close enough to use: staff in front of you, or an elevator
+  let best=null,bd=2.9;NPC.forEach(n=>{if(lvOf(n.p)!==FP.lv)return;const ddx=n.p.x-FP.x,ddz=n.p.z-FP.z,d=Math.hypot(ddx,ddz);if(d<bd&&(ddx*fx+ddz*fz)/(d||1)>.2){bd=d;best=n}});
+  PADS.forEach(p=>{if(p.lv===FP.lv&&Math.hypot(p.x-FP.x,p.z-FP.z)<1.8)best=p});
   FP.near=best;
 }
-// ---- live game on the stadium field while your matchup is live ----
-const G={los:3,play:-1,gain:5,tgt:0,lastPts:null};
-const mkP=(o,i)=>({x:33,z:0,y:0,yaw:o?Math.PI:0,walk:1,ph:i,shirt:o?'#ff7a2f':'#e8edf5',pants:o?'#1d4ed8':'#e8edf5',skin:SKIN[i%4],hair:'#222',helmet:o?'#ff7a2f':'#c0392b',num:1});
-const OFF=[...Array(7)].map((_,i)=>mkP(1,i)),DEF=[...Array(6)].map((_,i)=>mkP(0,i+3));
-const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),lerp=(a,b,k)=>a+(b-a)*k;
-function form(los,tg){// formation spots [x,z] for offense (QB,C,G,G,RB,WR,WR) and defense (DL,DL,LB,CB,CB,S)
-  return{o:[[33,los+1.3],[33,los+.45],[32.1,los+.45],[33.9,los+.45],[33.9,los+2.4],[29.7,los+.45],[36.3,los+.45]],d:[[32.5,los-.55],[33.5,los-.55],[33,los-2.6],[29.9,los-1.1],[36.1,los-1.1],[33,los-6]]}}
-function gamePos(u,los,gain,tg){const F0=form(los,tg),o=F0.o.map(p=>p.slice()),d=F0.d.map(p=>p.slice());
-  const k=clamp((u-.12)/.5,0,1),depth=Math.max(2,gain-1.2);
-  [5,6].forEach((wi,j)=>{const dir=j?-1:1;o[wi][1]-=k*depth;o[wi][0]+=dir*Math.max(0,k-.55)*3.2});
-  o[0][1]+=Math.min(1,u/.4)*1.1;o[4][0]+=k*2.2;o[4][1]-=k*.8;o[1][1]-=k*.3;o[2][1]-=k*.25;o[3][1]-=k*.25;
-  d[0][1]+=k*.5;d[1][1]+=k*.6;
-  const wr=o[5+tg];d[3+tg]=[wr[0]+(tg?-.4:.4),wr[1]-.9];d[4-tg][1]-=k*2;d[2][1]-=k*.6;
-  let carrier=null;
-  if(u>.62){const c=clamp((u-.62)/.23,0,1);wr[1]-=c*1.4;carrier=wr;
-    [[2,.6],[5,.8],[3+tg,.95]].forEach(([i,a])=>{d[i][0]=lerp(d[i][0],wr[0],c*a);d[i][1]=lerp(d[i][1],wr[1]-.5,c*a)})}
-  return{o,d,carrier,wr}}
-function liveGame(t,now){
-  if(!GAME_ON)return;
-  const P=6.5,n=Math.floor(t/P),u=(t%P)/P;
-  if(n!==G.play){if(G.play>=0){G.los-=G.gain;if(G.los<-8.3){G.los=3;cheerUntil=now+3500;toast('🏈 TOUCHDOWN on the field!')}}G.play=n;G.gain=2.5+(n*7919%5);G.tgt=n%2}
-  let A=gamePos(Math.min(u,.88),G.los,G.gain,G.tgt);
-  if(u>.88){const nl=G.los-G.gain<-8.3?3:G.los-G.gain,B=gamePos(0,nl,0,0),k=(u-.88)/.12;
-    A={o:A.o.map((p,i)=>[lerp(p[0],B.o[i][0],k),lerp(p[1],B.o[i][1],k)]),d:A.d.map((p,i)=>[lerp(p[0],B.d[i][0],k),lerp(p[1],B.d[i][1],k)]),carrier:null}}
-  const put=(pl,p,face)=>{const dx=p[0]-pl.x,dz=p[1]-pl.z,m=Math.hypot(dx,dz);pl.walk=m>.01;if(m>.02)pl.yaw=Math.atan2(dx,dz);else pl.yaw=face;pl.x=p[0];pl.z=p[1];person(pl,t)};
-  OFF.forEach((pl,i)=>put(pl,A.o[i],Math.PI));DEF.forEach((pl,i)=>put(pl,A.d[i],0));
-  // the ball: snap, throw, carry
-  const qb=OFF[0];let bx,by,bz;
-  if(u<.45){bx=qb.x;by=1.25;bz=qb.z-.35}
-  else if(u<.62){const k=(u-.45)/.17,c=gamePos(.62,G.los,G.gain,G.tgt).wr;bx=lerp(qb.x,c[0],k);bz=lerp(qb.z,c[1],k);by=1.3+Math.sin(k*Math.PI)*2.2}
-  else{const c=OFF[5+G.tgt];bx=c.x;by=1.2;bz=c.z-.35}
+function useNear(){const n=FP.near;if(!n)return;if(n.elev){Object.assign(FP,n.to,{pitch:0});toast(n.to.lv?'🛗 Suite level':'🛗 Field level · the Head Coach is on the sideline');return}openTalk(n)}
+// ---- game day: the staff moves to the stadium (Head Coach on the sideline, everyone else in their suite) ----
+const HOMEPOS=[coach,scout,analyst,mgr,intern].map(c=>({c,x:c.x,z:c.z,y:c.y,yaw:c.yaw,r:c.r,sit:c.sit,anim:c.anim}));
+let staged=null;
+function stage(gd){if(staged===gd)return;staged=gd;
+  if(!gd){HOMEPOS.forEach(h=>Object.assign(h.c,{x:h.x,z:h.z,y:h.y,yaw:h.yaw,r:h.r,sit:h.sit,anim:h.anim}));return}
+  Object.assign(coach,{x:SX-15.4,z:SZ,y:0,yaw:Math.PI/2});
+  Object.assign(scout,{x:SX-32.45,z:SUITE_CZ.sc-1,y:SUY,yaw:Math.PI/2});
+  Object.assign(analyst,{x:SX-32.9,z:SUITE_CZ.an,y:SUY,yaw:-Math.PI/2});
+  mgr.y=SUY;mgr.r=path([[SX-32.2,SUITE_CZ.mg-3],[SX-32.2,SUITE_CZ.mg+3.6]]);
+  intern.y=SUY;intern.r=path([[SX-33.9,SZ-2.4],[SX-33.9,SZ+2.2]])}
+// ---- the game on the field: your real starters vs your opponent's real starters, drive by drive ----
+// Each team gets the ball in turn. Skill players are the real fantasy starters (name + live points over their head),
+// linemen and defenders fill out the field. When a real player scores points, the next play goes to him.
+const TEAMC=[{shirt:NAVY,pants:SILV,helmet:SILV},{shirt:'#b8202e',pants:'#f2f2f2',helmet:'#f2f2f2'}];
+const mkP=i=>({x:SX,z:SZ,y:0,yaw:0,walk:1,ph:i*.7,shirt:NAVY,pants:SILV,skin:FSK[i%4],hair:'#222',helmet:SILV,num:1});
+const OFF=[...Array(10)].map((_,i)=>mkP(i)),DEF=[...Array(8)].map((_,i)=>mkP(i+3));
+const G={poss:0,y:20,play:-1,gain:5,tgt:0,n:0,queue:[],drive:0};
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),lerp=(a,b,k)=>a+(b-a)*k,lastName=n=>String(n||'').split(' ').slice(-1)[0].toUpperCase().replace(/[^A-Z'.-]/g,'');
+let LINE=[{name:'',lineup:[]},{name:'',lineup:[]}];
+function rosterFor(t){const L=(LINE[t].lineup||[]).filter(p=>['QB','RB','WR','TE'].includes(p.pos));
+  const by=pos=>L.filter(p=>p.pos===pos),qb=by('QB')[0],rbs=by('RB'),wrs=by('WR'),te=by('TE')[0];
+  // offense slots: QB, C, LG, RG, RB, WR (left), WR (right), TE, slot, RB2
+  return [qb||{pos:'QB'},null,null,null,rbs[0]||null,wrs[0]||null,wrs[1]||null,te||null,wrs[2]||null,rbs[1]||null]}
+// formation offsets [dx, yards behind the line]; defense [dx, yards off the ball]
+const OF=[[0,1.4],[0,.45],[-1.2,.45],[1.2,.45],[.9,2.8],[-10,.45],[10,.45],[2.5,.5],[-6,.6],[-1.2,2.8]],DF=[[-.8,.7],[.8,.7],[0,3.2],[-3.2,3],[-10,1.4],[10,1.4],[-3,8],[3,8]];
+const ROUTE={5:[0,1,.4],6:[0,1,-.4],7:[.3,.75,.6],8:[0,.9,.7],4:[1,.35,0],9:[-1,.35,0]};
+function playPos(u,y,f,gain,tg){// f: +1 = drives toward -z (south to north), -1 = the other way
+  const los=SZ+f*(25-y),O=OF.map(([dx,b])=>[SX+dx,los+f*b]),D=DF.map(([dx,d])=>[SX+dx,los-f*d]);
+  const k=clamp((u-.12)/.5,0,1),depth=Math.max(2.5,gain-1.5);
+  Object.entries(ROUTE).forEach(([i,[side,fw,brk]])=>{const p=O[+i];p[1]-=f*k*depth*fw;p[0]+=side*k*2.2+Math.max(0,k-.55)*brk*-Math.sign(p[0]-SX||1)*5});
+  O[0][1]+=f*Math.min(1,u/.4)*1.2;[1,2,3].forEach(i=>O[i][1]-=f*k*.3);D[0][1]+=f*k*.5;D[1][1]+=f*k*.5;
+  const cb={5:4,6:5,8:3,7:2,4:6,9:7}[tg]??3;
+  const TG=O[tg];D[cb]=[TG[0]+.5,TG[1]-f*.9];
+  if(u>.62){const c=clamp((u-.62)/.23,0,1);TG[1]-=f*c*1.6;[[6,.7],[7,.6],[2,.5],[cb,.95]].forEach(([i,a])=>{D[i][0]=lerp(D[i][0],TG[0],c*a);D[i][1]=lerp(D[i][1],TG[1]-f*.5,c*a)})}
+  return{O,D,T:TG}}
+const tags=document.createElement('div');tags.id='ptags';wrap.appendChild(tags);const TAGS=[];
+function tag(i,txt,cls){let e=TAGS[i];if(!e){e=TAGS[i]=document.createElement('div');e.className='ptag';tags.appendChild(e)}if(e._t!==txt){e._t=txt;e.textContent=txt}e.className='ptag '+(cls||'');return e}
+function liveGame(t,now,VP,w,h){
+  const P=6.5,n=Math.floor(t/P),u=(t%P)/P,R0=[rosterFor(0),rosterFor(1)];
+  if(n!==G.play){
+    if(G.play>=0){G.y+=G.gain;G.n++;
+      if(G.y>=50){const tm=LINE[G.poss];cheerUntil=now+3500;if(SBF())toast(`🏈 TOUCHDOWN ${(tm.name||'').toUpperCase()}!`);G.poss^=1;G.y=20;G.n=0}
+      else if(G.n>=5){G.poss^=1;G.y=clamp(50-G.y,10,35);G.n=0}}
+    G.play=n;
+    // a real scoring play jumps the line: that player's team gets the ball and he gets the target
+    const q=G.queue.shift();if(q&&q.t!==G.poss){G.poss=q.t;G.y=20;G.n=0}
+    const ro=R0[G.poss],skill=[5,6,7,8,4,9].filter(i=>ro[i]);
+    let tg=q?skill.find(i=>ro[i]&&ro[i].name===q.name):null;if(tg==null)tg=skill.length?skill[(n*7)%skill.length]:5;
+    G.tgt=tg;G.gain=q?Math.max(9,50-G.y):3+((n*7919)%7);G.big=q||null}
+  const f=G.poss?-1:1,col=TEAMC[G.poss],dcol=TEAMC[G.poss^1],ro=R0[G.poss];
+  let A=playPos(Math.min(u,.88),G.y,f,G.gain,G.tgt);
+  if(u>.88){const ny=G.y+G.gain>=50?20:G.y+G.gain,B=playPos(0,G.n>=4?clamp(50-ny,10,35):ny,G.y+G.gain>=50||G.n>=4?-f:f,0,5),k=(u-.88)/.12;
+    A={O:A.O.map((p,i)=>[lerp(p[0],B.O[i][0],k),lerp(p[1],B.O[i][1],k)]),D:A.D.map((p,i)=>[lerp(p[0],B.D[i][0],k),lerp(p[1],B.D[i][1],k)]),T:null}}
+  const put=(pl,p,face,c)=>{Object.assign(pl,c);const dx=p[0]-pl.x,dz=p[1]-pl.z,m=Math.hypot(dx,dz);pl.walk=m>.01;pl.yaw=m>.02?Math.atan2(dx,dz):face;pl.x=p[0];pl.z=p[1];person(pl,t)};
+  OFF.forEach((pl,i)=>{if(i>=8&&!ro[i])return;put(pl,A.O[i],f>0?Math.PI:0,col)});DEF.forEach((pl,i)=>put(pl,A.D[i],f>0?0:Math.PI,dcol));
+  // the ball: snap, throw, run after the catch
+  const qb=OFF[0],tp=OFF[G.tgt];let bx,by,bz;
+  if(u<.45){bx=qb.x;by=1.25;bz=qb.z-f*.35}
+  else if(u<.62){const k=(u-.45)/.17,c=playPos(.62,G.y,f,G.gain,G.tgt).T;bx=lerp(qb.x,c[0],k);bz=lerp(qb.z,c[1],k);by=1.3+Math.sin(k*Math.PI)*2.6}
+  else{bx=tp.x;by=1.2;bz=tp.z-f*.35}
   if(u<=.88)draw(mul(T(bx,by,bz),mul(Ry(t*8),Sc(.22,.2,.42))),'#8b4513');
-  // line of scrimmage + first-down marker
-  box(33,.09,G.los,8.6,.02,.08,'#3a9bff',.6);box(28.3,0,G.los-G.gain,.12,1.2,.12,'#ffd23f',.6);
+  const los=SZ+f*(25-G.y);box(SX,.1,los,26,.02,.1,'#3a9bff',.6);box(SX-13.4,0,los-f*Math.min(10,50-G.y),.15,1.4,.15,'#ffd23f',.7);
+  // name tags over the real players (only when you can see the field)
+  let ti=0;const near=FP.on?Math.hypot(FP.x-SX,FP.z-SZ)<75:cam.r<200&&Math.hypot(cam.t[0]-SX,cam.t[2]-SZ)<60;
+  if(near)[[OFF,ro]].forEach(([pls,r])=>pls.forEach((pl,i)=>{const p=r[i];if(!p||!p.name)return;const s=project(VP,[pl.x,2.75,pl.z],w,h);const e=tag(ti++,`${lastName(p.name)} ${(+p.pts||0).toFixed(1)}`,(G.poss?'opp':'me')+(i===G.tgt&&G.big?' big':''));
+    if(!s||s[2]>90||s[0]<-50||s[0]>w+50){e.style.display='none';return}e.style.display='';e.style.transform=`translate(${s[0]}px,${s[1]}px) translate(-50%,-100%)`}));
+  for(let i=ti;i<TAGS.length;i++)TAGS[i].style.display='none';
 }
+const SBF=()=>FP.on||Math.hypot(cam.t[0]-SX,cam.t[2]-SZ)<60;
 // ---- markers over the staff: "!" when they have something for you, a green arrow over whoever owns the task you clicked in the to-do list ----
 function npcMarks(t){const sel=TASKS.find(x=>x.id===FP.target);NPC.forEach(n=>{const open=TASKS.some(x=>x.k===n.k&&!x.done),hy=(n.p.sit?2.1:2.45)+(n.p.y||0)+Math.sin(t*3)*.08;
   if(sel&&!sel.done&&sel.k===n.k&&FP.on){box(n.p.x,hy+.45,n.p.z,.18,.4,.18,'#5ef38c',1);box(n.p.x,hy+.25,n.p.z,.42,.14,.42,'#5ef38c',1);box(n.p.x,hy+.12,n.p.z,.22,.12,.22,'#5ef38c',1)}
@@ -665,8 +800,11 @@ $u('.dask input').addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventD
 // ---- enter / exit / pause ----
 function lockIt(){try{const p=cv.requestPointerLock&&cv.requestPointerLock();if(p&&p.catch)p.catch(()=>{if(FP.on&&!FP.talk)pause.hidden=false})}catch{}}
 document.addEventListener('pointerlockerror',()=>{if(FP.on&&!FP.talk)pause.hidden=false});
-function enterFP(){if(FP.on)return;FP.on=true;wrap.classList.add('fp');document.body.classList.add('fpmode');Object.assign(FP,{x:0,z:9.5,yaw:0,pitch:-.04,y:0,vy:0,list:false});$u('.todop').hidden=true;renderTodo();lockIt();toast('🎮 Walk in through the front doors. Staff with a yellow ! have something for you.')}
-function exitFP(){FP.on=false;FP.talk=null;FP.list=false;$u('.todop').hidden=true;dlg.hidden=true;pause.hidden=true;wrap.classList.remove('fp');document.body.classList.remove('fpmode');if(document.pointerLockElement)document.exitPointerLock();FP.keys.clear()}
+function enterFP(gameDay){if(FP.on)return;FP.on=true;wrap.classList.add('fp');document.body.classList.add('fpmode');
+  FP.gameDay=!!gameDay;const gd=FP.gameDay||GAME_ON;
+  // game day: you start in the GM suite looking down at the field; otherwise outside the HQ front doors
+  Object.assign(FP,gd?{lv:1,x:SX-31.2,z:SZ+1.25,yaw:Math.PI/2,pitch:-.3}:{lv:0,x:0,z:9.5,yaw:0,pitch:-.04},{y:0,vy:0,list:false});$u('.todop').hidden=true;renderTodo();lockIt();toast(gd?'🏟️ Game day! You\'re in the GM suite. The staff suites are down the hall, the elevator takes you to the Head Coach on the sideline.':'🎮 Walk in through the front doors. Staff with a yellow ! have something for you.')}
+function exitFP(){FP.on=false;FP.gameDay=false;FP.lv=0;FP.talk=null;FP.list=false;$u('.todop').hidden=true;dlg.hidden=true;pause.hidden=true;wrap.classList.remove('fp');document.body.classList.remove('fpmode');if(document.pointerLockElement)document.exitPointerLock();FP.keys.clear()}
 $u('.pres').onclick=()=>{pause.hidden=true;lockIt()};$u('.pex').onclick=exitFP;
 document.addEventListener('pointerlockchange',()=>{FP.locked=document.pointerLockElement===cv;if(FP.on&&!FP.locked&&!FP.talk&&!FP.list)pause.hidden=false;if(FP.locked)pause.hidden=true});
 document.addEventListener('mousemove',e=>{if(!FP.on||!FP.locked||FP.talk)return;FP.yaw+=e.movementX*.0024;FP.pitch=clamp(FP.pitch-e.movementY*.0024,-1.35,1.35)});
@@ -676,7 +814,7 @@ document.addEventListener('keydown',e=>{if(!FP.on||FP.talk)return;if(e.target.cl
   const c=e.code;FP.keys.add(c);
   if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(c))e.preventDefault();
   if(c==='Space'&&FP.y===0)FP.vy=6;
-  if(c==='KeyE'&&FP.near)openTalk(FP.near);
+  if(c==='KeyE'&&FP.near)useNear();
   if(c==='KeyT')toggleList();
   if(c==='Escape'&&!FP.locked)exitFP()});
 document.addEventListener('keyup',e=>FP.keys.delete(e.code));
@@ -686,7 +824,7 @@ window.addEventListener('blur',()=>FP.keys.clear());
 let fpDrag=null;cv.addEventListener('pointerdown',e=>{if(FP.on&&!FP.locked)fpDrag={x:e.clientX,y:e.clientY}},true);
 document.addEventListener('pointermove',e=>{if(!fpDrag)return;FP.yaw+=(e.clientX-fpDrag.x)*.005;FP.pitch=clamp(FP.pitch-(e.clientY-fpDrag.y)*.004,-1.35,1.35);fpDrag={x:e.clientX,y:e.clientY}});
 document.addEventListener('pointerup',()=>fpDrag=null);
-document.getElementById('hqplay').onclick=enterFP;
+document.getElementById('hqplay').onclick=()=>enterFP(false);document.getElementById('hqgame').onclick=()=>enterFP(true);
 
 // ---- render loop ----
 const SKY=rgb('#1b2650');let last=performance.now();
@@ -701,8 +839,9 @@ function frame(now){
   const k=1-Math.pow(.02,dt);['yaw','el','r'].forEach(q=>cam[q]+=(goal[q]-cam[q])*k);for(let i=0;i<3;i++)cam.t[i]+=(goal.t[i]-cam.t[i])*k;
   let eye=[cam.t[0]+cam.r*Math.cos(cam.el)*Math.sin(cam.yaw),cam.t[1]+cam.r*Math.sin(cam.el),cam.t[2]+cam.r*Math.cos(cam.el)*Math.cos(cam.yaw)];
   let ctr=[cam.t[0],cam.t[1]+1,cam.t[2]];const asp=w/Math.max(h,1);
+  stage(GAME_ON||FP.gameDay);
   if(FP.on){fpMove(dt);const inside=FP.x>-14.2&&FP.x<14.2&&FP.z>-8.2&&FP.z<2.4,bob=FP.walk&&FP.y===0?Math.abs(Math.sin(t*10))*.06:0;
-    eye=[FP.x,1.62+(inside?F:0)+FP.y+bob,FP.z];const cp=Math.cos(FP.pitch);ctr=[eye[0]+Math.sin(FP.yaw)*cp,eye[1]+Math.sin(FP.pitch),eye[2]-Math.cos(FP.yaw)*cp]}
+    eye=[FP.x,1.62+(FP.lv?SUY:inside?F:0)+FP.y+bob,FP.z];const cp=Math.cos(FP.pitch);ctr=[eye[0]+Math.sin(FP.yaw)*cp,eye[1]+Math.sin(FP.pitch),eye[2]-Math.cos(FP.yaw)*cp]}
   VIEW={eye,ctr,asp};
   const VP=FP.on?mul(persp(1.15,asp,.06,420),look(eye,ctr,[0,1,0])):mul(persp(FOV,asp,1,420),look(eye,ctr,[0,1,0]));
   gl.viewport(0,0,cv.width,cv.height);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);
@@ -728,8 +867,8 @@ function frame(now){
   if(tk!==intern){Object.assign(intern,at(intern.r,t*intern.sp));intern.walk=1}else intern.walk=0;
   [coach,scout,analyst,mgr,intern].forEach(c=>{if(c===tk&&!c.sit){const y0=c.yaw;c.yaw=Math.atan2(FP.x-c.x,FP.z-c.z);person(c,t);if(c===coach)c.yaw=y0}else person(c,t)});
   // the live game in the stadium, the markers over the staff, and a roof once you're walking around inside
-  liveGame(t,now);npcMarks(t);
-  if(FP.on){box(0,F+3.62,-2.9,28.4,.14,10.8,'#cfc8b6');for(let i=-12;i<=12;i+=4)box(i,F+3.58,-2.9,1.6,.05,9,'#fff6c4',1)}
+  liveGame(t,now,VP,w,h);npcMarks(t);
+  if(FP.on&&FP.x<20){box(0,F+3.62,-2.9,28.4,.14,10.8,'#cfc8b6');for(let i=-12;i<=12;i+=4)box(i,F+3.58,-2.9,1.6,.05,9,'#fff6c4',1)}
   // crowd
   const cheer=now<cheerUntil;
   fans.forEach(f=>{const j=cheer?Math.abs(Math.sin(t*9+f.ph))*.4:Math.abs(Math.sin(t*1.5+f.ph))*.04;box(f.x,f.y+j,f.z,.45,.55,.35,f.c);box(f.x,f.y+j+.55,f.z,.34,.34,.34,f.s);
@@ -745,22 +884,24 @@ function frame(now){
   // particles
   parts.forEach(p=>{p.y+=dt*p.v;if(p.y>11){p.y=0}box(p.x+Math.sin(t+p.z)*.3,p.y,p.z,.1,.1,.1,'#fff3b0',1)});
   // scoreboard light strip
-  box(33,4.25,-17.1,18.4,.08,.05,alertOn?[1,.2,.2]:GAME_ON?[1,.3*fl,.2]:[.3,1,.5],1);
+  box(SX,SUY+14.5+2.6,SZ-67.55,35.6,.3,.1,alertOn?[1,.2,.2]:GAME_ON?[1,.3*fl,.2]:[.3,1,.5],1);
+  PADS.forEach(p=>{if(p.lv===(FP.on?FP.lv:p.lv))box(p.x,(p.lv?SUY:0)+.02,p.z,1.4,.06,1.4,[1,.48,.18],.5+.5*Math.sin(t*4))});
   // room highlight strip above the glass (hover/focus), red pulse on the head coach when there's an alert
   ROOMS.forEach((r,i)=>{const on=r===hot||r===focused;if(i===0&&alertOn){const pu=.5+.5*Math.sin(t*6);box(r.cx,F+3.12,-.84,6.9,.16,.04,[1,.2*pu,.2*pu],1)}else if(on)box(r.cx,F+3.12,-.84,6.9,.16,.04,r.acc,1)});
   // the staff report on each room's wall screen
   drawScreens(VP,t);
   // glass (see-through pass)
   gl.enable(gl.BLEND);gl.blendFuncSeparate(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA,gl.ZERO,gl.ONE);gl.depthMask(false);gl.uniform1f(U.uA,.2);
+  box(SX-30,SUY+.5,SZ,.06,3,55,'#9fd8ff',.22);
   ROOMS.forEach(r=>{(FP.on?[-2.35,2.35]:[-2.35,0,2.35]).forEach(o=>box(r.cx+o,F+.25,-1,2.2,3.1,.05,r===hot||r===focused?r.acc:'#9fd8ff',.25))});
   gl.uniform1f(U.uA,1);gl.depthMask(true);gl.disable(gl.BLEND);
   // game HUD: who you can talk to
-  if(FP.on){const pr=$u('.fpprompt'),txt=FP.near&&!FP.talk?`<b>E</b> TALK TO ${FP.near.who.toUpperCase()}`:'';if(pr.innerHTML!==txt)pr.innerHTML=txt;pr.style.display=txt?'':'none'}
+  if(FP.on){const pr=$u('.fpprompt'),txt=FP.near&&!FP.talk?(FP.near.elev?`<b>E</b> ${FP.near.label}`:`<b>E</b> TALK TO ${FP.near.who.toUpperCase()}`):'';if(pr.innerHTML!==txt)pr.innerHTML=txt;pr.style.display=txt?'':'none'}
   // labels
   lblBox.style.display=FP.on?'none':'';
   if(now-statusAt>800){statusAt=now;ROOMS.forEach(z=>{const s=document.getElementById('r-'+z.k);z.el.querySelector('span').textContent=s?s.textContent:''})}
   ROOMS.forEach(z=>place(z.el,VP,focused&&focused.k?[z.cx,F+4.1,-8.2]:z.p,w,h));
-  {const a=project(VP,ROOMS[0].p,w,h),b=project(VP,ROOMS[1].p,w,h),c=project(VP,ROOMS[3].p,w,h);lblBox.classList.toggle('tight',!!(a&&b&&c)&&Math.min(Math.abs(b[0]-a[0]),Math.abs(c[0]-a[0])/3)<142)}place(board,VP,[33,15.4,-17.3],w,h);
+  {const a=project(VP,ROOMS[0].p,w,h),b=project(VP,ROOMS[1].p,w,h),c=project(VP,ROOMS[3].p,w,h);lblBox.classList.toggle('tight',!!(a&&b&&c)&&Math.min(Math.abs(b[0]-a[0]),Math.abs(c[0]-a[0])/3)<142)}place(board,VP,[SX,SUY+14.5+23,SZ-68],w,h);
   beacon.style.display=alertOn?'':'none';if(alertOn)place(beacon,VP,[coach.x,F+6.4,coach.z],w,h);
   requestAnimationFrame(frame);
 }

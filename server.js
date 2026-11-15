@@ -68,7 +68,8 @@ async function scoreboard(week) {
       rest = Math.max(rest, 0); proj += sp + rest; left += rest; vr += (0.55 * rest) ** 2;
     });
     if (live) anyLive = true; if (left > 0.5) anyLeft = true;
-    return { owner: LG.owner[m.roster_id], team: md.team_name || '', avatar: av, mine: r.owner_id === LG.uid,
+    const lineup = (m.starters || []).map((id, i) => { if (!id || id === '0') return null; const p = pl(id); return { name: p.name, pos: p.pos, team: p.team, pts: Math.round((+((m.starters_points || [])[i]) || 0) * 100) / 100 }; }).filter(Boolean);
+    return { owner: LG.owner[m.roster_id], team: md.team_name || '', avatar: av, mine: r.owner_id === LG.uid, lineup,
       record: `${st.wins || 0}-${st.losses || 0}${st.ties ? '-' + st.ties : ''}`, pts, proj: Math.round(proj * 10) / 10, left: Math.round(left * 10) / 10, vr, live };
   };
   const g = {}; (mu || []).forEach(m => { if (m.matchup_id != null) (g[m.matchup_id] = g[m.matchup_id] || []).push(m); });
