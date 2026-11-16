@@ -1,180 +1,171 @@
 {
- "made": "2026-11-16T00:53:40.611Z",
+ "made": "2026-11-16T08:09:36.019Z",
  "week": 10,
- "report": "AFERR, you are 2-7 and scored 72.26 last week against gavinzteam's 88.6. Nobody in your lineup is hurt, and the lineup is already the best one available, so there are no start or sit changes. Cooper Jr., McConkey and Strong are all Out, so your real bench is thin. Quarterback is the biggest hole: Stafford averages 15.87 with a floor of 9.12 and has slipped to 12.33 over his last 3. Send the Josh Allen offer to daddyisback8 first, then the Stroud, Swift, Kittle and Cousins offers. Several offers reuse the same players (White, Flournoy, Dell, Stevenson, Mayer), so send one at a time and see who answers.",
+ "report": "You are 2-7 and lost 83.9 to 128.8 last week. Nobody on your roster has a new injury designation, so there are no forced replacements. The lineup is already the best it can be this week, so make no start/sit changes. Rachaad White plays Thursday at NYG, who rank 29th against RBs. The weak spots are RB2 (White 9.7), the QB (Stafford 12.3 over his last 3) and LaPorta (5.5 over his last 3). Send the Stroud offer to zaneruth first, since Stroud averages 20.5 and 24.95 over his last 3. Then send Tuten from Ashtonmoore12 and Jeanty from daddyisback8.",
  "team_breakdown": [
   {
    "group": "QB",
    "grade": "C",
-   "note": "Stafford averages 15.87 and has a 9.12 floor, with a last-3 of 12.33. That is a bottom-half starter."
+   "note": "Stafford averages 15.87 with a 12.33 last-3 and a floor of 9.12. He is a bottom-half starter, and Stroud at 20.5 is a clear upgrade."
   },
   {
    "group": "RB",
    "grade": "C+",
-   "note": "Javonte Williams is strong at 17.73 with 23 carries a game. Rachaad White is weak at 9.74, and the bench backs (Black 4.71, McGowan 3.63) are not starters."
+   "note": "Javonte Williams (17.73) is a real RB1. White (9.74) and Stevenson (12.63) are weak and cap the lineup."
   },
   {
    "group": "WR",
    "grade": "B",
-   "note": "Higgins averages 19.98 (28.17 over his last 3) and McMillan 15.56. Nobody behind them covers an injury or a bad week."
+   "note": "Higgins (19.98, 28.17 over his last 3) and McMillan (15.56) are solid starters. Jameson Williams (13.21) is a decent flex."
   },
   {
    "group": "TE",
    "grade": "C",
-   "note": "LaPorta averages 11.64 but only 5.5 over his last 3. His matchup is good (NE is 26th against TE), and Mayer at 9.09 is the backup."
+   "note": "LaPorta averages 11.64 but has scored 5.5 over his last 3. Mayer (9.09) is only a backup."
   },
   {
    "group": "FLEX depth",
-   "grade": "C+",
-   "note": "Jameson Williams (13.21) faces a tough NE defense, ranked 2nd against WR. Stevenson (12.63) has a great matchup against DET, ranked 30th against RB."
+   "grade": "C",
+   "note": "Stevenson (12.63) and J. Williams (13.21) hold the flex spots. Flournoy (9.31) is the next man up."
   },
   {
    "group": "Bench",
    "grade": "D",
-   "note": "Cooper Jr., McConkey and Strong are Out. The remaining healthy pieces average under 10 PPR points."
+   "note": "McConkey, Cooper and Strong are all Out. Black (4.71) and McGowan (3.63) rarely score, so the bench holds little usable depth."
   }
  ],
  "plan": [
-  "Upgrade QB. Josh Allen (25.09, floor 17.8) or Stroud (20.51, floor 16.48) is worth +4.6 to +9 PPR points a week.",
-  "Swap White for D'Andre Swift (17.09) to fix the weak RB2 slot. He is on a bye this week, so he helps from next week.",
-  "Move LaPorta and a spare WR for Kittle (14.29, floor 8.36) to steady TE, then use waivers to refill the WR bench."
+  "Send the Stroud (zaneruth) offer to upgrade QB by about +4.6 points per week.",
+  "Get a real RB2 through Tuten (Ashtonmoore12) or Jeanty (daddyisback8) to replace White's 9.74.",
+  "Cut Out players for usable bench pieces (Boutte, Ekeler, Hutchinson)."
  ],
  "start_sit": [],
  "replacements": [],
  "waivers": [
   {
    "add": "Kayshon Boutte",
-   "drop": "Rashid Shaheed",
+   "drop": "Seth McGowan",
    "confidence": "MEDIUM",
-   "why": "Boutte 7.86 avg, 11.87 last3, beats Shaheed 6.03 at 32% snap share."
+   "why": "Boutte averages 7.86 (11.87 last 3) against McGowan's 3.63 on 31% of snaps."
   },
   {
-   "add": "Xavier Hutchinson",
-   "drop": "Pierre Strong Jr.",
+   "add": "Savion Williams",
+   "drop": "Rashid Shaheed",
    "confidence": "LOW",
-   "why": "Hutchinson 8.29 avg, 81% snaps, replaces Strong, who is Out; Hutchinson is questionable."
+   "why": "S. Williams averages 8.08 against Shaheed's 6.03 on 32% of snaps."
   }
  ],
- "drops": [],
- "trades": [
+ "drops": [
   {
-   "to": "daddyisback8",
-   "give": [
-    "Tetairoa McMillan",
-    "Ryan Flournoy"
-   ],
-   "get": [
-    "Josh Allen"
-   ],
-   "drop_after": "",
-   "confidence": "MEDIUM",
-   "upgrades": "QB slot",
-   "gain": "+6.6",
-   "why": "Josh Allen averages 25.09 with a floor of 17.8, against Stafford's 15.87 and 9.12, so this is MORE POINTS and also steadier. daddyisback8 is 1-8 and starts Virgil (2.8) and Fields (7.0) at WR. McMillan (15.56) and Flournoy (9.31) fill both holes, and Penix (13.75) backs up QB, which is why he can give up Allen.",
-   "their_need": "WR starters Virgil 2.8 and Fields 7.0",
-   "value_check": "24.9 vs 25.1",
-   "opener": "McMillan for Allen straight up, I need the QB.",
-   "fallback": "Add Flournoy; walk away if he wants Higgins.",
-   "text": "Sent you a QB-for-WR offer, take a look"
+   "player": "Pierre Strong Jr.",
+   "add": "Austin Ekeler",
+   "for_trade": "",
+   "why": "Strong is Out; Ekeler has 6.73 last-3 with 8.3 carries and is WAS's RB behind White."
   },
+  {
+   "player": "Zonovan Knight",
+   "add": "Xavier Hutchinson",
+   "for_trade": "",
+   "why": "Knight is a third-string RB with no stats; Hutchinson averages 8.29 on 81% of snaps."
+  }
+ ],
+ "trades": [
   {
    "to": "zaneruth",
    "give": [
-    "Matthew Stafford",
-    "Michael Mayer"
+    "Michael Mayer",
+    "Ryan Flournoy"
    ],
    "get": [
     "C.J. Stroud"
    ],
    "drop_after": "",
    "confidence": "MEDIUM",
-   "upgrades": "QB slot",
+   "upgrades": "QB",
    "gain": "+4.6",
-   "why": "C.J. Stroud averages 20.51 with a floor of 16.48 (24.95 over his last 3), against Stafford's 15.87 and 9.12, so this is MORE POINTS and MORE RELIABLE. Zane starts Daniels (19.42), so Stroud is a spare. Brock Bowers is Out, and Mayer (9.09) beats his bench TE Andrews (6.52), while Stafford gives him a backup QB.",
-   "their_need": "TE, because Bowers is Out",
-   "value_check": "25.0 vs 20.5",
-   "opener": "Stafford for Stroud straight up.",
-   "fallback": "Mayer plus Stafford; walk if he asks for LaPorta.",
-   "text": "Sent a QB swap that covers your TE hole"
+   "why": "Stroud is the target: 20.51 average, 24.95 over his last 3, and a 16.48 floor. He sits on zaneruth's bench behind Jayden Daniels (19.42), and I would start him over Stafford's 15.87. Bowers is Out, so Mayer (9.09) fills a TE hole against Andrews at 6.52, and Flournoy gives WR depth after Tate went Out. This is MORE POINTS and MORE RELIABLE.",
+   "their_need": "TE since Bowers is Out; WR depth",
+   "value_check": "18.4 vs 20.5",
+   "opener": "Mayer plus Flournoy for Stroud, you keep Daniels.",
+   "fallback": "Add Tank Dell for Mayer and Flournoy; walk away if he wants Stafford too.",
+   "text": "Sent you an offer for your backup QB, take a look."
   },
   {
-   "to": "Cavery11",
+   "to": "Ashtonmoore12",
    "give": [
-    "Rachaad White",
-    "Ryan Flournoy"
+    "Matthew Stafford"
    ],
    "get": [
-    "D'Andre Swift"
+    "Bhayshul Tuten"
    ],
    "drop_after": "",
    "confidence": "MEDIUM",
-   "upgrades": "RB2 slot",
-   "gain": "+7.4",
-   "why": "D'Andre Swift averages 17.09 with 20.33 carries a game and a 9.44 floor, against White's 9.74, so this is MORE POINTS and MORE RELIABLE. He is on a bye this week, so it helps from next week. Cavery11 starts Kaleb Johnson (3.31) at RB2, and White (9.74) plays this week while Flournoy (9.31) beats Coleman (8.93) at WR.",
-   "their_need": "RB2, Kaleb Johnson 3.31, and Swift is on bye",
-   "value_check": "19.1 vs 17.1",
-   "opener": "White for Swift straight up.",
-   "fallback": "Add Flournoy; walk away if he asks for Stevenson too.",
-   "text": "Sent a swap that gives you a RB this week"
+   "upgrades": "RB2",
+   "gain": "+5.9",
+   "why": "Tuten is the target: 15.9 average, 21.17 over his last 3, a 10.32 floor and 13.3 carries per game. He replaces White's 9.74 at RB2. If the Stroud trade lands I don't need Stafford; otherwise I'd add Drew Lock (15.59) off waivers. Their QB Geno Smith is Out and Nix is on bye, so Stafford at 15.87 fills a hole. This is MORE POINTS.",
+   "their_need": "QB: Geno Smith Out, Nix on bye",
+   "value_check": "15.9 vs 15.9",
+   "opener": "Stafford for Tuten straight up.",
+   "fallback": "Add McGowan on my side; walk away if he asks for more than that.",
+   "text": "Sent you a QB-for-RB offer, check it when you can."
   },
   {
-   "to": "Gooner6967",
+   "to": "daddyisback8",
    "give": [
-    "Sam LaPorta",
-    "Omar Cooper Jr."
+    "Jameson Williams"
    ],
    "get": [
-    "George Kittle",
-    "Dallas Goedert"
+    "Ashton Jeanty"
    ],
    "drop_after": "",
-   "confidence": "LOW",
-   "upgrades": "TE slot and TE bench",
-   "gain": "+2.7",
-   "why": "George Kittle averages 14.29 with a floor of 8.36 and a 28% target share, against LaPorta's 11.64 and 6.78 floor (5.5 over his last 3), so this is MORE RELIABLE. Gooner has two good TEs and Goedert is on a bye, so LaPorta can step into his TE slot. Cooper Jr. is Out, so that part of the value is shaky; Dell (13.0) is the better add if Gooner pushes back.",
-   "their_need": "WR flex Douglas 10.71",
-   "value_check": "24.6 vs 24.9",
-   "opener": "LaPorta for Kittle plus a WR sweetener.",
-   "fallback": "Swap Cooper for Dell; walk if he wants Jameson Williams.",
-   "text": "Sent a TE swap, check it when you can"
+   "confidence": "MEDIUM",
+   "upgrades": "RB2",
+   "gain": "+2.3",
+   "why": "Jeanty is the target: 15.48 average, a 10.3 floor and 6.33 targets per game, a steadier floor than White at 5.3. Williams fills their worst slot, as their WRs are Virgil (2.8) and Fields (7). Williams at 13.21 would be about +10 points a week for them, and their RB depth holds up with Corum and Jones. This is MORE RELIABLE.",
+   "their_need": "WR: Virgil 2.8 and Fields 7.0 start",
+   "value_check": "13.2 vs 15.5",
+   "opener": "J. Williams for Jeanty one for one.",
+   "fallback": "Add Black as a throw-in; walk away if he wants Higgins.",
+   "text": "Offer sent, it fills your WR spot."
   },
   {
-   "to": "gavinzteam",
+   "to": "cash50",
    "give": [
-    "Rhamondre Stevenson"
+    "Rachaad White",
+    "Kaelon Black"
    ],
    "get": [
-    "Kirk Cousins"
+    "Jonah Coleman"
    ],
-   "drop_after": "",
+   "drop_after": "Kaelon Black",
    "confidence": "LOW",
-   "upgrades": "QB slot",
-   "gain": "+3.0",
-   "why": "Kirk Cousins averages 19.14 with a floor of 13.77, against Stafford's 15.87, so this is MORE POINTS. Gavin starts Price (6.3) at RB2 and keeps two spare QBs (Cousins 19.14 and Shough 18.2). Stevenson (12.63, 16.43 over his last 3, with a great DET matchup) would start for him right away and add about 6 points.",
-   "their_need": "RB2, Jadarian Price 6.3",
-   "value_check": "12.6 vs 19.1",
-   "opener": "Stevenson for Shough straight up.",
-   "fallback": "Add Flournoy for Cousins; walk if he wants White too.",
-   "text": "Sent a swap using your spare QB, take a look"
+   "upgrades": "RB2 from next week",
+   "gain": "+2.8",
+   "why": "Coleman is the target: 12.58 average, 16.03 over his last 3, 77% of snaps and 12.3 carries per game. He is on bye this week, so he helps from next week. White would start for cash50 over Charbonnet's 7.75 (+2), and Henry's 15.81 has fallen to 8.49 over his last 3. This is MORE POINTS.",
+   "their_need": "RB2: Charbonnet 7.75",
+   "value_check": "14.5 vs 12.6",
+   "opener": "White for Coleman straight up.",
+   "fallback": "Add Black; walk away if he asks for J. Williams.",
+   "text": "Sent a RB offer, look when you can."
   },
   {
-   "to": "bron123",
+   "to": "garfy135",
    "give": [
     "Tank Dell"
    ],
    "get": [
-    "Quinshon Judkins"
+    "Travis Kelce"
    ],
    "drop_after": "",
    "confidence": "LOW",
-   "upgrades": "RB bench depth",
-   "gain": "+1.8",
-   "why": "Quinshon Judkins averages 11.51 with a floor of 6.94 and 14.33 carries, against White's 9.74, so this is STRONGER BENCH, and he starts if White falters. Bron starts Metcalf (9.74) at WR3, and Dell (13.0, 5 targets a game) would beat him by about 3. Dell has only 2 games of data, and Bron already has Dowdle (8.92) at RB, so he can spare Judkins.",
-   "their_need": "WR3 Metcalf 9.74",
-   "value_check": "13.0 vs 11.5",
-   "opener": "Dell for Judkins straight up.",
-   "fallback": "Add Shaheed; walk if he asks for more than that.",
-   "text": "Sent a small WR for RB swap"
+   "upgrades": "TE",
+   "gain": "+0.8",
+   "why": "Kelce is the target: 12.41 average, 12.47 over his last 3 and an 8.76 floor against LaPorta's 6.78. He is questionable, so check his status first. Dell (13.0 over 2 games) would start over Robinson at 9.66 or Hollins at 9.7 for garfy135. They also have Kraft and Loveland at TE. This is MORE RELIABLE.",
+   "their_need": "WR: Robinson 9.7 and Hollins 9.7 start",
+   "value_check": "13.0 vs 12.4",
+   "opener": "Dell for Kelce one for one.",
+   "fallback": "Add Shaheed; walk away if he refuses.",
+   "text": "Sent a TE-for-WR offer, check it."
   }
  ]
 }
