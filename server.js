@@ -234,7 +234,8 @@ async function refresh() {
   const scout = await trendingFreeAgents(rostered);
   S = { updated: new Date().toISOString(), me: (teams.find(t => t.mine) || {}).owner,
     league: { name: lg.name, season: st.season, week: wk, positions: lg.roster_positions, slots: (lg.roster_positions || []).filter(x => x !== 'BN' && x !== 'IR' && x !== 'TAXI'), ppr: (lg.scoring_settings || {}).rec },
-    teams, games, moves, injuries, alerts, tradeLog: tradeLog.slice(0, 60), tradeCounts, statLines, scout, lock };
+    teams, games, moves, injuries, alerts, tradeLog: tradeLog.slice(0, 60), tradeCounts, statLines, scout, lock,
+    film: KNOW ? { season: KNOW.season, through_week: KNOW.through_week, made: KNOW.made } : null };
 }
 
 // Nightly NFL film study from nfl_knowledge.py (data/nfl/knowledge.json), matched to Sleeper players by name.
@@ -269,7 +270,7 @@ function statsFor(p) {
   const d = p.opp && p.pos ? (K.defense_vs_pos[TEAMFIX[p.opp] || p.opp] || {})[p.pos] : null;
   if (!k && !d) return null;
   return { avg: k && k.ppr_avg, last3: k && k.ppr_last3, trend: k && k.trend, floor: k && k.ppr_floor, ceil: k && k.ppr_ceiling,
-    tgt: k && k.target_share, tpg: k && k.targets_pg, car: k && k.carries_pg, snap: k && k.snap_pct, g: k && k.games, def: d && d.rank };
+    tgt: k && k.target_share, tpg: k && k.targets_pg, car: k && k.carries_pg, snap: k && k.snap_pct, g: k && k.games, def: d && d.rank, defPts: d && d.ppr_allowed };
 }
 function nflFor(list) {
   const K = KNOW; if (!K) return null;

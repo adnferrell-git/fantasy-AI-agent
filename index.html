@@ -67,7 +67,11 @@ nav button.on{background:var(--ac)}
 .prow img{flex:0 0 46px;width:46px;height:46px;border-radius:50%;object-fit:cover;background:#0b1020;border:2px solid var(--line)}
 .prow.bad img{border-color:var(--rd)}.pinfo{flex:1;min-width:0}.pname{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pstats{display:flex;gap:14px;text-align:center}.pstats b{display:block;font-size:13px}.pstats span{font-size:10px;color:var(--mu);white-space:nowrap}
-@media(max-width:760px){.pstats div:nth-child(n+3){display:none}}
+@media(max-width:760px){.pstats>div:nth-child(n+3){display:none}.prow img{display:none}}
+.pstats>div{flex:0 0 62px}.pstats>div:last-child{flex-basis:74px}.pstats .gap{visibility:hidden}.pstats .tr b{font-size:14px}.pstats .tr.up b,.pstats .tr.hot b{color:var(--ac)}.pstats .tr.dn b,.pstats .tr.cold b{color:var(--rd)}.pstats .tr.flat b{color:var(--mu)}
+.pstats .tr em{display:block;font-style:normal;font-family:'Press Start 2P',monospace;font-size:7px;margin-top:2px}.pstats .tr.hot em{color:var(--ac)}.pstats .tr.cold em{color:var(--rd)}
+.mb{display:block;height:4px;margin:3px auto 2px;width:40px;background:#222a44;border-radius:2px;overflow:hidden}.mb i{display:block;height:100%;background:var(--ac);border-radius:2px}
+.fsn{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--mu);margin:-4px 0 8px}.fsn b{color:var(--tx,#fff)}.fsn .up,.fsn .dn{font-weight:700}
 .up{color:var(--ac)}.dn{color:var(--rd)}.dr{font-size:11px;padding:0 6px;border-radius:3px;background:#222a44;margin-left:4px}.dr.easy{color:var(--ac)}.dr.hard{color:var(--rd)}
 .sec{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--mu);margin:12px 0 2px}
 .gain{color:var(--ac);font-weight:700}.grade{display:inline-block;width:34px;font-family:'Press Start 2P',monospace;font-size:11px}.gA{color:var(--ac)}.gB{color:#9be36d}.gC{color:var(--wa)}.gD,.gF{color:var(--rd)}
@@ -178,7 +182,7 @@ nav{margin-bottom:18px}
 <div class="pane on" id="score"><div class="card"><div class="sbhead"><h2>Scoreboard</h2><span id="sbstat" class="mu"></span><div class="wkpick"><button id="wkp" class="ghost" title="Previous week">◀</button><select id="wksel" aria-label="Week"></select><button id="wkn" class="ghost" title="Next week">▶</button></div></div><div id="sb" class="sbgrid mu">Loading the scoreboard…</div></div>
 <div class="card stcard"><h2>Standings</h2><table id="stand"></table></div></div>
 <div class="pane" id="arena"><div class="card"><h2>My lineup</h2><div id="lu2" class="mu">Loading…</div></div></div>
-<div class="pane" id="lineup"><div class="card"><h2>Head Coach breakdown</h2><div id="bd" class="mu">Waiting on the Head Coach…</div></div><div class="card"><h2>Lineup changes</h2><div id="ss" class="mu">Waiting on the Head Coach…</div></div><div class="card"><h2>Waiver pickups · who to drop</h2><div id="wv" class="mu">Waiting on the Scout…</div></div><div class="card"><h2>My lineup</h2><div id="lu"></div></div><div class="card"><h2>Injury report</h2><div id="inj"></div></div></div>
+<div class="pane" id="lineup"><div class="card"><h2>Head Coach breakdown</h2><div id="bd" class="mu">Waiting on the Head Coach…</div></div><div class="card"><h2>Lineup changes</h2><div id="ss" class="mu">Waiting on the Head Coach…</div></div><div class="card"><h2>Waiver pickups · who to drop</h2><div id="wv" class="mu">Waiting on the Scout…</div></div><div class="card"><h2>My lineup · film study</h2><div id="fs" class="fsn"></div><div id="lu"></div></div><div class="card"><h2>Injury report</h2><div id="inj"></div></div></div>
 <div class="pane" id="trades"><div class="card"><h2>Trade board · offers to send <span id="trn"></span></h2><div id="tr" class="mu">Waiting on the Analyst…</div></div><div class="card"><h2>Counter-offer help</h2><div class="mu">Paste or type what the owner sent back, and the Manager tells you what to do.</div><textarea id="cin" rows="3" placeholder="Example: Bob countered, he wants Player A and Player B for Player C"></textarea><button id="cgo" style="margin-top:8px">Ask the Manager</button><div id="cout" class="mu" style="white-space:pre-wrap;margin-top:8px"></div></div></div>
 <div class="pane" id="tlog"><div class="card"><h2>League trade log</h2><div id="tstats" class="mu"></div><div id="tl"></div></div></div>
 </section>
@@ -973,13 +977,23 @@ requestAnimationFrame(frame);
 const $=s=>document.querySelector(s),esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
 const HS=p=>p.pos==='DEF'?`https://sleepercdn.com/images/team_logos/nfl/${String(p.id).toLowerCase()}.png`:`https://sleepercdn.com/content/nfl/players/thumb/${p.id}.jpg`;
+// Film study (nightly nflverse numbers) next to each player: trend arrow, usage, snaps, and the defense he faces.
+const trendOf=t=>t==null?null:t>=3?{c:'hot',a:'▲',l:'HOT'}:t>=1?{c:'up',a:'▲',l:''}:t<=-3?{c:'cold',a:'▼',l:'COLD'}:t<=-1?{c:'dn',a:'▼',l:''}:{c:'flat',a:'▬',l:''};
+const bar=v=>v==null?'':`<span class="mb"><i style="width:${Math.max(0,Math.min(100,v))}%"></i></span>`;
 function prow(p,slot){const st=p.st||{},f=v=>v==null?'–':v;
-  const tr=st.trend==null?'':st.trend>=1?` <span class="up">▲${st.trend}</span>`:st.trend<=-1?` <span class="dn">▼${Math.abs(st.trend)}</span>`:'';
-  const def=st.def?`<span class="dr ${st.def<=8?'easy':st.def>=25?'hard':''}" title="Opponent defense rank vs ${esc(p.pos||'')} (1 = gives up the most)">#${st.def} vs ${esc(p.pos||'')}</span>`:'';
+  const t=trendOf(st.trend),tr=t?`<div class="tr ${t.c}" title="Last 3 games (${f(st.last3)}) minus season avg (${f(st.avg)})"><b>${t.a}${t.c==='flat'?'':' '+Math.abs(st.trend).toFixed(1)}</b><span>trend</span>${t.l?`<em>${t.l}</em>`:''}</div>`:'<div class="tr flat"><b>–</b><span>trend</span></div>';
+  const def=st.def?`<span class="dr ${st.def<=8?'easy':st.def>=25?'hard':''}" title="${esc(p.opp||'')} defense rank vs ${esc(p.pos||'')} (1 = gives up the most)${st.defPts!=null?': '+st.defPts+' PPR/game allowed':''}">#${st.def} vs ${esc(p.pos||'')}${st.def<=8?' · soft':st.def>=25?' · tough':''}</span>`:'';
   const kick=p.kick?new Date(p.kick).toLocaleString([],{weekday:'short',hour:'numeric',minute:'2-digit'}):'';
-  const use=p.pos==='RB'?[st.car!=null?st.car:null,'carries/g']:p.pos==='QB'?[null,'']:[st.tgt!=null?Math.round(st.tgt*100)+'%':null,'tgt share'];
+  const tgt=st.tgt!=null?Math.round(st.tgt*100):null;
+  const tg=`<div><b>${tgt!=null?tgt+'%':'–'}</b>${bar(tgt!=null?tgt*3:null)}<span>tgt share</span></div>`,gap='<div class="gap"></div>';
+  const use=p.pos==='RB'?`<div><b>${f(st.car)}</b><span>carries/g</span></div>`+tg:p.pos==='WR'||p.pos==='TE'?gap+tg:gap+gap;
   const bad=p.bye||(p.inj&&['Out','IR','PUP','Sus','Doubtful'].includes(p.inj));
-  return `<div class="prow ${bad?'bad':''}"><span class="slot">${esc(slot)}</span><img src="${HS(p)}" loading="lazy" alt="" onerror="this.style.visibility='hidden'"><div class="pinfo"><div class="pname">${esc(p.name)}${p.inj?`<span class="chip">${esc(p.inj)}</span>`:''}${p.bye?'<span class="chip">BYE</span>':''}</div><div class="mu">${esc(p.pos||'')} · ${esc(p.team||'')}${p.opp?` · vs ${esc(p.opp)}`:''}${kick?' · '+kick:''}${def}</div></div><div class="pstats"><div><b>${f(st.avg)}</b><span>avg pts</span></div><div><b>${f(st.last3)}${tr}</b><span>last 3</span></div><div><b>${st.floor!=null?st.floor+'–'+st.ceil:'–'}</b><span>floor–ceil</span></div><div><b>${st.snap!=null?st.snap+'%':'–'}</b><span>snaps</span></div>${use[1]?`<div><b>${f(use[0])}</b><span>${use[1]}</span></div>`:''}</div></div>`}
+  return `<div class="prow ${bad?'bad':''}"><span class="slot">${esc(slot)}</span><img src="${HS(p)}" loading="lazy" alt="" onerror="this.style.visibility='hidden'"><div class="pinfo"><div class="pname">${esc(p.name)}${p.inj?`<span class="chip">${esc(p.inj)}</span>`:''}${p.bye?'<span class="chip">BYE</span>':''}</div><div class="mu">${esc(p.pos||'')} · ${esc(p.team||'')}${p.opp?` · vs ${esc(p.opp)}`:''}${kick?' · '+kick:''}${def}</div></div><div class="pstats"><div><b>${f(st.avg)}</b><span>avg pts</span></div>${tr}<div><b>${st.snap!=null?Math.round(st.snap)+'%':'–'}</b>${bar(st.snap)}<span>snaps</span></div>${use}<div><b>${f(st.last3)}</b><span>last 3</span></div><div><b>${st.floor!=null?st.floor+'–'+st.ceil:'–'}</b><span>floor–ceil</span></div></div></div>`}
+function filmNote(s,m){const el=$('#fs');if(!el)return;const fm=s.film,all=m?[...m.starters,...m.bench]:[];
+  if(!fm&&!all.some(p=>p.st)){el.innerHTML='<span>Film study not loaded yet. It updates every night from nflverse.</span>';return}
+  const hot=all.filter(p=>p.st&&p.st.trend>=3).sort((a,b)=>b.st.trend-a.st.trend),cold=all.filter(p=>p.st&&p.st.trend<=-3).sort((a,b)=>a.st.trend-b.st.trend);
+  const nm=l=>l.slice(0,3).map(p=>esc(p.name.split(' ').slice(-1)[0])).join(', ');
+  el.innerHTML=`<span>📼 Through <b>Week ${esc(fm&&fm.through_week||'?')}</b></span>${hot.length?`<span class="up">▲ Heating up: ${nm(hot)}</span>`:''}${cold.length?`<span class="dn">▼ Cooling: ${nm(cold)}</span>`:''}<span>Trend = last 3 games vs season avg · #rank = opp defense vs his position (1 gives up the most)</span>`}
 const pn=p=>`${esc(p.name)} <span class="mu">${esc(p.pos||'')} ${esc(p.team||'')}</span>${p.inj?`<span class="chip">${esc(p.inj)}</span>`:''}`;
 let LS=null,LB=null,done={};try{done=JSON.parse(localStorage.getItem('done')||'{}')}catch{}
 const pn0=p=>`${esc(p.name)} <span class="mu">${esc(p.pos||'')} ${esc(p.team||'')}${p.opp?' vs '+esc(p.opp):''}</span>`;
@@ -1044,7 +1058,7 @@ async function state(){try{
   $('#tick').textContent=wire.length?wire.join('   •   '):'Quiet on the wire. Nothing moving yet.';
   const m=s.teams.find(x=>x.mine);
   const SL=(s.league&&s.league.slots)||[];const SLN={SUPER_FLEX:'SFLX',REC_FLEX:'WRTE',WRRB_FLEX:'W/R',FLEX:'FLEX'};
-  $('#lu').innerHTML=m?'<div class="sec">STARTERS</div>'+m.starters.map((p,i)=>prow(p,SLN[SL[i]]||SL[i]||'')).join('')+'<div class="sec">BENCH</div>'+m.bench.map(p=>prow(p,'BN')).join(''):'';
+  $('#lu').innerHTML=m?'<div class="sec">STARTERS</div>'+m.starters.map((p,i)=>prow(p,SLN[SL[i]]||SL[i]||'')).join('')+'<div class="sec">BENCH</div>'+m.bench.map(p=>prow(p,'BN')).join(''):'';try{filmNote(s,m)}catch(e){console.error(e)}
   $('#inj').innerHTML=s.injuries.map(i=>`<div class="row"><span class="${i.mine?'me':''}">${esc(i.name)} <span class="mu">${esc(i.owner)}</span></span><span class="chip">${esc(i.inj)}</span></div>`).join('')||'Clean bill of health.';
   $('#lu2').innerHTML=m?m.starters.map(p=>`<div class="row"><span>${pn0(p)}</span><span>${flag(p)}</span></div>`).join(''):'';
   todos();
