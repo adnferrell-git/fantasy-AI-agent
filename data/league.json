@@ -48,7 +48,7 @@
      "name": "Pat Freiermuth",
      "pos": "TE",
      "team": "PIT",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "5872",
@@ -262,7 +262,7 @@
      "name": "Adonai Mitchell",
      "pos": "WR",
      "team": "NYJ",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "12469",
@@ -332,7 +332,7 @@
      "name": "Geno Smith",
      "pos": "QB",
      "team": "NYJ",
-     "inj": null
+     "inj": "Out"
     },
     {
      "id": "12490",
@@ -353,7 +353,7 @@
      "name": "Garrett Wilson",
      "pos": "WR",
      "team": "NYJ",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "8137",
@@ -502,7 +502,7 @@
      "name": "Drake Maye",
      "pos": "QB",
      "team": "NE",
-     "inj": null
+     "inj": "Out"
     },
     {
      "id": "10219",
@@ -523,7 +523,7 @@
      "name": "Drake London",
      "pos": "WR",
      "team": "ATL",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "4177",
@@ -544,14 +544,14 @@
      "name": "Wan'Dale Robinson",
      "pos": "WR",
      "team": "TEN",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "1466",
      "name": "Travis Kelce",
      "pos": "TE",
      "team": "KC",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "12961",
@@ -588,7 +588,7 @@
      "name": "Woody Marks",
      "pos": "RB",
      "team": "HOU",
-     "inj": null
+     "inj": "Out"
     },
     {
      "id": "12489",
@@ -651,7 +651,7 @@
      "name": "Jordan Addison",
      "pos": "WR",
      "team": "MIN",
-     "inj": "Questionable"
+     "inj": "Out"
     },
     {
      "id": "DEN",
@@ -721,7 +721,7 @@
      "name": "Rhamondre Stevenson",
      "pos": "RB",
      "team": "NE",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "2747",
@@ -744,7 +744,7 @@
      "name": "Ladd McConkey",
      "pos": "WR",
      "team": "LAC",
-     "inj": "Questionable"
+     "inj": "Out"
     },
     {
      "id": "11783",
@@ -758,7 +758,7 @@
      "name": "Omar Cooper Jr.",
      "pos": "WR",
      "team": "NYJ",
-     "inj": "Questionable"
+     "inj": "Out"
     },
     {
      "id": "13414",
@@ -779,7 +779,7 @@
      "name": "Pierre Strong Jr.",
      "pos": "RB",
      "team": "GB",
-     "inj": null
+     "inj": "Out"
     },
     {
      "id": "8122",
@@ -856,7 +856,7 @@
      "name": "Brock Bowers",
      "pos": "TE",
      "team": "LV",
-     "inj": null
+     "inj": "Out"
     },
     {
      "id": "13274",
@@ -1012,7 +1012,7 @@
      "name": "A.J. Brown",
      "pos": "WR",
      "team": "NE",
-     "inj": "Questionable"
+     "inj": "Out"
     },
     {
      "id": "11637",
@@ -1615,7 +1615,7 @@
      "name": "Travis Etienne Jr.",
      "pos": "RB",
      "team": "NO",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "9494",
@@ -1664,7 +1664,7 @@
      "name": "Amon-Ra St. Brown",
      "pos": "WR",
      "team": "DET",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "9480",
@@ -1685,7 +1685,7 @@
      "name": "Denzel Boston",
      "pos": "WR",
      "team": "CLE",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "7839",
@@ -1934,7 +1934,7 @@
      "name": "Tyjae Spears",
      "pos": "RB",
      "team": "TEN",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "TB",
