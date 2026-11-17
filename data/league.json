@@ -1210,10 +1210,10 @@
      "inj": null
     },
     {
-     "id": "7042",
-     "name": "Tyler Bass",
+     "id": "11786",
+     "name": "Cam Little",
      "pos": "K",
-     "team": "BUF",
+     "team": "JAX",
      "inj": null
     },
     {
@@ -1293,6 +1293,13 @@
      "name": "Rico Dowdle",
      "pos": "RB",
      "team": "PIT",
+     "inj": null
+    },
+    {
+     "id": "7042",
+     "name": "Tyler Bass",
+     "pos": "K",
+     "team": "BUF",
      "inj": null
     },
     {
