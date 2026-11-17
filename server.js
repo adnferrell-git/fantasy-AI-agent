@@ -245,8 +245,14 @@ let KNOW = null, knowAt = 0;
 const KNOW_URL = 'https://raw.githubusercontent.com/adnferrell-git/fantasy-AI-agent/main/data/nfl/knowledge.json';
 async function loadKnowledge() {
   if (KNOW && Date.now() - knowAt < 6 * 36e5) return KNOW;
-  try { KNOW = JSON.parse(fs.readFileSync('data/nfl/knowledge.json', 'utf8')); }
-  catch { try { const r = await fetch(KNOW_URL + '?t=' + Date.now()); if (r.ok) KNOW = await r.json(); } catch {} }
+  // Use whichever copy is newer: the PC's data folder is never auto-updated, so a local copy would go stale.
+  let local = null, remote = null;
+  try { local = JSON.parse(fs.readFileSync('data/nfl/knowledge.json', 'utf8')); } catch {}
+  try { const r = await fetch(KNOW_URL + '?t=' + Date.now()); if (r.ok) remote = await r.json(); } catch {}
+  const age = k => [k.season || 0, k.through_week || 0, Date.parse(k.made || 0) || 0];
+  const newer = (a, b) => { const x = age(a), y = age(b); for (let i = 0; i < 3; i++) if (x[i] !== y[i]) return x[i] > y[i] ? a : b; return a; };
+  const best = [local, remote].filter(k => k && k.players).reduce((a, b) => a ? newer(a, b) : b, null);
+  if (best) KNOW = best;
   knowAt = Date.now(); return KNOW;
 }
 // What the staff learned from grading its own past calls (learn.js writes data/lessons.json on GitHub).
