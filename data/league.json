@@ -99,13 +99,6 @@
      "inj": null
     },
     {
-     "id": "12502",
-     "name": "Gunnar Helm",
-     "pos": "TE",
-     "team": "TEN",
-     "inj": null
-    },
-    {
      "id": "12522",
      "name": "Cam Ward",
      "pos": "QB",
@@ -153,6 +146,13 @@
      "pos": "TE",
      "team": "MIN",
      "inj": "Out"
+    },
+    {
+     "id": "CHI",
+     "name": "Chicago Bears",
+     "pos": "DEF",
+     "team": "CHI",
+     "inj": null
     },
     {
      "id": "CIN",
