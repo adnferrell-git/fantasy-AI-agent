@@ -72,11 +72,8 @@
      "inj": null
     },
     {
-     "id": "CAR",
-     "name": "Carolina Panthers",
-     "pos": "DEF",
-     "team": "CAR",
-     "inj": null
+     "id": "0",
+     "name": "0"
     }
    ],
    "bench": [
@@ -99,6 +96,20 @@
      "name": "Corey Kiner",
      "pos": "RB",
      "team": "NE",
+     "inj": null
+    },
+    {
+     "id": "12502",
+     "name": "Gunnar Helm",
+     "pos": "TE",
+     "team": "TEN",
+     "inj": null
+    },
+    {
+     "id": "12522",
+     "name": "Cam Ward",
+     "pos": "QB",
+     "team": "TEN",
      "inj": null
     },
     {
@@ -142,13 +153,6 @@
      "pos": "TE",
      "team": "MIN",
      "inj": "Out"
-    },
-    {
-     "id": "7042",
-     "name": "Tyler Bass",
-     "pos": "K",
-     "team": "BUF",
-     "inj": null
     },
     {
      "id": "CIN",
@@ -570,17 +574,17 @@
    ],
    "bench": [
     {
+     "id": "10218",
+     "name": "Xavier Hutchinson",
+     "pos": "WR",
+     "team": "HOU",
+     "inj": "Questionable"
+    },
+    {
      "id": "11620",
      "name": "Rome Odunze",
      "pos": "WR",
      "team": "CHI",
-     "inj": null
-    },
-    {
-     "id": "12457",
-     "name": "Jaydon Blue",
-     "pos": "RB",
-     "team": "FA",
      "inj": null
     },
     {
