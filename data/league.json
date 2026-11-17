@@ -1643,10 +1643,10 @@
      "inj": null
     },
     {
-     "id": "13286",
-     "name": "Jadarian Price",
+     "id": "11584",
+     "name": "Bucky Irving",
      "pos": "RB",
-     "team": "SEA",
+     "team": "TB",
      "inj": null
     },
     {
@@ -1685,17 +1685,17 @@
      "inj": null
     },
     {
-     "id": "13346",
-     "name": "Denzel Boston",
-     "pos": "WR",
-     "team": "CLE",
+     "id": "4147",
+     "name": "Samaje Perine",
+     "pos": "RB",
+     "team": "CIN",
      "inj": null
     },
     {
-     "id": "7839",
-     "name": "Evan McPherson",
+     "id": "11792",
+     "name": "Will Reichard",
      "pos": "K",
-     "team": "CIN",
+     "team": "MIN",
      "inj": null
     },
     {
@@ -1715,23 +1715,9 @@
      "inj": null
     },
     {
-     "id": "11584",
-     "name": "Bucky Irving",
-     "pos": "RB",
-     "team": "TB",
-     "inj": null
-    },
-    {
      "id": "1166",
      "name": "Kirk Cousins",
      "pos": "QB",
-     "team": "MIN",
-     "inj": null
-    },
-    {
-     "id": "11792",
-     "name": "Will Reichard",
-     "pos": "K",
      "team": "MIN",
      "inj": null
     },
@@ -1750,10 +1736,17 @@
      "inj": null
     },
     {
-     "id": "4147",
-     "name": "Samaje Perine",
+     "id": "13286",
+     "name": "Jadarian Price",
      "pos": "RB",
-     "team": "CIN",
+     "team": "SEA",
+     "inj": null
+    },
+    {
+     "id": "13346",
+     "name": "Denzel Boston",
+     "pos": "WR",
+     "team": "CLE",
      "inj": null
     },
     {
@@ -1769,6 +1762,13 @@
      "pos": "WR",
      "team": "WAS",
      "inj": "IR"
+    },
+    {
+     "id": "7839",
+     "name": "Evan McPherson",
+     "pos": "K",
+     "team": "CIN",
+     "inj": null
     },
     {
      "id": "8180",
