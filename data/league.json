@@ -824,10 +824,10 @@
      "inj": null
     },
     {
-     "id": "9509",
-     "name": "Bijan Robinson",
+     "id": "12507",
+     "name": "Omarion Hampton",
      "pos": "RB",
-     "team": "ATL",
+     "team": "LAC",
      "inj": null
     },
     {
@@ -859,24 +859,24 @@
      "inj": "Out"
     },
     {
-     "id": "13274",
-     "name": "Germie Bernard",
+     "id": "12499",
+     "name": "Elic Ayomanor",
      "pos": "WR",
-     "team": "PIT",
+     "team": "TEN",
      "inj": null
     },
     {
-     "id": "12506",
-     "name": "Harold Fannin Jr.",
-     "pos": "TE",
-     "team": "CLE",
-     "inj": null
+     "id": "13279",
+     "name": "Carnell Tate",
+     "pos": "WR",
+     "team": "TEN",
+     "inj": "Out"
     },
     {
-     "id": "5119",
-     "name": "Jason Sanders",
+     "id": "6650",
+     "name": "Chase McLaughlin",
      "pos": "K",
-     "team": "NYJ",
+     "team": "TB",
      "inj": null
     },
     {
@@ -910,25 +910,18 @@
      "inj": "IR"
     },
     {
-     "id": "12499",
-     "name": "Elic Ayomanor",
-     "pos": "WR",
-     "team": "TEN",
+     "id": "12506",
+     "name": "Harold Fannin Jr.",
+     "pos": "TE",
+     "team": "CLE",
      "inj": null
     },
     {
-     "id": "12507",
-     "name": "Omarion Hampton",
-     "pos": "RB",
-     "team": "LAC",
-     "inj": null
-    },
-    {
-     "id": "13279",
-     "name": "Carnell Tate",
+     "id": "13274",
+     "name": "Germie Bernard",
      "pos": "WR",
-     "team": "TEN",
-     "inj": "Out"
+     "team": "PIT",
+     "inj": null
     },
     {
      "id": "13305",
@@ -945,17 +938,17 @@
      "inj": null
     },
     {
+     "id": "5119",
+     "name": "Jason Sanders",
+     "pos": "K",
+     "team": "NYJ",
+     "inj": null
+    },
+    {
      "id": "6130",
      "name": "Devin Singletary",
      "pos": "RB",
      "team": "NYG",
-     "inj": null
-    },
-    {
-     "id": "6650",
-     "name": "Chase McLaughlin",
-     "pos": "K",
-     "team": "TB",
      "inj": null
     },
     {
@@ -964,6 +957,13 @@
      "pos": "WR",
      "team": "NE",
      "inj": "IR"
+    },
+    {
+     "id": "9509",
+     "name": "Bijan Robinson",
+     "pos": "RB",
+     "team": "ATL",
+     "inj": null
     },
     {
      "id": "9511",
