@@ -22,6 +22,21 @@ async function post(text) {
   }
 }
 
+// data/staff-status.json tells the app why the report stopped updating. Only a fixed label goes in it, never the raw
+// error (the repo is public). It stays the same while the same problem lasts, so a long outage makes just one commit.
+const STATUS = 'data/staff-status.json';
+const readStatus = () => { try { return JSON.parse(fs.readFileSync(STATUS, 'utf8')); } catch { return null; } };
+const writeStatus = o => { fs.mkdirSync('data', { recursive: true }); fs.writeFileSync(STATUS, JSON.stringify(o, null, 1) + '\n'); };
+const failKind = m => /credit balance/i.test(m) ? 'credits' : /api[ _-]?key|authentication|unauthorized/i.test(m) ? 'key' : 'other';
+const FAIL_TEXT = { credits: 'the Anthropic account is out of credits. Add credits and the staff restarts on its next run.',
+  key: 'Anthropic refused the API key. Check the ANTHROPIC_API_KEY secret on GitHub.', other: 'the run hit an error. It tries again on the next run.' };
+async function noteFailure(message) {
+  const kind = failKind(message), prev = readStatus();
+  if (prev && prev.ok === false && prev.kind === kind) return;
+  writeStatus({ ok: false, kind, since: new Date().toISOString() });
+  if (kind !== 'other') await post(`⚠️ **The staff report is paused:** ${FAIL_TEXT[kind]}`);
+}
+
 const list = (title, rows) => rows && rows.length ? `\n**${title}**\n` + rows.join('\n') : '';
 
 (async () => {
@@ -35,6 +50,7 @@ const list = (title, rows) => rows && rows.length ? `\n**${title}**\n` + rows.jo
   if (b.error) throw new Error(b.error);
   fs.mkdirSync('data', { recursive: true });
   fs.writeFileSync('data/brief.json', JSON.stringify({ made: new Date().toISOString(), week: S.league.week, ...b }, null, 1));
+  writeStatus({ ok: true });
   try { learn.saveHistory(S, b); } catch (e) { console.error('history save failed:', e.message); }
 
   const msg = `🏈 **FRONT OFFICE REPORT · Week ${S.league.week}**\n${b.report || ''}`
@@ -47,4 +63,8 @@ const list = (title, rows) => rows && rows.length ? `\n**${title}**\n` + rows.jo
     + list('What they learned', (graded.lessons || []).slice(0, 4).map(l => '• ' + l)) : '';
   await post(msg + film);
   console.log('staff report done');
-})().catch(e => { console.error('staff failed:', e.message); process.exit(1); });
+})().catch(async e => {
+  console.error('staff failed:', e.message);
+  try { await noteFailure(e.message); } catch (e2) { console.error('could not save the failure note:', e2.message); }
+  process.exit(1);
+});

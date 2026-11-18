@@ -303,7 +303,8 @@ async function githubBrief() {
 
 // The report the HQ wall screens show. With a key, the live brief this PC made; otherwise data/brief.json,
 // whichever is newer: the copy in this folder (after a git pull) or the one on GitHub (the overnight staff run).
-let ghReport = null, ghAt = 0;
+let ghReport = null, ghAt = 0, ghStatus = null;
+const STATUS_URL = REPORT_URL.replace('brief.json', 'staff-status.json');
 async function staffReport() {
   if (KEY && brief && !brief.error) return { ...brief, made: new Date(briefAt).toISOString(), source: 'live' };
   let local = null;
@@ -311,9 +312,16 @@ async function staffReport() {
   if (!ghReport || Date.now() - ghAt > 3e5) {
     ghAt = Date.now();
     try { const r = await fetch(REPORT_URL + '?t=' + Date.now()); if (r.ok) ghReport = { ...(await r.json()), source: 'github' }; } catch {}
+    try { const r = await fetch(STATUS_URL + '?t=' + Date.now()); if (r.ok) ghStatus = await r.json(); } catch {}
   }
   const best = [local, ghReport].filter(b => b && !b.error).sort((a, b) => new Date(b.made || 0) - new Date(a.made || 0))[0];
-  return best || { error: 'No staff report yet. The staff on GitHub writes one on its next run.' };
+  if (!best) return { error: 'No staff report yet. The staff on GitHub writes one on its next run.' };
+  // Say so when the staff has stopped updating. A one-off error only counts once the report is over 12 hours old.
+  let st = ghStatus;
+  if (!st) try { st = JSON.parse(fs.readFileSync('data/staff-status.json', 'utf8')); } catch {}
+  const made = new Date(best.made || 0).getTime();
+  const paused = st && st.ok === false && new Date(st.since).getTime() > made && (st.kind !== 'other' || Date.now() - made > 12 * 36e5);
+  return paused ? { ...best, paused: { kind: st.kind, since: st.since } } : best;
 }
 
 async function makeBrief() {

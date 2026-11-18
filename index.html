@@ -86,6 +86,7 @@ main{display:block;padding:20px 20px 40px;max-width:1320px;margin:0 auto}#hq3d{m
 .card{padding:18px;margin-bottom:20px}h2{margin-bottom:14px}
 #today{border-color:var(--ac);padding:18px 20px}
 .thead{display:flex;align-items:center;gap:12px;margin-bottom:12px}.thead h2{margin:0;font-size:11px;color:var(--ac)}.thead .mu{flex:1}
+.tpause{margin:0 0 12px;padding:10px 12px;border:1px solid var(--wa);border-radius:8px;color:var(--wa);font-size:14px;line-height:1.45}
 .thead button{font-size:8px;padding:8px 10px;font-family:'Press Start 2P',ui-monospace,monospace}
 #tlist{list-style:none;margin:0;padding:0}
 .ti{display:flex;align-items:center;gap:14px;padding:11px 4px;border-bottom:1px solid var(--line);font-size:16px;transition:background .3s}.ti:last-child{border:0}
@@ -170,6 +171,7 @@ nav{margin-bottom:18px}
 <div id="toasts"></div><div class="hqhint mu">drag to spin · scroll to zoom · click a room to read its screen</div></section>
 <main>
 <section class="card" id="today"><div class="thead"><h2>TODAY</h2><span class="mu" id="tsum">Getting the staff's list…</span><button id="tall" class="ghost" aria-expanded="false">SEE ALL ▾</button></div>
+<div class="tpause" id="tpause" hidden></div>
 <ul id="tlist"><li class="tclear mu">Loading…</li></ul>
 <div id="allTodo" hidden>
 <div class="room" id="room-hc"><div class="rt">🏈 Head Coach</div><div class="mu" id="r-hc">Head Coach is calling plays…</div><div class="todo" id="t-hc"></div></div>
@@ -1082,7 +1084,11 @@ async function brief(){try{
   if(t){$('#r-an').textContent=`${b.trades.length} trade ideas on the board`;$('#r-mg').textContent=`On the phone with ${t.to}`}
 }catch(e){}}
 // the overnight staff report for the HQ wall screens (data/brief.json, or the live brief when this PC has a key)
-async function report(){try{const b=await(await fetch('/api/report')).json();if(b.error)return;LR=b;renderToday();if(window.HQ)HQ.report(b);
+function renderPause(b){const el=$('#tpause');if(!el)return;const p=b.paused;el.hidden=!p;if(!p)return;
+  const d=new Date(b.made),when=isNaN(d)?'the last good run':d.toLocaleString('en-US',{weekday:'short',hour:'numeric',minute:'2-digit'});
+  const why={credits:'Anthropic credits ran out. Add credits and it restarts by itself.',key:'Anthropic refused the API key. Check the key on GitHub.'}[p.kind]||'The last runs hit an error. It keeps retrying.';
+  el.textContent=`⚠ Staff report paused, these calls are from ${when}. ${why}`}
+async function report(){try{const b=await(await fetch('/api/report')).json();if(b.error)return;LR=b;renderPause(b);renderToday();if(window.HQ)HQ.report(b);
   const c=(b.start_sit||[])[0],r=(b.replacements||[])[0];$('#r-hc').textContent=c?`${c.call}: ${c.player}`:r?`Swap in ${r.in} for ${r.out}`:'Lineup is set';
   const t=(b.trades||[])[0];if(t){$('#r-an').textContent=`Target: ${(t.get||[]).join(', ')}`;$('#r-mg').textContent=`Texting ${t.to}`}}catch(e){}}
 document.addEventListener('click',e=>{const c=e.target.closest('.cp');if(!c)return;try{navigator.clipboard.writeText(c.dataset.c);c.textContent='Copied'}catch{c.textContent='Copy failed'}});
