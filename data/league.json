@@ -197,24 +197,10 @@
      "inj": null
     },
     {
-     "id": "9488",
-     "name": "Jaxon Smith-Njigba",
+     "id": "13294",
+     "name": "Makai Lemon",
      "pos": "WR",
-     "team": "SEA",
-     "inj": null
-    },
-    {
-     "id": "8167",
-     "name": "Christian Watson",
-     "pos": "WR",
-     "team": "GB",
-     "inj": null
-    },
-    {
-     "id": "5001",
-     "name": "Dalton Schultz",
-     "pos": "TE",
-     "team": "HOU",
+     "team": "PHI",
      "inj": null
     },
     {
@@ -225,6 +211,20 @@
      "inj": null
     },
     {
+     "id": "5001",
+     "name": "Dalton Schultz",
+     "pos": "TE",
+     "team": "HOU",
+     "inj": null
+    },
+    {
+     "id": "8134",
+     "name": "Khalil Shakir",
+     "pos": "WR",
+     "team": "BUF",
+     "inj": null
+    },
+    {
      "id": "9224",
      "name": "Chase Brown",
      "pos": "RB",
@@ -232,10 +232,10 @@
      "inj": null
     },
     {
-     "id": "12713",
-     "name": "Andy Borregales",
+     "id": "6528",
+     "name": "Joey Slye",
      "pos": "K",
-     "team": "NE",
+     "team": "TEN",
      "inj": null
     },
     {
@@ -283,13 +283,6 @@
      "inj": null
     },
     {
-     "id": "13294",
-     "name": "Makai Lemon",
-     "pos": "WR",
-     "team": "PHI",
-     "inj": null
-    },
-    {
      "id": "1479",
      "name": "Keenan Allen",
      "pos": "WR",
@@ -311,10 +304,17 @@
      "inj": "IR"
     },
     {
-     "id": "8134",
-     "name": "Khalil Shakir",
+     "id": "8167",
+     "name": "Christian Watson",
      "pos": "WR",
-     "team": "BUF",
+     "team": "GB",
+     "inj": null
+    },
+    {
+     "id": "9488",
+     "name": "Jaxon Smith-Njigba",
+     "pos": "WR",
+     "team": "SEA",
      "inj": null
     },
     {
