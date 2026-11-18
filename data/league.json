@@ -502,18 +502,18 @@
    "record": "2-8",
    "starters": [
     {
-     "id": "11564",
-     "name": "Drake Maye",
+     "id": "9228",
+     "name": "Bryce Young",
      "pos": "QB",
-     "team": "NE",
-     "inj": "Out"
+     "team": "CAR",
+     "inj": null
     },
     {
-     "id": "10219",
-     "name": "Chris Rodriguez Jr.",
+     "id": "12474",
+     "name": "Woody Marks",
      "pos": "RB",
-     "team": "JAX",
-     "inj": null
+     "team": "HOU",
+     "inj": "Out"
     },
     {
      "id": "8155",
@@ -523,32 +523,32 @@
      "inj": null
     },
     {
-     "id": "8112",
-     "name": "Drake London",
+     "id": "11620",
+     "name": "Rome Odunze",
      "pos": "WR",
-     "team": "ATL",
-     "inj": "Questionable"
-    },
-    {
-     "id": "4177",
-     "name": "Mack Hollins",
-     "pos": "WR",
-     "team": "NE",
+     "team": "CHI",
      "inj": null
     },
     {
-     "id": "9484",
-     "name": "Tucker Kraft",
+     "id": "13281",
+     "name": "Jordyn Tyson",
+     "pos": "WR",
+     "team": "NO",
+     "inj": null
+    },
+    {
+     "id": "12517",
+     "name": "Colston Loveland",
      "pos": "TE",
-     "team": "GB",
+     "team": "CHI",
      "inj": null
     },
     {
-     "id": "8126",
-     "name": "Wan'Dale Robinson",
+     "id": "13301",
+     "name": "Antonio Williams",
      "pos": "WR",
-     "team": "TEN",
-     "inj": "IR"
+     "team": "WAS",
+     "inj": null
     },
     {
      "id": "1466",
@@ -565,10 +565,10 @@
      "inj": null
     },
     {
-     "id": "GB",
-     "name": "Green Bay Packers",
+     "id": "DEN",
+     "name": "Denver Broncos",
      "pos": "DEF",
-     "team": "GB",
+     "team": "DEN",
      "inj": null
     }
    ],
@@ -581,17 +581,17 @@
      "inj": "Questionable"
     },
     {
-     "id": "11620",
-     "name": "Rome Odunze",
-     "pos": "WR",
-     "team": "CHI",
+     "id": "10219",
+     "name": "Chris Rodriguez Jr.",
+     "pos": "RB",
+     "team": "JAX",
      "inj": null
     },
     {
-     "id": "12474",
-     "name": "Woody Marks",
-     "pos": "RB",
-     "team": "HOU",
+     "id": "11564",
+     "name": "Drake Maye",
+     "pos": "QB",
+     "team": "NE",
      "inj": "Out"
     },
     {
@@ -602,20 +602,6 @@
      "inj": "IR"
     },
     {
-     "id": "12517",
-     "name": "Colston Loveland",
-     "pos": "TE",
-     "team": "CHI",
-     "inj": null
-    },
-    {
-     "id": "13281",
-     "name": "Jordyn Tyson",
-     "pos": "WR",
-     "team": "NO",
-     "inj": null
-    },
-    {
      "id": "13287",
      "name": "Jeremiyah Love",
      "pos": "RB",
@@ -623,10 +609,10 @@
      "inj": "IR"
     },
     {
-     "id": "13301",
-     "name": "Antonio Williams",
+     "id": "4177",
+     "name": "Mack Hollins",
      "pos": "WR",
-     "team": "WAS",
+     "team": "NE",
      "inj": null
     },
     {
@@ -637,10 +623,24 @@
      "inj": null
     },
     {
-     "id": "9228",
-     "name": "Bryce Young",
-     "pos": "QB",
-     "team": "CAR",
+     "id": "8112",
+     "name": "Drake London",
+     "pos": "WR",
+     "team": "ATL",
+     "inj": "Questionable"
+    },
+    {
+     "id": "8126",
+     "name": "Wan'Dale Robinson",
+     "pos": "WR",
+     "team": "TEN",
+     "inj": "IR"
+    },
+    {
+     "id": "9484",
+     "name": "Tucker Kraft",
+     "pos": "TE",
+     "team": "GB",
      "inj": null
     },
     {
@@ -658,10 +658,10 @@
      "inj": "Out"
     },
     {
-     "id": "DEN",
-     "name": "Denver Broncos",
+     "id": "GB",
+     "name": "Green Bay Packers",
      "pos": "DEF",
-     "team": "DEN",
+     "team": "GB",
      "inj": null
     }
    ]
@@ -1501,17 +1501,17 @@
      "inj": null
     },
     {
-     "id": "13297",
-     "name": "Reggie Virgil",
+     "id": "12514",
+     "name": "Emeka Egbuka",
      "pos": "WR",
-     "team": "ARI",
+     "team": "TB",
      "inj": null
     },
     {
-     "id": "13285",
-     "name": "Malachi Fields",
+     "id": "4037",
+     "name": "Chris Godwin Jr.",
      "pos": "WR",
-     "team": "NYG",
+     "team": "TB",
      "inj": null
     },
     {
@@ -1529,24 +1529,24 @@
      "inj": null
     },
     {
-     "id": "11586",
-     "name": "Blake Corum",
-     "pos": "RB",
-     "team": "LAR",
-     "inj": null
+     "id": "7525",
+     "name": "DeVonta Smith",
+     "pos": "WR",
+     "team": "PHI",
+     "inj": "Out"
     },
     {
-     "id": "13545",
-     "name": "Trey Smack",
+     "id": "2020",
+     "name": "Cairo Santos",
      "pos": "K",
-     "team": "GB",
+     "team": "CHI",
      "inj": null
     },
     {
-     "id": "NE",
-     "name": "New England Patriots",
+     "id": "CAR",
+     "name": "Carolina Panthers",
      "pos": "DEF",
-     "team": "NE",
+     "team": "CAR",
      "inj": null
     }
    ],
@@ -1566,6 +1566,13 @@
      "inj": null
     },
     {
+     "id": "11586",
+     "name": "Blake Corum",
+     "pos": "RB",
+     "team": "LAR",
+     "inj": null
+    },
+    {
      "id": "11762",
      "name": "Anthony Gould",
      "pos": "WR",
@@ -1573,10 +1580,17 @@
      "inj": "Questionable"
     },
     {
-     "id": "12514",
-     "name": "Emeka Egbuka",
+     "id": "13285",
+     "name": "Malachi Fields",
      "pos": "WR",
-     "team": "TB",
+     "team": "NYG",
+     "inj": null
+    },
+    {
+     "id": "13297",
+     "name": "Reggie Virgil",
+     "pos": "WR",
+     "team": "ARI",
      "inj": null
     },
     {
@@ -1594,32 +1608,11 @@
      "inj": null
     },
     {
-     "id": "4037",
-     "name": "Chris Godwin Jr.",
-     "pos": "WR",
-     "team": "TB",
-     "inj": null
-    },
-    {
      "id": "5906",
      "name": "Dawson Knox",
      "pos": "TE",
      "team": "BUF",
      "inj": null
-    },
-    {
-     "id": "6427",
-     "name": "Ashton Dulin",
-     "pos": "WR",
-     "team": "IND",
-     "inj": null
-    },
-    {
-     "id": "7525",
-     "name": "DeVonta Smith",
-     "pos": "WR",
-     "team": "PHI",
-     "inj": "Out"
     },
     {
      "id": "7543",
