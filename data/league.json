@@ -516,11 +516,11 @@
      "inj": null
     },
     {
-     "id": "12474",
-     "name": "Woody Marks",
+     "id": "7567",
+     "name": "Kenny Gainwell",
      "pos": "RB",
-     "team": "HOU",
-     "inj": "Out"
+     "team": "TB",
+     "inj": null
     },
     {
      "id": "8155",
@@ -602,6 +602,13 @@
      "inj": "Out"
     },
     {
+     "id": "12474",
+     "name": "Woody Marks",
+     "pos": "RB",
+     "team": "HOU",
+     "inj": "Out"
+    },
+    {
      "id": "12489",
      "name": "RJ Harvey",
      "pos": "RB",
@@ -620,13 +627,6 @@
      "name": "Mack Hollins",
      "pos": "WR",
      "team": "NE",
-     "inj": null
-    },
-    {
-     "id": "7567",
-     "name": "Kenny Gainwell",
-     "pos": "RB",
-     "team": "TB",
      "inj": null
     },
     {
@@ -1396,11 +1396,11 @@
    ],
    "bench": [
     {
-     "id": "11579",
-     "name": "Audric Estime",
+     "id": "11583",
+     "name": "Jonathon Brooks",
      "pos": "RB",
-     "team": "NO",
-     "inj": null
+     "team": "CAR",
+     "inj": "IR"
     },
     {
      "id": "11643",
