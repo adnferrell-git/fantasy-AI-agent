@@ -1685,10 +1685,10 @@
      "inj": null
     },
     {
-     "id": "3214",
-     "name": "Hunter Henry",
-     "pos": "TE",
-     "team": "NE",
+     "id": "8180",
+     "name": "Jalen Nailor",
+     "pos": "WR",
+     "team": "LV",
      "inj": null
     },
     {
@@ -1757,6 +1757,13 @@
      "inj": null
     },
     {
+     "id": "3214",
+     "name": "Hunter Henry",
+     "pos": "TE",
+     "team": "NE",
+     "inj": null
+    },
+    {
      "id": "4454",
      "name": "Kendrick Bourne",
      "pos": "WR",
@@ -1775,13 +1782,6 @@
      "name": "Evan McPherson",
      "pos": "K",
      "team": "CIN",
-     "inj": null
-    },
-    {
-     "id": "8180",
-     "name": "Jalen Nailor",
-     "pos": "WR",
-     "team": "LV",
      "inj": null
     },
     {
