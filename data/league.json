@@ -1331,11 +1331,11 @@
      "inj": null
     },
     {
-     "id": "11579",
-     "name": "Audric Estime",
+     "id": "8151",
+     "name": "Kenneth Walker III",
      "pos": "RB",
-     "team": "NO",
-     "inj": null
+     "team": "KC",
+     "inj": "Out"
     },
     {
      "id": "7594",
@@ -1352,11 +1352,11 @@
      "inj": null
     },
     {
-     "id": "11646",
-     "name": "Jalen Coker",
+     "id": "12519",
+     "name": "Luther Burden III",
      "pos": "WR",
-     "team": "CAR",
-     "inj": null
+     "team": "CHI",
+     "inj": "Questionable"
     },
     {
      "id": "8131",
@@ -1366,17 +1366,17 @@
      "inj": null
     },
     {
-     "id": "11834",
-     "name": "Devaughn Vele",
+     "id": "11646",
+     "name": "Jalen Coker",
      "pos": "WR",
-     "team": "NO",
+     "team": "CAR",
      "inj": null
     },
     {
-     "id": "12540",
-     "name": "Chimere Dike",
+     "id": "13296",
+     "name": "Caleb Douglas",
      "pos": "WR",
-     "team": "TEN",
+     "team": "MIA",
      "inj": null
     },
     {
@@ -1387,19 +1387,33 @@
      "inj": null
     },
     {
-     "id": "MIA",
-     "name": "Miami Dolphins",
+     "id": "SF",
+     "name": "San Francisco 49ers",
      "pos": "DEF",
-     "team": "MIA",
+     "team": "SF",
      "inj": null
     }
    ],
    "bench": [
     {
+     "id": "11579",
+     "name": "Audric Estime",
+     "pos": "RB",
+     "team": "NO",
+     "inj": null
+    },
+    {
      "id": "11643",
      "name": "Jaylen Wright",
      "pos": "RB",
      "team": "MIA",
+     "inj": null
+    },
+    {
+     "id": "11834",
+     "name": "Devaughn Vele",
+     "pos": "WR",
+     "team": "NO",
      "inj": null
     },
     {
@@ -1410,13 +1424,6 @@
      "inj": "IR"
     },
     {
-     "id": "12519",
-     "name": "Luther Burden III",
-     "pos": "WR",
-     "team": "CHI",
-     "inj": "Questionable"
-    },
-    {
      "id": "12529",
      "name": "TreVeyon Henderson",
      "pos": "RB",
@@ -1424,10 +1431,10 @@
      "inj": "IR"
     },
     {
-     "id": "13296",
-     "name": "Caleb Douglas",
+     "id": "12540",
+     "name": "Chimere Dike",
      "pos": "WR",
-     "team": "MIA",
+     "team": "TEN",
      "inj": null
     },
     {
@@ -1459,13 +1466,6 @@
      "inj": "IR"
     },
     {
-     "id": "8151",
-     "name": "Kenneth Walker III",
-     "pos": "RB",
-     "team": "KC",
-     "inj": "Out"
-    },
-    {
      "id": "8172",
      "name": "Greg Dulcich",
      "pos": "TE",
@@ -1473,10 +1473,10 @@
      "inj": null
     },
     {
-     "id": "SF",
-     "name": "San Francisco 49ers",
+     "id": "MIA",
+     "name": "Miami Dolphins",
      "pos": "DEF",
-     "team": "SF",
+     "team": "MIA",
      "inj": null
     }
    ]
