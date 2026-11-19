@@ -131,7 +131,7 @@
      "name": "Mike Evans",
      "pos": "WR",
      "team": "SF",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "4039",
@@ -145,7 +145,7 @@
      "name": "T.J. Hockenson",
      "pos": "TE",
      "team": "MIN",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "CHI",
@@ -350,7 +350,7 @@
      "name": "Bhayshul Tuten",
      "pos": "RB",
      "team": "JAX",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "8408",
@@ -392,7 +392,7 @@
      "name": "Jakobi Meyers",
      "pos": "WR",
      "team": "JAX",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "3451",
@@ -422,7 +422,7 @@
      "name": "Kyle Monangai",
      "pos": "RB",
      "team": "CHI",
-     "inj": "Out"
+     "inj": null
     },
     {
      "id": "12536",
@@ -436,7 +436,7 @@
      "name": "Geno Smith",
      "pos": "QB",
      "team": "NYJ",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "4035",
@@ -457,7 +457,7 @@
      "name": "David Montgomery",
      "pos": "RB",
      "team": "HOU",
-     "inj": "Out"
+     "inj": null
     },
     {
      "id": "5995",
@@ -485,7 +485,7 @@
      "name": "Chig Okonkwo",
      "pos": "TE",
      "team": "WAS",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "9479",
@@ -541,7 +541,7 @@
      "name": "Jordyn Tyson",
      "pos": "WR",
      "team": "NO",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "12517",
@@ -562,7 +562,7 @@
      "name": "Travis Kelce",
      "pos": "TE",
      "team": "KC",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "12961",
@@ -585,14 +585,14 @@
      "name": "Xavier Hutchinson",
      "pos": "WR",
      "team": "HOU",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "10219",
      "name": "Chris Rodriguez Jr.",
      "pos": "RB",
      "team": "JAX",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "11564",
@@ -655,7 +655,7 @@
      "name": "Dontayvion Wicks",
      "pos": "WR",
      "team": "PHI",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "9756",
@@ -679,10 +679,10 @@
    "record": "2-8",
    "starters": [
     {
-     "id": "421",
-     "name": "Matthew Stafford",
+     "id": "13269",
+     "name": "Fernando Mendoza",
      "pos": "QB",
-     "team": "LAR",
+     "team": "LV",
      "inj": null
     },
     {
@@ -728,24 +728,24 @@
      "inj": null
     },
     {
-     "id": "7611",
-     "name": "Rhamondre Stevenson",
-     "pos": "RB",
-     "team": "NE",
+     "id": "11783",
+     "name": "Ryan Flournoy",
+     "pos": "WR",
+     "team": "DAL",
      "inj": null
     },
     {
-     "id": "2747",
-     "name": "Jason Myers",
+     "id": "13968",
+     "name": "Drew Stevens",
      "pos": "K",
-     "team": "SEA",
+     "team": "WAS",
      "inj": null
     },
     {
-     "id": "LAR",
-     "name": "Los Angeles Rams",
+     "id": "NYG",
+     "name": "New York Giants",
      "pos": "DEF",
-     "team": "LAR",
+     "team": "NYG",
      "inj": null
     }
    ],
@@ -755,21 +755,14 @@
      "name": "Ladd McConkey",
      "pos": "WR",
      "team": "LAC",
-     "inj": "Out"
-    },
-    {
-     "id": "11783",
-     "name": "Ryan Flournoy",
-     "pos": "WR",
-     "team": "DAL",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "13276",
      "name": "Omar Cooper Jr.",
      "pos": "WR",
      "team": "NYJ",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "13414",
@@ -786,18 +779,25 @@
      "inj": null
     },
     {
+     "id": "421",
+     "name": "Matthew Stafford",
+     "pos": "QB",
+     "team": "LAR",
+     "inj": null
+    },
+    {
+     "id": "7611",
+     "name": "Rhamondre Stevenson",
+     "pos": "RB",
+     "team": "NE",
+     "inj": null
+    },
+    {
      "id": "8116",
      "name": "Pierre Strong Jr.",
      "pos": "RB",
      "team": "GB",
      "inj": "Out"
-    },
-    {
-     "id": "8122",
-     "name": "Zonovan Knight",
-     "pos": "RB",
-     "team": "ARI",
-     "inj": null
     },
     {
      "id": "8676",
@@ -818,6 +818,13 @@
      "name": "Tank Dell",
      "pos": "WR",
      "team": "HOU",
+     "inj": null
+    },
+    {
+     "id": "LAR",
+     "name": "Los Angeles Rams",
+     "pos": "DEF",
+     "team": "LAR",
      "inj": null
     }
    ]
@@ -867,7 +874,7 @@
      "name": "Brock Bowers",
      "pos": "TE",
      "team": "LV",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "12499",
@@ -881,7 +888,7 @@
      "name": "Carnell Tate",
      "pos": "WR",
      "team": "TEN",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "6650",
@@ -1058,7 +1065,7 @@
      "name": "Matt Gay",
      "pos": "K",
      "team": "LV",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "KC",
@@ -1258,14 +1265,14 @@
      "name": "Darren Waller",
      "pos": "TE",
      "team": "CAR",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "3321",
      "name": "Tyreek Hill",
      "pos": "WR",
      "team": "FA",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "6011",
@@ -1335,7 +1342,7 @@
      "name": "Kenneth Walker III",
      "pos": "RB",
      "team": "KC",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "7594",
@@ -1356,7 +1363,7 @@
      "name": "Luther Burden III",
      "pos": "WR",
      "team": "CHI",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "8131",
@@ -1377,7 +1384,7 @@
      "name": "Caleb Douglas",
      "pos": "WR",
      "team": "MIA",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "11533",
@@ -1526,7 +1533,7 @@
      "name": "Dalton Kincaid",
      "pos": "TE",
      "team": "BUF",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "9500",
@@ -1540,7 +1547,7 @@
      "name": "DeVonta Smith",
      "pos": "WR",
      "team": "PHI",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "2020",
@@ -1938,14 +1945,14 @@
      "name": "Jaylen Waddle",
      "pos": "WR",
      "team": "DEN",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "9508",
      "name": "Tyjae Spears",
      "pos": "RB",
      "team": "TEN",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "TB",
