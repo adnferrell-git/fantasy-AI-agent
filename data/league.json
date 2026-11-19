@@ -1452,18 +1452,18 @@
      "inj": null
     },
     {
-     "id": "3286",
-     "name": "Demarcus Robinson",
-     "pos": "WR",
-     "team": "SF",
-     "inj": null
-    },
-    {
      "id": "5849",
      "name": "Kyler Murray",
      "pos": "QB",
      "team": "MIN",
      "inj": "Out"
+    },
+    {
+     "id": "8122",
+     "name": "Zonovan Knight",
+     "pos": "RB",
+     "team": "ARI",
+     "inj": null
     },
     {
      "id": "8142",
