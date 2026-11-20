@@ -537,7 +537,7 @@
      "name": "Jordyn Tyson",
      "pos": "WR",
      "team": "NO",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "12517",
@@ -1338,7 +1338,7 @@
      "name": "Kenneth Walker III",
      "pos": "RB",
      "team": "KC",
-     "inj": "Questionable"
+     "inj": "Out"
     },
     {
      "id": "7594",
@@ -1380,7 +1380,7 @@
      "name": "Caleb Douglas",
      "pos": "WR",
      "team": "MIA",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "11533",
