@@ -1813,17 +1813,17 @@
    "record": "4-6",
    "starters": [
     {
-     "id": "6804",
-     "name": "Jordan Love",
+     "id": "11560",
+     "name": "Caleb Williams",
      "pos": "QB",
-     "team": "GB",
+     "team": "CHI",
      "inj": null
     },
     {
-     "id": "8150",
-     "name": "Kyren Williams",
+     "id": "4866",
+     "name": "Saquon Barkley",
      "pos": "RB",
-     "team": "LAR",
+     "team": "PHI",
      "inj": null
     },
     {
@@ -1841,10 +1841,10 @@
      "inj": null
     },
     {
-     "id": "12501",
-     "name": "Matthew Golden",
+     "id": "7569",
+     "name": "Nico Collins",
      "pos": "WR",
-     "team": "GB",
+     "team": "HOU",
      "inj": null
     },
     {
@@ -1855,18 +1855,18 @@
      "inj": null
     },
     {
-     "id": "9501",
-     "name": "DeMario Douglas",
-     "pos": "WR",
-     "team": "NE",
+     "id": "5022",
+     "name": "Dallas Goedert",
+     "pos": "TE",
+     "team": "PHI",
      "inj": null
     },
     {
-     "id": "7569",
-     "name": "Nico Collins",
+     "id": "7526",
+     "name": "Jaylen Waddle",
      "pos": "WR",
-     "team": "HOU",
-     "inj": null
+     "team": "DEN",
+     "inj": "Questionable"
     },
     {
      "id": "12185",
@@ -1885,17 +1885,17 @@
    ],
    "bench": [
     {
-     "id": "11560",
-     "name": "Caleb Williams",
-     "pos": "QB",
-     "team": "CHI",
-     "inj": null
-    },
-    {
      "id": "11610",
      "name": "Malik Washington",
      "pos": "WR",
      "team": "MIA",
+     "inj": null
+    },
+    {
+     "id": "12501",
+     "name": "Matthew Golden",
+     "pos": "WR",
+     "team": "GB",
      "inj": null
     },
     {
@@ -1913,25 +1913,11 @@
      "inj": null
     },
     {
-     "id": "4866",
-     "name": "Saquon Barkley",
-     "pos": "RB",
-     "team": "PHI",
-     "inj": null
-    },
-    {
      "id": "4943",
      "name": "Sam Darnold",
      "pos": "QB",
      "team": "SEA",
      "inj": "Out"
-    },
-    {
-     "id": "5022",
-     "name": "Dallas Goedert",
-     "pos": "TE",
-     "team": "PHI",
-     "inj": null
     },
     {
      "id": "6803",
@@ -1941,11 +1927,25 @@
      "inj": "DNR"
     },
     {
-     "id": "7526",
-     "name": "Jaylen Waddle",
+     "id": "6804",
+     "name": "Jordan Love",
+     "pos": "QB",
+     "team": "GB",
+     "inj": null
+    },
+    {
+     "id": "8150",
+     "name": "Kyren Williams",
+     "pos": "RB",
+     "team": "LAR",
+     "inj": null
+    },
+    {
+     "id": "9501",
+     "name": "DeMario Douglas",
      "pos": "WR",
-     "team": "DEN",
-     "inj": "Questionable"
+     "team": "NE",
+     "inj": null
     },
     {
      "id": "9508",
