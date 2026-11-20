@@ -48,7 +48,7 @@
      "name": "T.J. Hockenson",
      "pos": "TE",
      "team": "MIN",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "5872",
@@ -1366,7 +1366,7 @@
      "name": "Isaiah Likely",
      "pos": "TE",
      "team": "NYG",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "11646",
