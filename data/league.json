@@ -432,7 +432,7 @@
      "name": "Geno Smith",
      "pos": "QB",
      "team": "NYJ",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "4035",
@@ -651,7 +651,7 @@
      "name": "Dontayvion Wicks",
      "pos": "WR",
      "team": "PHI",
-     "inj": "Questionable"
+     "inj": "Out"
     },
     {
      "id": "9756",
