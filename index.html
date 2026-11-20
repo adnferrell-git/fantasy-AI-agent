@@ -190,6 +190,10 @@ nav{margin-bottom:18px}
 </section>
 </main>
 <script>
+// A report from an older week: its start/sit calls and lineup swaps no longer apply (trades and waivers still can).
+// Shared by the HQ and the page; LS (the league state) is set by the page script below.
+function nowWk(){let s=null;try{s=LS}catch{}return s&&s.league?+s.league.week||0:0}
+function staleWk(b){return !!(b&&b.week&&nowWk()>+b.week)}
 // ===== 3D VOXEL HQ: the team facility (plain WebGL, no libraries) =====
 // Front office building with a hallway and four glass-front rooms (Head Coach, Scout, Analyst, Manager),
 // the practice field on the left and a small stadium on the right, all on solid ground.
@@ -499,6 +503,7 @@ const PAINT={
   const X=172,MW=W-X-16;g.fillStyle='#1d4ed8';g.font=PXF(17);g.textAlign='left';g.fillText('GAME PLAN',X,40);const st=stamp(b);if(st){g.font=PXF(11);g.fillStyle='#8a9ab3';g.textAlign='right';g.fillText(st,W-14,36)}
   const c=b&&(b.start_sit||[])[0],r=b&&(b.replacements||[])[0];
   if(!b){lines(g,'Waiting on the report…',X,110,MW,18,26,3,'#555');return}
+  if(staleWk(b)){const t='NEW WEEK '+nowWk();let y=lines(g,t,X,96,MW,fitPx(g,t,MW,34,16),40,1,'#1d4ed8');y=lines(g,'Week '+b.week+' calls are done.',X,y+12,MW,18,24,1,'#333');lines(g,'New start/sit calls come with the next staff report. Check byes and injuries before lock.',X,y+14,MW,14,20,3,'#555');return}
   if(c){const t=up(c.call)+' '+up(c.player);const px=fitPx(g,t,MW,34,16);let y=lines(g,t,X,92,MW,px,px+10,2,c.call==='SIT'?'#e67e22':'#1f9d55');
     if(c.over)y=lines(g,(c.call==='SIT'?'put in ':'over ')+c.over,X,y+10,MW,fitPx(g,'over '+c.over,MW,18,12),24,2,'#333');lines(g,up(c.confidence||'')+' CONFIDENCE',X,Math.min(y+24,H-16),MW,14,18,1,'#1d4ed8');return}
   if(r){const a='IN: '+up(r.in),o='OUT: '+up(r.out);let y=lines(g,a,X,90,MW,fitPx(g,a,MW,30,14),38,1,'#1f9d55');y=lines(g,o,X,y+4,MW,fitPx(g,o,MW,20,11),28,1,'#e74c3c');lines(g,r.why,X,y+16,MW,14,22,3,'#555');return}
@@ -676,7 +681,7 @@ window.HQ={
   const first=!repKey;repKey=k;REP=b;paintScreens();if(!first)toast('📺 New staff report is up on the wall screens')},
  update(s){
   if(!s)return;const me=(s.teams||[]).find(t=>t.mine);
-  const tr0=REPstate&&(REPstate.scout||[])[0],tr1=(s.scout||[])[0];REPstate=s;if(REP&&(tr0&&tr0.name)!==(tr1&&tr1.name))paintScreens();
+  const tr0=REPstate&&(REPstate.scout||[])[0],tr1=(s.scout||[])[0],wk0=REPstate&&REPstate.league&&REPstate.league.week;REPstate=s;if(REP&&((tr0&&tr0.name)!==(tr1&&tr1.name)||wk0!==(s.league&&s.league.week)))paintScreens();
   if(!SBD)board.querySelector('span').textContent=`WK ${s.league?s.league.week:'--'} · ${me?me.record:'--'}`;
   const was=alertOn;alertOn=!!(s.alerts&&s.alerts.length);
   if(alertOn&&!was)s.alerts.forEach(a=>toast(`🚨 ${a.name} is ${a.status}`,'bad'));
@@ -834,7 +839,7 @@ const HIST={};
 const clip=(s,n)=>{s=String(s||'');return s.length>n?s.slice(0,n).replace(/\s+\S*$/,'')+'…':s};
 function greet(k){const b=REP||{},st=REPstate||{},mine=TASKS.filter(x=>x.k===k&&!x.done).map(x=>strip(x.html));
   const todo=mine.length?` On your list from me: ${mine.join('; ')}.`:'';
-  if(k==='hc'){const c=(b.start_sit||[])[0],r=(b.replacements||[])[0];let s=c?`Boss. ${c.call} ${c.player}${c.over?(c.call==='SIT'?', put in ':' over ')+c.over:''}. ${clip(c.why,200)}`:r?`${r.out} can't go. Put ${r.in} in. ${clip(r.why,160)}`:'Lineup is set, boss. Nothing to change this week.';
+  if(k==='hc'){const c=(b.start_sit||[])[0],r=(b.replacements||[])[0];let s=staleWk(b)?`New week, boss. My week ${b.week} calls are done, the week ${nowWk()} start/sit comes with the next report. Check byes and injuries before lock.`:c?`Boss. ${c.call} ${c.player}${c.over?(c.call==='SIT'?', put in ':' over ')+c.over:''}. ${clip(c.why,200)}`:r?`${r.out} can't go. Put ${r.in} in. ${clip(r.why,160)}`:'Lineup is set, boss. Nothing to change this week.';
     if(st.lock&&new Date(st.lock.at)>Date.now())s+=` Lineup locks ${new Date(st.lock.at).toLocaleString([],{weekday:'short',hour:'numeric',minute:'2-digit'})}.`;return s+todo}
   if(k==='sc'){const w=(b.waivers||[])[0],d=(b.drops||[])[0],tr=(st.scout||[])[0];return (w?`Got one for you. Add ${w.add}, drop ${w.drop}. ${clip(w.why,200)}`:d?`Make room: drop ${d.player}${d.add?' and grab '+d.add:''}. ${clip(d.why,160)}`:`Wire's quiet. Your bench beats it.${tr?' I\'m watching '+tr.name+' though.':''}`)+todo}
   if(k==='an'){const t=(b.trades||[])[0];return (t?`Top idea: send ${t.to} ${(t.give||[]).join(' + ')} for ${(t.get||[]).join(' + ')}${t.gain?', about '+t.gain+' pts a week':''}. ${clip(t.why,200)}`:'Roster is maxed. No trade makes you better right now.')+todo}
@@ -1019,7 +1024,7 @@ let LS=null,LB=null,done={};try{done=JSON.parse(localStorage.getItem('done')||'{
 const pn0=p=>`${esc(p.name)} <span class="mu">${esc(p.pos||'')} ${esc(p.team||'')}${p.opp?' vs '+esc(p.opp):''}</span>`;
 const flag=p=>{if(p.bye)return '<span class="flag red">🚩 BYE · take him out</span>';if(p.inj&&['Out','IR','PUP','Sus','Doubtful'].includes(p.inj))return `<span class="flag red">🚩 ${esc(p.inj)} · take him out</span>`;if(p.inj)return `<span class="flag yel">⚠️ ${esc(p.inj)}</span>`;return ''};
 function renderAlert(){const s=LS;if(!s)return;$('#alert').innerHTML=(s.alerts||[]).map(a=>`<div class="al"><b>INJURY ALERT:</b> ${esc(a.name)} (${esc(a.pos)}, ${esc(a.team)}) is ${esc(a.status)}. ${(()=>{const r=((LB&&LB.replacements)||[]).find(x=>x.out===a.name);return r?(r.fix==='TRADE'&&r.trade_ref?'Best fix: send the trade to <b>'+esc(r.trade_ref)+'</b> (stopgap: '+esc(r.in)+')':'Replace with <b>'+esc(r.in)+'</b> ('+esc(r.why)+')'):a.replacements.length?'Healthy bench option: '+esc(a.replacements.join(', ')):'No healthy bench player at that position, check waivers.'})()}</div>`).join('');}
-function todos(){const s=LS,b=LB||{};if(!s)return;const it={hc:[],sc:[],an:[],mg:[]};
+function todos(){const s=LS,b0=LB||{},b=staleWk(b0)?{...b0,replacements:[]}:b0;if(!s)return;const it={hc:[],sc:[],an:[],mg:[]};
  if(s.lock&&new Date(s.lock.at)>Date.now())it.hc.push(`Lock lineup before ${s.lock.player} kicks off (${new Date(s.lock.at).toLocaleString([],{weekday:'short',hour:'numeric',minute:'2-digit'})})`);
  (s.alerts||[]).forEach(a=>{const rp=(b.replacements||[]).find(x=>x.out===a.name),nm=rp?rp.in:a.replacements[0];if(a.status==='Questionable'){it.hc.push(`Check ${a.name} (Questionable) before kickoff, backup: ${nm||'none on bench'}`);return}it.hc.push(rp&&rp.fix==='TRADE'&&rp.trade_ref?`Fix ${a.name} (${a.status}) with the trade to ${rp.trade_ref}, stopgap: ${nm}`:`Replace ${a.name} (${a.status}) with ${nm||'a waiver pickup'}`);if(!a.replacements.length){const tr=(s.scout||[]).find(p=>p.pos===a.pos);it.sc.push(`Find a healthy ${a.pos} on waivers${tr?' (trending: '+tr.name+')':''}`)}});
  if(LB&&!LB.error){(b.waivers||[]).slice(0,3).forEach(w=>it.sc.push(`Add ${w.add}, drop ${w.drop}`));(b.drops||[]).slice(0,3).forEach(d=>it.sc.push(d.add?`Add ${d.add}, drop ${d.player}`:`Drop ${d.player} to make room for the ${d.for_trade||''} trade`))}else{(s.scout||[]).slice(0,3).forEach(p=>it.sc.push(`Check waivers: ${p.name} (${p.pos}, ${p.team})`))}
@@ -1031,7 +1036,7 @@ let LR=null,owed=null;try{owed=JSON.parse(localStorage.getItem('owed')||'null')}
 const SI={hc:['🏈','Head Coach'],sc:['🎬','Scout'],an:['📚','Analyst'],mg:['📞','Manager']},HARD=['Out','IR','PUP','Sus','Doubtful'];
 const when=d=>new Date(d).toLocaleString([],{weekday:'short',hour:'numeric',minute:'2-digit'});
 const inT=ms=>{const m=Math.max(0,Math.floor(ms/6e4));return m>=1440?Math.floor(m/1440)+'d '+Math.floor(m%1440/60)+'h':m>=60?Math.floor(m/60)+'h '+m%60+'m':m+'m'};
-function todayItems(){const s=LS,b=(LB&&!LB.error?LB:LR)||{},out=[],add=(k,id,html,pri,tag)=>out.push({k,id,html,pri,tag});
+function todayItems(){const s=LS,b0=(LB&&!LB.error?LB:LR)||{},old=!!(s&&s.league&&b0.week&&+s.league.week>+b0.week),b=old?{...b0,start_sit:[],replacements:[]}:b0,out=[],add=(k,id,html,pri,tag)=>out.push({k,id,html,pri,tag});
   const alerts=(s&&s.alerts)||[],hurt=new Set(alerts.map(a=>a.name));
   // 1. hurt or bye starters to swap out
   alerts.forEach(a=>{const rp=(b.replacements||[]).find(x=>x.out===a.name),nm=rp?rp.in:a.replacements[0];
@@ -1069,7 +1074,7 @@ async function askCoach(){const q=$('#q').value.trim();if(!q)return;$('#ans').te
   try{const r=await(await fetch('/api/ask',{method:'POST',body:JSON.stringify({q})})).json();$('#ans').textContent=r.answer}catch{$('#ans').textContent='Lost the connection.'}}
 $('#go').onclick=askCoach;$('#q').onkeydown=e=>{if(e.key==='Enter')askCoach()};
 async function state(){try{
-  const s=await(await fetch('/api/state')).json();if(s.error)return;LS=s;try{window.HQ&&HQ.update(s)}catch(e){console.error(e)}
+  const s=await(await fetch('/api/state')).json();if(s.error)return;const first=!LS;LS=s;if(first&&(LR||LB)){report();brief()}try{window.HQ&&HQ.update(s)}catch(e){console.error(e)}
   let lk='';if(s.lock){const ms=new Date(s.lock.at)-Date.now();if(ms>0){const m=Math.floor(ms/6e4);lk=` · Lineup locks in ${m>=60?Math.floor(m/60)+'h ':''}${m%60}m (${s.lock.player})`}else lk=' · Lineup locked'}
   $('#meta').textContent=`Week ${s.league.week} · ${s.me}${lk} · updated ${new Date(s.updated).toLocaleTimeString()}`;
   renderAlert();
@@ -1092,12 +1097,12 @@ async function brief(){try{
   const b=await(await fetch('/api/brief')).json();LB=b;renderAlert();todos();if(!b.error)report();
   if(b.error){if(!greeted){$('#say').textContent=b.error;greeted=true}return}
   if(!greeted){type($('#say'),b.report||'');greeted=true}
-  $('#ss').innerHTML=(b.start_sit||[]).map(x=>`<div class="item"><span class="call ${esc(x.call)}">${esc(x.call)}</span> <b>${esc(x.player)}</b>${x.over?` <span class="mu">${x.call==='SIT'?'→ put in':'over'}</span> <b>${esc(x.over)}</b>`:''} <span class="mu">${esc(x.confidence||'')} confidence${x.boom_chance&&!/^n\/?a/i.test(x.boom_chance)?' · boom chance '+esc(x.boom_chance):''}</span><div class="mu">${esc(x.why)}</div><button class="ghost more" data-q="${esc('Explain in detail why I should '+x.call+' '+x.player+' this week.')}">Tell me more</button><div class="long mu"></div></div>`).join('')||(b.report?'<div class="okset">✅ Your lineup is already the best it can be. No changes this week.</div>':'No calls yet.');
+  $('#ss').innerHTML=(staleWk(b)?`<div class="mu" style="margin-bottom:8px">These are last report's Week ${esc(b.week)} calls. Week ${nowWk()} calls come with the next staff report.</div>`:'')+(b.start_sit||[]).map(x=>`<div class="item"><span class="call ${esc(x.call)}">${esc(x.call)}</span> <b>${esc(x.player)}</b>${x.over?` <span class="mu">${x.call==='SIT'?'→ put in':'over'}</span> <b>${esc(x.over)}</b>`:''} <span class="mu">${esc(x.confidence||'')} confidence${x.boom_chance&&!/^n\/?a/i.test(x.boom_chance)?' · boom chance '+esc(x.boom_chance):''}</span><div class="mu">${esc(x.why)}</div><button class="ghost more" data-q="${esc('Explain in detail why I should '+x.call+' '+x.player+' this week.')}">Tell me more</button><div class="long mu"></div></div>`).join('')||(b.report?'<div class="okset">✅ Your lineup is already the best it can be. No changes this week.</div>':'No calls yet.');
   $('#bd').innerHTML=((b.team_breakdown||[]).map(g=>`<div class="row"><span><span class="grade g${esc(String(g.grade||'').charAt(0))}">${esc(g.grade||'')}</span><b>${esc(g.group)}</b></span><span class="mu" style="flex:1;margin-left:12px">${esc(g.note||'')}</span></div>`).join('')+((b.plan||[]).length?'<div class="sec">PLAN TO GO ELITE</div>'+b.plan.map((p,i)=>`<div class="mu">${i+1}. ${esc(p)}</div>`).join(''):''))||'The next staff report will include a full breakdown.';
   $('#trn').textContent=(b.trades||[]).length?'('+b.trades.length+')':'';
   $('#tr').innerHTML=(b.trades||[]).map((x,i)=>`<div class="item"><b>#${i+1} · To ${esc(x.to)}</b>${x.gain?` <span class="gain">${esc(x.gain)} pts/wk</span>`:''}${x.upgrades?` <span class="mu">· upgrades ${esc(x.upgrades)}</span>`:''}<div>Get: <b>${esc((x.get||[]).join(', '))}</b> <span class="mu">${esc(x.confidence||'')} confidence</span></div><div>Give: ${esc((x.give||[]).join(', '))}</div>${x.their_need||x.value_check?`<div class="mu">${x.their_need?`Fills their need: ${esc(x.their_need)}`:''}${x.their_need&&x.value_check?' · ':''}${x.value_check?`Value: ${esc(x.value_check)} PPR/g`:''}</div>`:''}${x.opener?`<div class="mu">1. Opener: ${esc(x.opener)}</div>`:''}${x.fallback?`<div class="mu">2. If he pushes back: ${esc(x.fallback)}</div>`:''}${x.drop_after?`<div class="mu">If roster is full, drop: ${esc(x.drop_after)}</div>`:''}${x.text?`<div class="mu">Text: "${esc(x.text)}" <button class="ghost more cp" data-c="${esc(x.text)}">Copy</button></div>`:''}<div class="mu">${esc(x.why)}</div><button class="ghost more" data-q="${esc('Break down this trade in detail. I give '+(x.give||[]).join(', ')+' and get '+(x.get||[]).join(', ')+' with '+x.to+'. Why does it help me, and why would they accept?')}">Break it down</button><div class="long mu"></div></div>`).join('')||(b.report?'✅ No trade left that makes your team better. The roster is maxed out.':'No offers right now.');
   $('#wv').innerHTML=((b.waivers||[]).map(w=>`<div class="item"><b>Add ${esc(w.add)}</b> · drop ${esc(w.drop)} <span class="mu">${esc(w.confidence||'')} confidence</span><div class="mu">${esc(w.why)}</div></div>`).join('')+(b.drops||[]).map(d=>`<div class="item"><b>${d.add?`Add ${esc(d.add)}`:'Make room'}</b> · drop ${esc(d.player)}${!d.add&&d.for_trade?` <span class="mu">for the trade to ${esc(d.for_trade)}</span>`:''}<div class="mu">${esc(d.why)}</div></div>`).join(''))||'No pickups or drops worth making right now.';
-  const c=(b.start_sit||[])[0],t=(b.trades||[])[0];
+  const c=!staleWk(b)&&(b.start_sit||[])[0],t=(b.trades||[])[0];
   if(c)$('#r-hc').textContent=`${c.call}: ${c.player}`;
   if(t){$('#r-an').textContent=`${b.trades.length} trade ideas on the board`;$('#r-mg').textContent=`On the phone with ${t.to}`}
 }catch(e){}}
@@ -1107,7 +1112,7 @@ function renderPause(b){const el=$('#tpause');if(!el)return;const p=b.paused;el.
   const why={credits:'Anthropic credits ran out. Add credits and it restarts by itself.',key:'Anthropic refused the API key. Check the key on GitHub.'}[p.kind]||'The last runs hit an error. It keeps retrying.';
   el.textContent=`⚠ Staff report paused, these calls are from ${when}. ${why}`}
 async function report(){try{const b=await(await fetch('/api/report')).json();if(b.error)return;LR=b;renderPause(b);renderToday();if(window.HQ)HQ.report(b);
-  const c=(b.start_sit||[])[0],r=(b.replacements||[])[0];$('#r-hc').textContent=c?`${c.call}: ${c.player}`:r?`Swap in ${r.in} for ${r.out}`:'Lineup is set';
+  const c=!staleWk(b)&&(b.start_sit||[])[0],r=!staleWk(b)&&(b.replacements||[])[0];$('#r-hc').textContent=staleWk(b)?`Week ${nowWk()} calls coming`:c?`${c.call}: ${c.player}`:r?`Swap in ${r.in} for ${r.out}`:'Lineup is set';
   const t=(b.trades||[])[0];if(t){$('#r-an').textContent=`Target: ${(t.get||[]).join(', ')}`;$('#r-mg').textContent=`Texting ${t.to}`}}catch(e){}}
 document.addEventListener('click',e=>{const c=e.target.closest('.cp');if(!c)return;try{navigator.clipboard.writeText(c.dataset.c);c.textContent='Copied'}catch{c.textContent='Copy failed'}});
 document.addEventListener('click',async e=>{const b=e.target.closest('.more:not(.cp)');if(!b)return;const o=b.nextElementSibling;o.textContent='Coach is breaking it down…';try{const r=await(await fetch('/api/ask',{method:'POST',body:JSON.stringify({q:b.dataset.q})})).json();o.textContent=r.answer}catch{o.textContent='Lost the connection.'}});
