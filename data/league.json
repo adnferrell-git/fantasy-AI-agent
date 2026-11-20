@@ -346,7 +346,7 @@
      "name": "Bhayshul Tuten",
      "pos": "RB",
      "team": "JAX",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "8408",
@@ -388,7 +388,7 @@
      "name": "Jakobi Meyers",
      "pos": "WR",
      "team": "JAX",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "3451",
@@ -588,7 +588,7 @@
      "name": "Chris Rodriguez Jr.",
      "pos": "RB",
      "team": "JAX",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "11564",
@@ -693,7 +693,7 @@
      "name": "Rachaad White",
      "pos": "RB",
      "team": "WAS",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "12526",
@@ -1366,7 +1366,7 @@
      "name": "Isaiah Likely",
      "pos": "TE",
      "team": "NYG",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "11646",
