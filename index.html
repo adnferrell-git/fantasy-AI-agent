@@ -1092,11 +1092,19 @@ async function state(){try{
   if(s.scout&&s.scout.length)$('#r-sc').textContent='Trending free agents: '+s.scout.slice(0,3).map(p=>`${p.name} (${p.pos})`).join(', ');else
   if(m&&m.bench.length)$('#r-sc').textContent='Scouting: '+m.bench.slice(0,3).map(p=>p.name).join(', ');
 }catch(e){}}
-let greeted=false;
+let greeted=false;const T0=Date.now();
+// The welcome box. Waits for the league (up to 8s) so it knows if the report is from an older week,
+// and then says the old start/sit calls are done instead of reading last week's report out loud.
+function greetText(b){const r=b.report||'';if(!staleWk(b))return r;
+  const pre=(r.match(/^\([^)]*\)\s*/)||[''])[0];let top=[];
+  try{top=todayItems().filter(x=>!done[x.id]).slice(0,2).map(x=>{const d=document.createElement('div');d.innerHTML=x.html;return d.textContent.replace(/\s+/g,' ').trim().replace(/[.\s]+$/,'')})}catch{}
+  return `${pre}New week, boss. That report was for Week ${b.week}, so its start/sit calls are done. Week ${nowWk()} calls come with the next staff report${LR&&LR.paused?" (it's paused right now, see the note under the HQ)":''}. Until then, check byes and injuries before lock.`+(top.length?` Still on your list: ${top.join('; ')}.`:'')}
+function sayHi(){const b=LB;if(greeted||!b||b.error)return;if(!LS&&Date.now()-T0<8e3){setTimeout(sayHi,1e3);return}
+  type($('#say'),greetText(b));greeted=true}
 async function brief(){try{
   const b=await(await fetch('/api/brief')).json();LB=b;renderAlert();todos();if(!b.error)report();
   if(b.error){if(!greeted){$('#say').textContent=b.error;greeted=true}return}
-  if(!greeted){type($('#say'),b.report||'');greeted=true}
+  sayHi()
   $('#ss').innerHTML=(staleWk(b)?`<div class="mu" style="margin-bottom:8px">These are last report's Week ${esc(b.week)} calls. Week ${nowWk()} calls come with the next staff report.</div>`:'')+(b.start_sit||[]).map(x=>`<div class="item"><span class="call ${esc(x.call)}">${esc(x.call)}</span> <b>${esc(x.player)}</b>${x.over?` <span class="mu">${x.call==='SIT'?'→ put in':'over'}</span> <b>${esc(x.over)}</b>`:''} <span class="mu">${esc(x.confidence||'')} confidence${x.boom_chance&&!/^n\/?a/i.test(x.boom_chance)?' · boom chance '+esc(x.boom_chance):''}</span><div class="mu">${esc(x.why)}</div><button class="ghost more" data-q="${esc('Explain in detail why I should '+x.call+' '+x.player+' this week.')}">Tell me more</button><div class="long mu"></div></div>`).join('')||(b.report?'<div class="okset">✅ Your lineup is already the best it can be. No changes this week.</div>':'No calls yet.');
   $('#bd').innerHTML=((b.team_breakdown||[]).map(g=>`<div class="row"><span><span class="grade g${esc(String(g.grade||'').charAt(0))}">${esc(g.grade||'')}</span><b>${esc(g.group)}</b></span><span class="mu" style="flex:1;margin-left:12px">${esc(g.note||'')}</span></div>`).join('')+((b.plan||[]).length?'<div class="sec">PLAN TO GO ELITE</div>'+b.plan.map((p,i)=>`<div class="mu">${i+1}. ${esc(p)}</div>`).join(''):''))||'The next staff report will include a full breakdown.';
   $('#trn').textContent=(b.trades||[]).length?'('+b.trades.length+')':'';
