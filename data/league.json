@@ -952,13 +952,6 @@
      "inj": null
     },
     {
-     "id": "5119",
-     "name": "Jason Sanders",
-     "pos": "K",
-     "team": "NYJ",
-     "inj": null
-    },
-    {
      "id": "6130",
      "name": "Devin Singletary",
      "pos": "RB",
@@ -1525,11 +1518,11 @@
      "inj": null
     },
     {
-     "id": "10236",
-     "name": "Dalton Kincaid",
+     "id": "5906",
+     "name": "Dawson Knox",
      "pos": "TE",
      "team": "BUF",
-     "inj": "Doubtful"
+     "inj": null
     },
     {
      "id": "9500",
@@ -1567,6 +1560,13 @@
      "pos": "WR",
      "team": "ARI",
      "inj": "IR"
+    },
+    {
+     "id": "10236",
+     "name": "Dalton Kincaid",
+     "pos": "TE",
+     "team": "BUF",
+     "inj": "Doubtful"
     },
     {
      "id": "11559",
@@ -1615,13 +1615,6 @@
      "name": "Laquon Treadwell",
      "pos": "WR",
      "team": "IND",
-     "inj": null
-    },
-    {
-     "id": "5906",
-     "name": "Dawson Knox",
-     "pos": "TE",
-     "team": "BUF",
      "inj": null
     },
     {
