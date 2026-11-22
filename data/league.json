@@ -651,7 +651,7 @@
      "name": "Dontayvion Wicks",
      "pos": "WR",
      "team": "PHI",
-     "inj": "Out"
+     "inj": "IR"
     },
     {
      "id": "9756",
@@ -792,7 +792,7 @@
      "id": "8116",
      "name": "Pierre Strong Jr.",
      "pos": "RB",
-     "team": "FA",
+     "team": "GB",
      "inj": null
     },
     {
@@ -921,7 +921,7 @@
      "name": "Roman Wilson",
      "pos": "WR",
      "team": "PIT",
-     "inj": "IR"
+     "inj": "Questionable"
     },
     {
      "id": "12506",
@@ -1927,7 +1927,7 @@
      "name": "Kyren Williams",
      "pos": "RB",
      "team": "LAR",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "9501",
@@ -1941,7 +1941,7 @@
      "name": "Tyjae Spears",
      "pos": "RB",
      "team": "TEN",
-     "inj": "Questionable"
+     "inj": "IR"
     },
     {
      "id": "TB",
