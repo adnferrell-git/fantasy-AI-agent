@@ -51,11 +51,11 @@
      "inj": null
     },
     {
-     "id": "5872",
-     "name": "Deebo Samuel Sr.",
+     "id": "2216",
+     "name": "Mike Evans",
      "pos": "WR",
      "team": "SF",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "3198",
@@ -116,17 +116,17 @@
      "inj": null
     },
     {
-     "id": "2216",
-     "name": "Mike Evans",
-     "pos": "WR",
-     "team": "SF",
-     "inj": "Questionable"
-    },
-    {
      "id": "4039",
      "name": "Cooper Kupp",
      "pos": "WR",
      "team": "SEA",
+     "inj": null
+    },
+    {
+     "id": "5872",
+     "name": "Deebo Samuel Sr.",
+     "pos": "WR",
+     "team": "SF",
      "inj": null
     },
     {
