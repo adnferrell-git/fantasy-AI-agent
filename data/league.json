@@ -866,11 +866,11 @@
      "inj": null
     },
     {
-     "id": "11604",
-     "name": "Brock Bowers",
+     "id": "5012",
+     "name": "Mark Andrews",
      "pos": "TE",
-     "team": "LV",
-     "inj": "Questionable"
+     "team": "BAL",
+     "inj": null
     },
     {
      "id": "12499",
@@ -917,6 +917,13 @@
      "inj": null
     },
     {
+     "id": "11604",
+     "name": "Brock Bowers",
+     "pos": "TE",
+     "team": "LV",
+     "inj": "Questionable"
+    },
+    {
      "id": "11630",
      "name": "Roman Wilson",
      "pos": "WR",
@@ -942,13 +949,6 @@
      "name": "Mike Washington Jr.",
      "pos": "RB",
      "team": "LV",
-     "inj": null
-    },
-    {
-     "id": "5012",
-     "name": "Mark Andrews",
-     "pos": "TE",
-     "team": "BAL",
      "inj": null
     },
     {
