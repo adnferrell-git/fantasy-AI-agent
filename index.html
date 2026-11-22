@@ -194,6 +194,11 @@ nav{margin-bottom:18px}
 // Shared by the HQ and the page; LS (the league state) is set by the page script below.
 function nowWk(){let s=null;try{s=LS}catch{}return s&&s.league?+s.league.week||0:0}
 function staleWk(b){return !!(b&&b.week&&nowWk()>+b.week)}
+// When a report was made. Within the last day: "Tue 12:59 AM". Older: "Tue, Nov 17 · 5 days ago", so an old report never looks like today's.
+function reportWhen(made,short){const d=new Date(made);if(!made||isNaN(d))return '';const h=(Date.now()-d)/36e5;
+  if(h<20)return d.toLocaleString('en-US',{weekday:'short',hour:'numeric',minute:'2-digit'});
+  const day=x=>new Date(x.getFullYear(),x.getMonth(),x.getDate()),n=Math.max(1,Math.round((day(new Date())-day(d))/864e5));
+  const ago=n===1?'yesterday':n+' days ago';return short?ago:`${d.toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric'})} · ${ago}`}
 // ===== 3D VOXEL HQ: the team facility (plain WebGL, no libraries) =====
 // Front office building with a hallway and four glass-front rooms (Head Coach, Scout, Analyst, Manager),
 // the practice field on the left and a small stadium on the right, all on solid ground.
@@ -491,7 +496,7 @@ function wrapT(g,t,maxW,maxL){const out=[];let cur='';String(t||'').split(/\s+/)
 function lines(g,t,x,y,maxW,px,lh,maxL,color,align){g.font=PXF(px);g.fillStyle=color;g.textAlign=align||'left';const L=wrapT(g,t,maxW,maxL);L.forEach((l,i)=>g.fillText(l,x,y+i*lh));return y+L.length*lh}
 const up=s=>String(s||'').toUpperCase();
 let REP=null,REPstate=null;
-function stamp(b){if(!b||!b.made)return '';const d=new Date(b.made);if(isNaN(d))return '';return (b.source==='live'?'LIVE · ':'')+d.toLocaleString('en-US',{weekday:'short',hour:'numeric',minute:'2-digit'}).toUpperCase()}
+function stamp(b){if(!b||!b.made)return '';const w=reportWhen(b.made,true);if(!w)return '';return (b.source==='live'?'LIVE · ':'')+w.toUpperCase()}
 function tvFrame(g,W,H,bg,acc,title,b){g.fillStyle=bg;g.fillRect(0,0,W,H);g.fillStyle=acc;g.fillRect(0,0,W,H>140?40:30);g.fillStyle='#0b0f17';g.textBaseline='middle';g.font=PXF(H>140?16:13);g.textAlign='left';g.fillText(title,14,H>140?21:16);
   const st=stamp(b);if(st){g.font=PXF(12);g.textAlign='right';g.fillText(st,W-12,H>140?21:16)}g.textBaseline='alphabetic'}
 const PAINT={
@@ -1095,7 +1100,7 @@ async function state(){try{
 let greeted=false;const T0=Date.now();
 // The welcome box. Waits for the league (up to 8s) so it knows if the report is from an older week,
 // and then says the old start/sit calls are done instead of reading last week's report out loud.
-function greetText(b){const r=b.report||'';if(!staleWk(b))return r;
+function greetText(b){let r=b.report||'';const w=reportWhen(b.made);if(w)r=r.replace(/^\(Staff report from [^)]*\)/,`(Staff report from ${w})`);if(!staleWk(b))return r;
   const pre=(r.match(/^\([^)]*\)\s*/)||[''])[0];let top=[];
   try{top=todayItems().filter(x=>!done[x.id]).slice(0,2).map(x=>{const d=document.createElement('div');d.innerHTML=x.html;return d.textContent.replace(/\s+/g,' ').trim().replace(/[.\s]+$/,'')})}catch{}
   return `${pre}New week, boss. That report was for Week ${b.week}, so its start/sit calls are done. Week ${nowWk()} calls come with the next staff report${LR&&LR.paused?" (it's paused right now, see the note under the HQ)":''}. Until then, check byes and injuries before lock.`+(top.length?` Still on your list: ${top.join('; ')}.`:'')}
@@ -1116,7 +1121,7 @@ async function brief(){try{
 }catch(e){}}
 // the overnight staff report for the HQ wall screens (data/brief.json, or the live brief when this PC has a key)
 function renderPause(b){const el=$('#tpause');if(!el)return;const p=b.paused;el.hidden=!p;if(!p)return;
-  const d=new Date(b.made),when=isNaN(d)?'the last good run':d.toLocaleString('en-US',{weekday:'short',hour:'numeric',minute:'2-digit'});
+  const when=reportWhen(b.made)||'the last good run';
   const why={credits:'Anthropic credits ran out. Add credits and it restarts by itself.',key:'Anthropic refused the API key. Check the key on GitHub.'}[p.kind]||'The last runs hit an error. It keeps retrying.';
   el.textContent=`⚠ Staff report paused, these calls are from ${when}. ${why}`}
 async function report(){try{const b=await(await fetch('/api/report')).json();if(b.error)return;LR=b;renderPause(b);renderToday();if(window.HQ)HQ.report(b);
