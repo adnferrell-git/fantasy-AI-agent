@@ -41,7 +41,7 @@
      "name": "DJ Moore",
      "pos": "WR",
      "team": "BUF",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "5844",
@@ -55,14 +55,14 @@
      "name": "Mike Evans",
      "pos": "WR",
      "team": "SF",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "3198",
      "name": "Derrick Henry",
      "pos": "RB",
      "team": "BAL",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "1945",
@@ -751,7 +751,7 @@
      "name": "Ladd McConkey",
      "pos": "WR",
      "team": "LAC",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "13276",
@@ -884,7 +884,7 @@
      "name": "Carnell Tate",
      "pos": "WR",
      "team": "TEN",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "6650",
@@ -921,14 +921,14 @@
      "name": "Brock Bowers",
      "pos": "TE",
      "team": "LV",
-     "inj": "Questionable"
+     "inj": "Out"
     },
     {
      "id": "11630",
      "name": "Roman Wilson",
      "pos": "WR",
      "team": "PIT",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "12506",
@@ -977,7 +977,7 @@
      "name": "Keaton Mitchell",
      "pos": "RB",
      "team": "LAC",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "9758",
@@ -1054,7 +1054,7 @@
      "name": "Matt Gay",
      "pos": "K",
      "team": "LV",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "KC",
@@ -1254,7 +1254,7 @@
      "name": "Darren Waller",
      "pos": "TE",
      "team": "CAR",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "3321",
@@ -1275,7 +1275,7 @@
      "name": "Justin Herbert",
      "pos": "QB",
      "team": "LAC",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "6806",
@@ -1289,7 +1289,7 @@
      "name": "Juwan Johnson",
      "pos": "TE",
      "team": "NO",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "7021",
@@ -1366,7 +1366,7 @@
      "name": "Jalen Coker",
      "pos": "WR",
      "team": "CAR",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "13296",
@@ -1566,7 +1566,7 @@
      "name": "Dalton Kincaid",
      "pos": "TE",
      "team": "BUF",
-     "inj": "Doubtful"
+     "inj": "Out"
     },
     {
      "id": "11559",
@@ -1813,7 +1813,7 @@
      "name": "Saquon Barkley",
      "pos": "RB",
      "team": "PHI",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "8228",
