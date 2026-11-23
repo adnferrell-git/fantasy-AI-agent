@@ -212,12 +212,21 @@ async function refresh() {
       ...Object.entries(t.drops || {}).map(([p, r]) => `${tm(r)} drops ${pl(p).name}`)].join(', '));
   const injuries = teams.flatMap(t => [...t.starters, ...t.bench].filter(p => p.inj).map(p => ({ ...p, owner: t.owner, mine: t.mine })));
   const mine = teams.find(t => t.mine), bad = ['Questionable', 'Doubtful', 'Out', 'IR', 'PUP', 'Sus'];
-  const alerts = mine ? mine.starters.filter(p => p.bye || (p.inj && bad.includes(p.inj))).map(p => ({ name: p.name, pos: p.pos, team: p.team, status: (p.inj && bad.includes(p.inj)) ? p.inj : 'on bye', replacements: mine.bench.filter(x => x.pos === p.pos && !x.inj && !x.bye).map(x => x.name) })) : [];
+  // Sleeper locks each player when his own game kicks off, so a swap is only possible while the starter's game
+  // (or, for a bye, any game left this week) hasn't started, and only for bench players who haven't played yet.
+  const now = Date.now(), started = t => !!t && now >= new Date(t).getTime();
+  const kicks = Object.values(kickMap), weekOver = kicks.length > 0 && kicks.every(started);
+  const canFix = p => p.bye ? !weekOver : !started(p.kick);
+  const alerts = mine ? mine.starters.filter(p => (p.bye || (p.inj && bad.includes(p.inj))) && canFix(p)).map(p => ({ name: p.name, pos: p.pos, team: p.team, status: (p.inj && bad.includes(p.inj)) ? p.inj : 'on bye', replacements: mine.bench.filter(x => x.pos === p.pos && !x.inj && !x.bye && !started(x.kick)).map(x => x.name) })) : [];
   for (const a of alerts) { const k = a.name + a.status; if (!alerted.has(k)) { alerted.add(k); ping(`INJURY on your team: ${a.name} (${a.pos}) is ${a.status}.` + (a.replacements.length ? ` Bench option: ${a.replacements.join(', ')}` : ' No healthy bench player at that position.')); } }
   let lock = null;
   if (mine) {
     const ks = mine.starters.filter(p => p.kick && !p.bye).sort((a, b) => new Date(a.kick) - new Date(b.kick));
     if (ks.length) lock = { at: ks[0].kick, player: ks[0].name, team: ks[0].team };
+    // lock = first kickoff (learn.js uses it); lock.next = the next starter still to kick off, for the countdown.
+    const nx = ks.find(p => !started(p.kick));
+    if (lock && nx && nx.kick !== lock.at) lock.next = { at: nx.kick, player: nx.name, team: nx.team };
+    if (lock) lock.all = !nx;
   }
   if (lock) {
     const mins = Math.round((new Date(lock.at) - Date.now()) / 6e4), k = 'lock' + lock.at;

@@ -845,7 +845,7 @@ const clip=(s,n)=>{s=String(s||'');return s.length>n?s.slice(0,n).replace(/\s+\S
 function greet(k){const b=REP||{},st=REPstate||{},mine=TASKS.filter(x=>x.k===k&&!x.done).map(x=>strip(x.html));
   const todo=mine.length?` On your list from me: ${mine.join('; ')}.`:'';
   if(k==='hc'){const c=(b.start_sit||[])[0],r=(b.replacements||[])[0];let s=staleWk(b)?`New week, boss. My week ${b.week} calls are done, the week ${nowWk()} start/sit comes with the next report. Check byes and injuries before lock.`:c?`Boss. ${c.call} ${c.player}${c.over?(c.call==='SIT'?', put in ':' over ')+c.over:''}. ${clip(c.why,200)}`:r?`${r.out} can't go. Put ${r.in} in. ${clip(r.why,160)}`:'Lineup is set, boss. Nothing to change this week.';
-    if(st.lock&&new Date(st.lock.at)>Date.now())s+=` Lineup locks ${new Date(st.lock.at).toLocaleString([],{weekday:'short',hour:'numeric',minute:'2-digit'})}.`;return s+todo}
+    const nl=nextLock(st);if(nl)s+=` ${nl.part?'Next players lock':'Lineup locks'} ${new Date(nl.at).toLocaleString([],{weekday:'short',hour:'numeric',minute:'2-digit'})}.`;return s+todo}
   if(k==='sc'){const w=(b.waivers||[])[0],d=(b.drops||[])[0],tr=(st.scout||[])[0];return (w?`Got one for you. Add ${w.add}, drop ${w.drop}. ${clip(w.why,200)}`:d?`Make room: drop ${d.player}${d.add?' and grab '+d.add:''}. ${clip(d.why,160)}`:`Wire's quiet. Your bench beats it.${tr?' I\'m watching '+tr.name+' though.':''}`)+todo}
   if(k==='an'){const t=(b.trades||[])[0];return (t?`Top idea: send ${t.to} ${(t.give||[]).join(' + ')} for ${(t.get||[]).join(' + ')}${t.gain?', about '+t.gain+' pts a week':''}. ${clip(t.why,200)}`:'Roster is maxed. No trade makes you better right now.')+todo}
   if(k==='mg'){const t=(b.trades||[]).find(x=>x.text);return (t?`Here's what I'd text ${t.to}: "${t.text}"`:'Phone is quiet. Nobody to follow up with.')+todo}
@@ -1030,7 +1030,7 @@ const pn0=p=>`${esc(p.name)} <span class="mu">${esc(p.pos||'')} ${esc(p.team||''
 const flag=p=>{if(p.bye)return '<span class="flag red">🚩 BYE · take him out</span>';if(p.inj&&['Out','IR','PUP','Sus','Doubtful'].includes(p.inj))return `<span class="flag red">🚩 ${esc(p.inj)} · take him out</span>`;if(p.inj)return `<span class="flag yel">⚠️ ${esc(p.inj)}</span>`;return ''};
 function renderAlert(){const s=LS;if(!s)return;$('#alert').innerHTML=(s.alerts||[]).map(a=>`<div class="al"><b>INJURY ALERT:</b> ${esc(a.name)} (${esc(a.pos)}, ${esc(a.team)}) is ${esc(a.status)}. ${(()=>{const r=((LB&&LB.replacements)||[]).find(x=>x.out===a.name);return r?(r.fix==='TRADE'&&r.trade_ref?'Best fix: send the trade to <b>'+esc(r.trade_ref)+'</b> (stopgap: '+esc(r.in)+')':'Replace with <b>'+esc(r.in)+'</b> ('+esc(r.why)+')'):a.replacements.length?'Healthy bench option: '+esc(a.replacements.join(', ')):'No healthy bench player at that position, check waivers.'})()}</div>`).join('');}
 function todos(){const s=LS,b0=LB||{},b=staleWk(b0)?{...b0,replacements:[]}:b0;if(!s)return;const it={hc:[],sc:[],an:[],mg:[]};
- if(s.lock&&new Date(s.lock.at)>Date.now())it.hc.push(`Lock lineup before ${s.lock.player} kicks off (${new Date(s.lock.at).toLocaleString([],{weekday:'short',hour:'numeric',minute:'2-digit'})})`);
+ {const nl=nextLock(s);if(nl)it.hc.push(`${nl.part?'Set the rest of your lineup':'Lock lineup'} before ${nl.player} kicks off (${new Date(nl.at).toLocaleString([],{weekday:'short',hour:'numeric',minute:'2-digit'})})`)}
  (s.alerts||[]).forEach(a=>{const rp=(b.replacements||[]).find(x=>x.out===a.name),nm=rp?rp.in:a.replacements[0];if(a.status==='Questionable'){it.hc.push(`Check ${a.name} (Questionable) before kickoff, backup: ${nm||'none on bench'}`);return}it.hc.push(rp&&rp.fix==='TRADE'&&rp.trade_ref?`Fix ${a.name} (${a.status}) with the trade to ${rp.trade_ref}, stopgap: ${nm}`:`Replace ${a.name} (${a.status}) with ${nm||'a waiver pickup'}`);if(!a.replacements.length){const tr=(s.scout||[]).find(p=>p.pos===a.pos);it.sc.push(`Find a healthy ${a.pos} on waivers${tr?' (trending: '+tr.name+')':''}`)}});
  if(LB&&!LB.error){(b.waivers||[]).slice(0,3).forEach(w=>it.sc.push(`Add ${w.add}, drop ${w.drop}`));(b.drops||[]).slice(0,3).forEach(d=>it.sc.push(d.add?`Add ${d.add}, drop ${d.player}`:`Drop ${d.player} to make room for the ${d.for_trade||''} trade`))}else{(s.scout||[]).slice(0,3).forEach(p=>it.sc.push(`Check waivers: ${p.name} (${p.pos}, ${p.team})`))}
  (b.trades||[]).slice(0,3).forEach(x=>{it.an.push(`Send offer to ${x.to}: get ${(x.get||[]).join(', ')}`);it.sc.push(`Scout trade target: ${(x.get||[]).join(', ')} (${x.to})`);it.mg.push(`Text ${x.to} to make sure they saw it`)});
@@ -1040,6 +1040,8 @@ document.addEventListener('change',e=>{const c=e.target.closest('[data-t]');if(!
 let LR=null,owed=null;try{owed=JSON.parse(localStorage.getItem('owed')||'null')}catch{}
 const SI={hc:['🏈','Head Coach'],sc:['🎬','Scout'],an:['📚','Analyst'],mg:['📞','Manager']},HARD=['Out','IR','PUP','Sus','Doubtful'];
 const when=d=>new Date(d).toLocaleString([],{weekday:'short',hour:'numeric',minute:'2-digit'});
+// The next starter still to kick off (Sleeper locks each player at his own kickoff); part = some starters already locked.
+function nextLock(s){const l=s&&s.lock;if(!l)return null;const n=new Date(l.at)>Date.now()?l:l.next&&new Date(l.next.at)>Date.now()?l.next:null;return n?{...n,part:n!==l}:null}
 const inT=ms=>{const m=Math.max(0,Math.floor(ms/6e4));return m>=1440?Math.floor(m/1440)+'d '+Math.floor(m%1440/60)+'h':m>=60?Math.floor(m/60)+'h '+m%60+'m':m+'m'};
 function todayItems(){const s=LS,b0=(LB&&!LB.error?LB:LR)||{},old=!!(s&&s.league&&b0.week&&+s.league.week>+b0.week),b=old?{...b0,start_sit:[],replacements:[]}:b0,out=[],add=(k,id,html,pri,tag)=>out.push({k,id,html,pri,tag});
   const alerts=(s&&s.alerts)||[],hurt=new Set(alerts.map(a=>a.name));
@@ -1049,7 +1051,7 @@ function todayItems(){const s=LS,b0=(LB&&!LB.error?LB:LR)||{},old=!!(s&&s.league
     const st=a.status==='on bye'?'bye':esc(a.status);
     add('hc','x:'+a.name+a.status,rp&&rp.fix==='TRADE'&&rp.trade_ref?`Swap out <b>${esc(a.name)}</b> (${st}) <span class="mu">· trade to ${esc(rp.trade_ref)}, stopgap ${esc(nm)}</span>`:`Swap out <b>${esc(a.name)}</b> (${st}) for <b>${esc(nm||'a waiver pickup')}</b>`,0,'NOW')});
   // 2. lineup lock
-  if(s&&s.lock){const ms=new Date(s.lock.at)-Date.now();if(ms>0)add('hc','lock:'+s.lock.at,`Set your lineup <span class="mu">· locks ${when(s.lock.at)} (in ${inT(ms)})</span>`,ms<3*36e5?1:2,ms<3*36e5?'SOON':'')}
+  const nl=nextLock(s);if(nl){const ms=new Date(nl.at)-Date.now();add('hc','lock:'+nl.at,`${nl.part?'Set the rest of your lineup':'Set your lineup'} <span class="mu">· ${nl.part?esc(nl.player)+' locks':'locks'} ${when(nl.at)} (in ${inT(ms)})</span>`,ms<3*36e5?1:2,ms<3*36e5?'SOON':'')}
   // 3. the Head Coach's top start/sit call (skip it when it's the same swap as an alert)
   const c=(b.start_sit||[]).find(x=>!hurt.has(x.player)&&!hurt.has(x.over));
   if(c)add('hc','ss:'+c.call+c.player,`<b>${esc(c.call)}</b> ${esc(c.player)}${c.over?` <span class="mu">${c.call==='SIT'?'· put in':'over'} ${esc(c.over)}</span>`:''}`,2.5);
@@ -1080,7 +1082,7 @@ async function askCoach(){const q=$('#q').value.trim();if(!q)return;$('#ans').te
 $('#go').onclick=askCoach;$('#q').onkeydown=e=>{if(e.key==='Enter')askCoach()};
 async function state(){try{
   const s=await(await fetch('/api/state')).json();if(s.error)return;const first=!LS;LS=s;if(first&&(LR||LB)){report();brief()}try{window.HQ&&HQ.update(s)}catch(e){console.error(e)}
-  let lk='';if(s.lock){const ms=new Date(s.lock.at)-Date.now();if(ms>0){const m=Math.floor(ms/6e4);lk=` · Lineup locks in ${m>=60?Math.floor(m/60)+'h ':''}${m%60}m (${s.lock.player})`}else lk=' · Lineup locked'}
+  let lk='';if(s.lock){const nl=nextLock(s);if(nl){const m=Math.floor((new Date(nl.at)-Date.now())/6e4);lk=` · ${nl.part?'Next lock':'Lineup locks'} in ${m>=60?Math.floor(m/60)+'h ':''}${m%60}m (${nl.player})`}else lk=' · Lineup locked'}
   $('#meta').textContent=`Week ${s.league.week} · ${s.me}${lk} · updated ${new Date(s.updated).toLocaleTimeString()}`;
   renderAlert();
   document.title=(s.alerts&&s.alerts.length?'(!) ':'')+'THE DYNASTY · Front Office';
