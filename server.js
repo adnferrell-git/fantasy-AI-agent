@@ -368,7 +368,7 @@ async function ask(q, who, history) {
   if (!KEY) return 'Add your ANTHROPIC_API_KEY and restart so I can answer.';
   if (!S) return 'Still loading the league, give me a minute.';
   const mt = S.teams.find(t => t.mine) || { starters: [], bench: [] };
-  const rep = brief && !brief.error ? brief : null;
+  const rep = brief && !brief.error ? freshMoves(brief) : null;
   const ctx = { league: S.league, my_team: mt, games: S.games, recent_moves: S.moves, completed_trades: S.tradeLog.slice(0, 15), trade_counts: S.tradeCounts, free_agents_trending: S.scout, other_teams: S.teams.filter(t => !t.mine), nfl_data: nflFor([...mt.starters, ...mt.bench, ...S.scout]),
     latest_staff_report: rep && { start_sit: rep.start_sit, replacements: rep.replacements, waivers: rep.waivers, drops: rep.drops, trades: (rep.trades || []).slice(0, 3) }, staff_lessons: lessonsCtx() };
   const role = STAFF[who] || STAFF.ac;
@@ -394,6 +394,29 @@ async function counter(text) {
   return r.ok ? ((j.content || []).map(c => c.text || '').join('') || 'Ran out of room to answer, ask again.') : ((j.error && j.error.message) || 'API error');
 }
 
+// A report can be days old (the staff may be paused), and players move in the meantime. Before the app shows a
+// report, drop the moves that can't happen anymore: a waiver add someone already picked up, a drop or trade piece
+// no longer on my team, a trade target who left that owner. Only the copy sent to the page changes, never the file.
+let allNames = null;
+function freshMoves(b) {
+  if (!b || b.error || !S || !S.teams) return b;
+  const k = n => nkey(String(n || '').replace(/\(.*?\)/g, ''));
+  const where = {};
+  S.teams.forEach(t => [...t.starters, ...t.bench].forEach(p => { where[k(p.name)] = t.mine ? '@me' : String(t.owner).toLowerCase(); }));
+  if (!allNames) { allNames = new Set(); for (const id of Object.keys(players)) allNames.add(k(pl(id).name)); }
+  // Off every roster but a real Sleeper player = he was cut. A name we can't match at all is left alone.
+  const cut = n => !where[k(n)] && allNames.has(k(n));
+  const pick = n => /\b(pick|round|faab)\b/i.test(String(n));
+  const mine = n => !n || pick(n) || (where[k(n)] ? where[k(n)] === '@me' : !cut(n));
+  const free = n => !n || !where[k(n)];
+  const theirs = (n, o) => pick(n) || (where[k(n)] ? where[k(n)] === String(o).toLowerCase() : !cut(n));
+  const waivers = (b.waivers || []).filter(w => free(w.add) && mine(w.drop));
+  const drops = (b.drops || []).filter(d => mine(d.player) && free(d.add));
+  const trades = (b.trades || []).filter(t => (t.give || []).every(mine) && (t.get || []).every(n => theirs(n, t.to)));
+  const moved = (b.waivers || []).length - waivers.length + (b.drops || []).length - drops.length + (b.trades || []).length - trades.length;
+  return moved ? { ...b, waivers, drops, trades, moved } : b;
+}
+
 if (SERVER) {
 http.createServer(async (req, res) => {
   const send = (o, c = 'application/json') => { res.writeHead(200, { 'content-type': c }); res.end(typeof o === 'string' ? o : JSON.stringify(o)); };
@@ -403,10 +426,10 @@ http.createServer(async (req, res) => {
     if (req.method === 'POST' && req.url === '/api/ask') { let b = ''; for await (const c of req) b += c; const o = JSON.parse(b); return send({ answer: await ask(o.q, o.who, o.history) }); }
     if (req.url.startsWith('/api/lessons')) return send((await loadLessons()) || { lessons: [], record: {} });
     if (req.url.startsWith('/api/scoreboard')) return send(await scoreboard(new URL(req.url, 'http://x').searchParams.get('week')));
-    if (req.url.startsWith('/api/report')) return send(await staffReport());
+    if (req.url.startsWith('/api/report')) return send(freshMoves(await staffReport()));
     if (req.url.startsWith('/api/brief')) {
       if (req.url.includes('refresh') || !brief || brief.error || Date.now() - briefAt > 18e5) { brief = await makeBrief(); briefAt = Date.now(); }
-      return send(brief);
+      return send(freshMoves(brief));
     }
     send(fs.readFileSync('index.html', 'utf8'), 'text/html');
   } catch (e) { res.writeHead(500); res.end(e.message); }

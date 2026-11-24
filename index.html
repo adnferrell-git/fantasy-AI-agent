@@ -1082,7 +1082,7 @@ async function askCoach(){const q=$('#q').value.trim();if(!q)return;$('#ans').te
 $('#go').onclick=askCoach;$('#q').onkeydown=e=>{if(e.key==='Enter')askCoach()};
 async function state(){try{
   const s=await(await fetch('/api/state')).json();if(s.error)return;const first=!LS;LS=s;if(first&&(LR||LB)){report();brief()}try{window.HQ&&HQ.update(s)}catch(e){console.error(e)}
-  let lk='';if(s.lock){const nl=nextLock(s);if(nl){const m=Math.floor((new Date(nl.at)-Date.now())/6e4);lk=` · ${nl.part?'Next lock':'Lineup locks'} in ${m>=60?Math.floor(m/60)+'h ':''}${m%60}m (${nl.player})`}else lk=' · Lineup locked'}
+  let lk='';if(s.lock){const nl=nextLock(s);if(nl){lk=` · ${nl.part?'Next lock':'Lineup locks'} in ${inT(new Date(nl.at)-Date.now())} (${nl.player})`}else lk=' · Lineup locked'}
   $('#meta').textContent=`Week ${s.league.week} · ${s.me}${lk} · updated ${new Date(s.updated).toLocaleTimeString()}`;
   renderAlert();
   document.title=(s.alerts&&s.alerts.length?'(!) ':'')+'THE DYNASTY · Front Office';
@@ -1122,10 +1122,10 @@ async function brief(){try{
   if(t){$('#r-an').textContent=`${b.trades.length} trade ideas on the board`;$('#r-mg').textContent=`On the phone with ${t.to}`}
 }catch(e){}}
 // the overnight staff report for the HQ wall screens (data/brief.json, or the live brief when this PC has a key)
-function renderPause(b){const el=$('#tpause');if(!el)return;const p=b.paused;el.hidden=!p;if(!p)return;
+function renderPause(b){const el=$('#tpause');if(!el)return;const p=b.paused,mv=+b.moved||0,gone=mv?` ${mv} old move${mv>1?'s':''} hidden (those players changed teams).`:'';el.hidden=!p&&!mv;if(!p){if(mv)el.textContent='ℹ'+gone;return}
   const when=reportWhen(b.made)||'the last good run';
   const why={credits:'Anthropic credits ran out. Add credits and it restarts by itself.',key:'Anthropic refused the API key. Check the key on GitHub.'}[p.kind]||'The last runs hit an error. It keeps retrying.';
-  el.textContent=`⚠ Staff report paused, these calls are from ${when}. ${why}`}
+  el.textContent=`⚠ Staff report paused, these calls are from ${when}. ${why}${gone}`}
 async function report(){try{const b=await(await fetch('/api/report')).json();if(b.error)return;LR=b;renderPause(b);renderToday();if(window.HQ)HQ.report(b);
   const c=!staleWk(b)&&(b.start_sit||[])[0],r=!staleWk(b)&&(b.replacements||[])[0];$('#r-hc').textContent=staleWk(b)?`Week ${nowWk()} calls coming`:c?`${c.call}: ${c.player}`:r?`Swap in ${r.in} for ${r.out}`:'Lineup is set';
   const t=(b.trades||[])[0];if(t){$('#r-an').textContent=`Target: ${(t.get||[]).join(', ')}`;$('#r-mg').textContent=`Texting ${t.to}`}}catch(e){}}
