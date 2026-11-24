@@ -1001,18 +1001,18 @@
      "inj": null
     },
     {
-     "id": "12504",
-     "name": "Kaleb Johnson",
+     "id": "6790",
+     "name": "D'Andre Swift",
      "pos": "RB",
-     "team": "GB",
+     "team": "CHI",
      "inj": null
     },
     {
-     "id": "5859",
-     "name": "A.J. Brown",
+     "id": "11624",
+     "name": "Xavier Worthy",
      "pos": "WR",
-     "team": "NE",
-     "inj": "Out"
+     "team": "KC",
+     "inj": null
     },
     {
      "id": "11637",
@@ -1029,17 +1029,17 @@
      "inj": null
     },
     {
-     "id": "11624",
-     "name": "Xavier Worthy",
-     "pos": "WR",
-     "team": "KC",
+     "id": "4993",
+     "name": "Mike Gesicki",
+     "pos": "TE",
+     "team": "CIN",
      "inj": null
     },
     {
-     "id": "12634",
-     "name": "Jordan Watkins",
+     "id": "12492",
+     "name": "Pat Bryant",
      "pos": "WR",
-     "team": "SF",
+     "team": "DEN",
      "inj": null
     },
     {
@@ -1050,10 +1050,10 @@
      "inj": null
     },
     {
-     "id": "KC",
-     "name": "Kansas City Chiefs",
+     "id": "WAS",
+     "name": "Washington Commanders",
      "pos": "DEF",
-     "team": "KC",
+     "team": "WAS",
      "inj": null
     }
    ],
@@ -1066,10 +1066,10 @@
      "inj": null
     },
     {
-     "id": "12492",
-     "name": "Pat Bryant",
-     "pos": "WR",
-     "team": "DEN",
+     "id": "12504",
+     "name": "Kaleb Johnson",
+     "pos": "RB",
+     "team": "GB",
      "inj": null
     },
     {
@@ -1087,13 +1087,6 @@
      "inj": null
     },
     {
-     "id": "4993",
-     "name": "Mike Gesicki",
-     "pos": "TE",
-     "team": "CIN",
-     "inj": null
-    },
-    {
      "id": "5850",
      "name": "Josh Jacobs",
      "pos": "RB",
@@ -1101,11 +1094,11 @@
      "inj": "Out"
     },
     {
-     "id": "6790",
-     "name": "D'Andre Swift",
-     "pos": "RB",
-     "team": "CHI",
-     "inj": null
+     "id": "5859",
+     "name": "A.J. Brown",
+     "pos": "WR",
+     "team": "NE",
+     "inj": "Out"
     },
     {
      "id": "6865",
@@ -1140,6 +1133,13 @@
      "name": "Quentin Johnston",
      "pos": "WR",
      "team": "LAC",
+     "inj": null
+    },
+    {
+     "id": "KC",
+     "name": "Kansas City Chiefs",
+     "pos": "DEF",
+     "team": "KC",
      "inj": null
     }
    ]
