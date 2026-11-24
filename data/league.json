@@ -1888,6 +1888,13 @@
      "inj": null
     },
     {
+     "id": "13200",
+     "name": "Max Hurleman",
+     "pos": "WR",
+     "team": "PIT",
+     "inj": null
+    },
+    {
      "id": "13293",
      "name": "Ja'Kobi Lane",
      "pos": "WR",
@@ -1928,13 +1935,6 @@
      "pos": "WR",
      "team": "NE",
      "inj": null
-    },
-    {
-     "id": "9508",
-     "name": "Tyjae Spears",
-     "pos": "RB",
-     "team": "TEN",
-     "inj": "IR"
     },
     {
      "id": "TB",
