@@ -1320,11 +1320,11 @@
      "inj": null
     },
     {
-     "id": "8122",
-     "name": "Zonovan Knight",
+     "id": "8151",
+     "name": "Kenneth Walker III",
      "pos": "RB",
-     "team": "ARI",
-     "inj": null
+     "team": "KC",
+     "inj": "Out"
     },
     {
      "id": "7594",
@@ -1441,18 +1441,18 @@
      "inj": "Out"
     },
     {
+     "id": "8122",
+     "name": "Zonovan Knight",
+     "pos": "RB",
+     "team": "ARI",
+     "inj": null
+    },
+    {
      "id": "8142",
      "name": "Alec Pierce",
      "pos": "WR",
      "team": "IND",
      "inj": "IR"
-    },
-    {
-     "id": "8151",
-     "name": "Kenneth Walker III",
-     "pos": "RB",
-     "team": "KC",
-     "inj": "Out"
     },
     {
      "id": "8172",
