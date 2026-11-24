@@ -72,10 +72,10 @@
      "inj": null
     },
     {
-     "id": "PIT",
-     "name": "Pittsburgh Steelers",
+     "id": "CIN",
+     "name": "Cincinnati Bengals",
      "pos": "DEF",
-     "team": "PIT",
+     "team": "CIN",
      "inj": null
     }
    ],
@@ -151,10 +151,10 @@
      "inj": null
     },
     {
-     "id": "CIN",
-     "name": "Cincinnati Bengals",
+     "id": "PIT",
+     "name": "Pittsburgh Steelers",
      "pos": "DEF",
-     "team": "CIN",
+     "team": "PIT",
      "inj": null
     }
    ]
@@ -1674,10 +1674,10 @@
      "inj": null
     },
     {
-     "id": "8180",
-     "name": "Jalen Nailor",
+     "id": "13346",
+     "name": "Denzel Boston",
      "pos": "WR",
-     "team": "LV",
+     "team": "CLE",
      "inj": null
     },
     {
@@ -1739,13 +1739,6 @@
      "inj": null
     },
     {
-     "id": "13346",
-     "name": "Denzel Boston",
-     "pos": "WR",
-     "team": "CLE",
-     "inj": null
-    },
-    {
      "id": "3214",
      "name": "Hunter Henry",
      "pos": "TE",
@@ -1771,6 +1764,13 @@
      "name": "Evan McPherson",
      "pos": "K",
      "team": "CIN",
+     "inj": null
+    },
+    {
+     "id": "8180",
+     "name": "Jalen Nailor",
+     "pos": "WR",
+     "team": "LV",
      "inj": null
     },
     {
