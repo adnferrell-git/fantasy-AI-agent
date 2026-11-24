@@ -179,17 +179,17 @@
      "inj": null
     },
     {
-     "id": "13337",
-     "name": "Emmett Johnson",
+     "id": "9224",
+     "name": "Chase Brown",
      "pos": "RB",
-     "team": "KC",
+     "team": "CIN",
      "inj": null
     },
     {
-     "id": "13294",
-     "name": "Makai Lemon",
+     "id": "9488",
+     "name": "Jaxon Smith-Njigba",
      "pos": "WR",
-     "team": "PHI",
+     "team": "SEA",
      "inj": null
     },
     {
@@ -207,17 +207,17 @@
      "inj": null
     },
     {
+     "id": "8167",
+     "name": "Christian Watson",
+     "pos": "WR",
+     "team": "GB",
+     "inj": null
+    },
+    {
      "id": "8134",
      "name": "Khalil Shakir",
      "pos": "WR",
      "team": "BUF",
-     "inj": null
-    },
-    {
-     "id": "9224",
-     "name": "Chase Brown",
-     "pos": "RB",
-     "team": "CIN",
      "inj": null
     },
     {
@@ -272,6 +272,20 @@
      "inj": null
     },
     {
+     "id": "13294",
+     "name": "Makai Lemon",
+     "pos": "WR",
+     "team": "PHI",
+     "inj": null
+    },
+    {
+     "id": "13337",
+     "name": "Emmett Johnson",
+     "pos": "RB",
+     "team": "KC",
+     "inj": null
+    },
+    {
      "id": "1479",
      "name": "Keenan Allen",
      "pos": "WR",
@@ -291,20 +305,6 @@
      "pos": "QB",
      "team": "BAL",
      "inj": "IR"
-    },
-    {
-     "id": "8167",
-     "name": "Christian Watson",
-     "pos": "WR",
-     "team": "GB",
-     "inj": null
-    },
-    {
-     "id": "9488",
-     "name": "Jaxon Smith-Njigba",
-     "pos": "WR",
-     "team": "SEA",
-     "inj": null
     },
     {
      "id": "96",
@@ -1483,45 +1483,17 @@
      "inj": null
     },
     {
-     "id": "12527",
-     "name": "Ashton Jeanty",
+     "id": "4866",
+     "name": "Saquon Barkley",
      "pos": "RB",
-     "team": "LV",
-     "inj": null
+     "team": "PHI",
+     "inj": "Questionable"
     },
     {
-     "id": "4199",
-     "name": "Aaron Jones Sr.",
+     "id": "11586",
+     "name": "Blake Corum",
      "pos": "RB",
-     "team": "MIN",
-     "inj": null
-    },
-    {
-     "id": "12514",
-     "name": "Emeka Egbuka",
-     "pos": "WR",
-     "team": "TB",
-     "inj": null
-    },
-    {
-     "id": "4037",
-     "name": "Chris Godwin Jr.",
-     "pos": "WR",
-     "team": "TB",
-     "inj": null
-    },
-    {
-     "id": "5906",
-     "name": "Dawson Knox",
-     "pos": "TE",
-     "team": "BUF",
-     "inj": null
-    },
-    {
-     "id": "9500",
-     "name": "Josh Downs",
-     "pos": "WR",
-     "team": "KC",
+     "team": "LAR",
      "inj": null
     },
     {
@@ -1532,17 +1504,45 @@
      "inj": null
     },
     {
-     "id": "2020",
-     "name": "Cairo Santos",
-     "pos": "K",
-     "team": "CHI",
+     "id": "12514",
+     "name": "Emeka Egbuka",
+     "pos": "WR",
+     "team": "TB",
      "inj": null
     },
     {
-     "id": "CAR",
-     "name": "Carolina Panthers",
+     "id": "10236",
+     "name": "Dalton Kincaid",
+     "pos": "TE",
+     "team": "BUF",
+     "inj": "Out"
+    },
+    {
+     "id": "7526",
+     "name": "Jaylen Waddle",
+     "pos": "WR",
+     "team": "DEN",
+     "inj": null
+    },
+    {
+     "id": "4199",
+     "name": "Aaron Jones Sr.",
+     "pos": "RB",
+     "team": "MIN",
+     "inj": null
+    },
+    {
+     "id": "13833",
+     "name": "Dominic Zvada",
+     "pos": "K",
+     "team": "NYG",
+     "inj": null
+    },
+    {
+     "id": "NYJ",
+     "name": "New York Jets",
      "pos": "DEF",
-     "team": "CAR",
+     "team": "NYJ",
      "inj": null
     }
    ],
@@ -1555,24 +1555,10 @@
      "inj": "IR"
     },
     {
-     "id": "10236",
-     "name": "Dalton Kincaid",
-     "pos": "TE",
-     "team": "BUF",
-     "inj": "Out"
-    },
-    {
      "id": "11559",
      "name": "Michael Penix Jr.",
      "pos": "QB",
      "team": "ATL",
-     "inj": null
-    },
-    {
-     "id": "11586",
-     "name": "Blake Corum",
-     "pos": "RB",
-     "team": "LAR",
      "inj": null
     },
     {
@@ -1608,6 +1594,20 @@
      "name": "Laquon Treadwell",
      "pos": "WR",
      "team": "IND",
+     "inj": null
+    },
+    {
+     "id": "4037",
+     "name": "Chris Godwin Jr.",
+     "pos": "WR",
+     "team": "TB",
+     "inj": null
+    },
+    {
+     "id": "5906",
+     "name": "Dawson Knox",
+     "pos": "TE",
+     "team": "BUF",
      "inj": null
     },
     {
@@ -1802,10 +1802,10 @@
      "inj": null
     },
     {
-     "id": "4866",
-     "name": "Saquon Barkley",
+     "id": "8150",
+     "name": "Kyren Williams",
      "pos": "RB",
-     "team": "PHI",
+     "team": "LAR",
      "inj": "Questionable"
     },
     {
@@ -1837,17 +1837,17 @@
      "inj": null
     },
     {
-     "id": "5022",
-     "name": "Dallas Goedert",
-     "pos": "TE",
-     "team": "PHI",
-     "inj": "Questionable"
+     "id": "12501",
+     "name": "Matthew Golden",
+     "pos": "WR",
+     "team": "GB",
+     "inj": null
     },
     {
-     "id": "7526",
-     "name": "Jaylen Waddle",
-     "pos": "WR",
-     "team": "DEN",
+     "id": "12527",
+     "name": "Ashton Jeanty",
+     "pos": "RB",
+     "team": "LV",
      "inj": null
     },
     {
@@ -1871,13 +1871,6 @@
      "name": "Malik Washington",
      "pos": "WR",
      "team": "MIA",
-     "inj": null
-    },
-    {
-     "id": "12501",
-     "name": "Matthew Golden",
-     "pos": "WR",
-     "team": "GB",
      "inj": null
     },
     {
@@ -1909,6 +1902,13 @@
      "inj": "Out"
     },
     {
+     "id": "5022",
+     "name": "Dallas Goedert",
+     "pos": "TE",
+     "team": "PHI",
+     "inj": "Questionable"
+    },
+    {
      "id": "6803",
      "name": "Brandon Aiyuk",
      "pos": "WR",
@@ -1923,11 +1923,11 @@
      "inj": null
     },
     {
-     "id": "8150",
-     "name": "Kyren Williams",
-     "pos": "RB",
-     "team": "LAR",
-     "inj": "Questionable"
+     "id": "9500",
+     "name": "Josh Downs",
+     "pos": "WR",
+     "team": "KC",
+     "inj": null
     },
     {
      "id": "9501",
