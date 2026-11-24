@@ -519,11 +519,11 @@
      "inj": null
     },
     {
-     "id": "11620",
-     "name": "Rome Odunze",
+     "id": "8112",
+     "name": "Drake London",
      "pos": "WR",
-     "team": "CHI",
-     "inj": null
+     "team": "ATL",
+     "inj": "Questionable"
     },
     {
      "id": "13281",
@@ -540,10 +540,10 @@
      "inj": null
     },
     {
-     "id": "13301",
-     "name": "Antonio Williams",
+     "id": "11620",
+     "name": "Rome Odunze",
      "pos": "WR",
-     "team": "WAS",
+     "team": "CHI",
      "inj": null
     },
     {
@@ -612,18 +612,18 @@
      "inj": "IR"
     },
     {
+     "id": "13301",
+     "name": "Antonio Williams",
+     "pos": "WR",
+     "team": "WAS",
+     "inj": null
+    },
+    {
      "id": "4177",
      "name": "Mack Hollins",
      "pos": "WR",
      "team": "NE",
      "inj": null
-    },
-    {
-     "id": "8112",
-     "name": "Drake London",
-     "pos": "WR",
-     "team": "ATL",
-     "inj": "Questionable"
     },
     {
      "id": "8126",
