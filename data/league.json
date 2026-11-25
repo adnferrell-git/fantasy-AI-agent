@@ -381,7 +381,7 @@
      "name": "Jakobi Meyers",
      "pos": "WR",
      "team": "JAX",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "3451",
@@ -460,7 +460,7 @@
      "name": "Jahan Dotson",
      "pos": "WR",
      "team": "ATL",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "8161",
@@ -1261,7 +1261,7 @@
      "name": "J.K. Dobbins",
      "pos": "RB",
      "team": "DEN",
-     "inj": "Out"
+     "inj": "Sus"
     },
     {
      "id": "7002",
@@ -1345,7 +1345,7 @@
      "name": "Isaiah Likely",
      "pos": "TE",
      "team": "NYG",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "11646",
