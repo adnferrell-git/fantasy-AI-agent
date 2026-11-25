@@ -179,10 +179,10 @@
      "inj": null
     },
     {
-     "id": "9224",
-     "name": "Chase Brown",
+     "id": "13337",
+     "name": "Emmett Johnson",
      "pos": "RB",
-     "team": "CIN",
+     "team": "KC",
      "inj": null
     },
     {
@@ -193,10 +193,10 @@
      "inj": null
     },
     {
-     "id": "10229",
-     "name": "Rashee Rice",
+     "id": "8167",
+     "name": "Christian Watson",
      "pos": "WR",
-     "team": "KC",
+     "team": "GB",
      "inj": null
     },
     {
@@ -207,17 +207,17 @@
      "inj": null
     },
     {
-     "id": "8167",
-     "name": "Christian Watson",
+     "id": "10229",
+     "name": "Rashee Rice",
      "pos": "WR",
-     "team": "GB",
+     "team": "KC",
      "inj": null
     },
     {
-     "id": "8134",
-     "name": "Khalil Shakir",
-     "pos": "WR",
-     "team": "BUF",
+     "id": "9224",
+     "name": "Chase Brown",
+     "pos": "RB",
+     "team": "CIN",
      "inj": null
     },
     {
@@ -279,13 +279,6 @@
      "inj": null
     },
     {
-     "id": "13337",
-     "name": "Emmett Johnson",
-     "pos": "RB",
-     "team": "KC",
-     "inj": null
-    },
-    {
      "id": "1479",
      "name": "Keenan Allen",
      "pos": "WR",
@@ -300,6 +293,13 @@
      "inj": "IR"
     },
     {
+     "id": "4017",
+     "name": "Deshaun Watson",
+     "pos": "QB",
+     "team": "CLE",
+     "inj": null
+    },
+    {
      "id": "4881",
      "name": "Lamar Jackson",
      "pos": "QB",
@@ -307,10 +307,10 @@
      "inj": "IR"
     },
     {
-     "id": "96",
-     "name": "Aaron Rodgers",
-     "pos": "QB",
-     "team": "PIT",
+     "id": "8134",
+     "name": "Khalil Shakir",
+     "pos": "WR",
+     "team": "BUF",
      "inj": null
     },
     {
@@ -1206,10 +1206,10 @@
      "inj": null
     },
     {
-     "id": "BUF",
-     "name": "Buffalo Bills",
+     "id": "NE",
+     "name": "New England Patriots",
      "pos": "DEF",
-     "team": "BUF",
+     "team": "NE",
      "inj": null
     }
    ],
@@ -1285,17 +1285,17 @@
      "inj": null
     },
     {
-     "id": "7561",
-     "name": "Elijah Mitchell",
-     "pos": "RB",
-     "team": "PHI",
-     "inj": null
-    },
-    {
      "id": "8132",
      "name": "Tyler Allgeier",
      "pos": "RB",
      "team": "ARI",
+     "inj": null
+    },
+    {
+     "id": "BUF",
+     "name": "Buffalo Bills",
+     "pos": "DEF",
+     "team": "BUF",
      "inj": null
     }
    ]
@@ -1874,13 +1874,6 @@
      "inj": null
     },
     {
-     "id": "13200",
-     "name": "Max Hurleman",
-     "pos": "WR",
-     "team": "PIT",
-     "inj": null
-    },
-    {
      "id": "13293",
      "name": "Ja'Kobi Lane",
      "pos": "WR",
@@ -1905,7 +1898,7 @@
      "id": "6803",
      "name": "Brandon Aiyuk",
      "pos": "WR",
-     "team": "FA",
+     "team": "WAS",
      "inj": null
     },
     {
