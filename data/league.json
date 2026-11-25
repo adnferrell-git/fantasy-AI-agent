@@ -1164,10 +1164,10 @@
      "inj": null
     },
     {
-     "id": "6813",
-     "name": "Jonathan Taylor",
+     "id": "12512",
+     "name": "Quinshon Judkins",
      "pos": "RB",
-     "team": "IND",
+     "team": "CLE",
      "inj": null
     },
     {
@@ -1199,10 +1199,10 @@
      "inj": null
     },
     {
-     "id": "8132",
-     "name": "Tyler Allgeier",
+     "id": "6813",
+     "name": "Jonathan Taylor",
      "pos": "RB",
-     "team": "ARI",
+     "team": "IND",
      "inj": null
     },
     {
@@ -1226,13 +1226,6 @@
      "name": "Brian Thomas Jr.",
      "pos": "WR",
      "team": "JAX",
-     "inj": null
-    },
-    {
-     "id": "12512",
-     "name": "Quinshon Judkins",
-     "pos": "RB",
-     "team": "CLE",
      "inj": null
     },
     {
@@ -1303,6 +1296,13 @@
      "name": "Elijah Mitchell",
      "pos": "RB",
      "team": "PHI",
+     "inj": null
+    },
+    {
+     "id": "8132",
+     "name": "Tyler Allgeier",
+     "pos": "RB",
+     "team": "ARI",
      "inj": null
     }
    ]
