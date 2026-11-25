@@ -41,7 +41,7 @@
      "name": "DJ Moore",
      "pos": "WR",
      "team": "BUF",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "5844",
@@ -62,7 +62,7 @@
      "name": "Derrick Henry",
      "pos": "RB",
      "team": "BAL",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "1945",
@@ -85,7 +85,7 @@
      "name": "Marvin Harrison Jr.",
      "pos": "WR",
      "team": "HOU",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "11655",
@@ -523,7 +523,7 @@
      "name": "Drake London",
      "pos": "WR",
      "team": "ATL",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "13281",
@@ -595,7 +595,7 @@
      "name": "Woody Marks",
      "pos": "RB",
      "team": "HOU",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "12489",
@@ -651,7 +651,7 @@
      "name": "Jordan Addison",
      "pos": "WR",
      "team": "MIN",
-     "inj": "Out"
+     "inj": "Doubtful"
     },
     {
      "id": "GB",
@@ -707,7 +707,7 @@
      "name": "Sam LaPorta",
      "pos": "TE",
      "team": "DET",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "8148",
@@ -751,7 +751,7 @@
      "name": "Omar Cooper Jr.",
      "pos": "WR",
      "team": "NYJ",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "13414",
@@ -914,7 +914,7 @@
      "name": "Brock Bowers",
      "pos": "TE",
      "team": "LV",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "11630",
@@ -1091,14 +1091,14 @@
      "name": "Josh Jacobs",
      "pos": "RB",
      "team": "GB",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "5859",
      "name": "A.J. Brown",
      "pos": "WR",
      "team": "NE",
-     "inj": "Out"
+     "inj": "Doubtful"
     },
     {
      "id": "6865",
@@ -1210,7 +1210,7 @@
      "name": "Cam Little",
      "pos": "K",
      "team": "JAX",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "BUF",
@@ -1324,7 +1324,7 @@
      "name": "Kenneth Walker III",
      "pos": "RB",
      "team": "KC",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "7594",
@@ -1359,7 +1359,7 @@
      "name": "Jalen Coker",
      "pos": "WR",
      "team": "CAR",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "12540",
@@ -1438,7 +1438,7 @@
      "name": "Kyler Murray",
      "pos": "QB",
      "team": "MIN",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "8122",
@@ -1487,7 +1487,7 @@
      "name": "Saquon Barkley",
      "pos": "RB",
      "team": "PHI",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "11586",
@@ -1515,7 +1515,7 @@
      "name": "Dalton Kincaid",
      "pos": "TE",
      "team": "BUF",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "7526",
@@ -1806,7 +1806,7 @@
      "name": "Kyren Williams",
      "pos": "RB",
      "team": "LAR",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "8228",
@@ -1899,21 +1899,21 @@
      "name": "Sam Darnold",
      "pos": "QB",
      "team": "SEA",
-     "inj": "Out"
+     "inj": "Questionable"
     },
     {
      "id": "5022",
      "name": "Dallas Goedert",
      "pos": "TE",
      "team": "PHI",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "6803",
      "name": "Brandon Aiyuk",
      "pos": "WR",
      "team": "FA",
-     "inj": "DNR"
+     "inj": null
     },
     {
      "id": "6804",
