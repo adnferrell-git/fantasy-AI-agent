@@ -13,7 +13,7 @@
      "name": "Brock Purdy",
      "pos": "QB",
      "team": "SF",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "9221",
@@ -55,14 +55,14 @@
      "name": "Mike Evans",
      "pos": "WR",
      "team": "SF",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "3198",
      "name": "Derrick Henry",
      "pos": "RB",
      "team": "BAL",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "1945",
