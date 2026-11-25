@@ -682,17 +682,10 @@
      "inj": null
     },
     {
-     "id": "8136",
-     "name": "Rachaad White",
+     "id": "7611",
+     "name": "Rhamondre Stevenson",
      "pos": "RB",
-     "team": "WAS",
-     "inj": null
-    },
-    {
-     "id": "12526",
-     "name": "Tetairoa McMillan",
-     "pos": "WR",
-     "team": "CAR",
+     "team": "NE",
      "inj": null
     },
     {
@@ -703,11 +696,18 @@
      "inj": null
     },
     {
+     "id": "12526",
+     "name": "Tetairoa McMillan",
+     "pos": "WR",
+     "team": "CAR",
+     "inj": null
+    },
+    {
      "id": "10859",
      "name": "Sam LaPorta",
      "pos": "TE",
      "team": "DET",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "8148",
@@ -717,10 +717,10 @@
      "inj": null
     },
     {
-     "id": "11783",
-     "name": "Ryan Flournoy",
+     "id": "11635",
+     "name": "Ladd McConkey",
      "pos": "WR",
-     "team": "DAL",
+     "team": "LAC",
      "inj": null
     },
     {
@@ -740,10 +740,10 @@
    ],
    "bench": [
     {
-     "id": "11635",
-     "name": "Ladd McConkey",
+     "id": "11783",
+     "name": "Ryan Flournoy",
      "pos": "WR",
-     "team": "LAC",
+     "team": "DAL",
      "inj": null
     },
     {
@@ -775,17 +775,17 @@
      "inj": null
     },
     {
-     "id": "7611",
-     "name": "Rhamondre Stevenson",
-     "pos": "RB",
-     "team": "NE",
-     "inj": null
-    },
-    {
      "id": "8116",
      "name": "Pierre Strong Jr.",
      "pos": "RB",
      "team": "GB",
+     "inj": null
+    },
+    {
+     "id": "8136",
+     "name": "Rachaad White",
+     "pos": "RB",
+     "team": "WAS",
      "inj": null
     },
     {
@@ -1268,7 +1268,7 @@
      "name": "J.K. Dobbins",
      "pos": "RB",
      "team": "DEN",
-     "inj": null
+     "inj": "Out"
     },
     {
      "id": "7002",
@@ -1576,13 +1576,6 @@
      "inj": null
     },
     {
-     "id": "13297",
-     "name": "Reggie Virgil",
-     "pos": "WR",
-     "team": "ARI",
-     "inj": null
-    },
-    {
      "id": "13421",
      "name": "Eli Raridon",
      "pos": "TE",
@@ -1601,6 +1594,13 @@
      "name": "Chris Godwin Jr.",
      "pos": "WR",
      "team": "TB",
+     "inj": null
+    },
+    {
+     "id": "4066",
+     "name": "Evan Engram",
+     "pos": "TE",
+     "team": "DEN",
      "inj": null
     },
     {
@@ -1678,7 +1678,7 @@
      "name": "Denzel Boston",
      "pos": "WR",
      "team": "CLE",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "4147",
@@ -1912,7 +1912,7 @@
      "id": "6803",
      "name": "Brandon Aiyuk",
      "pos": "WR",
-     "team": "SF",
+     "team": "FA",
      "inj": "DNR"
     },
     {
