@@ -763,7 +763,7 @@ const TEAMC=[{shirt:NAVY,pants:SILV,helmet:SILV},{shirt:'#b8202e',pants:'#f2f2f2
 const mkP=i=>({x:SX,z:SZ,y:0,yaw:0,walk:1,ph:i*.7,shirt:NAVY,pants:SILV,skin:FSK[i%4],hair:'#222',helmet:SILV,num:1});
 const OFF=[...Array(10)].map((_,i)=>mkP(i)),DEF=[...Array(8)].map((_,i)=>mkP(i+3));
 const G={poss:0,y:20,play:-1,gain:5,tgt:0,n:0,queue:[],drive:0};
-const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),lerp=(a,b,k)=>a+(b-a)*k,lastName=n=>String(n||'').split(' ').slice(-1)[0].toUpperCase().replace(/[^A-Z'.-]/g,'');
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),lerp=(a,b,k)=>a+(b-a)*k,lastName=n=>{const w=String(n||'').trim().split(/\s+/);while(w.length>1&&/^(jr|sr|ii|iii|iv|v)\.?$/i.test(w[w.length-1]))w.pop();return w[w.length-1].toUpperCase().replace(/[^A-Z'.-]/g,'')};
 let LINE=[{name:'',lineup:[]},{name:'',lineup:[]}];
 function rosterFor(t){const L=(LINE[t].lineup||[]).filter(p=>['QB','RB','WR','TE'].includes(p.pos));
   const by=pos=>L.filter(p=>p.pos===pos),qb=by('QB')[0],rbs=by('RB'),wrs=by('WR'),te=by('TE')[0];
@@ -1022,7 +1022,7 @@ function prow(p,slot){const st=p.st||{},f=v=>v==null?'–':v;
 function filmNote(s,m){const el=$('#fs');if(!el)return;const fm=s.film,all=m?[...m.starters,...m.bench]:[];
   if(!fm&&!all.some(p=>p.st)){el.innerHTML='<span>Film study not loaded yet. It updates every night from nflverse.</span>';return}
   const hot=all.filter(p=>p.st&&p.st.trend>=3).sort((a,b)=>b.st.trend-a.st.trend),cold=all.filter(p=>p.st&&p.st.trend<=-3).sort((a,b)=>a.st.trend-b.st.trend);
-  const nm=l=>l.slice(0,3).map(p=>esc(p.name.split(' ').slice(-1)[0])).join(', ');
+  const nm=l=>l.slice(0,3).map(p=>{const w=String(p.name||'').trim().split(/\s+/);while(w.length>1&&/^(jr|sr|ii|iii|iv|v)\.?$/i.test(w[w.length-1]))w.pop();return esc(w[w.length-1])}).join(', ');
   el.innerHTML=`<span>📼 Through <b>Week ${esc(fm&&fm.through_week||'?')}</b></span>${hot.length?`<span class="up">▲ Heating up: ${nm(hot)}</span>`:''}${cold.length?`<span class="dn">▼ Cooling: ${nm(cold)}</span>`:''}<span>Trend = last 3 games vs season avg · #rank = opp defense vs his position (1 gives up the most)</span>`}
 const pn=p=>`${esc(p.name)} <span class="mu">${esc(p.pos||'')} ${esc(p.team||'')}</span>${p.inj?`<span class="chip">${esc(p.inj)}</span>`:''}`;
 let LS=null,LB=null,done={};try{done=JSON.parse(localStorage.getItem('done')||'{}')}catch{}
