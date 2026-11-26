@@ -37,11 +37,11 @@
      "inj": null
     },
     {
-     "id": "4983",
-     "name": "DJ Moore",
+     "id": "2216",
+     "name": "Mike Evans",
      "pos": "WR",
-     "team": "BUF",
-     "inj": null
+     "team": "SF",
+     "inj": "Questionable"
     },
     {
      "id": "5844",
@@ -51,11 +51,11 @@
      "inj": null
     },
     {
-     "id": "2216",
-     "name": "Mike Evans",
+     "id": "13298",
+     "name": "KC Concepcion Jr.",
      "pos": "WR",
-     "team": "SF",
-     "inj": "Questionable"
+     "team": "CLE",
+     "inj": null
     },
     {
      "id": "3198",
@@ -102,13 +102,6 @@
      "inj": null
     },
     {
-     "id": "13298",
-     "name": "KC Concepcion Jr.",
-     "pos": "WR",
-     "team": "CLE",
-     "inj": null
-    },
-    {
      "id": "3634",
      "name": "Kalif Raymond",
      "pos": "WR",
@@ -120,6 +113,13 @@
      "name": "Mason Rudolph",
      "pos": "QB",
      "team": "PIT",
+     "inj": null
+    },
+    {
+     "id": "4983",
+     "name": "DJ Moore",
+     "pos": "WR",
+     "team": "BUF",
      "inj": null
     },
     {
