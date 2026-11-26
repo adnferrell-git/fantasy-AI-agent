@@ -920,7 +920,8 @@ function applySky(){const d=new Date(),h=hourOverride>=0&&hourOverride<24?hourOv
 applySky();setInterval(applySky,60000);
 function project(VP,p,w,h){const x=VP[0]*p[0]+VP[4]*p[1]+VP[8]*p[2]+VP[12],y=VP[1]*p[0]+VP[5]*p[1]+VP[9]*p[2]+VP[13],q=VP[3]*p[0]+VP[7]*p[1]+VP[11]*p[2]+VP[15];
   if(q<=0)return null;return[(x/q*.5+.5)*w,(1-(y/q*.5+.5))*h,q]}
-function place(el,VP,p,w,h){const s=project(VP,p,w,h);if(!s||s[0]<-80||s[0]>w+80||s[1]<-160||s[1]>h+60){el.style.opacity=0;el.style.pointerEvents='none';return}el.style.opacity=1;el.style.pointerEvents='';el.style.transform=`translate(${s[0]}px,${Math.max(s[1],44)}px) translate(-50%,-100%)`}
+// visibility too, because the blinking alarm label's CSS animation overrides an inline opacity of 0
+function place(el,VP,p,w,h){const s=project(VP,p,w,h);if(!s||s[0]<-80||s[0]>w+80||s[1]<-160||s[1]>h+60){el.style.opacity=0;el.style.visibility='hidden';el.style.pointerEvents='none';return}el.style.opacity=1;el.style.visibility='';el.style.pointerEvents='';el.style.transform=`translate(${s[0]}px,${Math.max(s[1],44)}px) translate(-50%,-100%)`}
 function frame(now){
   const t=now/1000,dt=Math.min(.05,(now-last)/1000);last=now;
   const dpr=Math.min(devicePixelRatio||1,1.5),w=cv.clientWidth,h=cv.clientHeight;
@@ -970,8 +971,8 @@ function frame(now){
     [-.5,.5].forEach(b=>{box(x+1.62*dir,.55,z+b,.06,.22,.3,'#fff6c4',1);box(x-1.62*dir,.55,z+b,.06,.22,.3,'#ff3030',1)})});
   // flag
   for(let i=0;i<6;i++){const wv=Math.sin(t*4-i*.8)*.1*i;box(-16.15+i*.5,6+wv*.3,4+wv,.5,.9,.06,i%2?'#ff7a2f':'#ffb84d')}
-  // alert beacon over the head coach
-  if(alertOn){const pu=.5+.5*Math.sin(t*8);draw(mul(T(coach.x,F+4.6+Math.sin(t*3)*.15,coach.z),mul(Ry(t*2),Sc(.55,.55,.55))),[1,.15+.2*pu,.15],pu)}
+  // alert beacon over the Head Coach's office (it stays there on game day while he's out on the sideline)
+  if(alertOn){const pu=.5+.5*Math.sin(t*8);draw(mul(T(HOMEPOS[0].x,F+4.6+Math.sin(t*3)*.15,HOMEPOS[0].z),mul(Ry(t*2),Sc(.55,.55,.55))),[1,.15+.2*pu,.15],pu)}
   // particles
   parts.forEach(p=>{p.y+=dt*p.v;if(p.y>11){p.y=0}box(p.x+Math.sin(t+p.z)*.3,p.y,p.z,.1,.1,.1,'#fff3b0',1)});
   // scoreboard light strip
@@ -996,7 +997,7 @@ function frame(now){
   if(now-statusAt>800){statusAt=now;ROOMS.forEach(z=>{const s=document.getElementById('r-'+z.k);z.el.querySelector('span').textContent=s?s.textContent:''})}
   ROOMS.forEach(z=>place(z.el,VP,focused&&focused.k?[z.cx,F+4.1,-8.2]:z.p,w,h));
   {const a=project(VP,ROOMS[0].p,w,h),b=project(VP,ROOMS[1].p,w,h),c=project(VP,ROOMS[3].p,w,h);lblBox.classList.toggle('tight',!!(a&&b&&c)&&Math.min(Math.abs(b[0]-a[0]),Math.abs(c[0]-a[0])/3)<142)}place(board,VP,[SX,SUY+14.5+23,SZ-68],w,h);
-  beacon.style.display=alertOn?'':'none';if(alertOn)place(beacon,VP,[coach.x,F+6.4,coach.z],w,h);
+  beacon.style.display=alertOn?'':'none';if(alertOn)place(beacon,VP,[HOMEPOS[0].x,F+6.4,HOMEPOS[0].z],w,h);
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
