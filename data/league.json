@@ -190,7 +190,7 @@
      "name": "Jaxon Smith-Njigba",
      "pos": "WR",
      "team": "SEA",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "8167",
@@ -1084,7 +1084,7 @@
      "name": "Josh Jacobs",
      "pos": "RB",
      "team": "GB",
-     "inj": "Questionable"
+     "inj": "Out"
     },
     {
      "id": "5859",
@@ -1112,7 +1112,7 @@
      "name": "Rashod Bateman",
      "pos": "WR",
      "team": "BAL",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "9493",
@@ -1175,7 +1175,7 @@
      "name": "Zay Flowers",
      "pos": "WR",
      "team": "BAL",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "8130",
@@ -1885,7 +1885,7 @@
      "name": "Sam Darnold",
      "pos": "QB",
      "team": "SEA",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "5022",
