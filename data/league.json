@@ -9,11 +9,11 @@
    "record": "9-2",
    "starters": [
     {
-     "id": "8183",
-     "name": "Brock Purdy",
+     "id": "11565",
+     "name": "J.J. McCarthy",
      "pos": "QB",
-     "team": "SF",
-     "inj": "Questionable"
+     "team": "NYG",
+     "inj": null
     },
     {
      "id": "9221",
@@ -95,13 +95,6 @@
      "inj": "IR"
     },
     {
-     "id": "12522",
-     "name": "Cam Ward",
-     "pos": "QB",
-     "team": "TEN",
-     "inj": null
-    },
-    {
      "id": "12533",
      "name": "Jacory Croskey-Merritt",
      "pos": "RB",
@@ -135,6 +128,13 @@
      "pos": "TE",
      "team": "PIT",
      "inj": null
+    },
+    {
+     "id": "8183",
+     "name": "Brock Purdy",
+     "pos": "QB",
+     "team": "SF",
+     "inj": "Questionable"
     },
     {
      "id": "9753",
