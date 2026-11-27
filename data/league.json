@@ -1823,11 +1823,11 @@
      "inj": null
     },
     {
-     "id": "9487",
-     "name": "Parker Washington",
+     "id": "9501",
+     "name": "DeMario Douglas",
      "pos": "WR",
-     "team": "JAX",
-     "inj": "Questionable"
+     "team": "NE",
+     "inj": null
     },
     {
      "id": "12527",
@@ -1902,17 +1902,17 @@
      "inj": null
     },
     {
+     "id": "9487",
+     "name": "Parker Washington",
+     "pos": "WR",
+     "team": "JAX",
+     "inj": "Questionable"
+    },
+    {
      "id": "9500",
      "name": "Josh Downs",
      "pos": "WR",
      "team": "KC",
-     "inj": null
-    },
-    {
-     "id": "9501",
-     "name": "DeMario Douglas",
-     "pos": "WR",
-     "team": "NE",
      "inj": null
     },
     {
