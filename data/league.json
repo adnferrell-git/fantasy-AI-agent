@@ -85,7 +85,7 @@
      "name": "Marvin Harrison Jr.",
      "pos": "WR",
      "team": "HOU",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "11655",
@@ -93,6 +93,13 @@
      "pos": "RB",
      "team": "NYG",
      "inj": "IR"
+    },
+    {
+     "id": "12522",
+     "name": "Cam Ward",
+     "pos": "QB",
+     "team": "TEN",
+     "inj": null
     },
     {
      "id": "12533",
@@ -106,13 +113,6 @@
      "name": "Kalif Raymond",
      "pos": "WR",
      "team": "CHI",
-     "inj": null
-    },
-    {
-     "id": "4972",
-     "name": "Mason Rudolph",
-     "pos": "QB",
-     "team": "PIT",
      "inj": null
     },
     {
@@ -197,14 +197,14 @@
      "name": "Christian Watson",
      "pos": "WR",
      "team": "GB",
-     "inj": null
+     "inj": "Out"
     },
     {
      "id": "5001",
      "name": "Dalton Schultz",
      "pos": "TE",
      "team": "HOU",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "10229",
@@ -537,7 +537,7 @@
      "name": "Colston Loveland",
      "pos": "TE",
      "team": "CHI",
-     "inj": null
+     "inj": "Out"
     },
     {
      "id": "11620",
@@ -849,7 +849,7 @@
      "name": "Stefon Diggs",
      "pos": "WR",
      "team": "WAS",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "8144",
@@ -928,7 +928,7 @@
      "name": "Harold Fannin Jr.",
      "pos": "TE",
      "team": "CLE",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "13274",
@@ -1070,7 +1070,7 @@
      "name": "Tyler Higbee",
      "pos": "TE",
      "team": "LAR",
-     "inj": null
+     "inj": "Out"
     },
     {
      "id": "4227",
@@ -1112,7 +1112,7 @@
      "name": "Rashod Bateman",
      "pos": "WR",
      "team": "BAL",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "9493",
@@ -1175,7 +1175,7 @@
      "name": "Zay Flowers",
      "pos": "WR",
      "team": "BAL",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "8130",
@@ -1233,7 +1233,7 @@
      "name": "Darren Waller",
      "pos": "TE",
      "team": "CAR",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "3321",
@@ -1480,7 +1480,7 @@
      "name": "Saquon Barkley",
      "pos": "RB",
      "team": "PHI",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "11586",
@@ -1508,7 +1508,7 @@
      "name": "Dalton Kincaid",
      "pos": "TE",
      "team": "BUF",
-     "inj": "Questionable"
+     "inj": null
     },
     {
      "id": "7526",
@@ -1792,7 +1792,7 @@
      "name": "Caleb Williams",
      "pos": "QB",
      "team": "CHI",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "8150",
@@ -1834,7 +1834,7 @@
      "name": "Parker Washington",
      "pos": "WR",
      "team": "JAX",
-     "inj": null
+     "inj": "Questionable"
     },
     {
      "id": "12527",
@@ -1892,7 +1892,7 @@
      "name": "Dallas Goedert",
      "pos": "TE",
      "team": "PHI",
-     "inj": null
+     "inj": "Out"
     },
     {
      "id": "6803",
