@@ -342,10 +342,10 @@
      "inj": "Questionable"
     },
     {
-     "id": "8408",
-     "name": "Jordan Mason",
+     "id": "5892",
+     "name": "David Montgomery",
      "pos": "RB",
-     "team": "MIN",
+     "team": "HOU",
      "inj": null
     },
     {
@@ -442,13 +442,6 @@
      "inj": null
     },
     {
-     "id": "5892",
-     "name": "David Montgomery",
-     "pos": "RB",
-     "team": "HOU",
-     "inj": null
-    },
-    {
      "id": "5995",
      "name": "Justice Hill",
      "pos": "RB",
@@ -477,17 +470,17 @@
      "inj": null
     },
     {
+     "id": "8408",
+     "name": "Jordan Mason",
+     "pos": "RB",
+     "team": "MIN",
+     "inj": null
+    },
+    {
      "id": "9479",
      "name": "Darnell Washington",
      "pos": "TE",
      "team": "PIT",
-     "inj": null
-    },
-    {
-     "id": "SEA",
-     "name": "Seattle Seahawks",
-     "pos": "DEF",
-     "team": "SEA",
      "inj": null
     }
    ]
